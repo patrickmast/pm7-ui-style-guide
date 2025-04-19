@@ -1,0 +1,9 @@
+/* CSS Variables for pm7-ui-style-guide */
+:root {
+  --primary: #1C86EF;
+  --border: #dedede;
+  --input-bg: #ffffff;
+  --foreground: #000000;
+  --radius: 0.5rem;
+  /* Add more as needed */
+}
