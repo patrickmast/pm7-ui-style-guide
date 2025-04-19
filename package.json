@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "hi@pm7.ink",
   "license": "ISC",
-  "description": ""
+  "description": "UI/Styling/Colors for pm7 apps",
+  "repository": { "type": "git", "url": "https://github.com/patrickmast/pm7-ui-style-guide.git" }
 }
