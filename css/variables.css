@@ -1,3 +1,4 @@
+/* Enhancement: Globally remove focus ring from input fields and set border color to primary on focus for all apps using pm7-ui-style-guide. */
 /* CSS Variables for pm7-ui-style-guide */
 :root {
   --primary: #1C86EF;
@@ -6,4 +7,22 @@
   --foreground: #000000;
   --radius: 0.5rem;
   /* Add more as needed */
+}
+
+/* Remove default focus ring and set border color on focus for all input fields */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input:not([type]):focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--primary, #1C86EF) !important;
+}
+
+/* Enhancement: Ensure all form labels above input fields are left-aligned for consistent UX across all apps. */
+label {
+  display: block;
+  text-align: left !important;
+  margin-bottom: 0.25rem;
 }

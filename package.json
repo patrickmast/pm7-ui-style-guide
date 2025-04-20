@@ -1,8 +1,9 @@
 {
   "name": "pm7-ui-style-guide",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +13,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/patrickmast/pm7-ui-style-guide.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }
