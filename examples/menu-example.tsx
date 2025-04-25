@@ -1,4 +1,4 @@
-// Enhancement: Separated menu example into its own component file for better organization
+// Enhancement: Added multi-language support to menu example with inline translations
 import React, { useState, useEffect } from 'react';
 import { PM7MenuComponent as Menu } from '../src/pm7-menu-component';
 
@@ -118,8 +118,14 @@ const MenuExample = () => {
         return savedLanguage;
       }
     }
-    return 'english';
+    return 'en';
   });
+
+  // Function to get label based on selected language with fallback
+  const getLabel = (item: any): string => {
+    const langKey = `label-${selectedLanguage}`;
+    return item[langKey] || item.label || '';
+  };
 
   // Function to select language
   const selectLanguage = (language: string) => {
@@ -128,11 +134,18 @@ const MenuExample = () => {
     console.log(`${language} selected`);
   };
 
-  // Define menu items
+  // Define menu items with inline translations
   const menuItems = [
     {
       id: 'profile',
       label: 'Profile',
+      'label-en': 'Profile',
+      'label-es': 'Perfil',
+      'label-fr': 'Profil',
+      'label-de': 'Profil',
+      'label-nl': 'Profiel',
+      'label-nl-be': 'Profiel',
+      'label-zh': '个人资料',
       onClick: () => console.log('Profile selected'),
       icon: (
         <svg
@@ -146,7 +159,7 @@ const MenuExample = () => {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
       )
@@ -154,6 +167,13 @@ const MenuExample = () => {
     {
       id: 'settings',
       label: 'Settings',
+      'label-en': 'Settings',
+      'label-es': 'Ajustes',
+      'label-fr': 'Paramètres',
+      'label-de': 'Einstellungen',
+      'label-nl': 'Instellingen',
+      'label-nl-be': 'Instellingen',
+      'label-zh': '设置',
       onClick: () => console.log('Settings selected'),
       icon: (
         <svg
@@ -173,6 +193,63 @@ const MenuExample = () => {
       )
     },
     {
+      id: 'notifications',
+      label: 'Notifications',
+      'label-en': 'Notifications',
+      'label-es': 'Notificaciones',
+      'label-fr': 'Notifications',
+      'label-de': 'Benachrichtigungen',
+      'label-nl': 'Meldingen',
+      'label-nl-be': 'Meldingen',
+      'label-zh': '通知',
+      onClick: () => console.log('Notifications selected'),
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+        </svg>
+      )
+    },
+    {
+      id: 'help',
+      label: 'Help',
+      'label-en': 'Help',
+      'label-es': 'Ayuda',
+      'label-fr': 'Aide',
+      'label-de': 'Hilfe',
+      'label-nl': 'Hulp',
+      'label-nl-be': 'Hulp',
+      'label-zh': '帮助',
+      onClick: () => console.log('Help selected'),
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <path d="M12 17h.01" />
+        </svg>
+      )
+    },
+    {
       id: 'divider-1',
       label: '',
       type: 'separator' as 'separator'
@@ -180,6 +257,13 @@ const MenuExample = () => {
     {
       id: 'language',
       label: 'Language',
+      'label-en': 'Language',
+      'label-es': 'Idioma',
+      'label-fr': 'Langue',
+      'label-de': 'Sprache',
+      'label-nl': 'Taal',
+      'label-nl-be': 'Taal',
+      'label-zh': '语言',
       type: 'submenu' as 'submenu',
       icon: (
         <svg
@@ -203,45 +287,115 @@ const MenuExample = () => {
       ),
       submenuItems: [
         {
-          id: 'english',
+          id: 'en',
           label: 'English',
+          'label-en': 'English',
+          'label-es': 'English',
+          'label-fr': 'English',
+          'label-de': 'English',
+          'label-nl': 'English',
+          'label-nl-be': 'English',
+          'label-zh': 'English',
           type: 'check' as 'check',
-          checked: selectedLanguage === 'english',
-          onClick: () => selectLanguage('english')
+          checked: selectedLanguage === 'en',
+          onClick: () => selectLanguage('en')
         },
         {
-          id: 'espanol',
+          id: 'es',
           label: 'Español',
+          'label-en': 'Español',
+          'label-es': 'Español',
+          'label-fr': 'Español',
+          'label-de': 'Español',
+          'label-nl': 'Español',
+          'label-nl-be': 'Español',
+          'label-zh': 'Español',
           type: 'check' as 'check',
-          checked: selectedLanguage === 'espanol',
-          onClick: () => selectLanguage('espanol')
+          checked: selectedLanguage === 'es',
+          onClick: () => selectLanguage('es')
         },
         {
-          id: 'francais',
+          id: 'fr',
           label: 'Français',
+          'label-en': 'Français',
+          'label-es': 'Français',
+          'label-fr': 'Français',
+          'label-de': 'Français',
+          'label-nl': 'Français',
+          'label-nl-be': 'Français',
+          'label-zh': 'Français',
           type: 'check' as 'check',
-          checked: selectedLanguage === 'francais',
-          onClick: () => selectLanguage('francais')
+          checked: selectedLanguage === 'fr',
+          onClick: () => selectLanguage('fr')
         },
         {
-          id: 'deutsch',
+          id: 'de',
           label: 'Deutsch',
+          'label-en': 'Deutsch',
+          'label-es': 'Deutsch',
+          'label-fr': 'Deutsch',
+          'label-de': 'Deutsch',
+          'label-nl': 'Deutsch',
+          'label-nl-be': 'Deutsch',
+          'label-zh': 'Deutsch',
           type: 'check' as 'check',
-          checked: selectedLanguage === 'deutsch',
-          onClick: () => selectLanguage('deutsch')
+          checked: selectedLanguage === 'de',
+          onClick: () => selectLanguage('de')
         },
         {
-          id: 'nederlands',
+          id: 'nl',
           label: 'Nederlands',
+          'label-en': 'Nederlands',
+          'label-es': 'Nederlands',
+          'label-fr': 'Nederlands',
+          'label-de': 'Nederlands',
+          'label-nl': 'Nederlands',
+          'label-nl-be': 'Nederlands',
+          'label-zh': 'Nederlands',
           type: 'check' as 'check',
-          checked: selectedLanguage === 'nederlands',
-          onClick: () => selectLanguage('nederlands')
+          checked: selectedLanguage === 'nl',
+          onClick: () => selectLanguage('nl')
+        },
+        {
+          id: 'nl-be',
+          label: 'Nederlands (België)',
+          'label-en': 'Nederlands (België)',
+          'label-es': 'Nederlands (België)',
+          'label-fr': 'Nederlands (België)',
+          'label-de': 'Nederlands (België)',
+          'label-nl': 'Nederlands (België)',
+          'label-nl-be': 'Nederlands (België)',
+          'label-zh': 'Nederlands (België)',
+          type: 'check' as 'check',
+          checked: selectedLanguage === 'nl-be',
+          onClick: () => selectLanguage('nl-be')
+        },
+        {
+          id: 'zh',
+          label: '中文',
+          'label-en': '中文',
+          'label-es': '中文',
+          'label-fr': '中文',
+          'label-de': '中文',
+          'label-nl': '中文',
+          'label-nl-be': '中文',
+          'label-zh': '中文',
+          type: 'check' as 'check',
+          checked: selectedLanguage === 'zh',
+          onClick: () => selectLanguage('zh')
         }
       ]
     },
     {
       id: 'theme',
       label: `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`,
+      'label-en': `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`,
+      'label-es': `Tema: ${theme === 'dark' ? 'Oscuro' : 'Claro'}`,
+      'label-fr': `Thème: ${theme === 'dark' ? 'Sombre' : 'Clair'}`,
+      'label-de': `Design: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`,
+      'label-nl': `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`,
+      'label-nl-be': `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`,
+      'label-zh': `主题: ${theme === 'dark' ? '深色' : '浅色'}`,
       type: 'switch' as 'switch',
       icon: theme === 'dark' ? <MoonIcon /> : <SunIcon />,
       checked: theme === 'dark',
@@ -255,6 +409,13 @@ const MenuExample = () => {
     {
       id: 'about',
       label: 'About',
+      'label-en': 'About',
+      'label-es': 'Acerca de',
+      'label-fr': 'À propos',
+      'label-de': 'Über',
+      'label-nl': 'Over',
+      'label-nl-be': 'Over',
+      'label-zh': '关于',
       onClick: () => console.log('About selected'),
       icon: (
         <svg
@@ -276,6 +437,22 @@ const MenuExample = () => {
     }
   ];
 
+  // Update theme label when theme changes
+  useEffect(() => {
+    menuItems.forEach(item => {
+      if (item.id === 'theme') {
+        item.label = `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`;
+        item['label-en'] = `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`;
+        item['label-es'] = `Tema: ${theme === 'dark' ? 'Oscuro' : 'Claro'}`;
+        item['label-fr'] = `Thème: ${theme === 'dark' ? 'Sombre' : 'Clair'}`;
+        item['label-de'] = `Design: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`;
+        item['label-nl'] = `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`;
+        item['label-nl-be'] = `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`;
+        item['label-zh'] = `主题: ${theme === 'dark' ? '深色' : '浅色'}`;
+      }
+    });
+  }, [theme]);
+
   return (
     <div className="component-example">
       <div className="component-header">
@@ -295,9 +472,15 @@ const MenuExample = () => {
       <div className="example-container">
         <div className="example-preview" style={{ background: theme === 'dark' ? '#262626' : '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
           <Menu 
-            menuItems={menuItems} 
+            menuItems={menuItems.map(item => ({
+              ...item,
+              label: getLabel(item),
+              submenuItems: item.submenuItems?.map(subItem => ({
+                ...subItem,
+                label: getLabel(subItem)
+              }))
+            }))} 
             initialTheme={theme}
-            forceDarkMode={theme === 'dark'} 
           />
         </div>
       </div>
@@ -306,23 +489,47 @@ const MenuExample = () => {
         <pre>
           <code>{`import { PM7MenuComponent as Menu } from 'winfakt-ui-style-guide';
 
-// Define menu items
+// Function to get label based on selected language
+const getLabel = (item) => {
+  const langKey = \`label-\${selectedLanguage}\`;
+  return item[langKey] || item.label || '';
+};
+
+// Define menu items with inline translations
 const menuItems = [
   {
-    id: 'language',
-    label: 'Set language',
-    onClick: () => console.log('Language selected')
+    id: 'profile',
+    label: 'Profile',
+    'label-en': 'Profile',
+    'label-es': 'Perfil',
+    'label-nl': 'Profiel',
+    onClick: () => console.log('Profile selected')
   },
   {
-    id: 'theme',
-    label: 'Theme: Light',
-    onClick: () => toggleTheme(),
-    rightIcon: <SunIcon />
+    id: 'language',
+    label: 'Language',
+    'label-en': 'Language',
+    'label-es': 'Idioma',
+    'label-nl': 'Taal',
+    type: 'submenu',
+    submenuItems: [
+      // language options...
+    ]
   }
 ];
 
-// Use the menu with custom items
-<Menu menuItems={menuItems} initialTheme="light" />`}</code>
+// Use the menu with translations
+<Menu 
+  menuItems={menuItems.map(item => ({
+    ...item,
+    label: getLabel(item),
+    submenuItems: item.submenuItems?.map(subItem => ({
+      ...subItem,
+      label: getLabel(subItem)
+    }))
+  }))} 
+  initialTheme="light" 
+/>`}</code>
         </pre>
       </div>
     </div>
