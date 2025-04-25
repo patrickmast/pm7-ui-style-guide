@@ -1,0 +1,40 @@
+/* Updated: Removed ineffective rule for left icon color. SVG needs modification (use currentColor). */
+
+/* Style for highlighted states (replaces :hover) */
+/* [data-radix-dropdown-menu-subtrigger][data-highlighted] svg, */
+/* [role="menuitem"][data-highlighted] svg { */
+/*   color: white; */
+/* } */
+
+/* Target the specific submenu icon */
+/* .submenu-icon svg { */
+/*   transition: color 0.2s ease; */
+/* } */
+
+/* MINIMAL FIX 3: Extreme Specificity */
+/* Target based on a specific class ('select-none') applied to the trigger itself */
+/* [data-radix-dropdown-menu-subtrigger].select-none[data-state="open"] .submenu-icon svg { */
+/*   color: white !important; */
+/* } */
+/* Optional fallback for direct svg if icon is not wrapped */
+/*  [data-radix-dropdown-menu-subtrigger].select-none[data-state="open"] > svg { */
+/*   color: white !important; */
+/* } */
+
+/* Cleanup previous attempts targeting RIGHT icon */
+/* [data-radix-dropdown-menu-subtrigger][data-state="open"] > .submenu-icon > svg { */
+/*   color: white;  */
+/* } */
+/* [data-radix-dropdown-menu-subtrigger][data-state="open"] > .submenu-icon > svg { */
+/*   color: white !important;  */
+/* } */
+
+/* FINAL: Keep LEFT menu item icon white when the submenu trigger is open */
+/* [data-radix-dropdown-menu-subtrigger][data-state="open"] > .inline-flex > .menu-item-icon > svg { */
+/*   color: white !important; */
+/* } */
+
+/* Force left icon color on highlight */
+/* [data-radix-dropdown-menu-item][data-highlighted] .menu-item-icon > svg { */
+/*   color: white !important; */
+/* } */

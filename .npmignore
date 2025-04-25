@@ -1,0 +1,21 @@
+# Don't include examples app in the npm package
+src/examples/
+
+# Source files (since we're publishing compiled output)
+src/**/*.tsx
+src/**/*.ts
+
+# Development files
+.storybook/
+.vscode/
+.idea/
+*.log
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Build output for examples
+dist/examples/

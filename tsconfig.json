@@ -6,7 +6,9 @@
     "outDir": "./",
     "rootDir": "src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": []
