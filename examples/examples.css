@@ -159,14 +159,14 @@ main {
   justify-content: center;
 }
 
-.theme-icon {
-  width: 16px; /* Match SVG width/height */
-  height: 16px; /* Match SVG width/height */
-}
-
 .theme-switch.dark .theme-switch-thumb {
   transform: translateX(28px);
   background-color: #6E6E6E;
+}
+
+.theme-switch .theme-icon {
+  width: 16px; /* Match SVG width/height */
+  height: 16px; /* Match SVG width/height */
 }
 
 .theme-switch.dark .theme-icon {
@@ -209,21 +209,4 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: auto;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121212;
-    --text: #f5f5f5;
-    --card-bg: #1e1e1e;
-    --sidebar-bg: #1a1a1a;
-    --sidebar-active: #2c2c2c;
-    --border: #333;
-  }
-  
-  .example-code pre {
-    background-color: #2c2c2c;
-    color: #f5f5f5;
-  }
 }

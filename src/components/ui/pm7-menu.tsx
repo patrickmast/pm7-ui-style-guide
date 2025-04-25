@@ -13,7 +13,7 @@ const MENU_STYLES = {
   ITEM_VERTICAL_PADDING_DESKTOP: 'py-2', // 8px
   ITEM_VERTICAL_PADDING_MOBILE: 'py-3', // 12px
   ITEM_ICON_TEXT_GAP: 'gap-3', // 12px
-  
+
   // Dropdown Container Styling
   CONTAINER_PADDING: 'py-3 px-3', // 12px
   CONTAINER_BORDER_RADIUS: 'rounded-[6px]', // 6px
@@ -22,10 +22,10 @@ const MENU_STYLES = {
   CONTAINER_MIN_WIDTH_MOBILE: 'min-w-[16rem]', // 16rem
   CONTAINER_MAX_WIDTH: 'max-w-[18.8rem]',
   CONTAINER_MARGIN_TOP: 'mt-1', // 4px
-  
+
   // Default Z-Index
   DEFAULT_Z_INDEX: 50,
-  
+
   // Default Accent Color
   DEFAULT_ACCENT_COLOR: '#1C86EF'
 };
@@ -56,7 +56,7 @@ const PM7MenuSubTrigger = React.forwardRef<
       inset && "pl-8",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "data-[highlighted]:bg-[#1C86EF] data-[highlighted]:text-white",
-      "text-black dark:text-[#FAFAFA]",
+      "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
     )}
     {...props}
@@ -75,7 +75,7 @@ const PM7MenuSubContent = React.forwardRef<
     ref={ref}
     className={cn(
       "z-50 min-w-[8rem] overflow-hidden rounded-[6px] border py-3 px-3 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-      "bg-white dark:!bg-[#262626] border-[#D5D5D5] dark:border-[#525252]",
+      "bg-white dark:bg-[#262626] border-[#D5D5D5] dark:border-[#525252] text-black dark:text-[#FAFAFA] dark:text-opacity-100",
       className
     )}
     {...props}
@@ -93,7 +93,7 @@ const PM7MenuContent = React.forwardRef<
       sideOffset={sideOffset}
       className={cn(
         "z-50 min-w-[12rem] overflow-hidden rounded-[6px] border py-3 px-3 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        "bg-white dark:!bg-[#262626] border-[#D5D5D5] dark:border-[#525252] text-black dark:text-[#FAFAFA]",
+        "bg-white dark:bg-[#262626] border-[#D5D5D5] dark:border-[#525252] text-black dark:text-[#FAFAFA] dark:text-opacity-100",
         className
       )}
       {...props}
@@ -111,10 +111,10 @@ const PM7MenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-md px-4 py-2 text-sm outline-none", 
+      "relative flex cursor-pointer select-none items-center rounded-md px-4 py-2 text-sm outline-none",
       inset && "pl-8",
       "data-[highlighted]:bg-[#1C86EF] data-[highlighted]:text-white",
-      "text-black dark:text-[#FAFAFA]",
+      "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
     )}
     {...props}
@@ -131,7 +131,7 @@ const PM7MenuCheckboxItem = React.forwardRef<
     className={cn(
       "relative flex cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "hover:bg-[#1C86EF] hover:text-white",
-      "text-black dark:text-[#FAFAFA]",
+      "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
     )}
     checked={checked}
@@ -156,7 +156,7 @@ const PM7MenuRadioItem = React.forwardRef<
     className={cn(
       "relative flex cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "hover:bg-[#1C86EF] hover:text-white",
-      "text-black dark:text-[#FAFAFA]",
+      "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
     )}
     {...props}
@@ -182,7 +182,7 @@ const PM7MenuLabel = React.forwardRef<
     className={cn(
       "px-2 py-1.5 text-sm font-semibold",
       inset && "pl-8",
-      "text-black dark:text-[#FAFAFA]",
+      "text-black dark:text-[#FAFAFA] dark:text-opacity-100",
       className
     )}
     {...props}
@@ -194,11 +194,13 @@ const PM7MenuSeparator = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Separator
-    ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-[#D5D5D5] dark:bg-[#525252]", className)}
-    {...props}
-  />
+  <div className="py-2 flex items-center justify-center">
+    <DropdownMenuPrimitive.Separator
+      ref={ref}
+      className={cn("w-[95%] h-[1px] bg-[#D5D5D5] dark:bg-[#525252]", className)}
+      {...props}
+    />
+  </div>
 ))
 PM7MenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
 
