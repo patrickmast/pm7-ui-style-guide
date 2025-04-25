@@ -6,6 +6,12 @@
 
 ---
 
+## Live Examples
+
+View the live examples of all components at our [Vercel deployment](https://pm7-ui-style-guide-mqrvlm8a9-pm7-projects.vercel.app/).
+
+---
+
 ## Purpose
 
 The Winfakt UI Style Guide serves as the single source of truth for all Winfakt applications, ensuring consistent styling, branding, and user experience. It provides:
@@ -201,6 +207,12 @@ export default function CustomMenu() {
 - Gap between icon and text: 12px (gap-3)
 - Min-width: 12rem on desktop, 16rem on mobile
 - Max-width: 18.8rem
+
+### Menu Separator Styling
+
+- Height: 1px
+- Background: #D4D4D4 in light mode, #525252 in dark mode
+- Margin: 8px 0 (my-2)
 
 ### Input Fields
 

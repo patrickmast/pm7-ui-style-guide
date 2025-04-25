@@ -65,7 +65,8 @@ import {
   PM7Menu, 
   PM7MenuTrigger, 
   PM7MenuContent, 
-  PM7MenuItem 
+  PM7MenuItem,
+  PM7MenuSeparator
 } from 'winfakt-ui-style-guide';
 
 function CustomButtonMenu() {
@@ -82,6 +83,10 @@ function CustomButtonMenu() {
         </PM7MenuItem>
         <PM7MenuItem onClick={() => console.log('Item 2 clicked')}>
           Menu Item 2
+        </PM7MenuItem>
+        <PM7MenuSeparator />
+        <PM7MenuItem onClick={() => console.log('Item 3 clicked')}>
+          Menu Item 3
         </PM7MenuItem>
       </PM7MenuContent>
     </PM7Menu>
@@ -143,6 +148,34 @@ Individual menu items.
 >
   Item Text
 </PM7MenuItem>
+```
+
+#### PM7MenuSeparator
+
+A horizontal separator line for visually dividing menu sections.
+
+```tsx
+<PM7MenuSeparator />
+```
+
+The separator is styled with:
+- 1-pixel height line
+- 95% width (centered)
+- Proper vertical padding (py-2) to match menu items
+- Light gray (#D5D5D5) in light mode, darker gray (#525252) in dark mode
+
+Example usage:
+
+```tsx
+<PM7MenuContent>
+  <PM7MenuItem>Profile</PM7MenuItem>
+  <PM7MenuItem>Settings</PM7MenuItem>
+  <PM7MenuSeparator /> {/* Adds a visual separator */}
+  <PM7MenuItem>Language</PM7MenuItem>
+  <PM7MenuItem>Theme</PM7MenuItem>
+  <PM7MenuSeparator />
+  <PM7MenuItem>About</PM7MenuItem>
+</PM7MenuContent>
 ```
 
 ## Styling

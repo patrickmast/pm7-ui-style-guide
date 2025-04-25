@@ -18,3 +18,4 @@ lib/
 
 # Node modules
 node_modules/
+.vercel
