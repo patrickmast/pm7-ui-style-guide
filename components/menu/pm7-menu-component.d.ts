@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react';
+import './pm7-menu.css';
+export type PM7MenuItemType = 'item' | 'submenu' | 'separator' | 'check' | 'radio' | 'switch';
 export interface PM7MenuItem {
     id: string;
-    label: React.ReactNode;
-    onClick?: () => void;
-    onChange?: () => void;
+    label?: string;
+    type?: PM7MenuItemType;
     icon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
-    type?: 'separator' | 'submenu' | 'check' | 'switch';
-    submenuItems?: PM7MenuItem[];
+    disabled?: boolean;
+    onClick?: () => void;
+    onChange?: (checked: boolean) => void;
     checked?: boolean;
+    submenuItems?: PM7MenuItem[];
 }
 export interface PM7MenuProps {
     menuItems?: PM7MenuItem[];

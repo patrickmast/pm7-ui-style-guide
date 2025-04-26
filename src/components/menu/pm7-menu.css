@@ -1,4 +1,5 @@
-/* Winfakt Menu Component CSS - Self-contained styling for light and dark modes */
+/* Winfakt Menu Component CSS - Self-contained styling for light and dark modes
+   ENHANCEMENT: Added spacing to the switch icon in switch-type menu items to ensure it is not too close to the label. */
 
 /* Base menu styles */
 .menu-item-icon {
@@ -6,6 +7,14 @@
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
+}
+
+/* Add spacing for the switch icon in switch-type menu items */
+.menu-item-switch-icon {
+  margin-left: 1rem;
+  /* Adjust as needed for desired spacing */
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Checkbox styling */

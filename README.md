@@ -4,6 +4,43 @@
 
 > **This package ensures consistent styling and UI components across all Winfakt applications by providing pre-styled components and design tokens.**
 
+## Table of Contents
+
+- [Live Examples](#live-examples)
+- [Purpose](#purpose)
+- [Why Use This Package?](#why-use-this-package)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Important: Use This Package Instead of Direct ShadCN/UI](#important-use-this-package-instead-of-direct-shadcnui)
+  - [Components](#components)
+  - [Design Tokens](#design-tokens)
+  - [CSS Variables](#css-variables)
+- [Component Documentation](#component-documentation)
+  - [Menu Component](#menu-component)
+  - [Menu Primitives](#menu-primitives)
+  - [Button Component](#button-component)
+  - [Dialog Component](#dialog-component)
+  - [Input Component](#input-component)
+- [Integration Guide for Developers](#integration-guide-for-developers)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
+  - [Component Usage](#component-usage)
+  - [Styling Integration](#styling-integration)
+  - [Troubleshooting](#troubleshooting)
+- [Brand Guidelines](#brand-guidelines)
+  - [Brand Name](#brand-name)
+  - [Colors](#colors)
+  - [Interactive Elements](#interactive-elements)
+- [UI/Styling Rules](#uistyling-rules)
+  - [Menu/Dropdown Styling](#menudropdown-styling)
+  - [Menu Separator Styling](#menu-separator-styling)
+  - [Input Fields](#input-fields)
+  - [Buttons](#buttons)
+  - [General](#general)
+- [Examples](#examples)
+- [Commit & Deploy Workflow](#commit--deploy-workflow)
+- [Contributing](#contributing)
+
 ---
 
 ## Live Examples
@@ -55,7 +92,7 @@ Instead of adding ShadCN/UI components directly to your project and then customi
 
 ```tsx
 // Import specific components
-import { PM7MenuComponent as Menu } from 'winfakt-ui-style-guide';
+import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
 
 // Define menu items
 const menuItems = [
@@ -113,7 +150,7 @@ const primaryColor = colors.primary; // #1C86EF
 The Menu component provides a dropdown menu with Winfakt styling and fully configurable menu items:
 
 ```tsx
-import { PM7MenuComponent as Menu } from 'winfakt-ui-style-guide';
+import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
 
 export default function AppMenu() {
   // Define menu items
@@ -141,7 +178,7 @@ export default function AppMenu() {
 - Supports icons, custom labels, and click handlers
 - Follows all Winfakt interaction patterns
 
-Detailed documentation can be found in [pm7-menu-component Documentation](./src/docs/pm7-menu-component.md).
+Detailed documentation can be found in [pm7-menu-component Documentation](./src/components/menu/README.md).
 
 ### Menu Primitives
 
@@ -153,7 +190,7 @@ import {
   PM7MenuTrigger,
   PM7MenuContent,
   PM7MenuItem
-} from 'winfakt-ui-style-guide';
+} from 'pm7-ui-style-guide';
 
 export default function CustomMenu() {
   return (
@@ -169,6 +206,342 @@ export default function CustomMenu() {
   );
 }
 ```
+
+### Button Component
+
+The Button component provides a styled button with Winfakt branding:
+
+```tsx
+import { PM7Button as Button } from 'pm7-ui-style-guide';
+
+export default function AppButton() {
+  return (
+    <Button onClick={() => console.log('Button clicked')}>Click me</Button>
+  );
+}
+```
+
+**Features:**
+- Implements Winfakt's exact button styling
+- Supports click handlers
+- Follows all Winfakt interaction patterns
+
+Detailed documentation can be found in [pm7-button-component Documentation](./src/components/button/README.md).
+
+### Dialog Component
+
+The Dialog component provides a styled dialog with Winfakt branding:
+
+```tsx
+import { PM7Dialog as Dialog } from 'pm7-ui-style-guide';
+
+export default function AppDialog() {
+  return (
+    <Dialog isOpen={true} onClose={() => console.log('Dialog closed')}>
+      <Dialog.Title>Dialog Title</Dialog.Title>
+      <Dialog.Description>Dialog description</Dialog.Description>
+    </Dialog>
+  );
+}
+```
+
+**Features:**
+- Implements Winfakt's exact dialog styling
+- Supports open/closed state and close handlers
+- Follows all Winfakt interaction patterns
+
+Detailed documentation can be found in [pm7-dialog-component Documentation](./src/components/dialog/README.md).
+
+### Input Component
+
+The Input component provides a styled input field with Winfakt branding:
+
+```tsx
+import { PM7Input as Input } from 'pm7-ui-style-guide';
+
+export default function AppInput() {
+  return (
+    <Input
+      type="text"
+      value="Input value"
+      onChange={(e) => console.log(e.target.value)}
+    />
+  );
+}
+```
+
+**Features:**
+- Implements Winfakt's exact input field styling
+- Supports value and change handlers
+- Follows all Winfakt interaction patterns
+
+Detailed documentation can be found in [pm7-input-component Documentation](./src/components/input/README.md).
+
+---
+
+## Integration Guide for Developers
+
+This guide provides detailed instructions for third-party developers who want to integrate the PM7 UI Style Guide into their applications.
+
+### Prerequisites
+
+* Node.js (>=14.17.0)
+* npm (>=6.14.13) or yarn (>=1.22.0)
+* React (>=16.8.0) - The library uses React hooks
+* A modern build system that can handle ES modules (webpack, Vite, Next.js, etc.)
+
+### Installation Steps
+
+1. Install the package using npm:
+   ```sh
+   npm install pm7-ui-style-guide
+   ```
+   
+   Or using yarn:
+   ```sh
+   yarn add pm7-ui-style-guide
+   ```
+
+2. Install peer dependencies (if not already in your project):
+   ```sh
+   npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu
+   ```
+
+3. Set up your project to handle CSS imports (if not already configured):
+   - For webpack: Ensure you have css-loader and style-loader configured
+   - For Next.js: No additional configuration needed
+   - For Vite: No additional configuration needed
+
+### Component Usage
+
+The PM7 UI Style Guide provides several components that you can import and use in your application:
+
+#### Menu Component
+
+```tsx
+import { PM7MenuComponent } from 'pm7-ui-style-guide';
+import { useState } from 'react';
+
+function MyApp() {
+  const [theme, setTheme] = useState('light');
+  
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+  
+  const menuItems = [
+    {
+      id: 'theme',
+      label: `Theme: ${theme === 'light' ? 'Light' : 'Dark'}`,
+      onClick: toggleTheme
+    },
+    {
+      id: 'help',
+      label: 'Help',
+      onClick: () => window.open('https://help.example.com', '_blank')
+    }
+  ];
+  
+  return (
+    <div className={theme}>
+      <header>
+        <h1>My Application</h1>
+        <PM7MenuComponent 
+          menuItems={menuItems} 
+          initialTheme={theme}
+        />
+      </header>
+      {/* Rest of your application */}
+    </div>
+  );
+}
+```
+
+#### Dialog Component
+
+```tsx
+import { 
+  PM7Dialog,
+  PM7DialogTrigger,
+  PM7DialogContent,
+  PM7DialogHeader,
+  PM7DialogTitle,
+  PM7DialogFooter 
+} from 'pm7-ui-style-guide';
+import '../node_modules/pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
+
+function MyDialog() {
+  return (
+    <PM7Dialog>
+      <PM7DialogTrigger asChild>
+        <button>Open Settings</button>
+      </PM7DialogTrigger>
+      <PM7DialogContent>
+        <PM7DialogHeader>
+          <PM7DialogTitle>Application Settings</PM7DialogTitle>
+        </PM7DialogHeader>
+        <div className="py-4">
+          {/* Your settings form */}
+          <p>Settings content goes here</p>
+        </div>
+        <PM7DialogFooter>
+          <button className="secondary-button">Cancel</button>
+          <button className="primary-button">Save</button>
+        </PM7DialogFooter>
+      </PM7DialogContent>
+    </PM7Dialog>
+  );
+}
+```
+
+#### Button and Input Styling
+
+```tsx
+import { buttonRules, inputRules } from 'pm7-ui-style-guide';
+
+function MyForm() {
+  return (
+    <form>
+      <div className="form-group">
+        <label htmlFor="name">Name</label>
+        <input 
+          id="name" 
+          type="text" 
+          style={{
+            borderColor: inputRules.alwaysShowBorder ? '#D4D4D4' : 'transparent',
+          }}
+          className="focus:border-primary"
+        />
+      </div>
+      <button 
+        type="submit"
+        style={{ cursor: buttonRules.cursor }}
+      >
+        Submit
+      </button>
+    </form>
+  );
+}
+```
+
+### Styling Integration
+
+The PM7 UI Style Guide provides styling through CSS variables and utility classes. Here's how to integrate them:
+
+#### CSS Variables
+
+Import the CSS variables in your main CSS file:
+
+```css
+@import 'pm7-ui-style-guide/src/css/variables.css';
+```
+
+Then use the variables in your styles:
+
+```css
+.my-button {
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+}
+
+.my-button:hover {
+  background-color: var(--primary-dark);
+}
+```
+
+#### Component-Specific CSS
+
+Some components require their specific CSS files. Import them as needed:
+
+```tsx
+// For Dialog component
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
+
+// For Menu component
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+```
+
+### Dark Mode Support
+
+The PM7 UI Style Guide components support dark mode. To enable it:
+
+1. Add a class to your root element based on the current theme:
+
+```tsx
+<div className={theme === 'dark' ? 'dark' : ''}>
+  {/* Your application */}
+</div>
+```
+
+2. Pass the theme to components that accept it:
+
+```tsx
+<PM7MenuComponent 
+  menuItems={menuItems} 
+  initialTheme={theme}
+/>
+```
+
+### TypeScript Support
+
+The package includes TypeScript definitions. You can import types for components and props:
+
+```tsx
+import { PM7MenuItem } from 'pm7-ui-style-guide';
+
+const menuItems: PM7MenuItem[] = [
+  {
+    id: 'settings',
+    label: 'Settings',
+    onClick: () => console.log('Settings clicked')
+  }
+];
+```
+
+### Troubleshooting
+
+#### Common Issues
+
+1. **Components not styled correctly**
+   - Make sure you've imported the component-specific CSS files
+   - Check that your bundler is configured to handle CSS imports
+
+2. **CSS variables not working**
+   - Ensure you've imported the variables.css file
+   - Check that your bundler is configured to handle CSS imports
+
+3. **Component not rendering**
+   - Check that you've installed all peer dependencies
+   - Ensure you're using a compatible React version
+
+#### Getting Help
+
+If you encounter issues not covered here:
+
+- Check the [Component Documentation](#component-documentation) for specific usage details
+- Look for similar issues in the [GitHub Issues](https://github.com/patrickmast/pm7-ui-style-guide/issues) page
+- Open a new issue with detailed information about your problem
+
+### Version Compatibility
+
+| PM7 UI Style Guide | React    | Notes                               |
+|--------------------|----------|-------------------------------------|
+| 1.x                | >=16.8.0 | Requires React with Hooks support   |
+| 2.x (future)       | >=18.0.0 | Will use React 18 features          |
+
+### Best Practices
+
+1. **Use components consistently** across your application to maintain a unified look and feel
+
+2. **Follow the Winfakt brand guidelines** for colors, spacing, and typography
+
+3. **Use the provided design tokens** instead of hardcoding values
+
+4. **Test your integration** in both light and dark modes
+
+5. **Keep the package updated** to benefit from bug fixes and new features
 
 ---
 

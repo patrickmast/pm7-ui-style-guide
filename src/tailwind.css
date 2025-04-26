@@ -1,4 +1,0 @@
-/* Enhancement: Tailwind CSS entry for pm7-ui-style-guide, enables all Tailwind and ShadCN styles in components. */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

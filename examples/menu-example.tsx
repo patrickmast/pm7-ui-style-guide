@@ -1,6 +1,15 @@
-// Enhancement: Added multi-language support to menu example with inline translations
-import React, { useState, useEffect } from 'react';
-import { PM7MenuComponent as Menu } from '../src/pm7-menu-component';
+// Bug Fix: Fixed dialog border color to #525252 in dark mode
+import React, { useState, useEffect, useRef } from 'react';
+import { PM7MenuComponent as Menu } from '../src/components/menu';
+import {
+  PM7Dialog,
+  PM7DialogContent,
+  PM7DialogHeader,
+  PM7DialogTitle,
+  PM7DialogSubTitle,
+  PM7DialogFooter,
+} from '../src/components/dialog';
+import '../src/components/dialog/pm7-dialog.css';
 
 // Sun icon component for theme switch (fixed black color)
 const SunIconSwitch = () => (
@@ -132,6 +141,14 @@ const MenuExample = () => {
     setSelectedLanguage(language);
     localStorage.setItem('winfakt-language', language);
     console.log(`${language} selected`);
+  };
+
+  // State for showing the about dialog
+  const [showAboutDialog, setShowAboutDialog] = useState(false);
+
+  // Function to show about dialog
+  const showAbout = () => {
+    setShowAboutDialog(true);
   };
 
   // Define menu items with inline translations
@@ -411,12 +428,12 @@ const MenuExample = () => {
       label: 'About',
       'label-en': 'About',
       'label-es': 'Acerca de',
-      'label-fr': 'À propos',
+      'label-fr': 'à propos',
       'label-de': 'Über',
       'label-nl': 'Over',
       'label-nl-be': 'Over',
       'label-zh': '关于',
-      onClick: () => console.log('About selected'),
+      onClick: () => showAbout(),
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -470,7 +487,7 @@ const MenuExample = () => {
         </div>
       </div>
       <div className="example-container">
-        <div className="example-preview" style={{ background: theme === 'dark' ? '#262626' : '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
+        <div className="example-preview" style={{ background: theme === 'dark' ? '#262626' : '#f5f5f5', padding: '20px', borderRadius: '8px', position: 'relative' }}>
           <Menu 
             menuItems={menuItems.map(item => ({
               ...item,
@@ -482,12 +499,52 @@ const MenuExample = () => {
             }))} 
             initialTheme={theme}
           />
+          
+          {/* About dialog */}
+          <PM7Dialog open={showAboutDialog} onOpenChange={setShowAboutDialog}>
+            <PM7DialogContent 
+              className={theme === 'dark' ? 'dark' : ''}
+              style={{ 
+                backgroundColor: theme === 'dark' ? '#262626' : 'white',
+                color: theme === 'dark' ? 'white' : 'inherit',
+                border: `1px solid ${theme === 'dark' ? '#525252' : '#e2e8f0'}`
+              }}
+            >
+              <PM7DialogHeader>
+                <PM7DialogTitle>PM7 UI Style Guide</PM7DialogTitle>
+                <PM7DialogSubTitle>
+                  A comprehensive UI component library for Winfakt applications.
+                </PM7DialogSubTitle>
+              </PM7DialogHeader>
+              <div style={{ margin: '16px 0', borderTop: `1px solid ${theme === 'dark' ? '#525252' : '#e2e8f0'}`, paddingTop: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
+                  <span style={{ fontWeight: '500', minWidth: '100px', color: theme === 'dark' ? '#a1a1aa' : '#64748b' }}>Version:</span>
+                  <span>1.0.8</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
+                  <span style={{ fontWeight: '500', minWidth: '100px', color: theme === 'dark' ? '#a1a1aa' : '#64748b' }}>Author:</span>
+                  <span>hi@pm7.ink</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <span style={{ fontWeight: '500', minWidth: '100px', color: theme === 'dark' ? '#a1a1aa' : '#64748b' }}>License:</span>
+                  <span>ISC</span>
+                </div>
+              </div>
+              <PM7DialogFooter>
+                <button 
+                  onClick={() => setShowAboutDialog(false)}
+                  className="pm7-dialog-button"
+                >
+                  Close
+                </button>
+              </PM7DialogFooter>
+            </PM7DialogContent>
+          </PM7Dialog>
         </div>
-      </div>
-      <div className="example-code">
-        <h3>Usage</h3>
-        <pre>
-          <code>{`import { PM7MenuComponent as Menu } from 'winfakt-ui-style-guide';
+        <div className="example-code">
+          <h3>Usage</h3>
+          <pre>
+            <code>{`import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
 
 // Function to get label based on selected language
 const getLabel = (item) => {
@@ -530,7 +587,8 @@ const menuItems = [
   }))} 
   initialTheme="light" 
 />`}</code>
-        </pre>
+          </pre>
+        </div>
       </div>
     </div>
   );
