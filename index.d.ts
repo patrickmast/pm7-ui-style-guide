@@ -4,7 +4,7 @@
  */
 
 // Main component exports with both PM7-prefixed and alias versions
-export { PM7MenuComponent, PM7MenuComponent as Menu } from './components/menu';
+export { PM7MenuComponent, PM7MenuComponent as Menu } from './components/menu/pm7-menu-component';
 export { PM7Button, PM7Button as Button } from './components/button';
 export { PM7Input, PM7Input as Input } from './components/input';
 export { 
