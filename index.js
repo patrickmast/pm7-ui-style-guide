@@ -19,6 +19,7 @@ exports.PM7MenuPortal = exports.PM7MenuSeparator = exports.PM7MenuLabel = export
 // Core UI components
 var menu_1 = require("./components/menu");
 Object.defineProperty(exports, "Menu", { enumerable: true, get: function () { return menu_1.PM7MenuComponent; } });
+__exportStar(require("./components/dialog"), exports);
 // Form components
 __exportStar(require("./components/input"), exports);
 __exportStar(require("./components/button"), exports);

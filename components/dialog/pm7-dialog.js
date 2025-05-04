@@ -1,5 +1,5 @@
 "use strict";
-// Enhancement: Added ShadCN-style dialog component for consistent UI
+// Bug Fix: Updated dialog border color to #525252 in dark mode
 "use client";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
