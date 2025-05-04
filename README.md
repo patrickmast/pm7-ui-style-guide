@@ -75,6 +75,11 @@ Install via npm:
 npm install pm7-ui-style-guide
 ```
 
+Install required peer dependencies:
+```sh
+npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu
+```
+
 Or, for direct use from GitHub (if you want the latest, unpublished code):
 ```sh
 npm install git+https://github.com/patrickmast/pm7-ui-style-guide.git
@@ -92,7 +97,8 @@ Instead of adding ShadCN/UI components directly to your project and then customi
 
 ```tsx
 // Import specific components
-import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
+// You can use either the PM7-prefixed version or the alias
+import { Menu, PM7MenuComponent } from 'pm7-ui-style-guide';
 
 // Define menu items
 const menuItems = [
@@ -150,7 +156,8 @@ const primaryColor = colors.primary; // #1C86EF
 The Menu component provides a dropdown menu with Winfakt styling and fully configurable menu items:
 
 ```tsx
-import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
+import { Menu } from 'pm7-ui-style-guide';
+// OR import { PM7MenuComponent } from 'pm7-ui-style-guide';
 
 export default function AppMenu() {
   // Define menu items
@@ -159,6 +166,10 @@ export default function AppMenu() {
       id: 'language',
       label: 'Set language',
       onClick: () => console.log('Language selected')
+    },
+    {
+      id: 'separator1',
+      type: 'separator'
     },
     {
       id: 'theme',
@@ -177,8 +188,9 @@ export default function AppMenu() {
 - Fully configurable menu items
 - Supports icons, custom labels, and click handlers
 - Follows all Winfakt interaction patterns
+- Supports separators with `type: 'separator'`
 
-Detailed documentation can be found in [pm7-menu-component Documentation](./src/components/menu/README.md).
+Detailed documentation can be found in [pm7-menu-component Documentation](./components/menu/README.md).
 
 ### Menu Primitives
 
@@ -212,7 +224,8 @@ export default function CustomMenu() {
 The Button component provides a styled button with Winfakt branding:
 
 ```tsx
-import { PM7Button as Button } from 'pm7-ui-style-guide';
+import { Button } from 'pm7-ui-style-guide';
+// OR import { PM7Button } from 'pm7-ui-style-guide';
 
 export default function AppButton() {
   return (
@@ -226,14 +239,15 @@ export default function AppButton() {
 - Supports click handlers
 - Follows all Winfakt interaction patterns
 
-Detailed documentation can be found in [pm7-button-component Documentation](./src/components/button/README.md).
+Detailed documentation can be found in [pm7-button-component Documentation](./components/button/README.md).
 
 ### Dialog Component
 
 The Dialog component provides a styled dialog with Winfakt branding:
 
 ```tsx
-import { PM7Dialog as Dialog } from 'pm7-ui-style-guide';
+import { Dialog } from 'pm7-ui-style-guide';
+// OR import { PM7Dialog } from 'pm7-ui-style-guide';
 
 export default function AppDialog() {
   return (
@@ -250,14 +264,15 @@ export default function AppDialog() {
 - Supports open/closed state and close handlers
 - Follows all Winfakt interaction patterns
 
-Detailed documentation can be found in [pm7-dialog-component Documentation](./src/components/dialog/README.md).
+Detailed documentation can be found in [pm7-dialog-component Documentation](./components/dialog/README.md).
 
 ### Input Component
 
 The Input component provides a styled input field with Winfakt branding:
 
 ```tsx
-import { PM7Input as Input } from 'pm7-ui-style-guide';
+import { Input } from 'pm7-ui-style-guide';
+// OR import { PM7Input } from 'pm7-ui-style-guide';
 
 export default function AppInput() {
   return (
@@ -275,7 +290,7 @@ export default function AppInput() {
 - Supports value and change handlers
 - Follows all Winfakt interaction patterns
 
-Detailed documentation can be found in [pm7-input-component Documentation](./src/components/input/README.md).
+Detailed documentation can be found in [pm7-input-component Documentation](./components/input/README.md).
 
 ---
 
@@ -302,7 +317,7 @@ This guide provides detailed instructions for third-party developers who want to
    yarn add pm7-ui-style-guide
    ```
 
-2. Install peer dependencies (if not already in your project):
+2. Install peer dependencies:
    ```sh
    npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu
    ```
@@ -319,7 +334,7 @@ The PM7 UI Style Guide provides several components that you can import and use i
 #### Menu Component
 
 ```tsx
-import { PM7MenuComponent } from 'pm7-ui-style-guide';
+import { Menu } from 'pm7-ui-style-guide';
 import { useState } from 'react';
 
 function MyApp() {
@@ -336,6 +351,10 @@ function MyApp() {
       onClick: toggleTheme
     },
     {
+      id: 'separator1',
+      type: 'separator'
+    },
+    {
       id: 'help',
       label: 'Help',
       onClick: () => window.open('https://help.example.com', '_blank')
@@ -346,7 +365,7 @@ function MyApp() {
     <div className={theme}>
       <header>
         <h1>My Application</h1>
-        <PM7MenuComponent 
+        <Menu 
           menuItems={menuItems} 
           initialTheme={theme}
         />
@@ -478,7 +497,7 @@ The PM7 UI Style Guide components support dark mode. To enable it:
 2. Pass the theme to components that accept it:
 
 ```tsx
-<PM7MenuComponent 
+<Menu 
   menuItems={menuItems} 
   initialTheme={theme}
 />
@@ -515,6 +534,10 @@ const menuItems: PM7MenuItem[] = [
 3. **Component not rendering**
    - Check that you've installed all peer dependencies
    - Ensure you're using a compatible React version
+
+4. **TypeScript errors with imports**
+   - Make sure you're importing from the root package: `import { Menu } from 'pm7-ui-style-guide'`
+   - If you're still having issues, try using the PM7-prefixed version: `import { PM7MenuComponent } from 'pm7-ui-style-guide'`
 
 #### Getting Help
 
