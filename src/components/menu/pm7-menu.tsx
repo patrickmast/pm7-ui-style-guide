@@ -42,6 +42,7 @@ function cn(...classes: (string | undefined | false)[]) {
 export type PM7MenuItemType = 'item' | 'submenu' | 'separator' | 'check' | 'radio' | 'switch';
 
 // Define menu item interface
+// Using Record type to avoid TypeScript recursive type reference issues
 export type PM7MenuItem = {
   id: string;
   label?: string;
@@ -51,14 +52,16 @@ export type PM7MenuItem = {
   onClick?: () => void;
   onChange?: (checked: boolean) => void;
   checked?: boolean;
-  submenuItems?: PM7MenuItem[];
+  submenuItems?: Record<string, any>[]; // Using Record to avoid TypeScript recursive type reference issues
 };
 
 // Define menu props
 export type PM7MenuProps = {
-  menuItems?: PM7MenuItem[];
+  menuItems?: Record<string, any>[]; // Using Record to avoid TypeScript recursive type reference issues
   initialTheme?: 'light' | 'dark';
   mobileBreakpoint?: number;
+  menuAlignment?: 'start' | 'center' | 'end';
+  menuIconColor?: string;
 };
 
 const PM7MenuRoot = DropdownMenuPrimitive.Root;
@@ -112,11 +115,13 @@ PM7MenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName
 const PM7MenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
+>(({ className, sideOffset = 4, align = "start", alignOffset = 4, ...props }, ref) => (
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
+      align={align}
+      alignOffset={alignOffset}
       className={cn(
         "z-50 min-w-[8rem] overflow-hidden rounded-[6px] border py-3 px-3 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         "bg-white dark:bg-[#262626] border-[#D5D5D5] dark:border-[#525252] text-black dark:text-[#FAFAFA] dark:text-opacity-100",
@@ -248,6 +253,8 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuItems = [],
   initialTheme = 'light',
   mobileBreakpoint = 768,
+  menuAlignment = 'start',
+  menuIconColor,
 }) => {
   // State for menu open/close
   const [isOpen, setIsOpen] = React.useState(false);
@@ -328,7 +335,7 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
           <button
             ref={menuButtonRef}
             aria-label="Open menu"
-            className={`flex items-center justify-center rounded-md cursor-pointer text-black hover:bg-opacity-10 hover:bg-gray-200 focus:outline-none focus-visible:outline-none`}
+            className={`flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none`}
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg
@@ -337,7 +344,7 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={theme === 'dark' ? '#FAFAFA' : 'currentColor'}
+              stroke={menuIconColor || (theme === 'dark' ? '#FAFAFA' : 'currentColor')}
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -349,7 +356,8 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
           </button>
         </PM7MenuTrigger>
         <PM7MenuContent
-          align="end"
+          align={menuAlignment}
+          alignOffset={4}
           style={{
             backgroundColor: currentTheme.bgColor,
             borderColor: currentTheme.borderColor,
@@ -401,7 +409,7 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                     }}
                     className={theme === 'dark' ? 'dark' : ''}
                   >
-                    {item.submenuItems.map((subItem) => (
+                    {item.submenuItems.map((subItem: Record<string, any>) => (
                       <React.Fragment key={subItem.id}>
                         {subItem.type === 'check' ? (
                           <PM7MenuCheckboxItem

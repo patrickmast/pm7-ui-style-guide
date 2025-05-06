@@ -38,9 +38,82 @@ body {
 header {
   background-color: var(--primary);
   color: white;
-  padding: 1rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
+  height: 60px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Reset all button styles */
+button.sidebar-toggle,
+button.menu-trigger,
+.menu-wrapper [data-radix-dropdown-menu-trigger] {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: white;
+  margin-right: 4px;
+  padding: 0;
+}
+
+/* Hover effect for buttons */
+button.sidebar-toggle:hover,
+button.menu-trigger:hover,
+.menu-wrapper [data-radix-dropdown-menu-trigger]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Fix SVG alignment */
+button.sidebar-toggle svg,
+button.menu-trigger svg,
+.menu-wrapper [data-radix-dropdown-menu-trigger] svg {
+  display: block;
+}
+
+.menu-wrapper {
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Menu trigger button - completely reset */
+.menu-wrapper button.menu-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+}
+
+/* Menu trigger hover effect */
+.menu-wrapper button.menu-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Remove any Radix UI styling */
+.menu-wrapper [data-radix-dropdown-menu-trigger] {
+  all: initial;
+  display: contents;
 }
 
 header h1 {
@@ -49,23 +122,6 @@ header h1 {
   font-weight: 500;
   flex-grow: 1;
   text-align: center;
-}
-
-.sidebar-toggle {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 0.5rem;
-  margin-right: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
 }
 
 .content-wrapper {

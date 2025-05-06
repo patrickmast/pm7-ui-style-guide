@@ -122,7 +122,7 @@ export default function AppHeader() {
   return (
     <header>
       <h1>Winfakt Application</h1>
-      <Menu menuItems={menuItems} /> {/* Pre-styled with Winfakt branding */}
+      <Menu menuItems={menuItems} menuAlignment="start" /> {/* Pre-styled with Winfakt branding */}
     </header>
   );
 }
@@ -181,7 +181,8 @@ export default function AppMenu() {
     }
   ];
 
-  return <Menu menuItems={menuItems} />;
+  // You can specify the menu alignment
+  return <Menu menuItems={menuItems} menuAlignment="start" menuIconColor="#1C86EF" />;
 }
 ```
 
@@ -191,6 +192,31 @@ export default function AppMenu() {
 - Supports icons, custom labels, and click handlers
 - Follows all Winfakt interaction patterns
 - Supports separators with `type: 'separator'`
+- Configurable menu alignment with `menuAlignment` prop (values: `start`, `center`, `end`)
+- Customizable menu icon color with `menuIconColor` prop
+
+**AI Assistant Prompt Example:**
+
+If you're using an AI assistant to help implement the Menu component, here's a sample prompt that will guide it to use the component correctly:
+
+```
+Add a menu to my React application using the pm7-ui-style-guide package. Specifically:
+
+1. Use the all-in-one Menu component (not the individual PM7Menu primitives)
+2. Create a menuItems array with the following items:
+   - A "Dashboard" item that navigates to the dashboard page
+   - A "Settings" item that navigates to the settings page
+   - A separator
+   - A "Dark Mode" toggle switch that changes the theme
+   - A separator
+   - An "About" item that shows version information
+
+3. Set the menuAlignment to "start" so the menu aligns with the left edge of the trigger button
+4. Set the menuIconColor to "#1C86EF" to match the Winfakt branding
+5. Make sure the menu appears when clicking a button in the header
+
+Please show the complete implementation including imports and the menuItems array definition.
+```
 
 Detailed documentation can be found in [pm7-menu-component Documentation](./components/menu/README.md).
 
@@ -212,7 +238,7 @@ export default function CustomMenu() {
       <PM7MenuTrigger asChild>
         <button>Custom Trigger</button>
       </PM7MenuTrigger>
-      <PM7MenuContent>
+      <PM7MenuContent align="start" alignOffset={4}>
         <PM7MenuItem onClick={() => console.log('Item 1')}>Item 1</PM7MenuItem>
         <PM7MenuItem onClick={() => console.log('Item 2')}>Item 2</PM7MenuItem>
       </PM7MenuContent>
@@ -220,6 +246,12 @@ export default function CustomMenu() {
   );
 }
 ```
+
+**Alignment Options:**
+- `align="start"`: Aligns the left edge of the menu with the left edge of the trigger button
+- `align="center"`: Centers the menu under the trigger button
+- `align="end"`: Aligns the right edge of the menu with the right edge of the trigger button
+- `alignOffset`: Controls the offset distance in pixels (default: 4)
 
 ### Button Component
 
@@ -370,6 +402,8 @@ function MyApp() {
         <Menu 
           menuItems={menuItems} 
           initialTheme={theme}
+          menuAlignment="start"
+          menuIconColor="#1C86EF"
         />
       </header>
       {/* Rest of your application */}
