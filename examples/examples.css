@@ -51,7 +51,6 @@ header {
 }
 
 /* Reset all button styles */
-button.sidebar-toggle,
 button.menu-trigger,
 .menu-wrapper [data-radix-dropdown-menu-trigger] {
   background: none;
@@ -68,7 +67,6 @@ button.menu-trigger,
 }
 
 /* Hover effect for buttons */
-button.sidebar-toggle:hover,
 button.menu-trigger:hover,
 .menu-wrapper [data-radix-dropdown-menu-trigger]:hover {
   background-color: rgba(255, 255, 255, 0.1);
@@ -76,7 +74,6 @@ button.menu-trigger:hover,
 }
 
 /* Fix SVG alignment */
-button.sidebar-toggle svg,
 button.menu-trigger svg,
 .menu-wrapper [data-radix-dropdown-menu-trigger] svg {
   display: block;
@@ -89,23 +86,21 @@ button.menu-trigger svg,
   height: 100%;
 }
 
-/* Menu trigger button - completely reset */
-.menu-wrapper button.menu-trigger {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: 40px;
-  height: 40px;
+/* Menu trigger button */
+button.menu-trigger {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
   color: white;
-  cursor: pointer;
+  margin-right: 4px;
+  padding: 0;
 }
 
-/* Menu trigger hover effect */
-.menu-wrapper button.menu-trigger:hover {
+/* Hover effect for buttons */
+button.menu-trigger:hover,
+.menu-wrapper [data-radix-dropdown-menu-trigger]:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
