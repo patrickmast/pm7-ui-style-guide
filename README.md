@@ -37,6 +37,7 @@
   - [Input Fields](#input-fields)
   - [Buttons](#buttons)
   - [General](#general)
+- [Architecture](#architecture)
 - [Examples](#examples)
 - [Commit & Deploy Workflow](#commit--deploy-workflow)
 - [Contributing](#contributing)
@@ -53,18 +54,19 @@ View the live examples of all components at our [Vercel deployment](https://pm7-
 
 The Winfakt UI Style Guide serves as the single source of truth for all Winfakt applications, ensuring consistent styling, branding, and user experience. It provides:
 
-- **Pre-styled UI Components**: Built on ShadCN/UI primitives but customized with Winfakt branding
+- **Styling Rules for ShadCN/UI**: Specific overrides and customizations to make ShadCN/UI components match Winfakt branding
 - **Design Tokens**: Colors, spacing, typography, and other design variables
-- **Styling Rules**: Guidelines for consistent implementation
+- **Styling Guidelines**: Rules for consistent implementation across applications
 
 ## Why Use This Package?
 
-Rather than having each application implement ShadCN/UI components and then customize them, this package provides already-customized components that match Winfakt's design system. This approach:
+This package is designed specifically for applications that **already use ShadCN/UI components**. Rather than having each application customize ShadCN/UI components individually, this package provides the Winfakt-specific styling rules and overrides. This approach:
 
-- **Ensures Consistency**: All applications use identical styling
+- **Ensures Consistency**: All applications use identical styling for ShadCN/UI components
 - **Saves Development Time**: No need to re-implement the same customizations
 - **Centralizes Updates**: Design changes can be made in one place
 - **Maintains Brand Identity**: Guarantees adherence to Winfakt brand guidelines
+- **Minimal Overhead**: Only provides the specific styling changes needed, not complete component reimplementations
 
 ---
 
@@ -627,15 +629,81 @@ If you encounter issues not covered here:
 
 ---
 
+## Architecture
+
+The PM7 UI Style Guide is designed to work within a specific architecture:
+
+1. **Base Layer**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+2. **Component Layer**: [ShadCN/UI](https://ui.shadcn.com/) - Unstyled, accessible components built on Tailwind
+3. **Branding Layer**: PM7 UI Style Guide - Winfakt-specific styling rules and overrides
+
+```
+┌─────────────────────────────────┐
+│ Your Application                 │
+│  ┌─────────────────────────────┐ │
+│  │ PM7 UI Style Guide          │ │ <- Winfakt branding layer
+│  │  ┌─────────────────────────┐│ │
+│  │  │ ShadCN/UI Components    ││ │ <- Component layer
+│  │  │  ┌─────────────────────┐│││
+│  │  │  │ Tailwind CSS        ││││ <- Utility CSS layer
+│  │  │  └─────────────────────┘│││
+│  │  └─────────────────────────┘││
+│  └─────────────────────────────┘│
+└─────────────────────────────────┘
+```
+
+This architecture allows you to leverage the accessibility and functionality of ShadCN/UI components while ensuring they adhere to Winfakt's brand guidelines.
+
+---
+
 ## Examples
 
-The examples folder contains demonstrations of all components. Each component has its own example file in the `/examples/` directory, making it easy to add new component examples without cluttering the main App.tsx file.
+The examples folder contains demonstrations of how to apply Winfakt styling rules to ShadCN/UI components. Each component has its own example file in the `/examples/` directory.
 
-To run the examples:
+### Understanding the Examples App
 
-```sh
-npm run dev
-```
+The examples app simulates a real application that uses:
+1. Tailwind CSS for utility classes
+2. ShadCN/UI for component structure
+3. PM7 UI Style Guide for Winfakt branding
+
+For each component, we demonstrate:
+- The styling rules provided by PM7 UI Style Guide
+- How these rules should be applied to ShadCN/UI components
+- The visual result of applying Winfakt branding
+
+### Running Examples Locally
+
+To run the examples app locally:
+
+1. Make sure you are in the project root directory:
+   ```sh
+   cd /Users/patrickmast/Dev/pm7-ui-style-guide
+   ```
+
+2. Start the development server:
+   ```sh
+   npm run dev
+   ```
+
+3. Open your browser and navigate to:
+   ```
+   http://localhost:5173/
+   ```
+
+> **Note:** Always run the dev server from the project root, not from the `/examples` directory. The Vite configuration is set up to serve the examples app in development mode and build the library in production mode.
+
+### Adding New Component Examples
+
+To add a new component example:
+
+1. Create a new file in the `/examples` directory (e.g., `your-component-example.tsx`)
+2. Use relative imports to reference your component:
+   ```tsx
+   // Example of correct import for local development
+   import { YourComponentRules } from '../src/components/your-component';
+   ```
+3. Update `App.tsx` in the examples directory to include your new example
 
 ---
 

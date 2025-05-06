@@ -23,7 +23,11 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "lucide-react": "^0.307.0"
+    "@radix-ui/react-slot": "^1.2.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.307.0",
+    "tailwind-merge": "^3.2.0"
   },
   "peerDependencies": {
     "@radix-ui/react-dialog": "^1.0.5",

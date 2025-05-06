@@ -1,10 +1,20 @@
-// Enhancement: Tailwind CSS config for pm7-ui-style-guide, set up for ShadCN and design system usage.
+// Enhancement: Updated Tailwind CSS config to include examples directory and add proper setup for ShadCN/UI components
 module.exports = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx}"
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./examples/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        // Winfakt brand colors
+        primary: "#1C86EF",
+        border: "#D4D4D4",
+      },
+      borderRadius: {
+        md: "6px",
+      },
+    },
   },
   plugins: [],
 };

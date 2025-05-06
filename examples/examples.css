@@ -38,20 +38,66 @@ body {
 header {
   background-color: var(--primary);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  flex-grow: 1;
   text-align: center;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
 
 .content-wrapper {
   display: flex;
   flex: 1;
+  position: relative;
 }
 
 .sidebar {
-  width: var(--sidebar-width);
+  /* width is now controlled by JavaScript */
   background-color: var(--sidebar-bg);
-  border-right: 1px solid var(--border);
+  border-right: none; /* Removed border since resize handle serves as the border */
   padding: 1.5rem 0;
+  flex-shrink: 0;
+}
+
+/* Resize handle styles */
+.resize-handle {
+  width: 1px;
+  background-color: var(--border);
+  cursor: col-resize;
+  transition: background-color 0.2s;
+  z-index: 10;
+  position: absolute; /* Make it absolute positioned */
+  top: 0;
+  bottom: 0; /* Extend to full height */
+  left: auto; /* Position will be set by JavaScript */
+}
+
+.resize-handle:hover,
+.resize-handle:active {
+  background-color: var(--primary);
 }
 
 .sidebar-title {
@@ -79,8 +125,17 @@ header {
 
 .sidebar-nav-item.active {
   background-color: var(--sidebar-active);
-  border-left: 3px solid var(--primary);
-  font-weight: 500;
+  position: relative; /* Add position relative */
+}
+
+.sidebar-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--primary);
 }
 
 .sidebar-nav-link {
@@ -209,4 +264,29 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: auto;
+}
+
+/* Sidebar width control */
+.sidebar-width-control {
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-width-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.sidebar-width-slider {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-width-value {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right;
 }
