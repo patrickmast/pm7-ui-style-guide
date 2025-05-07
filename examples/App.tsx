@@ -1,5 +1,7 @@
 // Enhancement: Added a Button section to the examples app and integrated ButtonExample component into navigation and rendering logic.
 import React, { useState, useRef, useEffect } from 'react';
+// Import package.json to access version information
+import packageJson from '../package.json';
 
 // Import example components
 import MenuExample from './menu-example';
@@ -249,7 +251,7 @@ const App = () => {
           <PM7DialogHeader>
             <PM7DialogTitle>PM7 UI Style Guide</PM7DialogTitle>
             <PM7DialogSubTitle>
-              Version: 1.1.9
+              Version: {packageJson.version}
             </PM7DialogSubTitle>
           </PM7DialogHeader>
           <div style={{ margin: '16px 0', borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>

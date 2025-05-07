@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] - 2025-05-07
+
+### Changed
+- Bumped version to 1.3.0 for npm package release
+- Includes all features and fixes from version 1.2.0
+
 ## [1.2.0] - 2025-05-07
 
 ### Added
