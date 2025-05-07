@@ -1,8 +1,8 @@
-# Winfakt UI Style Guide
+# PM7 UI Style Guide
 
-**The official source of truth for UI, styling, and branding across all Winfakt applications.**
+**The official source of truth for UI, styling, and branding across all PM7 applications.**
 
-> **This package ensures consistent styling and UI components across all Winfakt applications by providing pre-styled components and design tokens.**
+> **This package ensures consistent styling and UI components across all PM7 applications by providing pre-styled components and design tokens.**
 
 ## Table of Contents
 
@@ -52,20 +52,20 @@ View the live examples of all components at our [Vercel deployment](https://pm7-
 
 ## Purpose
 
-The Winfakt UI Style Guide serves as the single source of truth for all Winfakt applications, ensuring consistent styling, branding, and user experience. It provides:
+The PM7 UI Style Guide serves as the single source of truth for all PM7 applications, ensuring consistent styling, branding, and user experience. It provides:
 
-- **Styling Rules for ShadCN/UI**: Specific overrides and customizations to make ShadCN/UI components match Winfakt branding
+- **Styling Rules for ShadCN/UI**: Specific overrides and customizations to make ShadCN/UI components match PM7 branding
 - **Design Tokens**: Colors, spacing, typography, and other design variables
 - **Styling Guidelines**: Rules for consistent implementation across applications
 
 ## Why Use This Package?
 
-This package is designed specifically for applications that **already use ShadCN/UI components**. Rather than having each application customize ShadCN/UI components individually, this package provides the Winfakt-specific styling rules and overrides. This approach:
+This package is designed specifically for applications that **already use ShadCN/UI components**. Rather than having each application customize ShadCN/UI components individually, this package provides the PM7-specific styling rules and overrides. This approach:
 
 - **Ensures Consistency**: All applications use identical styling for ShadCN/UI components
 - **Saves Development Time**: No need to re-implement the same customizations
 - **Centralizes Updates**: Design changes can be made in one place
-- **Maintains Brand Identity**: Guarantees adherence to Winfakt brand guidelines
+- **Maintains Brand Identity**: Guarantees adherence to PM7 brand guidelines
 - **Minimal Overhead**: Only provides the specific styling changes needed, not complete component reimplementations
 
 ---
@@ -93,7 +93,7 @@ npm install git+https://github.com/patrickmast/pm7-ui-style-guide.git
 
 ### Important: Use This Package Instead of Direct ShadCN/UI
 
-Instead of adding ShadCN/UI components directly to your project and then customizing them, **use the pre-styled components from this package**. This ensures consistent styling across all Winfakt applications.
+Instead of adding ShadCN/UI components directly to your project and then customizing them, **use the pre-styled components from this package**. This ensures consistent styling across all PM7 applications.
 
 ### Components
 
@@ -121,8 +121,8 @@ const menuItems = [
 export default function AppHeader() {
   return (
     <header>
-      <h1>Winfakt Application</h1>
-      <Menu menuItems={menuItems} menuAlignment="start" /> {/* Pre-styled with Winfakt branding */}
+      <h1>PM7 Application</h1>
+      <Menu menuItems={menuItems} menuAlignment="start" /> {/* Pre-styled with PM7 branding */}
     </header>
   );
 }
@@ -133,7 +133,7 @@ export default function AppHeader() {
 ```tsx
 import { colors, tokens } from 'pm7-ui-style-guide';
 
-// Use the official Winfakt colors
+// Use the official PM7 colors
 const primaryColor = colors.primary; // #1C86EF
 ```
 
@@ -184,7 +184,7 @@ This organization makes it easier to find and maintain components, with each com
 
 ### Menu Component
 
-The Menu component provides a dropdown menu with Winfakt styling and fully configurable menu items:
+The Menu component provides a dropdown menu with PM7 styling and fully configurable menu items:
 
 ```tsx
 import { Menu } from 'pm7-ui-style-guide';
@@ -216,10 +216,10 @@ export default function AppMenu() {
 ```
 
 **Features:**
-- Implements Winfakt's exact dropdown styling
+- Implements PM7's exact dropdown styling
 - Fully configurable menu items
 - Supports icons, custom labels, and click handlers
-- Follows all Winfakt interaction patterns
+- Follows all PM7 interaction patterns
 - Supports separators with `type: 'separator'`
 - Configurable menu alignment with `menuAlignment` prop (values: `start`, `center`, `end`)
 - Customizable menu icon color with `menuIconColor` prop
@@ -241,7 +241,7 @@ Add a menu to my React application using the pm7-ui-style-guide package. Specifi
    - An "About" item that shows version information
 
 3. Set the menuAlignment to "start" so the menu aligns with the left edge of the trigger button
-4. Set the menuIconColor to "#1C86EF" to match the Winfakt branding
+4. Set the menuIconColor to "#1C86EF" to match the PM7 branding
 5. Make sure the menu appears when clicking a button in the header
 
 Please show the complete implementation including imports and the menuItems array definition.
@@ -284,7 +284,7 @@ export default function CustomMenu() {
 
 ### Button Component
 
-The Button component provides a styled button with Winfakt branding:
+The Button component provides a styled button with PM7 branding:
 
 ```tsx
 import { Button } from 'pm7-ui-style-guide';
@@ -298,15 +298,15 @@ export default function AppButton() {
 ```
 
 **Features:**
-- Implements Winfakt's exact button styling
+- Implements PM7's exact button styling
 - Supports click handlers
-- Follows all Winfakt interaction patterns
+- Follows all PM7 interaction patterns
 
 Detailed documentation can be found in [pm7-button-component Documentation](./components/button/README.md).
 
 ### Dialog Component
 
-The Dialog component provides a styled dialog with Winfakt branding:
+The Dialog component provides a styled dialog with PM7 branding:
 
 ```tsx
 import { Dialog } from 'pm7-ui-style-guide';
@@ -323,15 +323,15 @@ export default function AppDialog() {
 ```
 
 **Features:**
-- Implements Winfakt's exact dialog styling
+- Implements PM7's exact dialog styling
 - Supports open/closed state and close handlers
-- Follows all Winfakt interaction patterns
+- Follows all PM7 interaction patterns
 
 Detailed documentation can be found in [pm7-dialog-component Documentation](./components/dialog/README.md).
 
 ### Input Component
 
-The Input component provides a styled input field with Winfakt branding:
+The Input component provides a styled input field with PM7 branding:
 
 ```tsx
 import { Input } from 'pm7-ui-style-guide';
@@ -349,9 +349,9 @@ export default function AppInput() {
 ```
 
 **Features:**
-- Implements Winfakt's exact input field styling
+- Implements PM7's exact input field styling
 - Supports value and change handlers
-- Follows all Winfakt interaction patterns
+- Follows all PM7 interaction patterns
 
 Detailed documentation can be found in [pm7-input-component Documentation](./components/input/README.md).
 
@@ -623,7 +623,7 @@ If you encounter issues not covered here:
 
 1. **Use components consistently** across your application to maintain a unified look and feel
 
-2. **Follow the Winfakt brand guidelines** for colors, spacing, and typography
+2. **Follow the PM7 brand guidelines** for colors, spacing, and typography
 
 3. **Use the provided design tokens** instead of hardcoding values
 
@@ -637,7 +637,7 @@ If you encounter issues not covered here:
 
 ### Brand Name
 
-- The brand name is "Winfakt" (not "WinFakt")
+- The brand name is "PM7" (not "WinFakt")
 - Only the first letter 'W' is uppercase, and the 'k' is lowercase
 
 ### Colors
@@ -698,13 +698,13 @@ The PM7 UI Style Guide is designed to work within a specific architecture:
 
 1. **Base Layer**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 2. **Component Layer**: [ShadCN/UI](https://ui.shadcn.com/) - Unstyled, accessible components built on Tailwind
-3. **Branding Layer**: PM7 UI Style Guide - Winfakt-specific styling rules and overrides
+3. **Branding Layer**: PM7 UI Style Guide - PM7-specific styling rules and overrides
 
 ```
 ┌─────────────────────────────────┐
 │ Your Application                 │
 │  ┌─────────────────────────────┐ │
-│  │ PM7 UI Style Guide          │ │ <- Winfakt branding layer
+│  │ PM7 UI Style Guide          │ │ <- PM7 branding layer
 │  │  ┌─────────────────────────┐│ │
 │  │  │ ShadCN/UI Components    ││ │ <- Component layer
 │  │  │  ┌─────────────────────┐│││
@@ -715,25 +715,25 @@ The PM7 UI Style Guide is designed to work within a specific architecture:
 └─────────────────────────────────┘
 ```
 
-This architecture allows you to leverage the accessibility and functionality of ShadCN/UI components while ensuring they adhere to Winfakt's brand guidelines.
+This architecture allows you to leverage the accessibility and functionality of ShadCN/UI components while ensuring they adhere to PM7's brand guidelines.
 
 ---
 
 ## Examples
 
-The examples folder contains demonstrations of how to apply Winfakt styling rules to ShadCN/UI components. Each component has its own example file in the `/examples/` directory.
+The examples folder contains demonstrations of how to apply PM7 styling rules to ShadCN/UI components. Each component has its own example file in the `/examples/` directory.
 
 ### Understanding the Examples App
 
 The examples app simulates a real application that uses:
 1. Tailwind CSS for utility classes
 2. ShadCN/UI for component structure
-3. PM7 UI Style Guide for Winfakt branding
+3. PM7 UI Style Guide for PM7 branding
 
 For each component, we demonstrate:
 - The styling rules provided by PM7 UI Style Guide
 - How these rules should be applied to ShadCN/UI components
-- The visual result of applying Winfakt branding
+- The visual result of applying PM7 branding
 
 ### Running Examples Locally
 

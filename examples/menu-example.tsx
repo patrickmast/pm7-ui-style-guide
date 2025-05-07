@@ -1,158 +1,293 @@
-// Bug Fix: Fixed dialog border color to #525252 in dark mode
-import React, { useState, useEffect, useRef } from 'react';
-import { PM7MenuComponent as Menu } from '../src/components/menu';
-import {
-  PM7Dialog,
-  PM7DialogContent,
-  PM7DialogHeader,
-  PM7DialogTitle,
-  PM7DialogSubTitle,
-  PM7DialogFooter,
-} from '../src/components/dialog';
-import '../src/components/dialog/pm7-dialog.css';
+// Enhancement: Restored menu example to demonstrate PM7Menu component functionality, aligned the main flex container to the top (items-start)
+// Bug Fix: Fixed styling to match the rest of the examples app
+import React, { useState, useEffect } from 'react';
+import { LanguagesIcon, MoonIcon, SunIcon, HomeIcon, SettingsIcon, UserIcon } from 'lucide-react';
 
-// Sun icon component for theme switch (fixed black color)
-const SunIconSwitch = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="black"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="theme-icon"
-  >
-    <circle cx="12" cy="12" r="5" />
-    <line x1="12" y1="1" x2="12" y2="3" />
-    <line x1="12" y1="21" x2="12" y2="23" />
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-    <line x1="1" y1="12" x2="3" y2="12" />
-    <line x1="21" y1="12" x2="23" y2="12" />
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-  </svg>
-);
+// Import the menu component using relative imports for local development
+import { PM7Menu } from '../src/components/menu';
 
-// Moon icon component for theme switch (fixed white color in dark mode)
-const MoonIconSwitch = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="theme-icon"
-  >
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-  </svg>
-);
-
-// Sun icon component for menu items (uses currentColor)
-const SunIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="12" cy="12" r="5" />
-    <line x1="12" y1="1" x2="12" y2="3" />
-    <line x1="12" y1="21" x2="12" y2="23" />
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-    <line x1="1" y1="12" x2="3" y2="12" />
-    <line x1="21" y1="12" x2="23" y2="12" />
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-  </svg>
-);
-
-// Moon icon component for menu items (uses currentColor)
-const MoonIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-  </svg>
-);
-
-// Menu example component
 const MenuExample = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    // Check if user has a theme preference in localStorage
-    const savedTheme = localStorage.getItem('menu-component-theme');
-    if (savedTheme === 'dark' || savedTheme === 'light') {
-      return savedTheme;
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
-
-  useEffect(() => {
-    // Apply theme to document
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('menu-component-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
   // State for selected language
-  const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
+  const [selectedLanguage, setSelectedLanguage] = useState(() => {
     // Check if user has a language preference in localStorage
     if (typeof window !== 'undefined') {
-      const savedLanguage = localStorage.getItem('winfakt-language');
+      const savedLanguage = localStorage.getItem('pm7-language');
       if (savedLanguage) {
         return savedLanguage;
       }
     }
-    return 'en';
+    return 'en'; // Default to English
+  });
+
+  // State for theme (light/dark)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const savedTheme = localStorage.getItem('pm7-theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      return savedTheme as 'light' | 'dark';
+    }
+    // Check system preference
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light'; // Default to light theme
   });
 
   // Function to get label based on selected language with fallback
-  const getLabel = (item: any): string => {
+  const getLabel = (item: any) => {
     const langKey = `label-${selectedLanguage}`;
     return item[langKey] || item.label || '';
+  };
+
+  // Translations for all text in the menu example
+  const descriptions = {
+    'en': {
+      // Basic Menu section
+      basicMenu: 'Basic Menu',
+      title: 'A standard menu with hamburger icon and custom menu items.',
+      features: 'Features:',
+      multiLanguage: 'Multi-language support',
+      themeSwitching: 'Theme switching',
+      submenu: 'Submenu support',
+      icons: 'Icons',
+      separators: 'Separators',
+      checkboxes: 'Checkboxes and switches',
+      
+      // Menu Alignment section
+      menuAlignment: 'Menu Alignment',
+      startAlignment: 'Start Alignment',
+      centerAlignment: 'Center Alignment',
+      endAlignment: 'End Alignment',
+      
+      // Custom Icon Color section
+      customIconColor: 'Custom Icon Color',
+      iconColorDesc: 'The menu icon color can be customized using the',
+      prop: 'prop.',
+      exampleUses: 'This example uses',
+      primaryBlue: 'the PM7 primary blue',
+      yellow: 'yellow',
+      color: 'color:',
+      
+      // Usage section
+      usage: 'Usage'
+    },
+    'es': {
+      // Basic Menu section
+      basicMenu: 'Menú Básico',
+      title: 'Un menú estándar con icono de hamburguesa y elementos de menú personalizados.',
+      features: 'Características:',
+      multiLanguage: 'Soporte multilingüe',
+      themeSwitching: 'Cambio de tema',
+      submenu: 'Soporte de submenú',
+      icons: 'Iconos',
+      separators: 'Separadores',
+      checkboxes: 'Casillas de verificación e interruptores',
+      
+      // Menu Alignment section
+      menuAlignment: 'Alineación del Menú',
+      startAlignment: 'Alineación Inicial',
+      centerAlignment: 'Alineación Central',
+      endAlignment: 'Alineación Final',
+      
+      // Custom Icon Color section
+      customIconColor: 'Color de Icono Personalizado',
+      iconColorDesc: 'El color del icono del menú se puede personalizar usando el',
+      prop: 'prop.',
+      exampleUses: 'Este ejemplo usa',
+      primaryBlue: 'el color azul primario de PM7',
+      yellow: 'amarillo',
+      color: 'color:',
+      
+      // Usage section
+      usage: 'Uso'
+    },
+    'fr': {
+      // Basic Menu section
+      basicMenu: 'Menu de Base',
+      title: 'Un menu standard avec icône hamburger et éléments de menu personnalisés.',
+      features: 'Fonctionnalités:',
+      multiLanguage: 'Support multilingue',
+      themeSwitching: 'Changement de thème',
+      submenu: 'Support de sous-menu',
+      icons: 'Icônes',
+      separators: 'Séparateurs',
+      checkboxes: 'Cases à cocher et interrupteurs',
+      
+      // Menu Alignment section
+      menuAlignment: 'Alignement du Menu',
+      startAlignment: 'Alignement Début',
+      centerAlignment: 'Alignement Centre',
+      endAlignment: 'Alignement Fin',
+      
+      // Custom Icon Color section
+      customIconColor: 'Couleur d\'Icône Personnalisée',
+      iconColorDesc: 'La couleur de l\'icône du menu peut être personnalisée en utilisant le',
+      prop: 'prop.',
+      exampleUses: 'Cet exemple utilise',
+      primaryBlue: 'la couleur bleue primaire de PM7',
+      yellow: 'jaune',
+      color: 'couleur:',
+      
+      // Usage section
+      usage: 'Utilisation'
+    },
+    'de': {
+      // Basic Menu section
+      basicMenu: 'Basis Menü',
+      title: 'Ein Standardmenü mit Hamburger-Symbol und benutzerdefinierten Menüelementen.',
+      features: 'Funktionen:',
+      multiLanguage: 'Mehrsprachige Unterstützung',
+      themeSwitching: 'Themenwechsel',
+      submenu: 'Untermenü-Unterstützung',
+      icons: 'Symbole',
+      separators: 'Trennlinien',
+      checkboxes: 'Kontrollkästchen und Schalter',
+      
+      // Menu Alignment section
+      menuAlignment: 'Menü-Ausrichtung',
+      startAlignment: 'Ausrichtung Anfang',
+      centerAlignment: 'Ausrichtung Mitte',
+      endAlignment: 'Ausrichtung Ende',
+      
+      // Custom Icon Color section
+      customIconColor: 'Benutzerdefinierte Symbolfarbe',
+      iconColorDesc: 'Die Menüsymbolfarbe kann mit dem',
+      prop: 'Prop angepasst werden.',
+      exampleUses: 'Dieses Beispiel verwendet',
+      primaryBlue: 'die PM7 Primärblau',
+      yellow: 'gelbe',
+      color: 'Farbe:',
+      
+      // Usage section
+      usage: 'Verwendung'
+    },
+    'nl': {
+      // Basic Menu section
+      basicMenu: 'Basis Menu',
+      title: 'Een standaard menu met hamburger-pictogram en aangepaste menu-items.',
+      features: 'Functies:',
+      multiLanguage: 'Meertalige ondersteuning',
+      themeSwitching: 'Thema wisselen',
+      submenu: 'Submenu-ondersteuning',
+      icons: 'Pictogrammen',
+      separators: 'Scheidingslijnen',
+      checkboxes: 'Selectievakjes en schakelaars',
+      
+      // Menu Alignment section
+      menuAlignment: 'Menu Uitlijning',
+      startAlignment: 'Begin Uitlijning',
+      centerAlignment: 'Midden Uitlijning',
+      endAlignment: 'Einde Uitlijning',
+      
+      // Custom Icon Color section
+      customIconColor: 'Aangepaste Pictogramkleur',
+      iconColorDesc: 'De kleur van het menupictogram kan worden aangepast met de',
+      prop: 'eigenschap.',
+      exampleUses: 'Dit voorbeeld gebruikt',
+      primaryBlue: 'de PM7 primaire blauwe',
+      yellow: 'gele',
+      color: 'kleur:',
+      
+      // Usage section
+      usage: 'Gebruik'
+    },
+    'nl-be': {
+      // Basic Menu section
+      basicMenu: 'Basis Menu',
+      title: 'Een standaard menu met hamburger-pictogram en aangepaste menu-items.',
+      features: 'Functies:',
+      multiLanguage: 'Meertalige ondersteuning',
+      themeSwitching: 'Thema wisselen',
+      submenu: 'Submenu-ondersteuning',
+      icons: 'Pictogrammen',
+      separators: 'Scheidingslijnen',
+      checkboxes: 'Selectievakjes en schakelaars',
+      
+      // Menu Alignment section
+      menuAlignment: 'Menu Uitlijning',
+      startAlignment: 'Begin Uitlijning',
+      centerAlignment: 'Midden Uitlijning',
+      endAlignment: 'Einde Uitlijning',
+      
+      // Custom Icon Color section
+      customIconColor: 'Aangepaste Pictogramkleur',
+      iconColorDesc: 'De kleur van het menupictogram kan worden aangepast met de',
+      prop: 'eigenschap.',
+      exampleUses: 'Dit voorbeeld gebruikt',
+      primaryBlue: 'de PM7 primaire blauwe',
+      yellow: 'gele',
+      color: 'kleur:',
+      
+      // Usage section
+      usage: 'Gebruik'
+    },
+    'zh': {
+      // Basic Menu section
+      basicMenu: '基本菜单',
+      title: '带有汉堡图标和自定义菜单项的标准菜单。',
+      features: '功能：',
+      multiLanguage: '多语言支持',
+      themeSwitching: '主题切换',
+      submenu: '子菜单支持',
+      icons: '图标',
+      separators: '分隔符',
+      checkboxes: '复选框和开关',
+      
+      // Menu Alignment section
+      menuAlignment: '菜单对齐',
+      startAlignment: '左对齐',
+      centerAlignment: '居中对齐',
+      endAlignment: '右对齐',
+      
+      // Custom Icon Color section
+      customIconColor: '自定义图标颜色',
+      iconColorDesc: '可以使用',
+      prop: '属性自定义菜单图标颜色。',
+      exampleUses: '这个例子使用',
+      primaryBlue: 'PM7主要蓝色',
+      yellow: '黄色',
+      color: '颜色：',
+      
+      // Usage section
+      usage: '用法'
+    }
+  };
+
+  // Get description text based on selected language with fallback to English
+  const getDescription = (key: string) => {
+    return descriptions[selectedLanguage]?.[key] || descriptions['en'][key];
   };
 
   // Function to select language
   const selectLanguage = (language: string) => {
     setSelectedLanguage(language);
-    localStorage.setItem('winfakt-language', language);
-    console.log(`${language} selected`);
+    localStorage.setItem('pm7-language', language);
   };
 
-  // State for showing the about dialog
-  const [showAboutDialog, setShowAboutDialog] = useState(false);
+  // Function to toggle theme
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('pm7-theme', newTheme);
 
-  // Function to show about dialog
-  const showAbout = () => {
-    setShowAboutDialog(true);
+    // Apply theme to document for consistent styling
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
   };
 
-  // Define menu items with inline translations
+  // Define menu items with translations for all supported languages
   const menuItems = [
+    {
+      id: 'home',
+      label: 'Home',
+      'label-en': 'Home',
+      'label-es': 'Inicio',
+      'label-fr': 'Accueil',
+      'label-de': 'Startseite',
+      'label-nl': 'Home',
+      'label-nl-be': 'Home',
+      'label-zh': '首页',
+      onClick: () => console.log('Home selected'),
+      icon: <HomeIcon size={16} />
+    },
     {
       id: 'profile',
       label: 'Profile',
@@ -164,22 +299,7 @@ const MenuExample = () => {
       'label-nl-be': 'Profiel',
       'label-zh': '个人资料',
       onClick: () => console.log('Profile selected'),
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
-      )
+      icon: <UserIcon size={16} />
     },
     {
       id: 'settings',
@@ -192,84 +312,11 @@ const MenuExample = () => {
       'label-nl-be': 'Instellingen',
       'label-zh': '设置',
       onClick: () => console.log('Settings selected'),
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
-      )
+      icon: <SettingsIcon size={16} />
     },
     {
-      id: 'notifications',
-      label: 'Notifications',
-      'label-en': 'Notifications',
-      'label-es': 'Notificaciones',
-      'label-fr': 'Notifications',
-      'label-de': 'Benachrichtigungen',
-      'label-nl': 'Meldingen',
-      'label-nl-be': 'Meldingen',
-      'label-zh': '通知',
-      onClick: () => console.log('Notifications selected'),
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-        </svg>
-      )
-    },
-    {
-      id: 'help',
-      label: 'Help',
-      'label-en': 'Help',
-      'label-es': 'Ayuda',
-      'label-fr': 'Aide',
-      'label-de': 'Hilfe',
-      'label-nl': 'Hulp',
-      'label-nl-be': 'Hulp',
-      'label-zh': '帮助',
-      onClick: () => console.log('Help selected'),
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-          <path d="M12 17h.01" />
-        </svg>
-      )
-    },
-    {
-      id: 'divider-1',
-      label: '',
-      type: 'separator' as 'separator'
+      id: 'separator1',
+      type: 'separator'
     },
     {
       id: 'language',
@@ -281,123 +328,55 @@ const MenuExample = () => {
       'label-nl': 'Taal',
       'label-nl-be': 'Taal',
       'label-zh': '语言',
-      type: 'submenu' as 'submenu',
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="m5 8 6 6" />
-          <path d="m4 14 6-6 2-3" />
-          <path d="M2 5h12" />
-          <path d="M7 2h1" />
-          <path d="m22 22-5-10-5 10" />
-          <path d="M14 18h6" />
-        </svg>
-      ),
+      type: 'submenu',
+      icon: <LanguagesIcon size={16} />,
       submenuItems: [
         {
           id: 'en',
           label: 'English',
-          'label-en': 'English',
-          'label-es': 'English',
-          'label-fr': 'English',
-          'label-de': 'English',
-          'label-nl': 'English',
-          'label-nl-be': 'English',
-          'label-zh': 'English',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'en',
           onClick: () => selectLanguage('en')
         },
         {
           id: 'es',
           label: 'Español',
-          'label-en': 'Español',
-          'label-es': 'Español',
-          'label-fr': 'Español',
-          'label-de': 'Español',
-          'label-nl': 'Español',
-          'label-nl-be': 'Español',
-          'label-zh': 'Español',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'es',
           onClick: () => selectLanguage('es')
         },
         {
           id: 'fr',
           label: 'Français',
-          'label-en': 'Français',
-          'label-es': 'Français',
-          'label-fr': 'Français',
-          'label-de': 'Français',
-          'label-nl': 'Français',
-          'label-nl-be': 'Français',
-          'label-zh': 'Français',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'fr',
           onClick: () => selectLanguage('fr')
         },
         {
           id: 'de',
           label: 'Deutsch',
-          'label-en': 'Deutsch',
-          'label-es': 'Deutsch',
-          'label-fr': 'Deutsch',
-          'label-de': 'Deutsch',
-          'label-nl': 'Deutsch',
-          'label-nl-be': 'Deutsch',
-          'label-zh': 'Deutsch',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'de',
           onClick: () => selectLanguage('de')
         },
         {
           id: 'nl',
           label: 'Nederlands',
-          'label-en': 'Nederlands',
-          'label-es': 'Nederlands',
-          'label-fr': 'Nederlands',
-          'label-de': 'Nederlands',
-          'label-nl': 'Nederlands',
-          'label-nl-be': 'Nederlands',
-          'label-zh': 'Nederlands',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'nl',
           onClick: () => selectLanguage('nl')
         },
         {
           id: 'nl-be',
           label: 'Nederlands (België)',
-          'label-en': 'Nederlands (België)',
-          'label-es': 'Nederlands (België)',
-          'label-fr': 'Nederlands (België)',
-          'label-de': 'Nederlands (België)',
-          'label-nl': 'Nederlands (België)',
-          'label-nl-be': 'Nederlands (België)',
-          'label-zh': 'Nederlands (België)',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'nl-be',
           onClick: () => selectLanguage('nl-be')
         },
         {
           id: 'zh',
           label: '中文',
-          'label-en': '中文',
-          'label-es': '中文',
-          'label-fr': '中文',
-          'label-de': '中文',
-          'label-nl': '中文',
-          'label-nl-be': '中文',
-          'label-zh': '中文',
-          type: 'check' as 'check',
+          type: 'check',
           checked: selectedLanguage === 'zh',
           onClick: () => selectLanguage('zh')
         }
@@ -409,60 +388,33 @@ const MenuExample = () => {
       'label-en': `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`,
       'label-es': `Tema: ${theme === 'dark' ? 'Oscuro' : 'Claro'}`,
       'label-fr': `Thème: ${theme === 'dark' ? 'Sombre' : 'Clair'}`,
-      'label-de': `Design: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`,
+      'label-de': `Thema: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`,
       'label-nl': `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`,
       'label-nl-be': `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`,
       'label-zh': `主题: ${theme === 'dark' ? '深色' : '浅色'}`,
-      type: 'switch' as 'switch',
-      icon: theme === 'dark' ? <MoonIcon /> : <SunIcon />,
+      type: 'switch',
+      icon: theme === 'dark' ? <MoonIcon size={16} /> : <SunIcon size={16} />,
       checked: theme === 'dark',
       onChange: toggleTheme
-    },
-    {
-      id: 'divider-2',
-      label: '',
-      type: 'separator' as 'separator'
-    },
-    {
-      id: 'about',
-      label: 'About',
-      'label-en': 'About',
-      'label-es': 'Acerca de',
-      'label-fr': 'à propos',
-      'label-de': 'Über',
-      'label-nl': 'Over',
-      'label-nl-be': 'Over',
-      'label-zh': '关于',
-      onClick: () => showAbout(),
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 16v-4" />
-          <path d="M12 8h.01" />
-        </svg>
-      )
     }
   ];
 
-  // Update theme label when theme changes
+  // Apply theme to document when component mounts
+  useEffect(() => {
+    // Apply theme to document
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, []);
+
+  // Update theme labels when theme changes
   useEffect(() => {
     menuItems.forEach(item => {
       if (item.id === 'theme') {
         item.label = `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`;
+        item.icon = theme === 'dark' ? <MoonIcon size={16} /> : <SunIcon size={16} />;
         item['label-en'] = `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`;
         item['label-es'] = `Tema: ${theme === 'dark' ? 'Oscuro' : 'Claro'}`;
         item['label-fr'] = `Thème: ${theme === 'dark' ? 'Sombre' : 'Clair'}`;
-        item['label-de'] = `Design: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`;
+        item['label-de'] = `Thema: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`;
         item['label-nl'] = `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`;
         item['label-nl-be'] = `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`;
         item['label-zh'] = `主题: ${theme === 'dark' ? '深色' : '浅色'}`;
@@ -480,113 +432,136 @@ const MenuExample = () => {
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
           >
-            <span className="theme-switch-thumb">
-              {theme === 'light' ? <SunIconSwitch /> : <MoonIconSwitch />}
-            </span>
+            <div className="theme-switch-thumb">
+              {theme === 'light' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
+            </div>
           </button>
         </div>
       </div>
+
       <div className="example-container">
-        <div className="example-preview" style={{ background: theme === 'dark' ? '#262626' : '#f5f5f5', padding: '20px', borderRadius: '8px', position: 'relative' }}>
-          <Menu 
-            menuItems={menuItems.map(item => ({
-              ...item,
-              label: getLabel(item),
-              submenuItems: item.submenuItems?.map(subItem => ({
-                ...subItem,
-                label: getLabel(subItem)
-              }))
-            }))} 
-            initialTheme={theme}
-          />
-          
-          {/* About dialog */}
-          <PM7Dialog open={showAboutDialog} onOpenChange={setShowAboutDialog}>
-            <PM7DialogContent 
-              className={theme === 'dark' ? 'dark' : ''}
-              style={{ 
-                backgroundColor: theme === 'dark' ? '#262626' : 'white',
-                color: theme === 'dark' ? 'white' : 'inherit',
-                border: `1px solid ${theme === 'dark' ? '#525252' : '#e2e8f0'}`
-              }}
-            >
-              <PM7DialogHeader>
-                <PM7DialogTitle>PM7 UI Style Guide</PM7DialogTitle>
-                <PM7DialogSubTitle>
-                  A comprehensive UI component library for Winfakt applications.
-                </PM7DialogSubTitle>
-              </PM7DialogHeader>
-              <div style={{ margin: '16px 0', borderTop: `1px solid ${theme === 'dark' ? '#525252' : '#e2e8f0'}`, paddingTop: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                  <span style={{ fontWeight: '500', minWidth: '100px', color: theme === 'dark' ? '#a1a1aa' : '#64748b' }}>Version:</span>
-                  <span>1.0.8</span>
+        <div className="example-preview" style={{ background: theme === 'dark' ? '#333333' : '#f5f5f5', color: theme === 'dark' ? '#ffffff' : 'inherit', padding: '20px', borderRadius: '8px', display: 'flex', justifyContent: 'flex-start' }}>
+          <div className="">
+
+              <h3 className="text-xl font-semibold mb-3">{getDescription('basicMenu')}</h3>
+              <div className="flex items-start gap-4">
+                <PM7Menu
+                  menuItems={menuItems.map(item => ({
+                    ...item,
+                    label: getLabel(item),
+                    submenuItems: item.submenuItems?.map(subItem => ({
+                      ...subItem,
+                      label: getLabel(subItem)
+                    }))
+                  }))}
+                  initialTheme={theme}
+                  menuAlignment="start"
+                />
+                <div className="ml-4">
+                  <p>{getDescription('title')}</p>
+                  <p className="mt-2">{getDescription('features')}</p>
+                  <ul className="list-disc ml-5 mt-1">
+                    <li>{getDescription('multiLanguage')}</li>
+                    <li>{getDescription('themeSwitching')}</li>
+                    <li>{getDescription('submenu')}</li>
+                    <li>{getDescription('icons')}</li>
+                    <li>{getDescription('separators')}</li>
+                    <li>{getDescription('checkboxes')}</li>
+                  </ul>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                  <span style={{ fontWeight: '500', minWidth: '100px', color: theme === 'dark' ? '#a1a1aa' : '#64748b' }}>Author:</span>
-                  <span>hi@pm7.ink</span>
+
+            </div>
+
+            <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-3">{getDescription('menuAlignment')}</h3>
+              <div className="flex flex-wrap gap-8">
+                <div className="flex flex-col items-start">
+                  <p className="mb-2">{getDescription('startAlignment')}</p>
+                  <PM7Menu
+                    menuItems={menuItems.slice(0, 3)}
+                    initialTheme={theme}
+                    menuAlignment="start"
+                  />
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ fontWeight: '500', minWidth: '100px', color: theme === 'dark' ? '#a1a1aa' : '#64748b' }}>License:</span>
-                  <span>ISC</span>
+                <div className="flex flex-col items-start">
+                  <p className="mb-2">{getDescription('centerAlignment')}</p>
+                  <PM7Menu
+                    menuItems={menuItems.slice(0, 3)}
+                    initialTheme={theme}
+                    menuAlignment="center"
+                  />
+                </div>
+                <div className="flex flex-col items-start">
+                  <p className="mb-2">{getDescription('endAlignment')}</p>
+                  <PM7Menu
+                    menuItems={menuItems.slice(0, 3)}
+                    initialTheme={theme}
+                    menuAlignment="end"
+                  />
                 </div>
               </div>
-              <PM7DialogFooter>
-                <button 
-                  onClick={() => setShowAboutDialog(false)}
-                  className="pm7-dialog-button"
-                >
-                  Close
-                </button>
-              </PM7DialogFooter>
-            </PM7DialogContent>
-          </PM7Dialog>
+            </div>
+
+            <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold mb-3">{getDescription('customIconColor')}</h3>
+              <div className="flex items-start gap-4">
+                <PM7Menu
+                  menuItems={menuItems.slice(0, 3)}
+                  initialTheme={theme}
+                  menuIconColor={theme === 'dark' ? '#FFDD00' : '#1C86EF'}
+                />
+                <div className="ml-4">
+                  <p>{getDescription('iconColorDesc')} <code>menuIconColor</code> {getDescription('prop')}</p>
+                  <p className="mt-2">{getDescription('exampleUses')} {theme === 'dark' ? getDescription('yellow') : getDescription('primaryBlue')} {getDescription('color')} <code>{theme === 'dark' ? '#FFDD00' : '#1C86EF'}</code></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div className="example-code">
-          <h3>Usage</h3>
+          <h3>{getDescription('usage')}</h3>
           <pre>
-            <code>{`import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
+            <code>{`// For local development, use relative imports
+import { PM7Menu as Menu } from '../src/components/menu';
+// For production, use package imports
+// import { Menu } from "pm7-ui-style-guide";
 
-// Function to get label based on selected language
-const getLabel = (item) => {
-  const langKey = \`label-\${selectedLanguage}\`;
-  return item[langKey] || item.label || '';
-};
-
-// Define menu items with inline translations
+// Define menu items
 const menuItems = [
   {
-    id: 'profile',
-    label: 'Profile',
-    'label-en': 'Profile',
-    'label-es': 'Perfil',
-    'label-nl': 'Profiel',
-    onClick: () => console.log('Profile selected')
+    id: 'home',
+    label: 'Home',
+    icon: <HomeIcon size={16} />,
+    onClick: () => console.log('Home clicked')
   },
   {
-    id: 'language',
-    label: 'Language',
-    'label-en': 'Language',
-    'label-es': 'Idioma',
-    'label-nl': 'Taal',
-    type: 'submenu',
-    submenuItems: [
-      // language options...
-    ]
+    id: 'settings',
+    label: 'Settings',
+    icon: <SettingsIcon size={16} />,
+    onClick: () => console.log('Settings clicked')
+  },
+  {
+    id: 'theme',
+    label: 'Theme',
+    type: 'switch',
+    icon: <SunIcon size={16} />,
+    checked: isDarkMode,
+    onChange: (checked) => setIsDarkMode(checked)
   }
 ];
 
-// Use the menu with translations
-<Menu 
-  menuItems={menuItems.map(item => ({
-    ...item,
-    label: getLabel(item),
-    submenuItems: item.submenuItems?.map(subItem => ({
-      ...subItem,
-      label: getLabel(subItem)
-    }))
-  }))} 
-  initialTheme="light" 
-/>`}</code>
+// Render the menu component
+<Menu
+  menuItems={menuItems}
+  initialTheme="light"
+  menuAlignment="start"
+/>
+`}</code>
           </pre>
         </div>
       </div>

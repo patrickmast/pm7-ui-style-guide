@@ -16,22 +16,22 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // Direct named exports for commonly used components
-exports.PM7MenuComponent = exports.Menu = exports.PM7Button = exports.Button = exports.PM7Input = exports.Input = exports.PM7Dialog = exports.Dialog = void 0;
+exports.PM7Menu = exports.Menu = exports.PM7Button = exports.Button = exports.buttonRules = exports.inputRules = exports.PM7Dialog = exports.Dialog = void 0;
 
 // Menu components
 var menu_1 = require("./components/menu");
-Object.defineProperty(exports, "PM7MenuComponent", { enumerable: true, get: function () { return menu_1.PM7MenuComponent; } });
-Object.defineProperty(exports, "Menu", { enumerable: true, get: function () { return menu_1.PM7MenuComponent; } });
+Object.defineProperty(exports, "PM7Menu", { enumerable: true, get: function () { return menu_1.PM7Menu; } });
+Object.defineProperty(exports, "Menu", { enumerable: true, get: function () { return menu_1.PM7Menu; } });
 
 // Button components
 var button_1 = require("./components/button");
 Object.defineProperty(exports, "PM7Button", { enumerable: true, get: function () { return button_1.PM7Button; } });
 Object.defineProperty(exports, "Button", { enumerable: true, get: function () { return button_1.PM7Button; } });
+Object.defineProperty(exports, "buttonRules", { enumerable: true, get: function () { return button_1.buttonRules; } });
 
 // Input components
 var input_1 = require("./components/input");
-Object.defineProperty(exports, "PM7Input", { enumerable: true, get: function () { return input_1.PM7Input; } });
-Object.defineProperty(exports, "Input", { enumerable: true, get: function () { return input_1.PM7Input; } });
+Object.defineProperty(exports, "inputRules", { enumerable: true, get: function () { return input_1.inputRules; } });
 
 // Dialog components
 var dialog_1 = require("./components/dialog");

@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 // Import example components
 import MenuExample from './menu-example';
 import ButtonExample from './button-example';
-import { Menu, PM7MenuItemType } from '../src/components/menu/pm7-menu';
+import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
   PM7Dialog,
@@ -48,7 +48,11 @@ const MenuIcon = () => (
 
 // Main App
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState('menu');
+  // Initialize active component from localStorage or default to 'menu'
+  const [activeComponent, setActiveComponent] = useState(() => {
+    const savedComponent = localStorage.getItem('pm7-ui-style-guide-active-component');
+    return savedComponent || 'menu';
+  });
   // Initialize sidebar width from localStorage or default to 165px
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const savedWidth = localStorage.getItem(SIDEBAR_WIDTH_KEY);
@@ -69,6 +73,11 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
   }, [sidebarWidth]);
+
+  // Save active component to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('pm7-ui-style-guide-active-component', activeComponent);
+  }, [activeComponent]);
 
   const handleMouseDown = (e) => {
     resizingRef.current = true;
@@ -116,7 +125,7 @@ const App = () => {
       label: 'Component',
       type: 'submenu' as PM7MenuItemType,
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
         <path d="m3 12 3 3 3-3-3-3zm12 0 3 3 3-3-3-3zM9 6l3 3 3-3-3-3zm0 12 3 3 3-3-3-3z"/>
       </svg>
       ),

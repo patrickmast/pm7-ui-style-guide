@@ -2,12 +2,15 @@
 
 ## Overview
 
-The PM7 Input component provides styling rules for input fields in the Winfakt UI Style Guide. It ensures consistent input behavior and appearance across all Winfakt applications. This component has been reorganized as part of the project's file structure improvements, moving from `src/input.ts` to `src/components/input/pm7-input.ts` to follow the new component directory pattern.
+The PM7 Input component provides styling rules for input fields in the PM7 UI Style Guide. It ensures consistent input behavior and appearance across all PM7 applications. This component follows the project's component directory pattern, located at `src/components/input/pm7-input.ts`.
 
 ## Usage
 
 ```tsx
-import { inputRules } from 'pm7-ui-style-guide';
+// For local development, use relative imports
+import { inputRules } from '../src/components/input/pm7-input';
+// For production, use package imports
+// import { inputRules } from 'pm7-ui-style-guide';
 import { Input } from '@/components/ui/input'; // Your input component
 
 function StyledInput() {
@@ -48,7 +51,6 @@ The `inputRules` object provides standardized styling properties for input field
 The input rules are implemented as a simple JavaScript object that exports styling properties. These properties can be applied to any input component in your application.
 
 ```typescript
-// Enhancement: Created input component file that was missing after file reorganization
 // Input rules for pm7-ui-style-guide
 export const inputRules = {
   focusBorderColor: 'primary', // Use primary color for border on focus
@@ -56,14 +58,19 @@ export const inputRules = {
 };
 ```
 
-The implementation is intentionally minimal, focusing only on the key styling rules that ensure consistency across Winfakt applications. This design allows for maximum flexibility when applying these rules to various input components while maintaining the core Winfakt styling principles.
+The implementation is intentionally minimal, focusing only on the key styling rules that ensure consistency across PM7 applications. This design allows for maximum flexibility when applying these rules to various input components while maintaining the core PM7 styling principles.
+
+**Note:** The current implementation only provides the basic rules. If you need more advanced input styling, you may need to extend these rules with your own custom styles.
 
 ## Integration with Forms
 
 The input rules can be used in conjunction with form components to create cohesive and consistent forms:
 
 ```tsx
-import { inputRules } from 'pm7-ui-style-guide';
+// For local development, use relative imports
+import { inputRules } from '../src/components/input/pm7-input';
+// For production, use package imports
+// import { inputRules } from 'pm7-ui-style-guide';
 
 function LoginForm() {
   return (
@@ -105,7 +112,10 @@ function LoginForm() {
 While the input rules provide default styling, you can customize them to fit your specific needs:
 
 ```tsx
-import { inputRules } from 'pm7-ui-style-guide';
+// For local development, use relative imports
+import { inputRules } from '../src/components/input/pm7-input';
+// For production, use package imports
+// import { inputRules } from 'pm7-ui-style-guide';
 
 function CustomInput() {
   const customStyles = {

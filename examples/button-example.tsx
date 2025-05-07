@@ -3,11 +3,11 @@
 // Bug Fix: Updated button styles to match PM7Button component's conditional styling logic
 import React, { useState, useEffect } from 'react';
 import { PM7Button as Button, buttonRules } from '../src/components/button/pm7-button.tsx';
-import { 
-  PM7Dialog, 
-  PM7DialogContent, 
-  PM7DialogHeader, 
-  PM7DialogTitle, 
+import {
+  PM7Dialog,
+  PM7DialogContent,
+  PM7DialogHeader,
+  PM7DialogTitle,
   PM7DialogDescription,
   PM7DialogFooter
 } from '../src/components/dialog/pm7-dialog.tsx';
@@ -56,6 +56,16 @@ const MoonIconSwitch = () => (
   </svg>
 );
 
+// Separator component for visual separation between sections
+const Separator = ({ theme }: { theme: 'light' | 'dark' }) => (
+  <div style={{
+    height: '1px',
+    backgroundColor: theme === 'dark' ? '#525252' : '#e2e8f0',
+    margin: '24px 0',
+    width: '100%'
+  }}></div>
+);
+
 // Button example component
 const ButtonExample = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -89,7 +99,7 @@ const ButtonExample = () => {
   // Function to open dialog with button information
   const showButtonInfo = (title: string, className: string = '', disabled: boolean = false) => {
     let description = '';
-    
+
     if (className.includes('outline')) {
       description = 'This is an outline style button with a border and transparent background.';
     } else if (className.includes('secondary')) {
@@ -107,14 +117,14 @@ const ButtonExample = () => {
     } else {
       description = 'This is a default button with standard styling.';
     }
-    
+
     setActiveButtonInfo({
       title,
       description,
       className,
       disabled
     });
-    
+
     setDialogOpen(true);
   };
 
@@ -135,34 +145,38 @@ const ButtonExample = () => {
         </div>
       </div>
       <div className="example-container">
-        <div className="example-preview" style={{ background: theme === 'dark' ? '#262626' : '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
-          <div className="space-y-8">
+        <div className="example-preview" style={{ background: theme === 'dark' ? '#262626' : '#f5f5f5', padding: '20px', borderRadius: '8px', display: 'flex', justifyContent: 'flex-start' }}>
+          <div className="space-y-4">
             <div>
-              <h3 className="text-xl font-semibold mb-3">Button Variants</h3>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: theme === 'dark' ? 'white' : 'inherit' }}>Button Variants</h3>
               <div className="flex flex-wrap gap-4">
-                <Button className={buttonRules.button} onClick={() => showButtonInfo('Default Button')}>Default Button</Button>
-                <Button className={buttonRules.button + ' ' + buttonRules.outline} onClick={() => showButtonInfo('Outline Style', 'outline')}>Outline Style</Button>
-                <Button className={buttonRules.button + ' ' + buttonRules.secondary} onClick={() => showButtonInfo('Secondary Style', 'secondary')}>Secondary Style</Button>
-                <Button className={buttonRules.button + ' ' + buttonRules.ghost} onClick={() => showButtonInfo('Ghost Style', 'ghost')}>Ghost Style</Button>
-                <Button className={buttonRules.button + ' ' + buttonRules.link} onClick={() => showButtonInfo('Link Style', 'link')}>Link Style</Button>
+                <Button theme={theme} className={buttonRules.button} onClick={() => showButtonInfo('Default Button')}>Default Button</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.outline} onClick={() => showButtonInfo('Outline Style', 'outline')}>Outline Style</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.secondary} onClick={() => showButtonInfo('Secondary Style', 'secondary')}>Secondary Style</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.ghost} onClick={() => showButtonInfo('Ghost Style', 'ghost')}>Ghost Style</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.link} onClick={() => showButtonInfo('Link Style', 'link')}>Link Style</Button>
               </div>
             </div>
 
+            <Separator theme={theme} />
+
             <div>
-              <h3 className="text-xl font-semibold mb-3">Button Sizes</h3>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: theme === 'dark' ? 'white' : 'inherit' }}>Button Sizes</h3>
               <div className="flex flex-wrap items-center gap-4">
-                <Button className={buttonRules.button + ' ' + buttonRules.small} onClick={() => showButtonInfo('Small Button', 'small')}>Small Button</Button>
-                <Button className={buttonRules.button} onClick={() => showButtonInfo('Default Size')}>Default Size</Button>
-                <Button className={buttonRules.button + ' ' + buttonRules.large} onClick={() => showButtonInfo('Large Button', 'large')}>Large Button</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.small} onClick={() => showButtonInfo('Small Button', 'small')}>Small Button</Button>
+                <Button theme={theme} className={buttonRules.button} onClick={() => showButtonInfo('Default Size')}>Default Size</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.large} onClick={() => showButtonInfo('Large Button', 'large')}>Large Button</Button>
               </div>
             </div>
 
+            <Separator theme={theme} />
+
             <div>
-              <h3 className="text-xl font-semibold mb-3">Button States</h3>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: theme === 'dark' ? 'white' : 'inherit' }}>Button States</h3>
               <div className="flex flex-wrap gap-4">
-                <Button className={buttonRules.button} onClick={() => showButtonInfo('Default')}>Default</Button>
-                <Button className={buttonRules.button} disabled onClick={() => showButtonInfo('Disabled', '', true)}>Disabled</Button>
-                <Button className={buttonRules.button + ' ' + buttonRules.outline} disabled onClick={() => showButtonInfo('Disabled Outline', 'outline', true)}>Disabled Outline</Button>
+                <Button theme={theme} className={buttonRules.button} onClick={() => showButtonInfo('Default')}>Default</Button>
+                <Button theme={theme} className={buttonRules.button} disabled onClick={() => showButtonInfo('Disabled', '', true)}>Disabled</Button>
+                <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.outline} disabled onClick={() => showButtonInfo('Disabled Outline', 'outline', true)}>Disabled Outline</Button>
               </div>
             </div>
           </div>
@@ -170,14 +184,24 @@ const ButtonExample = () => {
         <div className="example-code">
           <h3>Usage</h3>
           <pre>
-            <code>{`import { Button } from "@/components/ui/button";
-import { buttonRules } from "pm7-ui-style-guide";
+            <code>{`// Enhancement: Updated import paths for better word-wrapping
+import { Button } from "@/components/ui/button";
+// For local development, use relative imports
+import { buttonRules } from "../src/components/button/pm7-button";
 
 // Apply the PM7 styling rules to your ShadCN/UI Button
 // In your component:
-<Button className={buttonRules.button}>Default Button</Button>
-<Button className={buttonRules.button + ' ' + buttonRules.outline}>Outline Button</Button>
-<Button className={buttonRules.button + ' ' + buttonRules.secondary}>Secondary Button</Button>
+<Button className={buttonRules.button}>
+  Default Button
+</Button>
+
+<Button className={buttonRules.button + ' ' + buttonRules.outline}>
+  Outline Button
+</Button>
+
+<Button className={buttonRules.button + ' ' + buttonRules.secondary}>
+  Secondary Button
+</Button>
 
 // The buttonRules object contains:
 ${JSON.stringify(buttonRules, null, 2)}`}</code>
@@ -203,7 +227,7 @@ ${JSON.stringify(buttonRules, null, 2)}`}</code>
             )}
           </PM7DialogDescription>
           <PM7DialogFooter>
-            <Button onClick={() => setDialogOpen(false)}>Close</Button>
+            <Button theme={theme} onClick={() => setDialogOpen(false)}>Close</Button>
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>

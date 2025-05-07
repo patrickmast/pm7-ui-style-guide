@@ -2,13 +2,14 @@
 
 ## Overview
 
-The PM7 Dialog component provides a flexible, accessible modal dialog system for the Winfakt UI Style Guide. It's built on top of Radix UI's Dialog primitive and styled according to Winfakt's design specifications.
+The PM7 Dialog component provides a flexible, accessible modal dialog system for the PM7 UI Style Guide. It's built on top of Radix UI's Dialog primitive and styled according to PM7's design specifications.
 
 ## Usage
 
 ### Basic Dialog
 
 ```tsx
+// For local development, use relative imports
 import {
   PM7Dialog,
   PM7DialogTrigger,
@@ -18,7 +19,18 @@ import {
   PM7DialogTitle,
   PM7DialogDescription,
   PM7DialogClose
-} from 'pm7-ui-style-guide';
+} from '../src/components/dialog/pm7-dialog';
+// For production, use package imports
+// import {
+//   PM7Dialog,
+//   PM7DialogTrigger,
+//   PM7DialogContent,
+//   PM7DialogHeader,
+//   PM7DialogFooter,
+//   PM7DialogTitle,
+//   PM7DialogDescription,
+//   PM7DialogClose
+// } from 'pm7-ui-style-guide';
 
 function BasicDialog() {
   return (
@@ -50,13 +62,22 @@ function BasicDialog() {
 ### Dialog with Custom Trigger
 
 ```tsx
+// For local development, use relative imports
 import {
   PM7Dialog,
   PM7DialogTrigger,
   PM7DialogContent,
   PM7DialogHeader,
   PM7DialogTitle
-} from 'pm7-ui-style-guide';
+} from '../src/components/dialog/pm7-dialog';
+// For production, use package imports
+// import {
+//   PM7Dialog,
+//   PM7DialogTrigger,
+//   PM7DialogContent,
+//   PM7DialogHeader,
+//   PM7DialogTitle
+// } from 'pm7-ui-style-guide';
 
 function DialogWithCustomTrigger() {
   return (
@@ -170,7 +191,7 @@ A button that closes the dialog when clicked.
 
 ## Styling
 
-The dialog components follow the Winfakt UI Style Guide specifications:
+The dialog components follow the PM7 UI Style Guide specifications:
 
 - **Dialog Overlay**:
   - Semi-transparent black background (`bg-black/50`) with blur effect (`backdrop-blur-sm`)

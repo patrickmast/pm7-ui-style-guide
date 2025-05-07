@@ -28,7 +28,9 @@ export const buttonRules = {
 
 // Simple Button component for the examples app
 // In a real app that already uses ShadCN/UI, they would apply buttonRules to their existing Button
-export interface PM7ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface PM7ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  theme?: 'light' | 'dark';
+}
 
 export const PM7Button: React.FC<PM7ButtonProps> = ({ children, ...props }) => {
   const getButtonStyles = () => {
@@ -46,7 +48,8 @@ export const PM7Button: React.FC<PM7ButtonProps> = ({ children, ...props }) => {
       return {
         ...baseStyles,
         backgroundColor: 'transparent',
-        color: props.disabled ? '#9CA3AF' : 'inherit',
+        // Use white text in dark mode, otherwise inherit from parent
+        color: props.disabled ? '#9CA3AF' : (props.theme === 'dark' ? 'white' : 'inherit'),
         border: '1px solid #D4D4D4',
       };
     } else if (className.includes(buttonRules.secondary)) {
@@ -60,7 +63,7 @@ export const PM7Button: React.FC<PM7ButtonProps> = ({ children, ...props }) => {
       return {
         ...baseStyles,
         backgroundColor: 'transparent',
-        color: '#111827',
+        color: props.disabled ? '#9CA3AF' : (props.theme === 'dark' ? 'white' : '#111827'),
         border: 'none',
       };
     } else if (className.includes(buttonRules.link)) {

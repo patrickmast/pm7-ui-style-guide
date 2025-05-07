@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PM7 Menu component provides a flexible, accessible dropdown menu system for the Winfakt UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content. This component has been reorganized as part of the project's file structure improvements, moving from `src/pm7-menu-component.tsx` to `src/components/menu/pm7-menu.tsx` to follow the new component directory pattern.
+The PM7 Menu component provides a flexible, accessible dropdown menu system for the PM7 UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content. This component follows the project's component directory pattern, located at `src/components/menu/pm7-menu.tsx`.
 
 ## Usage
 
@@ -11,7 +11,10 @@ The PM7 Menu component provides a flexible, accessible dropdown menu system for 
 For a standard menu with hamburger icon and custom menu items:
 
 ```tsx
-import { PM7MenuComponent } from 'pm7-ui-style-guide';
+// For local development, use relative imports
+import { PM7Menu } from '../src/components/menu/pm7-menu';
+// For production, use package imports
+// import { PM7Menu } from 'pm7-ui-style-guide';
 
 function MyComponent() {
   // Define your custom menu items
@@ -25,12 +28,12 @@ function MyComponent() {
       id: 'theme',
       label: 'Theme: Light',
       onClick: () => toggleTheme(),
-      rightIcon: <SunIcon />
+      icon: <SunIcon />
     }
   ];
 
   return (
-    <PM7MenuComponent 
+    <PM7Menu 
       menuItems={menuItems}
       initialTheme="light"
     />
@@ -52,9 +55,14 @@ function MyComponent() {
 interface PM7MenuItem {
   id: string;            // Unique identifier for the menu item
   label: React.ReactNode; // Text or component to display
+  type?: string;        // Menu item type (normal, check, radio, submenu, separator, switch)
   onClick?: () => void;  // Click handler
   icon?: React.ReactNode; // Optional icon to display before the label
   rightIcon?: React.ReactNode; // Optional icon to display after the label
+  disabled?: boolean;   // Whether the item is disabled
+  checked?: boolean;    // For check/radio/switch items, whether it's checked
+  onChange?: (checked: boolean) => void; // For check/radio/switch items
+  submenuItems?: PM7MenuItem[]; // For submenu items
   // Multi-language support properties
   'label-en'?: string;   // English label
   'label-es'?: string;   // Spanish label
@@ -96,7 +104,10 @@ The following language codes are supported by default, but you can add any addit
 ### Basic Implementation
 
 ```tsx
-import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
+// For local development, use relative imports
+import { PM7Menu as Menu } from '../src/components/menu/pm7-menu';
+// For production, use package imports
+// import { PM7Menu as Menu } from 'pm7-ui-style-guide';
 import { useState, useEffect } from 'react';
 
 function MultiLanguageMenu() {
@@ -209,13 +220,16 @@ useEffect(() => {
 Here's a complete example of a menu with a language switcher that updates all menu items in real-time:
 
 ```tsx
-import { PM7MenuComponent as Menu } from 'pm7-ui-style-guide';
+// For local development, use relative imports
+import { PM7Menu as Menu } from '../src/components/menu/pm7-menu';
+// For production, use package imports
+// import { PM7Menu as Menu } from 'pm7-ui-style-guide';
 import { useState, useEffect } from 'react';
 
 function LanguageSwitchableMenu() {
   // Theme state
   const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('winfakt-theme');
+    const savedTheme = localStorage.getItem('pm7-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') {
       return savedTheme;
     }
@@ -249,7 +263,7 @@ function LanguageSwitchableMenu() {
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    localStorage.setItem('winfakt-theme', newTheme);
+    localStorage.setItem('pm7-theme', newTheme);
   };
 
   // Define menu items with translations for all supported languages
@@ -434,13 +448,22 @@ const menuItems = [
 For custom menu implementations, you can use the individual primitives:
 
 ```tsx
+// For local development, use relative imports
 import { 
-  PM7Menu, 
+  PM7MenuRoot, 
   PM7MenuTrigger, 
   PM7MenuContent, 
   PM7MenuItem,
   PM7MenuSeparator
-} from 'pm7-ui-style-guide';
+} from '../src/components/menu/pm7-menu';
+// For production, use package imports
+// import { 
+//   PM7MenuRoot, 
+//   PM7MenuTrigger, 
+//   PM7MenuContent, 
+//   PM7MenuItem,
+//   PM7MenuSeparator
+// } from 'pm7-ui-style-guide';
 
 function CustomButtonMenu() {
   return (
@@ -561,7 +584,7 @@ The menu components follow the Winfakt UI Style Guide specifications:
 - Menu container has 12px padding (`py-3 px-3`) on all sides
 - Menu container has a 6px border radius (`rounded-[6px]`)
 - Menu items have rounded corners (`rounded-md`)
-- Menu hover state uses Winfakt blue (#1C86EF)
+- Menu hover state uses PM7 blue (#1C86EF)
 - Menu is positioned below the trigger with right edges aligned (`align="end"`)
 - All interactive elements show pointer cursor on hover
 

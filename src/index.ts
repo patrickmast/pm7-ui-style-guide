@@ -1,7 +1,7 @@
-// Enhancement: Updated exports to allow selective importing of components and renamed Menu to PM7MenuComponent for consistency
+// Enhancement: Updated exports to allow selective importing of components and renamed PM7MenuComponent to PM7Menu for consistency
 
 // Core UI components
-export { PM7MenuComponent as Menu } from './components/menu';
+export { PM7Menu as Menu } from './components/menu';
 export * from './components/dialog';
 
 // Form components
