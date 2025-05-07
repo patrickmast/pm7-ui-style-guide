@@ -103,7 +103,8 @@ export const PM7Button: React.FC<PM7ButtonProps> = ({ children, ...props }) => {
 
   // Add CSS for focus state
   const focusStyles = {
-    outline: 'none'
+    outline: 'none',
+    boxShadow: 'none'
   };
 
   return (

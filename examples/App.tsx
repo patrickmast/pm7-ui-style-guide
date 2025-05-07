@@ -182,7 +182,7 @@ const App = () => {
             <Menu menuItems={menuItems} menuAlignment="start" menuIconColor="white" />
           </div>
         </div>
-        <h1>Winfakt UI Style Guide</h1>
+        <h1>PM7 UI Style Guide</h1>
       </header>
       <div className="content-wrapper">
         {sidebarVisible && (
@@ -232,7 +232,7 @@ const App = () => {
         </main>
       </div>
       <footer>
-        <p>Winfakt UI Style Guide - A collection of reusable UI components</p>
+        <p>PM7 UI Style Guide - A collection of reusable UI components</p>
       </footer>
       {/* Version Info Dialog */}
       <PM7Dialog open={showVersionDialog} onOpenChange={setShowVersionDialog}>
