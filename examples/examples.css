@@ -52,7 +52,8 @@ header {
 
 /* Reset all button styles */
 button.menu-trigger,
-.menu-wrapper [data-radix-dropdown-menu-trigger] {
+.menu-wrapper [data-radix-dropdown-menu-trigger],
+button.sidebar-toggle-button {
   background: none;
   border: none;
   cursor: pointer;
@@ -75,7 +76,8 @@ button.menu-trigger:hover,
 
 /* Fix SVG alignment */
 button.menu-trigger svg,
-.menu-wrapper [data-radix-dropdown-menu-trigger] svg {
+.menu-wrapper [data-radix-dropdown-menu-trigger] svg,
+button.sidebar-toggle-button svg {
   display: block;
 }
 
@@ -322,6 +324,35 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: auto;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: white;
+  margin-left: 4px;
+  padding: 0;
+}
+
+/* Media query for small screens */
+@media (max-width: 799px) {
+  .sidebar-toggle-button {
+    display: flex;
+  }
+  
+  main {
+    margin-left: 0 !important;
+  }
+}
+
+@media (min-width: 800px) {
+  .sidebar-toggle-button {
+    display: none;
+  }
 }
 
 /* Sidebar width control */

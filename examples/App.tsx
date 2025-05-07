@@ -61,8 +61,13 @@ const App = () => {
     return savedWidth ? parseInt(savedWidth, 10) : 165;
   });
   // Initialize sidebar visibility from localStorage or default to true
+  // Also consider window width for initial state
   const [sidebarVisible, setSidebarVisible] = useState(() => {
     const savedVisibility = localStorage.getItem('pm7-ui-style-guide-sidebar-visible');
+    // If window width is less than 800px, hide sidebar by default
+    if (typeof window !== 'undefined' && window.innerWidth < 800) {
+      return false;
+    }
     return savedVisibility ? savedVisibility === 'true' : true;
   });
   const [showVersionDialog, setShowVersionDialog] = useState(false);
@@ -81,7 +86,25 @@ const App = () => {
     localStorage.setItem('pm7-ui-style-guide-active-component', activeComponent);
   }, [activeComponent]);
 
-  const handleMouseDown = (e) => {
+  // Add responsive behavior to hide sidebar when window width is less than 800px
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 800) {
+        setSidebarVisible(false);
+      } else {
+        // Only restore sidebar if it was previously visible before resizing below 800px
+        const savedVisibility = localStorage.getItem('pm7-ui-style-guide-sidebar-visible');
+        if (savedVisibility === 'true') {
+          setSidebarVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
     resizingRef.current = true;
     startXRef.current = e.clientX;
     startWidthRef.current = sidebarWidth;
@@ -89,7 +112,7 @@ const App = () => {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     if (!resizingRef.current) return;
     const newWidth = startWidthRef.current + (e.clientX - startXRef.current);
     if (newWidth >= MIN_SIDEBAR_WIDTH) {
@@ -107,6 +130,19 @@ const App = () => {
     const newVisibility = !sidebarVisible;
     setSidebarVisible(newVisibility);
     localStorage.setItem('pm7-ui-style-guide-sidebar-visible', newVisibility.toString());
+  };
+
+  // Add a button to toggle sidebar on small screens
+  const renderSidebarToggle = () => {
+    return (
+      <button
+        className="sidebar-toggle-button"
+        onClick={toggleSidebar}
+        aria-label={sidebarVisible ? 'Hide sidebar' : 'Show sidebar'}
+      >
+        {sidebarVisible ? <SidebarCollapseIcon /> : <SidebarExpandIcon />}
+      </button>
+    );
   };
 
   const renderComponent = () => {
@@ -157,7 +193,7 @@ const App = () => {
       label: sidebarVisible ? 'Hide sidebar' : 'Show sidebar',
       type: 'switch' as PM7MenuItemType,
       checked: sidebarVisible,
-      onChange: (checked) => {
+      onChange: (checked: boolean) => {
         setSidebarVisible(checked);
         localStorage.setItem('pm7-ui-style-guide-sidebar-visible', checked.toString());
       },
