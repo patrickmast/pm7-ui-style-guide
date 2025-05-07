@@ -1,6 +1,8 @@
-# pm7-menu-component
+# PM7 Menu Component
 
-The pm7-menu-component provides a flexible, accessible dropdown menu system for the Winfakt UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content.
+## Overview
+
+The PM7 Menu component provides a flexible, accessible dropdown menu system for the Winfakt UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content. This component has been reorganized as part of the project's file structure improvements, moving from `src/pm7-menu-component.tsx` to `src/components/menu/pm7-menu.tsx` to follow the new component directory pattern.
 
 ## Usage
 

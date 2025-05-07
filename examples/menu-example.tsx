@@ -101,7 +101,7 @@ const MoonIcon = () => (
 const MenuExample = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     // Check if user has a theme preference in localStorage
-    const savedTheme = localStorage.getItem('winfakt-theme');
+    const savedTheme = localStorage.getItem('menu-component-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') {
       return savedTheme;
     }
@@ -111,7 +111,7 @@ const MenuExample = () => {
   useEffect(() => {
     // Apply theme to document
     document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('winfakt-theme', theme);
+    localStorage.setItem('menu-component-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {

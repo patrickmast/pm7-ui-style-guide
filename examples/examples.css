@@ -128,17 +128,18 @@ header h1 {
 .sidebar {
   /* width is now controlled by JavaScript */
   background-color: var(--sidebar-bg);
-  border-right: none; /* Removed border since resize handle serves as the border */
   padding: 1.5rem 0;
   flex-shrink: 0;
+  position: relative;
 }
 
 /* Resize handle styles */
 .resize-handle {
-  width: 1px;
-  background-color: var(--border);
+  width: 4px;
+  background-color: var(--sidebar-bg); /* Match sidebar background */
+  border-right: 1px solid #DEDEDE; /* Explicit 1px border */
   cursor: col-resize;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
   z-index: 10;
   position: absolute; /* Make it absolute positioned */
   top: 0;
@@ -149,6 +150,8 @@ header h1 {
 .resize-handle:hover,
 .resize-handle:active {
   background-color: var(--primary);
+  border-color: var(--primary);
+  width: 4px;
 }
 
 .sidebar-title {
@@ -156,8 +159,10 @@ header h1 {
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--text);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #DEDEDE;
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 20; /* Higher than resize handle */
 }
 
 .sidebar-nav {

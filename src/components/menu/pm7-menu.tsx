@@ -53,6 +53,7 @@ export type PM7MenuItem = {
   onChange?: (checked: boolean) => void;
   checked?: boolean;
   submenuItems?: Record<string, any>[]; // Using Record to avoid TypeScript recursive type reference issues
+  showUncheckedIcon?: boolean; // Controls whether to show the unchecked icon with opacity
 };
 
 // Define menu props
@@ -62,6 +63,7 @@ export type PM7MenuProps = {
   mobileBreakpoint?: number;
   menuAlignment?: 'start' | 'center' | 'end';
   menuIconColor?: string;
+  showUncheckedIcon?: boolean; // Controls whether to show the unchecked icon with opacity
 };
 
 const PM7MenuRoot = DropdownMenuPrimitive.Root;
@@ -155,12 +157,14 @@ PM7MenuItem.displayName = DropdownMenuPrimitive.Item.displayName
 
 const PM7MenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
-  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
->(({ className, children, checked, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem> & {
+    showUncheckedIcon?: boolean
+  }
+>(({ className, children, checked, showUncheckedIcon = false, ...props }, ref) => (
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-pointer select-none items-center rounded-md py-2 px-4 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "hover:bg-[#1C86EF] hover:text-white",
       "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
@@ -168,10 +172,11 @@ const PM7MenuCheckboxItem = React.forwardRef<
     checked={checked}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span className="mr-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
         <CheckIcon className="h-4 w-4" />
       </DropdownMenuPrimitive.ItemIndicator>
+      {!checked && showUncheckedIcon && <CheckIcon className="h-4 w-4 absolute opacity-10" />}
     </span>
     {children}
   </DropdownMenuPrimitive.CheckboxItem>
@@ -185,14 +190,14 @@ const PM7MenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-pointer select-none items-center rounded-md py-2 px-4 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "hover:bg-[#1C86EF] hover:text-white",
       "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
     )}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span className="mr-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
         <CircleIcon className="h-2 w-2 fill-current" />
       </DropdownMenuPrimitive.ItemIndicator>
@@ -255,6 +260,7 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   mobileBreakpoint = 768,
   menuAlignment = 'start',
   menuIconColor,
+  showUncheckedIcon = false
 }) => {
   // State for menu open/close
   const [isOpen, setIsOpen] = React.useState(false);
@@ -415,6 +421,7 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                           <PM7MenuCheckboxItem
                             key={subItem.id}
                             checked={subItem.checked}
+                            showUncheckedIcon={subItem.showUncheckedIcon ?? showUncheckedIcon}
                             onCheckedChange={checked => {
                               if (subItem.onChange) subItem.onChange(!!checked);
                               if (subItem.onClick) subItem.onClick();
@@ -470,6 +477,7 @@ export const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                 <PM7MenuCheckboxItem
                   key={item.id}
                   checked={item.checked}
+                  showUncheckedIcon={item.showUncheckedIcon ?? showUncheckedIcon}
                   onCheckedChange={checked => {
                     if (item.onChange) item.onChange(!!checked);
                     if (item.onClick) item.onClick();

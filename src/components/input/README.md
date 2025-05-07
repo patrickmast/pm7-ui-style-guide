@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PM7 Input component provides styling rules for input fields in the Winfakt UI Style Guide. It ensures consistent input behavior and appearance across all Winfakt applications.
+The PM7 Input component provides styling rules for input fields in the Winfakt UI Style Guide. It ensures consistent input behavior and appearance across all Winfakt applications. This component has been reorganized as part of the project's file structure improvements, moving from `src/input.ts` to `src/components/input/pm7-input.ts` to follow the new component directory pattern.
 
 ## Usage
 
@@ -48,12 +48,15 @@ The `inputRules` object provides standardized styling properties for input field
 The input rules are implemented as a simple JavaScript object that exports styling properties. These properties can be applied to any input component in your application.
 
 ```typescript
+// Enhancement: Created input component file that was missing after file reorganization
 // Input rules for pm7-ui-style-guide
 export const inputRules = {
   focusBorderColor: 'primary', // Use primary color for border on focus
   alwaysShowBorder: true,
 };
 ```
+
+The implementation is intentionally minimal, focusing only on the key styling rules that ensure consistency across Winfakt applications. This design allows for maximum flexibility when applying these rules to various input components while maintaining the core Winfakt styling principles.
 
 ## Integration with Forms
 

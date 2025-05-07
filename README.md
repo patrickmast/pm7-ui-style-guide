@@ -153,6 +153,35 @@ const primaryColor = colors.primary; // #1C86EF
 
 ## Component Documentation
 
+### Component Organization
+
+All components have been reorganized into a more structured directory pattern for better maintainability:
+
+```
+src/
+  components/
+    button/
+      index.ts         # Exports from the component implementation file
+      pm7-button.tsx  # Component implementation
+      README.md       # Component documentation
+    dialog/
+      index.tsx       # Exports from the component implementation file
+      pm7-dialog.tsx  # Component implementation
+      pm7-dialog.css  # Component styles
+      README.md       # Component documentation
+    input/
+      index.ts        # Exports from the component implementation file
+      pm7-input.ts    # Component implementation
+      README.md       # Component documentation
+    menu/
+      index.tsx       # Exports from the component implementation file
+      pm7-menu.tsx    # Component implementation
+      pm7-menu.css    # Component styles
+      README.md       # Component documentation
+```
+
+This organization makes it easier to find and maintain components, with each component having its own directory containing all related files.
+
 ### Menu Component
 
 The Menu component provides a dropdown menu with Winfakt styling and fully configurable menu items:

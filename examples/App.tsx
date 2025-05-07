@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import MenuExample from './menu-example';
 import ButtonExample from './button-example';
 import { Menu, PM7MenuItemType } from '../src/components/menu/pm7-menu';
+import { PM7Button } from '../src/components/button/pm7-button';
 import {
   PM7Dialog,
   PM7DialogContent,
@@ -53,7 +54,11 @@ const App = () => {
     const savedWidth = localStorage.getItem(SIDEBAR_WIDTH_KEY);
     return savedWidth ? parseInt(savedWidth, 10) : 165;
   });
-  const [sidebarVisible, setSidebarVisible] = useState(false);
+  // Initialize sidebar visibility from localStorage or default to true
+  const [sidebarVisible, setSidebarVisible] = useState(() => {
+    const savedVisibility = localStorage.getItem('pm7-ui-style-guide-sidebar-visible');
+    return savedVisibility ? savedVisibility === 'true' : true;
+  });
   const [showVersionDialog, setShowVersionDialog] = useState(false);
   const sidebarRef = useRef(null);
   const resizingRef = useRef(false);
@@ -88,7 +93,9 @@ const App = () => {
   };
 
   const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
+    const newVisibility = !sidebarVisible;
+    setSidebarVisible(newVisibility);
+    localStorage.setItem('pm7-ui-style-guide-sidebar-visible', newVisibility.toString());
   };
 
   const renderComponent = () => {
@@ -105,18 +112,30 @@ const App = () => {
   // Define menu items
   const menuItems = [
     {
-      id: 'menu-component',
-      label: 'Menu Component',
-      type: 'check' as PM7MenuItemType,
-      checked: activeComponent === 'menu',
-      onClick: () => setActiveComponent('menu')
-    },
-    {
-      id: 'button-component',
-      label: 'Button Component',
-      type: 'check' as PM7MenuItemType,
-      checked: activeComponent === 'button',
-      onClick: () => setActiveComponent('button')
+      id: 'components-submenu',
+      label: 'Component',
+      type: 'submenu' as PM7MenuItemType,
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <path d="m3 12 3 3 3-3-3-3zm12 0 3 3 3-3-3-3zM9 6l3 3 3-3-3-3zm0 12 3 3 3-3-3-3z"/>
+      </svg>
+      ),
+      submenuItems: [
+        {
+          id: 'menu-component',
+          label: 'Menu',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'menu',
+          onClick: () => setActiveComponent('menu')
+        },
+        {
+          id: 'button-component',
+          label: 'Button',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'button',
+          onClick: () => setActiveComponent('button')
+        }
+      ]
     },
     {
       id: 'divider-1',
@@ -127,7 +146,10 @@ const App = () => {
       label: sidebarVisible ? 'Hide sidebar' : 'Show sidebar',
       type: 'switch' as PM7MenuItemType,
       checked: sidebarVisible,
-      onChange: (checked) => setSidebarVisible(checked),
+      onChange: (checked) => {
+        setSidebarVisible(checked);
+        localStorage.setItem('pm7-ui-style-guide-sidebar-visible', checked.toString());
+      },
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" strokeWidth="2">
           <path d="M6 21a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3zM18 5h-8v14h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1"/>
@@ -202,7 +224,7 @@ const App = () => {
           <div
             className="resize-handle"
             onMouseDown={handleMouseDown}
-            style={{ left: `${sidebarWidth}px` }}
+            style={{ left: `${sidebarWidth - 3}px` }}
           ></div>
         )}
         <main style={{ marginLeft: sidebarVisible ? undefined : '0' }}>
@@ -226,22 +248,24 @@ const App = () => {
               <span style={{ fontWeight: '500', minWidth: '100px', color: '#64748b' }}>Package:</span>
               <span>pm7-ui-style-guide</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-              <span style={{ fontWeight: '500', minWidth: '100px', color: '#64748b' }}>Author:</span>
-              <span>Patrick Mast</span>
-            </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <span style={{ fontWeight: '500', minWidth: '100px', color: '#64748b' }}>License:</span>
-              <span>ISC</span>
+              <a
+                href="https://opensource.org/licenses/ISC"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#1C86EF', textDecoration: 'underline' }}
+              >
+                https://opensource.org/licenses/ISC
+              </a>
             </div>
           </div>
           <PM7DialogFooter>
-            <button 
+            <PM7Button
               onClick={() => setShowVersionDialog(false)}
-              className="pm7-dialog-button"
             >
               Close
-            </button>
+            </PM7Button>
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>

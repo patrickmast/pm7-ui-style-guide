@@ -151,7 +151,12 @@ A description or subtitle for the dialog. `PM7DialogDescription` is kept for bac
 
 ```tsx
 <PM7DialogSubTitle>Additional information about the dialog</PM7DialogSubTitle>
+
+{/* Or using the backward-compatible name */}
+<PM7DialogDescription>Additional information about the dialog</PM7DialogDescription>
 ```
+
+**Note:** The `PM7DialogSubTitle` component was introduced to provide better semantic meaning for the dialog's secondary text. The `PM7DialogDescription` component is maintained for backward compatibility and is functionally identical to `PM7DialogSubTitle`.
 
 ### PM7DialogClose
 
@@ -167,12 +172,32 @@ A button that closes the dialog when clicked.
 
 The dialog components follow the Winfakt UI Style Guide specifications:
 
-- Dialog overlay has a semi-transparent black background with blur effect
-- Dialog content has appropriate padding (24px) and rounded corners (6px)
-- Dialog has a subtle animation when opening and closing
-- Close button is positioned in the top-right corner
-- Footer buttons are aligned to the right on desktop and stacked on mobile
-- All interactive elements show pointer cursor on hover
+- **Dialog Overlay**:
+  - Semi-transparent black background (`bg-black/50`) with blur effect (`backdrop-blur-sm`)
+  - Uses pointer cursor to indicate it's clickable to close the dialog
+  - Animated fade-in and fade-out transitions when opening and closing
+
+- **Dialog Content**:
+  - Padding: 24px (p-6)
+  - Rounded corners: 6px on medium screens and larger (sm:rounded-lg)
+  - Fixed positioning in the center of the viewport
+  - Animated entrance/exit with zoom and slide effects
+  - Default cursor to indicate non-clickable area
+
+- **Dark Mode Support**:
+  - Background color: `#262626` in dark mode, `white` in light mode
+  - Border color: `#525252` in dark mode, `#e2e8f0` in light mode
+
+- **Close Button**:
+  - Positioned in the top-right corner (right-4 top-4)
+  - Partially transparent (opacity-70) with increased opacity on hover (hover:opacity-100)
+  - Uses the PM7Button component with transparent background
+  - Includes an SVG X icon and screen-reader text for accessibility
+
+- **Footer**:
+  - Mobile: Column layout with reverse order (buttons stacked with primary action on top)
+  - Desktop: Row layout with buttons aligned to the right (sm:flex-row sm:justify-end)
+  - Space between buttons on desktop (sm:space-x-2)
 
 ## Accessibility
 

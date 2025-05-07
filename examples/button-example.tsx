@@ -1,6 +1,16 @@
 // Enhancement: Updated Button example to demonstrate how PM7 UI Style Guide enhances ShadCN/UI components
+// Enhancement: Added dialog functionality to display information about each button when clicked
+// Bug Fix: Updated button styles to match PM7Button component's conditional styling logic
 import React, { useState, useEffect } from 'react';
 import { PM7Button as Button, buttonRules } from '../src/components/button/pm7-button.tsx';
+import { 
+  PM7Dialog, 
+  PM7DialogContent, 
+  PM7DialogHeader, 
+  PM7DialogTitle, 
+  PM7DialogDescription,
+  PM7DialogFooter
+} from '../src/components/dialog/pm7-dialog.tsx';
 
 // Sun icon component for theme switch (fixed black color)
 const SunIconSwitch = () => (
@@ -50,21 +60,62 @@ const MoonIconSwitch = () => (
 const ButtonExample = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     // Check if user has a theme preference in localStorage
-    const savedTheme = localStorage.getItem('winfakt-theme');
+    const savedTheme = localStorage.getItem('button-component-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') {
       return savedTheme;
     }
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
+  // State for dialog visibility
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [activeButtonInfo, setActiveButtonInfo] = useState({
+    title: '',
+    description: '',
+    className: '',
+    disabled: false
+  });
+
   useEffect(() => {
     // Apply theme to document
     document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('winfakt-theme', theme);
+    localStorage.setItem('button-component-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  // Function to open dialog with button information
+  const showButtonInfo = (title: string, className: string = '', disabled: boolean = false) => {
+    let description = '';
+    
+    if (className.includes('outline')) {
+      description = 'This is an outline style button with a border and transparent background.';
+    } else if (className.includes('secondary')) {
+      description = 'This is a secondary style button with custom styling.';
+    } else if (className.includes('ghost')) {
+      description = 'This is a ghost style button that becomes visible on hover.';
+    } else if (className.includes('link')) {
+      description = 'This is a link style button with an underline.';
+    } else if (className.includes('small')) {
+      description = 'This is a small size button with reduced padding and font size.';
+    } else if (className.includes('large')) {
+      description = 'This is a large size button with increased padding and font size.';
+    } else if (disabled) {
+      description = 'This is a disabled button that cannot be interacted with.';
+    } else {
+      description = 'This is a default button with standard styling.';
+    }
+    
+    setActiveButtonInfo({
+      title,
+      description,
+      className,
+      disabled
+    });
+    
+    setDialogOpen(true);
   };
 
   return (
@@ -89,29 +140,29 @@ const ButtonExample = () => {
             <div>
               <h3 className="text-xl font-semibold mb-3">Button Variants</h3>
               <div className="flex flex-wrap gap-4">
-                <Button>Default Button</Button>
-                <Button className="border border-gray-300">Outline Style</Button>
-                <Button className="bg-gray-200 text-gray-800">Secondary Style</Button>
-                <Button className="bg-transparent hover:bg-gray-100">Ghost Style</Button>
-                <Button className="underline p-0 h-auto">Link Style</Button>
+                <Button className={buttonRules.button} onClick={() => showButtonInfo('Default Button')}>Default Button</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.outline} onClick={() => showButtonInfo('Outline Style', 'outline')}>Outline Style</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.secondary} onClick={() => showButtonInfo('Secondary Style', 'secondary')}>Secondary Style</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.ghost} onClick={() => showButtonInfo('Ghost Style', 'ghost')}>Ghost Style</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.link} onClick={() => showButtonInfo('Link Style', 'link')}>Link Style</Button>
               </div>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold mb-3">Button Sizes</h3>
               <div className="flex flex-wrap items-center gap-4">
-                <Button className="text-sm px-2 py-1">Small Button</Button>
-                <Button>Default Size</Button>
-                <Button className="text-lg px-6 py-3">Large Button</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.small} onClick={() => showButtonInfo('Small Button', 'small')}>Small Button</Button>
+                <Button className={buttonRules.button} onClick={() => showButtonInfo('Default Size')}>Default Size</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.large} onClick={() => showButtonInfo('Large Button', 'large')}>Large Button</Button>
               </div>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold mb-3">Button States</h3>
               <div className="flex flex-wrap gap-4">
-                <Button>Default</Button>
-                <Button disabled>Disabled</Button>
-                <Button className="border border-gray-300" disabled>Disabled Outline</Button>
+                <Button className={buttonRules.button} onClick={() => showButtonInfo('Default')}>Default</Button>
+                <Button className={buttonRules.button} disabled onClick={() => showButtonInfo('Disabled', '', true)}>Disabled</Button>
+                <Button className={buttonRules.button + ' ' + buttonRules.outline} disabled onClick={() => showButtonInfo('Disabled Outline', 'outline', true)}>Disabled Outline</Button>
               </div>
             </div>
           </div>
@@ -125,14 +176,37 @@ import { buttonRules } from "pm7-ui-style-guide";
 // Apply the PM7 styling rules to your ShadCN/UI Button
 // In your component:
 <Button className={buttonRules.button}>Default Button</Button>
-<Button className={buttonRules.button} variant="outline">Outline Button</Button>
-<Button className={buttonRules.button} variant="secondary">Secondary Button</Button>
+<Button className={buttonRules.button + ' ' + buttonRules.outline}>Outline Button</Button>
+<Button className={buttonRules.button + ' ' + buttonRules.secondary}>Secondary Button</Button>
 
 // The buttonRules object contains:
 ${JSON.stringify(buttonRules, null, 2)}`}</code>
           </pre>
         </div>
       </div>
+      <PM7Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
+          <PM7DialogHeader>
+            <PM7DialogTitle>{activeButtonInfo.title}</PM7DialogTitle>
+          </PM7DialogHeader>
+          <PM7DialogDescription>
+            {activeButtonInfo.description}
+            {activeButtonInfo.className && (
+              <div className="mt-2">
+                <p><strong>CSS Classes:</strong> {activeButtonInfo.className}</p>
+              </div>
+            )}
+            {activeButtonInfo.disabled && (
+              <div className="mt-2">
+                <p><strong>State:</strong> Disabled</p>
+              </div>
+            )}
+          </PM7DialogDescription>
+          <PM7DialogFooter>
+            <Button onClick={() => setDialogOpen(false)}>Close</Button>
+          </PM7DialogFooter>
+        </PM7DialogContent>
+      </PM7Dialog>
     </div>
   );
 };
