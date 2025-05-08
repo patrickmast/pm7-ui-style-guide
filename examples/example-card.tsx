@@ -96,7 +96,7 @@ export default function ExampleCard() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "2rem auto" }}>
+    <>
       <PM7TabSelector
         tabs={[
           { id: "Overview", label: "Overview" },
@@ -109,28 +109,42 @@ export default function ExampleCard() {
         initialTheme={theme}
         className="mb-4"
       />
-      <div className={`component-example ${theme === "dark" ? "dark-mode" : "light-mode"}`}>
-        <PM7Card>
-          <div className="p-6">
-            {activeTab === "Overview" && (
-              <div>
-                <h3 className="text-xl font-semibold mb-3">PM7Card</h3>
-                <p className="mb-4">The PM7Card component provides a flexible, theme-aware card container for static content, with header, footer, title, and subtitle support.</p>
-                <h4 className="text-lg font-medium mt-4 mb-2">Key Features</h4>
-                <ul className="list-disc ml-5 mt-1 mb-4">
-                  <li>Light and dark theme support</li>
-                  <li>Header, footer, title, and subtitle subcomponents</li>
-                  <li>Customizable via className and CSS</li>
-                  <li>Simple, accessible markup</li>
-                </ul>
-              </div>
-            )}
-            {activeTab === "Usage" && (
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Basic Usage</h3>
-                <p className="mb-4">Here's how to use the PM7Card component in your React application:</p>
-                <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mb-4 overflow-x-auto">
-                  <code className="font-mono">{`import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } from '@pm7-ui/card';
+      {activeTab === "Overview" && (
+        <PM7Card className="mb-6">
+          <h3 className="text-xl font-semibold mb-3">PM7Card</h3>
+          <p className="mb-4">The PM7Card component provides a flexible, theme-aware card container for static content, with header, footer, title, and subtitle support.</p>
+          <h4 className="text-lg font-medium mt-4 mb-2">Key Features</h4>
+          <ul className="list-disc ml-5 mt-1 mb-4">
+            <li>Light and dark theme support</li>
+            <li>Header, footer, title, and subtitle subcomponents</li>
+            <li>Customizable via className and CSS</li>
+            <li>Simple, accessible markup</li>
+          </ul>
+        </PM7Card>
+      )}
+      {activeTab === "Examples" && (
+        <div style={{ maxWidth: 400, margin: "2rem auto" }}>
+          <PM7Card>
+            <PM7CardHeader>
+              <PM7CardTitle>PM7 Card Title</PM7CardTitle>
+              <PM7CardSubTitle>This is a subtitle for the card.</PM7CardSubTitle>
+            </PM7CardHeader>
+            <div style={{ margin: "1rem 0" }}>
+              This is the main content of the card. You can put any React node here.
+            </div>
+            <PM7CardFooter>
+              <button style={{ padding: "0.5rem 1rem", borderRadius: 4, background: "#1C86EF", color: "white", border: "none" }}>Action</button>
+            </PM7CardFooter>
+          </PM7Card>
+        </div>
+      )}
+      <div style={{ maxWidth: 600, margin: "2rem auto" }}>
+        {activeTab === "Usage" && (
+          <PM7Card>
+            <h3 className="text-xl font-semibold mb-3">Basic Usage</h3>
+            <p className="mb-4">Here's how to use the PM7Card component in your React application:</p>
+            <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mb-4 overflow-x-auto">
+              <code className="font-mono">{`import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } from '@pm7-ui/card';
 
 <PM7Card>
   <PM7CardHeader>
@@ -142,36 +156,17 @@ export default function ExampleCard() {
     <button>Action</button>
   </PM7CardFooter>
 </PM7Card>`}</code>
-                </pre>
-              </div>
-            )}
-            {activeTab === "API" && (
-              <div className="markdown-container dark:text-white">
-                <ReactMarkdown>{cardReadme}</ReactMarkdown>
-              </div>
-            )}
-            {activeTab === "Examples" && (
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Live Example</h3>
-                <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-                  <PM7Card>
-                    <PM7CardHeader>
-                      <PM7CardTitle>PM7 Card Title</PM7CardTitle>
-                      <PM7CardSubTitle>This is a subtitle for the card.</PM7CardSubTitle>
-                    </PM7CardHeader>
-                    <div style={{ margin: "1rem 0" }}>
-                      This is the main content of the card. You can put any React node here.
-                    </div>
-                    <PM7CardFooter>
-                      <button style={{ padding: "0.5rem 1rem", borderRadius: 4, background: "#1C86EF", color: "white", border: "none" }}>Action</button>
-                    </PM7CardFooter>
-                  </PM7Card>
-                </div>
-              </div>
-            )}
-          </div>
-        </PM7Card>
+            </pre>
+          </PM7Card>
+        )}
+        {activeTab === "API" && (
+          <PM7Card>
+            <div className="markdown-container dark:text-white">
+              <ReactMarkdown>{cardReadme}</ReactMarkdown>
+            </div>
+          </PM7Card>
+        )}
       </div>
-    </div>
+    </>
   );
 }

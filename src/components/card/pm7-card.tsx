@@ -8,7 +8,7 @@ const PM7Card = React.forwardRef<
 >(({ className = "", ...props }, ref) => (
   <div
     ref={ref}
-    className={`pm7-card bg-background border shadow-lg p-6 sm:rounded-lg ${className}`}
+    className={`pm7-card bg-background border p-6 sm:rounded-lg ${className}`}
     style={{
       backgroundColor: className?.includes("dark") ? "#262626" : "white",
       border: `1px solid ${className?.includes("dark") ? "#525252" : "#e2e8f0"}`,
