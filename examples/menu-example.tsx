@@ -49,10 +49,10 @@ interface Descriptions {
 const MenuExample = () => {
   // Tab state for tab row
   const [activeTab, setActiveTab] = useState<TabType>('Preview');
-  
+
   // State for README markdown content
   const [readmeContent, setReadmeContent] = useState<string>('');
-  
+
   // State for selected language
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageType>(() => {
     // Check if user has a language preference in localStorage
@@ -97,13 +97,13 @@ const MenuExample = () => {
       icons: 'Icons',
       separators: 'Separators',
       checkboxes: 'Checkboxes and switches',
-      
+
       // Menu Alignment section
       menuAlignment: 'Menu Alignment',
       startAlignment: 'Start Alignment',
       centerAlignment: 'Center Alignment',
       endAlignment: 'End Alignment',
-      
+
       // Custom Icon Color section
       customIconColor: 'Custom Icon Color',
       iconColorDesc: 'The menu icon color can be customized using the',
@@ -112,7 +112,7 @@ const MenuExample = () => {
       primaryBlue: 'the PM7 primary blue',
       yellow: 'yellow',
       color: 'color:',
-      
+
       // Usage section
       usage: 'Usage'
     },
@@ -127,13 +127,13 @@ const MenuExample = () => {
       icons: 'Iconos',
       separators: 'Separadores',
       checkboxes: 'Casillas de verificación e interruptores',
-      
+
       // Menu Alignment section
       menuAlignment: 'Alineación del Menú',
       startAlignment: 'Alineación Inicial',
       centerAlignment: 'Alineación Central',
       endAlignment: 'Alineación Final',
-      
+
       // Custom Icon Color section
       customIconColor: 'Color de Icono Personalizado',
       iconColorDesc: 'El color del icono del menú se puede personalizar usando la',
@@ -142,7 +142,7 @@ const MenuExample = () => {
       primaryBlue: 'el azul primario de PM7',
       yellow: 'amarillo',
       color: 'color:',
-      
+
       // Usage section
       usage: 'Uso'
     },
@@ -157,13 +157,13 @@ const MenuExample = () => {
       icons: 'Icônes',
       separators: 'Séparateurs',
       checkboxes: 'Cases à cocher et interrupteurs',
-      
+
       // Menu Alignment section
       menuAlignment: 'Alignement du Menu',
       startAlignment: 'Alignement au Début',
       centerAlignment: 'Alignement au Centre',
       endAlignment: 'Alignement à la Fin',
-      
+
       // Custom Icon Color section
       customIconColor: 'Couleur d\'Icône Personnalisée',
       iconColorDesc: 'La couleur de l\'icône du menu peut être personnalisée à l\'aide de la',
@@ -172,7 +172,7 @@ const MenuExample = () => {
       primaryBlue: 'le bleu primaire PM7',
       yellow: 'jaune',
       color: 'couleur:',
-      
+
       // Usage section
       usage: 'Utilisation'
     },
@@ -187,13 +187,13 @@ const MenuExample = () => {
       icons: 'Symbole',
       separators: 'Trennlinien',
       checkboxes: 'Kontrollkästchen und Schalter',
-      
+
       // Menu Alignment section
       menuAlignment: 'Menü-Ausrichtung',
       startAlignment: 'Ausrichtung am Anfang',
       centerAlignment: 'Zentrale Ausrichtung',
       endAlignment: 'Ausrichtung am Ende',
-      
+
       // Custom Icon Color section
       customIconColor: 'Benutzerdefinierte Symbolfarbe',
       iconColorDesc: 'Die Farbe des Menüsymbols kann mit der',
@@ -202,7 +202,7 @@ const MenuExample = () => {
       primaryBlue: 'das PM7-Primärblau',
       yellow: 'gelb',
       color: 'Farbe:',
-      
+
       // Usage section
       usage: 'Verwendung'
     },
@@ -217,13 +217,13 @@ const MenuExample = () => {
       icons: 'Pictogrammen',
       separators: 'Scheidingslijnen',
       checkboxes: 'Selectievakjes en schakelaars',
-      
+
       // Menu Alignment section
       menuAlignment: 'Menu Uitlijning',
       startAlignment: 'Begin Uitlijning',
       centerAlignment: 'Midden Uitlijning',
       endAlignment: 'Einde Uitlijning',
-      
+
       // Custom Icon Color section
       customIconColor: 'Aangepaste Pictogramkleur',
       iconColorDesc: 'De kleur van het menupictogram kan worden aangepast met de',
@@ -232,7 +232,7 @@ const MenuExample = () => {
       primaryBlue: 'de PM7 primaire blauwe',
       yellow: 'gele',
       color: 'kleur:',
-      
+
       // Usage section
       usage: 'Gebruik'
     },
@@ -247,13 +247,13 @@ const MenuExample = () => {
       icons: 'Pictogrammen',
       separators: 'Scheidingslijnen',
       checkboxes: 'Selectievakjes en schakelaars',
-      
+
       // Menu Alignment section
       menuAlignment: 'Menu Uitlijning',
       startAlignment: 'Begin Uitlijning',
       centerAlignment: 'Midden Uitlijning',
       endAlignment: 'Einde Uitlijning',
-      
+
       // Custom Icon Color section
       customIconColor: 'Aangepaste Pictogramkleur',
       iconColorDesc: 'De kleur van het menupictogram kan worden aangepast met de',
@@ -262,7 +262,7 @@ const MenuExample = () => {
       primaryBlue: 'de PM7 primaire blauwe',
       yellow: 'gele',
       color: 'kleur:',
-      
+
       // Usage section
       usage: 'Gebruik'
     },
@@ -277,13 +277,13 @@ const MenuExample = () => {
       icons: '图标',
       separators: '分隔符',
       checkboxes: '复选框和开关',
-      
+
       // Menu Alignment section
       menuAlignment: '菜单对齐',
       startAlignment: '开始对齐',
       centerAlignment: '居中对齐',
       endAlignment: '结束对齐',
-      
+
       // Custom Icon Color section
       customIconColor: '自定义图标颜色',
       iconColorDesc: '菜单图标颜色可以使用',
@@ -292,7 +292,7 @@ const MenuExample = () => {
       primaryBlue: 'PM7主要蓝色',
       yellow: '黄色',
       color: '颜色：',
-      
+
       // Usage section
       usage: '使用方法'
     }
@@ -311,7 +311,7 @@ const MenuExample = () => {
     }
   };
 
-  // Theme is now controlled by the App component's toggle
+  // Theme is now controlled by the App component
   // No local toggleTheme function needed
 
   // Listen for theme changes in localStorage (from App component)
@@ -321,7 +321,7 @@ const MenuExample = () => {
         setTheme(e.newValue as ThemeType);
       }
     };
-    
+
     // Also check for direct localStorage changes
     const checkTheme = () => {
       const currentTheme = localStorage.getItem('pm7-theme') as ThemeType;
@@ -329,35 +329,29 @@ const MenuExample = () => {
         setTheme(currentTheme);
       }
     };
-    
+
     // Set up interval to check theme
     const intervalId = setInterval(checkTheme, 500);
-    
+
     // Add storage event listener
     window.addEventListener('storage', handleStorageChange);
-    
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       clearInterval(intervalId);
     };
   }, [theme]);
-  
+
   // Load README content when Documentation tab is selected
   useEffect(() => {
     if (activeTab === 'Documentation') {
-      // Load README from local file in examples directory
-      fetch('./menu-readme.md')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch README.md');
-          }
-          return response.text();
-        })
-        .then(text => {
-          setReadmeContent(text);
+      // Import README directly using Vite's ?raw feature
+      import('../src/components/menu/README.md?raw')
+        .then(module => {
+          setReadmeContent(module.default);
         })
         .catch(error => {
-          console.error('Error fetching README.md:', error);
+          console.error('Error loading README.md:', error);
           setReadmeContent(`# Error Loading Documentation
 
 Unable to load the component documentation. Please try again later.`);

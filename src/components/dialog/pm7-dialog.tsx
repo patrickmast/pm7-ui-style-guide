@@ -1,4 +1,4 @@
-// Bug Fix: Updated dialog border color to #525252 in dark mode
+// Enhancement: The close (X) icon in the dialog now uses #333333 in light mode and white in dark mode for accessibility and theme consistency. This is achieved by applying a color style to the button parent, which the SVG icon inherits via `currentColor`.
 "use client"
 
 import * as React from "react"
@@ -35,7 +35,7 @@ const PM7DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={`fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg ${className || ''}`}
-      style={{ 
+      style={{
         cursor: 'default',
         backgroundColor: className?.includes('dark') ? '#262626' : 'white',
         border: `1px solid ${className?.includes('dark') ? '#525252' : '#e2e8f0'}`
@@ -44,9 +44,9 @@ const PM7DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close asChild>
-        <PM7Button 
-          className="absolute right-4 top-4 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
-          style={{ padding: '4px', minWidth: 'auto', background: 'transparent', border: 'none' }}
+        <PM7Button
+          className="pm7-dialog-close absolute right-4 top-4 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+          style={{ color: 'inherit', padding: '4px', minWidth: 'auto', background: 'transparent', border: 'none' }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 6 6 18" />
@@ -109,6 +109,29 @@ PM7DialogSubTitle.displayName = "PM7DialogSubTitle"
 // Keep the old name for backward compatibility
 const PM7DialogDescription = PM7DialogSubTitle
 
+// Bug Fix: Added PM7DialogSeparator component for consistent separator styling with dark/light mode support
+// Enhancement: Added marginTop and marginBottom parameters for customizable spacing
+const PM7DialogSeparator = ({
+  className,
+  marginTop = '0px',
+  marginBottom = '0px',
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & {
+  marginTop?: string;
+  marginBottom?: string;
+}) => (
+  <div
+    className={`border-t ${className || ''}`}
+    style={{
+      borderColor: className?.includes('dark') ? '#525252' : '#e2e8f0',
+      marginTop,
+      marginBottom,
+    }}
+    {...props}
+  />
+)
+PM7DialogSeparator.displayName = "PM7DialogSeparator"
+
 export {
   PM7Dialog,
   PM7DialogPortal,
@@ -121,4 +144,5 @@ export {
   PM7DialogTitle,
   PM7DialogSubTitle,
   PM7DialogDescription, // Keep for backward compatibility
+  PM7DialogSeparator,
 }

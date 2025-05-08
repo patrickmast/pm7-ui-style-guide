@@ -17,6 +17,7 @@ import {
   PM7DialogTitle,
   PM7DialogSubTitle,
   PM7DialogFooter,
+  PM7DialogSeparator
 } from '../src/components/dialog';
 import '../src/components/dialog/pm7-dialog.css';
 import { MoonIcon, SunIcon } from 'lucide-react';
@@ -113,7 +114,7 @@ const App = () => {
       localStorage.setItem('pm7-theme', theme);
     }
   }, [theme]);
-  
+
   // Function to toggle theme
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
@@ -376,25 +377,38 @@ const App = () => {
       </footer>
       {/* Version Info Dialog */}
       <PM7Dialog open={showVersionDialog} onOpenChange={setShowVersionDialog}>
-        <PM7DialogContent>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
           <PM7DialogHeader>
             <PM7DialogTitle>PM7 UI Style Guide</PM7DialogTitle>
             <PM7DialogSubTitle>
               Version: {packageJson.version}
             </PM7DialogSubTitle>
           </PM7DialogHeader>
-          <div style={{ margin: '16px 0', borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>
+          <PM7DialogSeparator className={theme === 'dark' ? 'dark' : ''} marginTop='16px' marginBottom='16px' />
+          <div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-              <span style={{ fontWeight: '500', minWidth: '100px', color: '#64748b' }}>Package:</span>
+              <span style={{
+                fontWeight: '500',
+                minWidth: '100px',
+                color: theme === 'dark' ? '#9ca3af' : '#64748b'
+              }}>
+                Package:
+              </span>
               <span>pm7-ui-style-guide</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <span style={{ fontWeight: '500', minWidth: '100px', color: '#64748b' }}>License:</span>
+              <span style={{
+                fontWeight: '500',
+                minWidth: '100px',
+                color: theme === 'dark' ? '#9ca3af' : '#64748b'
+              }}>
+                License:
+              </span>
               <a
                 href="https://opensource.org/licenses/ISC"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#1C86EF', textDecoration: 'underline' }}
+                style={{ color: theme === 'dark' ? '#3b9eff' : '#1C86EF', textDecoration: 'underline' }}
               >
                 https://opensource.org/licenses/ISC
               </a>

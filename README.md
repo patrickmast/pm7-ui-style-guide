@@ -327,6 +327,50 @@ export default function AppDialog() {
 - Supports open/closed state and close handlers
 - Follows all PM7 interaction patterns
 
+#### Dialog Separator
+
+The Dialog component includes a separator component for creating visual divisions within dialogs:
+
+```tsx
+import {
+  PM7Dialog,
+  PM7DialogContent,
+  PM7DialogHeader,
+  PM7DialogTitle,
+  PM7DialogSeparator,
+  PM7DialogFooter
+} from 'pm7-ui-style-guide';
+
+export default function AppDialog() {
+  const [theme, setTheme] = useState('light');
+  
+  return (
+    <PM7Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
+        <PM7DialogHeader>
+          <PM7DialogTitle>Dialog Title</PM7DialogTitle>
+        </PM7DialogHeader>
+        
+        <PM7DialogSeparator className={theme === 'dark' ? 'dark' : ''} marginTop="16px" marginBottom="16px" />
+        
+        <div>Dialog content goes here</div>
+        
+        <PM7DialogFooter>
+          <button onClick={() => setIsOpen(false)}>Close</button>
+        </PM7DialogFooter>
+      </PM7DialogContent>
+    </PM7Dialog>
+  );
+}
+```
+
+**PM7DialogSeparator Props:**
+- `className`: For theme styling (pass 'dark' for dark mode)
+- `marginTop`: Optional top margin (default: '0px')
+- `marginBottom`: Optional bottom margin (default: '0px')
+
+The separator automatically adapts its styling based on the theme.
+
 Detailed documentation can be found in [pm7-dialog-component Documentation](./components/dialog/README.md).
 
 ### Input Component

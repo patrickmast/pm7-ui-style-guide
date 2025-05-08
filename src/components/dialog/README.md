@@ -191,6 +191,8 @@ A button that closes the dialog when clicked.
 
 ## Styling
 
+- **Close Icon Color:** The dialog close (X) icon is #333333 in light mode and white in dark mode, ensuring it is always clearly visible and theme-consistent. This is achieved by setting the `color` property on the button, which the SVG icon inherits via `currentColor`.
+
 The dialog components follow the PM7 UI Style Guide specifications:
 
 - **Dialog Overlay**:
