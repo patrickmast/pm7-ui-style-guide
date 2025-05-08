@@ -1,39 +1,77 @@
 /* Winfakt UI Style Guide Examples CSS */
 
 :root {
-  --primary: #1C86EF;
-  --border: #dedede;
   --background: #f5f5f5;
-  --text: #333;
+  --border: #dedede;
+  --border-color: #e0e0e0;
   --card-bg: white;
-  --sidebar-width: 250px;
-  --sidebar-bg: #f8f9fa;
-  --sidebar-active: #e9ecef;
+  --code-bg: #f5f5f5;
   --footer-bg: #333;
   --footer-text: white;
-  --code-bg: #f5f5f5;
-  --border-color: #e0e0e0;
-  --tab-active-text: #1C86EF;
+  --gray-text-500: #9ca3af;
+  --gray-text-700: #e0e0e0;
+  --header-dark-bg: #0a4b87;
+  --header-text: white;
+  --markdown-pre-bg: #f5f5f5;
+  --primary: #1C86EF;
+  --sidebar-active: #e9ecef;
+  --sidebar-bg: #f8f9fa;
+  --sidebar-width: 250px;
+  --sidebar-width-label: #666;
+  --sidebar-width-value: #666;
+  --tab-active-bg: #F8F9FA;
   --tab-active-border: #1C86EF;
+  --tab-active-dark-bg: #333;
+  --tab-active-dark-border: #3B9EFF;
+  --tab-active-dark-text: white;
+  --tab-active-text: #1C86EF;
+  --tab-active-text-color: #000;
+  --tab-container-dark-bg: #1A1A1A;
   --tab-hover-text: #374151;
+  --text: #333;
+  --theme-switch-bg: white;
+  --theme-switch-dark-icon: white;
+  --theme-switch-dark-thumb-bg: #6E6E6E;
+  --theme-switch-light-icon: black;
+  --theme-switch-thumb-bg: #FFD43B;
   font-size: 16px; /* Base font size */
 }
 
 /* Dark mode variables */
 .dark {
   --background: #121212;
-  --text: #e0e0e0;
-  --card-bg: #1e1e1e;
-  --sidebar-bg: #1E1E1E;
-  --sidebar-active: #2a2a2a;
   --border: #444;
+  --border-color: #444;
+  --card-bg: #1e1e1e;
+  --code-bg: #2d2d2d;
   --footer-bg: #1a1a1a;
   --footer-text: #e0e0e0;
-  --code-bg: #2d2d2d;
-  --border-color: #444;
-  --tab-active-text: #3b9eff;
+  --gray-text-500: #9ca3af;
+  --gray-text-700: #e0e0e0;
+  --header-dark-bg: #0a4b87;
+  --header-text: white;
+  --markdown-pre-bg: #2d2d2d;
+  --primary: #3b9eff;
+  --sidebar-active: #2a2a2a;
+  --sidebar-bg: #1E1E1E;
+  --sidebar-width: 250px;
+  --sidebar-width-label: #999;
+  --sidebar-width-value: #999;
+  --tab-active-bg: #333;
   --tab-active-border: #3b9eff;
+  --tab-active-dark-bg: #333;
+  --tab-active-dark-border: #3B9EFF;
+  --tab-active-dark-text: white;
+  --tab-active-text: #3b9eff;
+  --tab-active-text-color: white;
+  --tab-container-dark-bg: #1A1A1A;
   --tab-hover-text: #e5e7eb;
+  --text: #e0e0e0;
+  --theme-switch-bg: white;
+  --theme-switch-dark-icon: white;
+  --theme-switch-dark-thumb-bg: #6E6E6E;
+  --theme-switch-light-icon: black;
+  --theme-switch-thumb-bg: #FFD43B;
 }
 
 html {
@@ -62,7 +100,7 @@ body {
 
 header {
   background-color: var(--primary);
-  color: white;
+  color: var(--header-text);
   padding: 0 1rem;
   display: flex;
   align-items: center;
@@ -71,7 +109,7 @@ header {
 }
 
 .dark header {
-  background-color: #0a4b87; /* Darker blue for dark mode */
+  background-color: var(--header-dark-bg); /* Darker blue for dark mode */
 }
 
 .header-controls {
@@ -108,8 +146,8 @@ header {
 
 /* Make the sun icon black in light mode */
 .header-controls .theme-toggle .theme-switch:not(.dark) .theme-icon {
-  color: black;
-  stroke: black;
+  color: var(--theme-switch-light-icon);
+  stroke: var(--theme-switch-light-icon);
 }
 
 /* New Tab Styling */
@@ -121,8 +159,8 @@ header {
 }
 
 .dark .tab-container {
-  background-color: #1A1A1A;
-  border-bottom-color: #444;
+  background-color: var(--tab-container-dark-bg);
+  border-bottom-color: var(--border);
 }
 
 .tab-button {
@@ -141,16 +179,16 @@ header {
 .tab-active {
   opacity: 1;
   border-bottom: 1px solid var(--tab-active-border);
-  background-color: #F8F9FA;
+  background-color: var(--tab-active-bg);
   border-radius: 4px 4px 0 0;
-  color: #000;
+  color: var(--tab-active-text-color);
 }
 
 .dark .tab-active {
-  border-bottom: 1px solid #3B9EFF;
-  background-color: #333;
+  border-bottom: 1px solid var(--tab-active-dark-border);
+  background-color: var(--tab-active-dark-bg);
   border-radius: 4px 4px 0 0;
-  color: white;
+  color: var(--tab-active-dark-text);
 }
 
 /* Reset all button styles */
@@ -163,10 +201,10 @@ button.flex.mb-4.border-b {
 }
 
 .dark .flex.mb-4.border-b {
-  border-color: #444;
-  background-color: #1A1A1A;
+  border-color: var(--border);
+  background-color: var(--background);
   position: relative;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--border);
 }
 
 .flex.mb-4.border-b button {
@@ -196,11 +234,11 @@ button.flex.mb-4.border-b {
 }
 
 .dark .flex.mb-4.border-b button.text-gray-500 {
-  color: #9ca3af;
+  color: var(--gray-text-500);
 }
 
 .dark .flex.mb-4.border-b button.text-gray-700 {
-  color: #e0e0e0;
+  color: var(--gray-text-700);
 }
 
 .flex.mb-4.border-b button.text-blue-500 {
@@ -224,13 +262,13 @@ button.flex.mb-4.border-b {
 
 .dark .flex.mb-4.border-b button.border-blue-500 {
   border-color: white;
-  background-color: #2d2d2d;
+  background-color: var(--code-bg);
   border-radius: 4px 4px 0 0;
   box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.1);
 }
 
 .dark .active-tab {
-  background-color: #333 !important;
+  background-color: var(--tab-active-dark-bg) !important;
   border-bottom: 4px solid white !important;
   border-radius: 4px 4px 0 0;
   position: relative;
@@ -259,7 +297,7 @@ button.sidebar-toggle-button {
   justify-content: center;
   width: 40px;
   height: 40px;
-  color: white;
+  color: var(--header-text);
   margin-right: 4px;
   padding: 0;
   transition: color 0.3s ease;
@@ -300,7 +338,7 @@ button.menu-trigger {
   justify-content: center;
   width: 40px;
   height: 40px;
-  color: white;
+  color: var(--header-text);
   margin-right: 4px;
   padding: 0;
 }
@@ -324,7 +362,7 @@ header h1 {
   font-weight: 500;
   flex-grow: 1;
   text-align: center;
-  color: white;
+  color: var(--header-text);
 }
 
 .content-wrapper {
@@ -346,8 +384,8 @@ header h1 {
 }
 
 .dark .sidebar {
-  background-color: #1E1E1E;
-  color: #e0e0e0;
+  background-color: var(--sidebar-bg);
+  color: var(--text);
 }
 
 /* Resize handle styles */
@@ -384,9 +422,9 @@ header h1 {
 }
 
 .dark .sidebar-title {
-  background-color: #1E1E1E;
-  border-bottom-color: #444;
-  color: #e0e0e0;
+  background-color: var(--sidebar-bg);
+  border-bottom-color: var(--border);
+  color: var(--text);
 }
 
 .sidebar-nav {
@@ -404,7 +442,7 @@ header h1 {
 }
 
 .dark .sidebar-nav-item:hover {
-  background-color: #2a2a2a;
+  background-color: var(--sidebar-active);
 }
 
 .sidebar-nav-item.active {
@@ -413,7 +451,7 @@ header h1 {
 }
 
 .dark .sidebar-nav-item.active {
-  background-color: #2a2a2a;
+  background-color: var(--sidebar-active);
 }
 
 .sidebar-nav-item.active::before {
@@ -428,7 +466,7 @@ header h1 {
 }
 
 .dark .sidebar-nav-item.active::before {
-  background-color: #3b9eff;
+  background-color: var(--primary);
 }
 
 .sidebar-nav-link {
@@ -440,7 +478,7 @@ header h1 {
 }
 
 .dark .sidebar-nav-link {
-  color: #e0e0e0;
+  color: var(--text);
 }
 
 main {
@@ -453,8 +491,8 @@ main {
 }
 
 .dark main {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 .component-example {
@@ -513,7 +551,7 @@ main {
 }
 
 .code-example pre {
-  background-color: #f1f5f9;
+  background-color: var(--code-bg);
   border-radius: 6px;
   padding: 16px;
   overflow-x: auto;
@@ -532,11 +570,11 @@ main {
   font-weight: 700;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .dark-mode .markdown-container h1 {
-  border-bottom-color: #444;
+  border-bottom-color: var(--border-color);
 }
 
 .markdown-container h2 {
@@ -545,11 +583,11 @@ main {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.25rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .dark-mode .markdown-container h2 {
-  border-bottom-color: #444;
+  border-bottom-color: var(--border-color);
 }
 
 .markdown-container h3 {
@@ -581,27 +619,19 @@ main {
 
 .markdown-container code {
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  background-color: #f5f5f5;
+  background-color: var(--code-bg);
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.9rem;
-}
-
-.markdown-container code {
-  background-color: var(--code-bg);
   transition: background-color 0.3s ease;
 }
 
 .markdown-container pre {
-  background-color: #f5f5f5;
+  background-color: var(--code-bg);
   padding: 1rem;
   border-radius: 0.25rem;
   overflow-x: auto;
   margin-bottom: 1rem;
-}
-
-.markdown-container pre {
-  background-color: var(--code-bg);
   transition: background-color 0.3s ease;
 }
 
@@ -656,7 +686,7 @@ main {
 }
 
 .dark .component-header {
-  background-color: #0a4b87; /* Darker blue for dark mode */
+  background-color: var(--header-dark-bg); /* Darker blue for dark mode */
 }
 
 .component-header h2 {
@@ -676,7 +706,7 @@ main {
   position: relative;
   width: 56px;
   height: 28px;
-  background-color: white;
+  background-color: var(--theme-switch-bg);
   border-radius: 14px;
   border: none;
   cursor: pointer;
@@ -688,7 +718,7 @@ main {
 }
 
 .theme-switch.dark {
-  background-color: white;
+  background-color: var(--theme-switch-bg);
 }
 
 .theme-switch-thumb {
@@ -696,7 +726,7 @@ main {
   left: 0;
   width: 24px;
   height: 24px;
-  background-color: #FFD43B;
+  background-color: var(--theme-switch-thumb-bg);
   border-radius: 50%;
   transition: transform 0.3s, background-color 0.3s;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -707,7 +737,7 @@ main {
 
 .theme-switch.dark .theme-switch-thumb {
   transform: translateX(28px);
-  background-color: #6E6E6E;
+  background-color: var(--theme-switch-dark-thumb-bg);
 }
 
 .theme-switch .theme-icon {
@@ -716,7 +746,13 @@ main {
 }
 
 .theme-switch.dark .theme-icon {
-  color: white;
+  color: var(--theme-switch-dark-icon);
+}
+
+/* Make the sun icon black in light mode */
+.header-controls .theme-toggle .theme-switch:not(.dark) .theme-icon {
+  color: var(--theme-switch-light-icon);
+  stroke: var(--theme-switch-light-icon);
 }
 
 .example-container {
@@ -768,7 +804,7 @@ footer {
   justify-content: center;
   width: 40px;
   height: 40px;
-  color: white;
+  color: var(--header-text);
   margin-left: 4px;
   padding: 0;
 }
@@ -790,12 +826,12 @@ code.font-mono.bg-gray-100 {
 }
 
 .dark code.font-mono.bg-gray-100 {
-  background-color: #2d2d2d !important;
-  color: #e0e0e0 !important;
+  background-color: var(--code-bg) !important;
+  color: var(--text) !important;
 }
 
 .dark code.font-mono.bg-gray-100.dark\:bg-gray-800 {
-  background-color: #1e1e1e !important;
+  background-color: var(--code-bg) !important;
 }
 
 @media (min-width: 800px) {
@@ -815,7 +851,7 @@ code.font-mono.bg-gray-100 {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.8rem;
-  color: #666;
+  color: var(--sidebar-width-label);
 }
 
 .sidebar-width-slider {
@@ -825,6 +861,6 @@ code.font-mono.bg-gray-100 {
 
 .sidebar-width-value {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--sidebar-width-value);
   text-align: right;
 }
