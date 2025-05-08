@@ -4,10 +4,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import packageJson from '../package.json';
 
 // Import example components
-import MenuExample from './menu-example';
-import ButtonExample from './button-example';
-import InputExample from './input-example';
-import DialogExample from './dialog-example';
+import MenuExample from './example-menu';
+import ButtonExample from './example-button';
+import InputExample from './example-input';
+import DialogExample from './example-dialog';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
