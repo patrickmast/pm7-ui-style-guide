@@ -1,29 +1,75 @@
-// Enhancement: Restored menu example to demonstrate PM7Menu component functionality, aligned the main flex container to the top (items-start)
+// Enhancement: Moved the tab bar (Preview, Usage, Documentation) out of the .component-example div and placed it above. The tab bar is now rendered before the main example card container.
 // Bug Fix: Fixed styling to match the rest of the examples app
+// Enhancement: Changed theme toggle from <button> to <div role="button"> for MenuExample header, with accessibility handlers.
+// Bug Fix: Fixed JSX structure and TypeScript typing issues
 import React, { useState, useEffect } from 'react';
 import { LanguagesIcon, MoonIcon, SunIcon, HomeIcon, SettingsIcon, UserIcon } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 // Import the menu component using relative imports for local development
 import { PM7Menu } from '../src/components/menu';
+import type { PM7MenuItem } from '../src/components/menu/pm7-menu';
+
+type TabType = 'Preview' | 'Usage' | 'Documentation';
+type ThemeType = 'light' | 'dark';
+type LanguageType = 'en' | 'es' | 'fr' | 'de' | 'nl' | 'nl-be' | 'zh';
+
+// Extend the imported PM7MenuItem type with our language-specific properties
+interface MenuItemType extends PM7MenuItem {
+  // Add any additional properties needed for the example
+  [key: string]: any; // For label-xx properties
+}
+
+interface Descriptions {
+  [key: string]: {
+    basicMenu: string;
+    title: string;
+    features: string;
+    multiLanguage: string;
+    themeSwitching: string;
+    submenu: string;
+    icons: string;
+    separators: string;
+    checkboxes: string;
+    menuAlignment: string;
+    startAlignment: string;
+    centerAlignment: string;
+    endAlignment: string;
+    customIconColor: string;
+    iconColorDesc: string;
+    prop: string;
+    exampleUses: string;
+    primaryBlue: string;
+    yellow: string;
+    color: string;
+    usage: string;
+  };
+}
 
 const MenuExample = () => {
+  // Tab state for tab row
+  const [activeTab, setActiveTab] = useState<TabType>('Preview');
+  
+  // State for README markdown content
+  const [readmeContent, setReadmeContent] = useState<string>('');
+  
   // State for selected language
-  const [selectedLanguage, setSelectedLanguage] = useState(() => {
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageType>(() => {
     // Check if user has a language preference in localStorage
     if (typeof window !== 'undefined') {
       const savedLanguage = localStorage.getItem('pm7-language');
-      if (savedLanguage) {
-        return savedLanguage;
+      if (savedLanguage && ['en', 'es', 'fr', 'de', 'nl', 'nl-be', 'zh'].includes(savedLanguage)) {
+        return savedLanguage as LanguageType;
       }
     }
     return 'en'; // Default to English
   });
 
-  // State for theme (light/dark)
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+  // Use global theme from localStorage (controlled by App component)
+  const [theme, setTheme] = useState<ThemeType>(() => {
     const savedTheme = localStorage.getItem('pm7-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') {
-      return savedTheme as 'light' | 'dark';
+      return savedTheme as ThemeType;
     }
     // Check system preference
     if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -33,13 +79,13 @@ const MenuExample = () => {
   });
 
   // Function to get label based on selected language with fallback
-  const getLabel = (item: any) => {
+  const getLabel = (item: MenuItemType): string => {
     const langKey = `label-${selectedLanguage}`;
     return item[langKey] || item.label || '';
   };
 
   // Translations for all text in the menu example
-  const descriptions = {
+  const descriptions: Descriptions = {
     'en': {
       // Basic Menu section
       basicMenu: 'Basic Menu',
@@ -90,10 +136,10 @@ const MenuExample = () => {
       
       // Custom Icon Color section
       customIconColor: 'Color de Icono Personalizado',
-      iconColorDesc: 'El color del icono del menú se puede personalizar usando el',
-      prop: 'prop.',
+      iconColorDesc: 'El color del icono del menú se puede personalizar usando la',
+      prop: 'propiedad.',
       exampleUses: 'Este ejemplo usa',
-      primaryBlue: 'el color azul primario de PM7',
+      primaryBlue: 'el azul primario de PM7',
       yellow: 'amarillo',
       color: 'color:',
       
@@ -114,16 +160,16 @@ const MenuExample = () => {
       
       // Menu Alignment section
       menuAlignment: 'Alignement du Menu',
-      startAlignment: 'Alignement Début',
-      centerAlignment: 'Alignement Centre',
-      endAlignment: 'Alignement Fin',
+      startAlignment: 'Alignement au Début',
+      centerAlignment: 'Alignement au Centre',
+      endAlignment: 'Alignement à la Fin',
       
       // Custom Icon Color section
       customIconColor: 'Couleur d\'Icône Personnalisée',
-      iconColorDesc: 'La couleur de l\'icône du menu peut être personnalisée en utilisant le',
-      prop: 'prop.',
+      iconColorDesc: 'La couleur de l\'icône du menu peut être personnalisée à l\'aide de la',
+      prop: 'propriété.',
       exampleUses: 'Cet exemple utilise',
-      primaryBlue: 'la couleur bleue primaire de PM7',
+      primaryBlue: 'le bleu primaire PM7',
       yellow: 'jaune',
       color: 'couleur:',
       
@@ -132,8 +178,8 @@ const MenuExample = () => {
     },
     'de': {
       // Basic Menu section
-      basicMenu: 'Basis Menü',
-      title: 'Ein Standardmenü mit Hamburger-Symbol und benutzerdefinierten Menüelementen.',
+      basicMenu: 'Basis-Menü',
+      title: 'Ein Standard-Menü mit Hamburger-Symbol und benutzerdefinierten Menüelementen.',
       features: 'Funktionen:',
       multiLanguage: 'Mehrsprachige Unterstützung',
       themeSwitching: 'Themenwechsel',
@@ -144,17 +190,17 @@ const MenuExample = () => {
       
       // Menu Alignment section
       menuAlignment: 'Menü-Ausrichtung',
-      startAlignment: 'Ausrichtung Anfang',
-      centerAlignment: 'Ausrichtung Mitte',
-      endAlignment: 'Ausrichtung Ende',
+      startAlignment: 'Ausrichtung am Anfang',
+      centerAlignment: 'Zentrale Ausrichtung',
+      endAlignment: 'Ausrichtung am Ende',
       
       // Custom Icon Color section
       customIconColor: 'Benutzerdefinierte Symbolfarbe',
-      iconColorDesc: 'Die Menüsymbolfarbe kann mit dem',
-      prop: 'Prop angepasst werden.',
+      iconColorDesc: 'Die Farbe des Menüsymbols kann mit der',
+      prop: 'Eigenschaft angepasst werden.',
       exampleUses: 'Dieses Beispiel verwendet',
-      primaryBlue: 'die PM7 Primärblau',
-      yellow: 'gelbe',
+      primaryBlue: 'das PM7-Primärblau',
+      yellow: 'gelb',
       color: 'Farbe:',
       
       // Usage section
@@ -234,47 +280,93 @@ const MenuExample = () => {
       
       // Menu Alignment section
       menuAlignment: '菜单对齐',
-      startAlignment: '左对齐',
+      startAlignment: '开始对齐',
       centerAlignment: '居中对齐',
-      endAlignment: '右对齐',
+      endAlignment: '结束对齐',
       
       // Custom Icon Color section
       customIconColor: '自定义图标颜色',
-      iconColorDesc: '可以使用',
-      prop: '属性自定义菜单图标颜色。',
-      exampleUses: '这个例子使用',
+      iconColorDesc: '菜单图标颜色可以使用',
+      prop: '属性进行自定义。',
+      exampleUses: '此示例使用',
       primaryBlue: 'PM7主要蓝色',
       yellow: '黄色',
       color: '颜色：',
       
       // Usage section
-      usage: '用法'
+      usage: '使用方法'
     }
   };
 
-  // Get description text based on selected language with fallback to English
-  const getDescription = (key: string) => {
-    return descriptions[selectedLanguage]?.[key] || descriptions['en'][key];
+  // Function to get description based on selected language with fallback
+  const getDescription = (key: keyof typeof descriptions['en']) => {
+    return descriptions[selectedLanguage]?.[key] || descriptions['en'][key] || key;
   };
 
   // Function to select language
-  const selectLanguage = (language: string) => {
-    setSelectedLanguage(language);
-    localStorage.setItem('pm7-language', language);
+  const selectLanguage = (lang: LanguageType) => {
+    setSelectedLanguage(lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('pm7-language', lang);
+    }
   };
 
-  // Function to toggle theme
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('pm7-theme', newTheme);
+  // Theme is now controlled by the App component's toggle
+  // No local toggleTheme function needed
 
-    // Apply theme to document for consistent styling
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  };
+  // Listen for theme changes in localStorage (from App component)
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'pm7-theme' && e.newValue) {
+        setTheme(e.newValue as ThemeType);
+      }
+    };
+    
+    // Also check for direct localStorage changes
+    const checkTheme = () => {
+      const currentTheme = localStorage.getItem('pm7-theme') as ThemeType;
+      if (currentTheme && currentTheme !== theme) {
+        setTheme(currentTheme);
+      }
+    };
+    
+    // Set up interval to check theme
+    const intervalId = setInterval(checkTheme, 500);
+    
+    // Add storage event listener
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(intervalId);
+    };
+  }, [theme]);
+  
+  // Load README content when Documentation tab is selected
+  useEffect(() => {
+    if (activeTab === 'Documentation') {
+      // Load README from local file in examples directory
+      fetch('./menu-readme.md')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch README.md');
+          }
+          return response.text();
+        })
+        .then(text => {
+          setReadmeContent(text);
+        })
+        .catch(error => {
+          console.error('Error fetching README.md:', error);
+          setReadmeContent(`# Error Loading Documentation
 
-  // Define menu items with translations for all supported languages
-  const menuItems = [
+Unable to load the component documentation. Please try again later.`);
+        });
+    }
+  }, [activeTab]);
+
+  // Menu items for the example
+  const menuItems: MenuItemType[] = [
     {
       id: 'home',
       label: 'Home',
@@ -316,6 +408,7 @@ const MenuExample = () => {
     },
     {
       id: 'separator1',
+      label: '',  // Adding empty label to satisfy TypeScript type requirements
       type: 'separator'
     },
     {
@@ -395,177 +488,233 @@ const MenuExample = () => {
       type: 'switch',
       icon: theme === 'dark' ? <MoonIcon size={16} /> : <SunIcon size={16} />,
       checked: theme === 'dark',
-      onChange: toggleTheme
+      onChange: () => {
+        // Theme is now controlled by the App component
+        // This is just for display in the menu example
+        console.log('Theme toggle clicked in menu example')
+      }
     }
   ];
 
-  // Apply theme to document when component mounts
-  useEffect(() => {
-    // Apply theme to document
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  }, []);
-
-  // Update theme labels when theme changes
-  useEffect(() => {
-    menuItems.forEach(item => {
-      if (item.id === 'theme') {
-        item.label = `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`;
-        item.icon = theme === 'dark' ? <MoonIcon size={16} /> : <SunIcon size={16} />;
-        item['label-en'] = `Theme: ${theme === 'dark' ? 'Dark' : 'Light'}`;
-        item['label-es'] = `Tema: ${theme === 'dark' ? 'Oscuro' : 'Claro'}`;
-        item['label-fr'] = `Thème: ${theme === 'dark' ? 'Sombre' : 'Clair'}`;
-        item['label-de'] = `Thema: ${theme === 'dark' ? 'Dunkel' : 'Hell'}`;
-        item['label-nl'] = `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`;
-        item['label-nl-be'] = `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`;
-        item['label-zh'] = `主题: ${theme === 'dark' ? '深色' : '浅色'}`;
-      }
-    });
-  }, [theme]);
-
+  // Return the component UI
   return (
-    <div className="component-example">
-      <div className="component-header">
-        <h2>Menu Component</h2>
-        <div className="theme-toggle">
-          <button
-            className={`theme-switch ${theme === 'dark' ? 'dark' : ''}`}
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-          >
-            <div className="theme-switch-thumb">
-              {theme === 'light' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
-            </div>
-          </button>
-        </div>
+    <>
+      {/* Tab Row */}
+      <div className="tab-container mb-4">
+        <button
+          className={`tab-button ${activeTab === 'Preview' ? 'tab-active' : ''}`}
+          onClick={() => setActiveTab('Preview')}
+        >
+          Preview
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'Usage' ? 'tab-active' : ''}`}
+          onClick={() => setActiveTab('Usage')}
+        >
+          Usage
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'Documentation' ? 'tab-active' : ''}`}
+          onClick={() => setActiveTab('Documentation')}
+        >
+          Documentation
+        </button>
       </div>
 
-      <div className="example-container">
-        <div className="example-preview" style={{ background: theme === 'dark' ? '#333333' : '#f5f5f5', color: theme === 'dark' ? '#ffffff' : 'inherit', padding: '20px', borderRadius: '8px', display: 'flex', justifyContent: 'flex-start' }}>
-          <div className="">
-
-              <h3 className="text-xl font-semibold mb-3">{getDescription('basicMenu')}</h3>
-              <div className="flex items-start gap-4">
-                <PM7Menu
-                  menuItems={menuItems.map(item => ({
-                    ...item,
-                    label: getLabel(item),
-                    submenuItems: item.submenuItems?.map(subItem => ({
-                      ...subItem,
-                      label: getLabel(subItem)
-                    }))
-                  }))}
-                  initialTheme={theme}
-                  menuAlignment="start"
-                />
-                <div className="ml-4">
-                  <p>{getDescription('title')}</p>
-                  <p className="mt-2">{getDescription('features')}</p>
-                  <ul className="list-disc ml-5 mt-1">
-                    <li>{getDescription('multiLanguage')}</li>
-                    <li>{getDescription('themeSwitching')}</li>
-                    <li>{getDescription('submenu')}</li>
-                    <li>{getDescription('icons')}</li>
-                    <li>{getDescription('separators')}</li>
-                    <li>{getDescription('checkboxes')}</li>
-                  </ul>
-                </div>
-
-            </div>
-
-            <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
-
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-3">{getDescription('menuAlignment')}</h3>
-              <div className="flex flex-wrap gap-8">
-                <div className="flex flex-col items-start">
-                  <p className="mb-2">{getDescription('startAlignment')}</p>
+      {/* Card is always visible, only content changes */}
+      <div className={`component-example ${theme === 'dark' ? 'dark-mode' : 'light-mode'}`}>
+        <div className="p-6">
+          {/* Preview tab content */}
+          {activeTab === 'Preview' && (
+            <>
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold mb-3">{getDescription('basicMenu')}</h3>
+                <div className="flex items-start gap-4">
                   <PM7Menu
-                    menuItems={menuItems.slice(0, 3)}
+                    menuItems={menuItems.map(item => ({
+                      ...item,
+                      label: getLabel(item),
+                      submenuItems: item.submenuItems?.map(subItem => ({
+                        ...subItem,
+                        label: getLabel(subItem)
+                      }))
+                    }))}
                     initialTheme={theme}
-                    menuAlignment="start"
                   />
-                </div>
-                <div className="flex flex-col items-start">
-                  <p className="mb-2">{getDescription('centerAlignment')}</p>
-                  <PM7Menu
-                    menuItems={menuItems.slice(0, 3)}
-                    initialTheme={theme}
-                    menuAlignment="center"
-                  />
-                </div>
-                <div className="flex flex-col items-start">
-                  <p className="mb-2">{getDescription('endAlignment')}</p>
-                  <PM7Menu
-                    menuItems={menuItems.slice(0, 3)}
-                    initialTheme={theme}
-                    menuAlignment="end"
-                  />
+                  <div className="ml-4">
+                    <p>{getDescription('title')}</p>
+                    <p className="mt-2">{getDescription('features')}</p>
+                    <ul className="list-disc ml-5 mt-1">
+                      <li>{getDescription('multiLanguage')}</li>
+                      <li>{getDescription('themeSwitching')}</li>
+                      <li>{getDescription('submenu')}</li>
+                      <li>{getDescription('icons')}</li>
+                      <li>{getDescription('separators')}</li>
+                      <li>{getDescription('checkboxes')}</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+              <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
 
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-3">{getDescription('customIconColor')}</h3>
-              <div className="flex items-start gap-4">
-                <PM7Menu
-                  menuItems={menuItems.slice(0, 3)}
-                  initialTheme={theme}
-                  menuIconColor={theme === 'dark' ? '#FFDD00' : '#1C86EF'}
-                />
-                <div className="ml-4">
-                  <p>{getDescription('iconColorDesc')} <code>menuIconColor</code> {getDescription('prop')}</p>
-                  <p className="mt-2">{getDescription('exampleUses')} {theme === 'dark' ? getDescription('yellow') : getDescription('primaryBlue')} {getDescription('color')} <code>{theme === 'dark' ? '#FFDD00' : '#1C86EF'}</code></p>
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold mb-3">{getDescription('menuAlignment')}</h3>
+                <div className="flex flex-wrap gap-8">
+                  <div className="flex flex-col items-start">
+                    <p className="mb-2">{getDescription('startAlignment')}</p>
+                    <PM7Menu
+                      menuItems={menuItems.slice(0, 3).map(item => ({
+                        ...item,
+                        label: getLabel(item),
+                        submenuItems: item.submenuItems?.map(subItem => ({
+                          ...subItem,
+                          label: getLabel(subItem)
+                        }))
+                      }))}
+                      initialTheme={theme}
+                      menuAlignment="start"
+                    />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <p className="mb-2">{getDescription('centerAlignment')}</p>
+                    <PM7Menu
+                      menuItems={menuItems.slice(0, 3).map(item => ({
+                        ...item,
+                        label: getLabel(item),
+                        submenuItems: item.submenuItems?.map(subItem => ({
+                          ...subItem,
+                          label: getLabel(subItem)
+                        }))
+                      }))}
+                      initialTheme={theme}
+                      menuAlignment="center"
+                    />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <p className="mb-2">{getDescription('endAlignment')}</p>
+                    <PM7Menu
+                      menuItems={menuItems.slice(0, 3).map(item => ({
+                        ...item,
+                        label: getLabel(item),
+                        submenuItems: item.submenuItems?.map(subItem => ({
+                          ...subItem,
+                          label: getLabel(subItem)
+                        }))
+                      }))}
+                      initialTheme={theme}
+                      menuAlignment="end"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="example-code">
-          <h3>{getDescription('usage')}</h3>
-          <pre>
-            <code>{`// For local development, use relative imports
-import { PM7Menu as Menu } from '../src/components/menu';
-// For production, use package imports
-// import { Menu } from "pm7-ui-style-guide";
+              <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
 
-// Define menu items
-const menuItems = [
-  {
-    id: 'home',
-    label: 'Home',
-    icon: <HomeIcon size={16} />,
-    onClick: () => console.log('Home clicked')
-  },
-  {
-    id: 'settings',
-    label: 'Settings',
-    icon: <SettingsIcon size={16} />,
-    onClick: () => console.log('Settings clicked')
-  },
-  {
-    id: 'theme',
-    label: 'Theme',
-    type: 'switch',
-    icon: <SunIcon size={16} />,
-    checked: isDarkMode,
-    onChange: (checked) => setIsDarkMode(checked)
-  }
-];
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold mb-3">{getDescription('customIconColor')}</h3>
+                <div className="flex items-start gap-4">
+                  <PM7Menu
+                    menuItems={menuItems.slice(0, 3).map(item => ({
+                      ...item,
+                      label: getLabel(item),
+                      submenuItems: item.submenuItems?.map(subItem => ({
+                        ...subItem,
+                        label: getLabel(subItem)
+                      }))
+                    }))}
+                    initialTheme={theme}
+                    menuIconColor={theme === 'dark' ? '#FFDD00' : '#1C86EF'}
+                  />
+                  <div className="ml-4">
+                    <p>{getDescription('iconColorDesc')} <code>menuIconColor</code> {getDescription('prop')}</p>
+                    <p className="mt-2">{getDescription('exampleUses')} {theme === 'dark' ? getDescription('yellow') : getDescription('primaryBlue')} {getDescription('color')} <code>{theme === 'dark' ? '#FFDD00' : '#1C86EF'}</code></p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
 
-// Render the menu component
-<Menu
+          {/* Usage tab content */}
+          {activeTab === 'Usage' && (
+            <div className="code-example">
+              <h3 className="text-xl font-semibold mb-3">Menu Component Implementation</h3>
+              <p className="mb-4">Below you'll find example code for implementing the PM7Menu component in your application. You can choose from different alignment options such as start, center, and end.</p>
+              <p className="mb-4">The component accepts the following important props:</p>
+              <ul className="list-disc ml-5 mb-5">
+                <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuItems</code> - An array of menu items with their properties</li>
+                <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">initialTheme</code> - The initial theme (light or dark)</li>
+                <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuAlignment</code> - The alignment of the menu (start, center, end)</li>
+                <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuIconColor</code> - Optional color for the menu icon</li>
+              </ul>
+              <pre>
+                <code>{`// For local development, use relative imports
+import { PM7Menu } from '../src/components/menu';
+
+<PM7Menu
   menuItems={menuItems}
   initialTheme="light"
   menuAlignment="start"
 />
+
+<PM7Menu
+  menuItems={menuItems}
+  initialTheme="light"
+  menuAlignment="center"
+/>
+
+<PM7Menu
+  menuItems={menuItems}
+  initialTheme="light"
+  menuAlignment="end"
+/>
 `}</code>
-          </pre>
+              </pre>
+            </div>
+          )}
+
+          {/* Documentation tab content */}
+          {activeTab === 'Documentation' && (
+            <div className="p-6">
+              <div className="markdown-container dark:text-white">
+                <ReactMarkdown
+                  components={{
+                    code: ({node, inline, className, children, ...props}: any) => {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return !inline && match ? (
+                        <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mb-3 overflow-x-auto">
+                          <code className={`font-mono ${className}`} {...props}>
+                            {String(children).replace(/\n$/, '')}
+                          </code>
+                        </pre>
+                      ) : (
+                        <code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded" {...props}>
+                          {children}
+                        </code>
+                      );
+                    },
+                    // Add custom styling for other elements as needed
+                    h1: ({children}: any) => <h1 className="text-2xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">{children}</h1>,
+                    h2: ({children}: any) => <h2 className="text-xl font-semibold mt-6 mb-3 pb-1 border-b border-gray-200 dark:border-gray-700">{children}</h2>,
+                    h3: ({children}: any) => <h3 className="text-lg font-medium mt-5 mb-2">{children}</h3>,
+                    p: ({children}: any) => <p className="mb-4">{children}</p>,
+                    ul: ({children}: any) => <ul className="list-disc pl-5 mb-4">{children}</ul>,
+                    ol: ({children}: any) => <ol className="list-decimal pl-5 mb-4">{children}</ol>,
+                    li: ({children}: any) => <li className="mb-1">{children}</li>,
+                    table: ({children}: any) => <div className="overflow-x-auto mb-6"><table className="w-full border-collapse">{children}</table></div>,
+                    thead: ({children}: any) => <thead className="bg-gray-100 dark:bg-gray-800">{children}</thead>,
+                    th: ({children}: any) => <th className="border border-gray-300 dark:border-gray-600 p-2 text-left">{children}</th>,
+                    td: ({children}: any) => <td className="border border-gray-300 dark:border-gray-600 p-2">{children}</td>,
+                  }}
+                >
+                  {readmeContent}
+                </ReactMarkdown>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

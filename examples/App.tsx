@@ -6,6 +6,8 @@ import packageJson from '../package.json';
 // Import example components
 import MenuExample from './menu-example';
 import ButtonExample from './button-example';
+import InputExample from './input-example';
+import DialogExample from './dialog-example';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
@@ -17,6 +19,7 @@ import {
   PM7DialogFooter,
 } from '../src/components/dialog';
 import '../src/components/dialog/pm7-dialog.css';
+import { MoonIcon, SunIcon } from 'lucide-react';
 
 // Import CSS
 import './examples.css';
@@ -70,6 +73,19 @@ const App = () => {
     }
     return savedVisibility ? savedVisibility === 'true' : true;
   });
+  // Initialize theme state from localStorage or system preference
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('pm7-theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      return savedTheme;
+    }
+    // Check system preference
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light'; // Default to light theme
+  });
+
   const [showVersionDialog, setShowVersionDialog] = useState(false);
   const sidebarRef = useRef(null);
   const resizingRef = useRef(false);
@@ -85,6 +101,23 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('pm7-ui-style-guide-active-component', activeComponent);
   }, [activeComponent]);
+
+  // Apply theme to document when component mounts and when theme changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Apply dark mode class to html element
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      // Apply dark mode class to body element for component examples
+      document.body.classList.toggle('dark', theme === 'dark');
+      // Save theme preference to localStorage
+      localStorage.setItem('pm7-theme', theme);
+    }
+  }, [theme]);
+  
+  // Function to toggle theme
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
 
   // Add responsive behavior to hide sidebar when window width is less than 800px
   useEffect(() => {
@@ -151,6 +184,10 @@ const App = () => {
         return <MenuExample />;
       case 'button':
         return <ButtonExample />;
+      case 'input':
+        return <InputExample />;
+      case 'dialog':
+        return <DialogExample />;
       default:
         return <div>Select a component from the sidebar</div>;
     }
@@ -181,6 +218,20 @@ const App = () => {
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'button',
           onClick: () => setActiveComponent('button')
+        },
+        {
+          id: 'input-component',
+          label: 'Input',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'input',
+          onClick: () => setActiveComponent('input')
+        },
+        {
+          id: 'dialog-component',
+          label: 'Dialog',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'dialog',
+          onClick: () => setActiveComponent('dialog')
         }
       ]
     },
@@ -226,12 +277,30 @@ const App = () => {
       <header>
         <div className="header-controls">
           <div className="menu-wrapper">
-            <Menu menuItems={menuItems} menuAlignment="start" menuIconColor="white" />
+            <Menu menuItems={menuItems} menuAlignment="start" menuIconColor="white" initialTheme={theme as 'light' | 'dark'} />
+          </div>
+          <div className="theme-toggle" style={{ marginRight: '-5px', position: 'relative', left: '-5px' }}>
+            <div
+              role="button"
+              tabIndex={0}
+              className={`theme-switch ${theme === 'dark' ? 'dark' : ''}`}
+              onClick={toggleTheme}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  toggleTheme();
+                }
+              }}
+              data-component-name="App"
+            >
+              <div className="theme-switch-thumb">
+                {theme === 'dark' ? <MoonIcon className="theme-icon" size={16} /> : <SunIcon className="theme-icon" size={16} />}
+              </div>
+            </div>
           </div>
         </div>
         <h1>PM7 UI Style Guide</h1>
       </header>
-      <div className="content-wrapper">
+      <div className={`content-wrapper ${theme === 'dark' ? 'dark' : ''}`}>
         {sidebarVisible && (
           <aside
             className="sidebar"
@@ -264,6 +333,30 @@ const App = () => {
                   Button
                 </a>
               </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'input' ? 'active' : ''}`}>
+                <a
+                  href="#input"
+                  className="sidebar-nav-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveComponent('input');
+                  }}
+                >
+                  Input
+                </a>
+              </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'dialog' ? 'active' : ''}`}>
+                <a
+                  href="#dialog"
+                  className="sidebar-nav-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveComponent('dialog');
+                  }}
+                >
+                  Dialog
+                </a>
+              </li>
             </ul>
           </aside>
         )}
@@ -274,7 +367,7 @@ const App = () => {
             style={{ left: `${sidebarWidth - 3}px` }}
           ></div>
         )}
-        <main style={{ marginLeft: sidebarVisible ? undefined : '0' }}>
+        <main data-theme={theme} className={theme === 'dark' ? 'dark' : ''} style={{ marginLeft: sidebarVisible ? undefined : '0' }}>
           {renderComponent()}
         </main>
       </div>

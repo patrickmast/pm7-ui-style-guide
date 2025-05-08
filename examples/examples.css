@@ -9,7 +9,31 @@
   --sidebar-width: 250px;
   --sidebar-bg: #f8f9fa;
   --sidebar-active: #e9ecef;
+  --footer-bg: #333;
+  --footer-text: white;
+  --code-bg: #f5f5f5;
+  --border-color: #e0e0e0;
+  --tab-active-text: #1C86EF;
+  --tab-active-border: #1C86EF;
+  --tab-hover-text: #374151;
   font-size: 16px; /* Base font size */
+}
+
+/* Dark mode variables */
+.dark {
+  --background: #121212;
+  --text: #e0e0e0;
+  --card-bg: #1e1e1e;
+  --sidebar-bg: #1E1E1E;
+  --sidebar-active: #2a2a2a;
+  --border: #444;
+  --footer-bg: #1a1a1a;
+  --footer-text: #e0e0e0;
+  --code-bg: #2d2d2d;
+  --border-color: #444;
+  --tab-active-text: #3b9eff;
+  --tab-active-border: #3b9eff;
+  --tab-hover-text: #e5e7eb;
 }
 
 html {
@@ -27,6 +51,7 @@ body {
   background-color: var(--background);
   color: var(--text);
   line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -42,21 +67,193 @@ header {
   display: flex;
   align-items: center;
   height: 60px;
+  transition: background-color 0.3s ease;
+}
+
+.dark header {
+  background-color: #0a4b87; /* Darker blue for dark mode */
 }
 
 .header-controls {
   display: flex;
   align-items: center;
-  height: 100%;
+  margin-right: 20px;
+  gap: 20px;
+}
+
+/* Smaller theme toggle in header */
+.header-controls .theme-toggle {
+  margin-right: -5px; /* Move the entire toggle 5px to the left */
+}
+
+.header-controls .theme-toggle .theme-switch {
+  width: 37px; /* Reduced from 40px to 37px (3 pixels less) */
+  height: 20px;
+}
+
+.header-controls .theme-toggle .theme-switch-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+/* Adjust the position of the thumb in dark mode to stay within the switch */
+.header-controls .theme-toggle .theme-switch.dark .theme-switch-thumb {
+  transform: translateX(17px); /* Adjusted from 20px to 17px to match the new width */
+}
+
+.header-controls .theme-toggle .theme-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Make the sun icon black in light mode */
+.header-controls .theme-toggle .theme-switch:not(.dark) .theme-icon {
+  color: black;
+  stroke: black;
+}
+
+/* New Tab Styling */
+.tab-container {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  background-color: var(--background);
+}
+
+.dark .tab-container {
+  background-color: #1A1A1A;
+  border-bottom-color: #444;
+}
+
+.tab-button {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  opacity: 0.7;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 2px solid transparent;
+}
+
+/* Hover effect removed as requested */
+
+.tab-active {
+  opacity: 1;
+  border-bottom: 1px solid var(--tab-active-border);
+  background-color: #F8F9FA;
+  border-radius: 4px 4px 0 0;
+  color: #000;
+}
+
+.dark .tab-active {
+  border-bottom: 1px solid #3B9EFF;
+  background-color: #333;
+  border-radius: 4px 4px 0 0;
+  color: white;
 }
 
 /* Reset all button styles */
 button.menu-trigger,
 .menu-wrapper [data-radix-dropdown-menu-trigger],
-button.sidebar-toggle-button {
+button.flex.mb-4.border-b {
+  border-color: var(--border);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background-color: var(--background);
+}
+
+.dark .flex.mb-4.border-b {
+  border-color: #444;
+  background-color: #1A1A1A;
+  position: relative;
+  border-bottom: 1px solid #444;
+}
+
+.flex.mb-4.border-b button {
   background: none;
   border: none;
+  font-size: 1rem;
   cursor: pointer;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.flex.mb-4.border-b button.text-blue-500 {
+  color: var(--tab-active-text);
+}
+
+.flex.mb-4.border-b button.border-blue-500 {
+  border-color: var(--tab-active-border);
+}
+
+.flex.mb-4.border-b button:hover {
+  color: var(--tab-hover-text);
+}
+
+.flex.mb-4.border-b button.text-gray-500 {
+  color: #6b7280;
+  transition: color 0.3s ease;
+}
+
+.dark .flex.mb-4.border-b button.text-gray-500 {
+  color: #9ca3af;
+}
+
+.dark .flex.mb-4.border-b button.text-gray-700 {
+  color: #e0e0e0;
+}
+
+.flex.mb-4.border-b button.text-blue-500 {
+  color: var(--tab-active-text);
+  transition: color 0.3s ease;
+}
+
+.dark .flex.mb-4.border-b button.text-blue-500 {
+  color: white;
+  font-weight: 600;
+  position: relative;
+}
+
+.flex.mb-4.border-b button.border-blue-500 {
+  border-color: var(--tab-active-border);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  border-bottom-width: 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.dark .flex.mb-4.border-b button.border-blue-500 {
+  border-color: white;
+  background-color: #2d2d2d;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark .active-tab {
+  background-color: #333 !important;
+  border-bottom: 4px solid white !important;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+
+.dark .active-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: white;
+}
+
+.flex.mb-4.border-b button.text-gray-500:hover,
+.flex.mb-4.border-b button.hover\:text-gray-700:hover {
+  color: var(--tab-hover-text);
+}
+
+button.menu-trigger,
+.menu-wrapper [data-radix-dropdown-menu-trigger],
+button.sidebar-toggle-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,6 +262,14 @@ button.sidebar-toggle-button {
   color: white;
   margin-right: 4px;
   padding: 0;
+  transition: color 0.3s ease;
+}
+
+.dark button.menu-trigger svg,
+.dark .menu-wrapper [data-radix-dropdown-menu-trigger] svg,
+.dark button.sidebar-toggle-button svg {
+  color: white;
+  stroke: white;
 }
 
 /* Hover effect for buttons */
@@ -119,27 +324,36 @@ header h1 {
   font-weight: 500;
   flex-grow: 1;
   text-align: center;
+  color: white;
 }
 
 .content-wrapper {
   display: flex;
   flex: 1;
   position: relative;
+  background-color: var(--background);
+  transition: background-color 0.3s ease;
 }
 
 .sidebar {
   /* width is now controlled by JavaScript */
   background-color: var(--sidebar-bg);
-  padding: 1.5rem 0;
+  padding: 0 0 1.5rem 0; /* Remove top padding to accommodate Components title */
   flex-shrink: 0;
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text);
+}
+
+.dark .sidebar {
+  background-color: #1E1E1E;
+  color: #e0e0e0;
 }
 
 /* Resize handle styles */
 .resize-handle {
   width: 4px;
   background-color: var(--sidebar-bg); /* Match sidebar background */
-  /* Removed border-right */
   cursor: col-resize;
   transition: background-color 0.2s, border-color 0.2s;
   z-index: 10;
@@ -157,14 +371,22 @@ header h1 {
 }
 
 .sidebar-title {
-  padding: 0 1.5rem 1rem;
+  padding: 1rem 1.5rem;
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--text);
-  border-bottom: 1px solid #DEDEDE;
+  background-color: var(--sidebar-bg);
+  border-bottom: 1px solid var(--border);
   margin-bottom: 1rem;
   position: relative;
   z-index: 20; /* Higher than resize handle */
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.dark .sidebar-title {
+  background-color: #1E1E1E;
+  border-bottom-color: #444;
+  color: #e0e0e0;
 }
 
 .sidebar-nav {
@@ -181,9 +403,17 @@ header h1 {
   background-color: var(--sidebar-active);
 }
 
+.dark .sidebar-nav-item:hover {
+  background-color: #2a2a2a;
+}
+
 .sidebar-nav-item.active {
   background-color: var(--sidebar-active);
   position: relative; /* Add position relative */
+}
+
+.dark .sidebar-nav-item.active {
+  background-color: #2a2a2a;
 }
 
 .sidebar-nav-item.active::before {
@@ -194,6 +424,11 @@ header h1 {
   bottom: 0;
   width: 3px;
   background-color: var(--primary);
+  transition: background-color 0.3s ease;
+}
+
+.dark .sidebar-nav-item.active::before {
+  background-color: #3b9eff;
 }
 
 .sidebar-nav-link {
@@ -201,19 +436,212 @@ header h1 {
   text-decoration: none;
   display: block;
   width: 100%;
+  transition: color 0.3s ease;
+}
+
+.dark .sidebar-nav-link {
+  color: #e0e0e0;
 }
 
 main {
   flex: 1;
-  padding: 2rem;
+  padding: 1.5rem;
+  margin-left: 0;
+  transition: margin-left 0.3s, background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+.dark main {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
 .component-example {
-  background-color: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
   overflow: hidden;
+  margin-bottom: 2rem;
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  color: var(--text);
+}
+
+/* Ensure all text within component examples follows the theme */
+.component-example p,
+.component-example h3,
+.component-example li,
+.component-example span {
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.component-example hr {
+  border-color: var(--border);
+  transition: border-color 0.3s ease;
+}
+
+/* Reset all component example styles to use CSS variables */
+.component-example {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.component-example h3 {
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.component-example li {
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.component-example hr {
+  border-color: var(--border);
+  transition: border-color 0.3s ease;
+}
+
+/* Code example styling */
+.code-example {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.code-example pre {
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+/* Markdown container styling */
+.markdown-container {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.markdown-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dark-mode .markdown-container h1 {
+  border-bottom-color: #444;
+}
+
+.markdown-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dark-mode .markdown-container h2 {
+  border-bottom-color: #444;
+}
+
+.markdown-container h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-container h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-container p {
+  margin-bottom: 1rem;
+}
+
+.markdown-container ul, .markdown-container ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-container li {
+  margin-bottom: 0.5rem;
+}
+
+.markdown-container code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  background-color: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.markdown-container code {
+  background-color: var(--code-bg);
+  transition: background-color 0.3s ease;
+}
+
+.markdown-container pre {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.markdown-container pre {
+  background-color: var(--code-bg);
+  transition: background-color 0.3s ease;
+}
+
+.markdown-container pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.markdown-container th, .markdown-container td {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  text-align: left;
+  transition: border-color 0.3s ease;
+}
+
+.markdown-container th {
+  background-color: var(--code-bg);
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.code-example pre {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.code-example code {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  transition: color 0.3s ease;
 }
 
 .component-header {
@@ -224,6 +652,11 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.dark .component-header {
+  background-color: #0a4b87; /* Darker blue for dark mode */
 }
 
 .component-header h2 {
@@ -308,7 +741,7 @@ main {
 }
 
 .example-code pre {
-  background-color: #f5f5f5;
+  background-color: var(--code-bg);
   padding: 1rem;
   border-radius: 4px;
   overflow-x: auto;
@@ -316,14 +749,16 @@ main {
   font-size: 0.9rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+  transition: background-color 0.3s ease;
 }
 
 footer {
-  background-color: #333;
-  color: white;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   text-align: center;
   padding: 1rem;
   margin-top: auto;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Sidebar toggle button */
@@ -343,10 +778,24 @@ footer {
   .sidebar-toggle-button {
     display: flex;
   }
-  
+
   main {
     margin-left: 0 !important;
   }
+}
+
+/* Fix for code elements with Tailwind classes */
+code.font-mono.bg-gray-100 {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark code.font-mono.bg-gray-100 {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+}
+
+.dark code.font-mono.bg-gray-100.dark\:bg-gray-800 {
+  background-color: #1e1e1e !important;
 }
 
 @media (min-width: 800px) {
