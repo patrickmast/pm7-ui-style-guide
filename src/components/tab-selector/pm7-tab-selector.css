@@ -1,0 +1,46 @@
+/* PM7TabSelector Component Styles */
+
+.pm7-tab-container {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb; /* Light mode border */
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.pm7-tab-button {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #000000; /* Light mode text */
+  opacity: 0.7;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px; /* This overlaps the container border */
+  transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.pm7-tab-button.pm7-tab-active {
+  opacity: 1;
+  border-bottom: 1px solid #1C86EF; /* Light mode active border - using PM7 blue */
+  background-color: #f3f8ff; /* Light blue background for active tab */
+  margin-bottom: -1px;
+  border-radius: 4px 4px 0 0;
+  color: #1C86EF; /* PM7 blue for active tab */
+}
+
+/* Dark mode styles */
+.dark .pm7-tab-container {
+  background-color: transparent;
+  border-bottom-color: #374151; /* Dark mode border */
+}
+
+.dark .pm7-tab-button {
+  color: #FAFAFA; /* Dark mode text */
+}
+
+.dark .pm7-tab-button.pm7-tab-active {
+  border-bottom: 1px solid #1C86EF; /* Dark mode active border */
+  background-color: rgba(28, 134, 239, 0.15); /* Slightly transparent blue for dark mode */
+  color: #1C86EF; /* PM7 blue for active tab */
+}

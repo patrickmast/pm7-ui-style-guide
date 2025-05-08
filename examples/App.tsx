@@ -8,6 +8,8 @@ import MenuExample from './example-menu';
 import ButtonExample from './example-button';
 import InputExample from './example-input';
 import DialogExample from './example-dialog';
+import TabSelectorExample from './example-tab-selector';
+import ExampleCard from './example-card';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
@@ -189,8 +191,12 @@ const App = () => {
         return <InputExample />;
       case 'dialog':
         return <DialogExample />;
+      case 'tabSelector':
+        return <TabSelectorExample />;
+      case 'card':
+        return <ExampleCard />;
       default:
-        return <div>Select a component from the sidebar</div>;
+        return <MenuExample />;
     }
   };
 
@@ -233,6 +239,20 @@ const App = () => {
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'dialog',
           onClick: () => setActiveComponent('dialog')
+        },
+        {
+          id: 'tab-selector-component',
+          label: 'Tab Selector',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'tabSelector',
+          onClick: () => setActiveComponent('tabSelector')
+        },
+        {
+          id: 'card-component',
+          label: 'Card',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'card',
+          onClick: () => setActiveComponent('card')
         }
       ]
     },
@@ -356,6 +376,30 @@ const App = () => {
                   }}
                 >
                   Dialog
+                </a>
+              </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'tabSelector' ? 'active' : ''}`}>
+                <a
+                  href="#tabSelector"
+                  className="sidebar-nav-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveComponent('tabSelector');
+                  }}
+                >
+                  Tab Selector
+                </a>
+              </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'card' ? 'active' : ''}`}>
+                <a
+                  href="#card"
+                  className="sidebar-nav-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveComponent('card');
+                  }}
+                >
+                  Card
                 </a>
               </li>
             </ul>
