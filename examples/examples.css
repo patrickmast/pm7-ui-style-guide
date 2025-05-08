@@ -171,7 +171,8 @@ header {
   opacity: 0.7;
   cursor: pointer;
   position: relative;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px; /* This overlaps the container border */
 }
 
 /* Hover effect removed as requested */
@@ -180,6 +181,7 @@ header {
   opacity: 1;
   border-bottom: 1px solid var(--tab-active-border);
   background-color: var(--tab-active-bg);
+  margin-bottom: -1px; /* This overlaps the container border */
   border-radius: 4px 4px 0 0;
   color: var(--tab-active-text-color);
 }
@@ -187,6 +189,7 @@ header {
 .dark .tab-active {
   border-bottom: 1px solid var(--tab-active-dark-border);
   background-color: var(--tab-active-dark-bg);
+  margin-bottom: -1px; /* This overlaps the container border */
   border-radius: 4px 4px 0 0;
   color: var(--tab-active-dark-text);
 }
