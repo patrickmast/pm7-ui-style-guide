@@ -138,7 +138,7 @@ export default function ExampleCard() {
           </PM7Card>
         </div>
       )}
-      <div style={{ maxWidth: 600, margin: "2rem auto" }}>
+      <div style={{ maxWidth: 600, margin: "0" }}>
         {activeTab === "Usage" && (
           <PM7Card>
             <h3 className="text-xl font-semibold mb-3">Basic Usage</h3>
