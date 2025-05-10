@@ -1,18 +1,6 @@
-// Enhancement: Created a new example file to showcase the PM7TabSelector component
-// This example demonstrates how to use the PM7TabSelector component in isolation
-
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { PM7TabSelector } from '../src/components/tab-selector';
-import ExampleTabSelectorOverview from './example-tab-selector-overview';
-import ExampleTabSelectorUsage from './example-tab-selector-usage';
-import ExampleTabSelectorAPI from './example-tab-selector-api';
-import ExampleTabSelectorExamples from './example-tab-selector-examples';
 
-type TabType = 'Overview' | 'Usage' | 'API' | 'Examples';
-type ThemeType = 'light' | 'dark';
-
-// Static README content to avoid import issues
 const tabSelectorReadme = `# PM7TabSelector Component
 
 A reusable tab selector component that provides a clean, accessible interface for switching between different content sections. The component supports both light and dark themes and integrates with the PM7 design system.
@@ -71,42 +59,17 @@ const MyComponent = () => {
 | \`activeTab\` | \`string\` | Yes | - | ID of the currently active tab |
 | \`onTabChange\` | \`(tabId: string) => void\` | Yes | - | Function called when a tab is clicked |
 | \`className\` | \`string\` | No | \`''\` | Additional CSS class names to apply to the container |
-| \`initialTheme\` | \`'light' \| 'dark'\` | No | \`'light'\` | Initial theme to use |
+| \`initialTheme\` | \`'light' | 'dark'\` | No | \`'light'\` | Initial theme to use |
 
 ## Theme Support
 
 The component automatically detects theme changes by listening to the \`pm7-theme\` value in localStorage. It will update its appearance when the theme changes between 'light' and 'dark'.
 `;
 
-const TabSelectorExample = ({ theme }: { theme: ThemeType }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('Overview');
+const ExampleTabSelectorAPI = ({ theme }: { theme: 'light' | 'dark' }) => (
+  <div className="markdown-container dark:text-white">
+    <ReactMarkdown>{tabSelectorReadme}</ReactMarkdown>
+  </div>
+);
 
-  const handleTabChange = (tabId: string) => {
-    if (tabId === 'Overview' || tabId === 'Usage' || tabId === 'API' || tabId === 'Examples') {
-      setActiveTab(tabId as TabType);
-    }
-  };
-
-  return (
-    <>
-      <PM7TabSelector
-        tabs={[
-          { id: 'Overview', label: 'Overview' },
-          { id: 'Usage', label: 'Usage' },
-          { id: 'API', label: 'API' },
-          { id: 'Examples', label: 'Examples' }
-        ]}
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        initialTheme={theme}
-        className="mb-4"
-      />
-      {activeTab === 'Overview' && <ExampleTabSelectorOverview theme={theme} />}
-      {activeTab === 'Usage' && <ExampleTabSelectorUsage theme={theme} />}
-      {activeTab === 'API' && <ExampleTabSelectorAPI theme={theme} />}
-      {activeTab === 'Examples' && <ExampleTabSelectorExamples theme={theme} />}
-    </>
-  );
-};
-
-export default TabSelectorExample;
+export default ExampleTabSelectorAPI;

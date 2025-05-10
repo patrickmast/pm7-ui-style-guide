@@ -184,19 +184,19 @@ const App = () => {
   const renderComponent = () => {
     switch (activeComponent) {
       case 'menu':
-        return <MenuExample />;
+        return <MenuExample theme={theme} />;
       case 'button':
-        return <ButtonExample />;
+        return <ButtonExample theme={theme} />;
       case 'input':
-        return <InputExample />;
+        return <InputExample theme={theme} />;
       case 'dialog':
-        return <DialogExample />;
+        return <DialogExample theme={theme} />;
       case 'tabSelector':
-        return <TabSelectorExample />;
+        return <TabSelectorExample theme={theme} />;
       case 'card':
-        return <ExampleCard />;
+        return <ExampleCard theme={theme} />;
       default:
-        return <MenuExample />;
+        return <MenuExample theme={theme} />;
     }
   };
 
@@ -328,7 +328,6 @@ const App = () => {
             ref={sidebarRef}
             style={{ width: `${sidebarWidth}px` }}
           >
-            <div className="sidebar-title">Components</div>
             <ul className="sidebar-nav">
               <li className={`sidebar-nav-item ${activeComponent === 'menu' ? 'active' : ''}`}>
                 <a

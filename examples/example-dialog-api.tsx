@@ -1,26 +1,7 @@
-// Enhancement: Rebuilt the Dialog example to match the styling and layout of TabSelector and Card examples.
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { PM7TabSelector } from '../src/components/tab-selector';
 import { PM7Card } from '../src/components/card';
-import {
-  PM7Dialog,
-  PM7DialogContent,
-  PM7DialogHeader,
-  PM7DialogTitle,
-  PM7DialogDescription,
-  PM7DialogFooter,
-  PM7DialogSeparator
-} from '../src/components/dialog/pm7-dialog';
-import '../src/components/dialog/pm7-dialog.css';
-import '../src/components/tab-selector/pm7-tab-selector.css';
-import '../src/components/card/pm7-card.css';
-import ExampleDialogOverview from './example-dialog-overview';
-import ExampleDialogUsage from './example-dialog-usage';
-import ExampleDialogAPI from './example-dialog-api';
-import ExampleDialogExamples from './example-dialog-examples';
 
-// Static README content for API tab
 const dialogReadme = `# PM7Dialog
 
 A flexible Dialog component for PM7 UI that provides modal dialogs with various configurations. Supports headers, footers, titles, descriptions, and dark mode.
@@ -89,39 +70,12 @@ import {
 ## License
 MIT`;
 
-type TabType = 'Overview' | 'Usage' | 'API' | 'Examples';
-type ThemeType = 'light' | 'dark';
+const ExampleDialogAPI = ({ theme }: { theme: 'light' | 'dark' }) => (
+  <PM7Card className="mb-6">
+    <div className="markdown-container dark:text-white">
+      <ReactMarkdown>{dialogReadme}</ReactMarkdown>
+    </div>
+  </PM7Card>
+);
 
-const DialogExample = ({ theme }: { theme: ThemeType }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('Overview');
-
-  const handleTabChange = (tabId: string) => {
-    if (tabId === 'Overview' || tabId === 'Usage' || tabId === 'API' || tabId === 'Examples') {
-      setActiveTab(tabId as TabType);
-    }
-  };
-
-  return (
-    <>
-      <PM7TabSelector
-        tabs={[
-          { id: "Overview", label: "Overview" },
-          { id: "Usage", label: "Usage" },
-          { id: "API", label: "API" },
-          { id: "Examples", label: "Examples" }
-        ]}
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        initialTheme={theme}
-        className="mb-4"
-      />
-
-      {activeTab === "Overview" && <ExampleDialogOverview theme={theme} />}
-      {activeTab === "Usage" && <ExampleDialogUsage theme={theme} />}
-      {activeTab === "API" && <ExampleDialogAPI theme={theme} />}
-      {activeTab === "Examples" && <ExampleDialogExamples theme={theme} />}
-    </>
-  );
-};
-
-export default DialogExample;
+export default ExampleDialogAPI;

@@ -384,11 +384,13 @@ header h1 {
   position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
   color: var(--text);
+  border-right: 1px solid #DEDEDE;
 }
 
 .dark .sidebar {
   background-color: var(--sidebar-bg);
   color: var(--text);
+  border-right: 1px solid #444;
 }
 
 /* Resize handle styles */
@@ -402,6 +404,11 @@ header h1 {
   top: 0;
   bottom: 0; /* Extend to full height */
   left: auto; /* Position will be set by JavaScript */
+  border-left: 1px solid #DEDEDE;
+}
+
+.dark .resize-handle {
+  border-left: 1px solid #444;
 }
 
 .resize-handle:hover,
@@ -412,26 +419,33 @@ header h1 {
 }
 
 .sidebar-title {
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--text);
-  background-color: var(--sidebar-bg);
+  background-color: inherit;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 1rem;
+  border-right: 1px solid #DEDEDE;
+  margin-bottom: 0;
   position: relative;
   z-index: 20; /* Higher than resize handle */
   transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .dark .sidebar-title {
-  background-color: var(--sidebar-bg);
+  background-color: inherit;
   border-bottom-color: var(--border);
   color: var(--text);
+  border-right: 1px solid #444;
 }
 
 .sidebar-nav {
   list-style: none;
+  border-right: 1px solid #DEDEDE;
+}
+
+.dark .sidebar-nav {
+  border-right: 1px solid #444;
 }
 
 .sidebar-nav-item {
