@@ -26,6 +26,7 @@ import { MoonIcon, SunIcon } from 'lucide-react';
 
 // Import CSS
 import './examples.css';
+import './examples-sidebar.css';
 
 // Constants
 const SIDEBAR_WIDTH_KEY = 'pm7-ui-style-guide-sidebar-width';
@@ -328,6 +329,7 @@ const App = () => {
             ref={sidebarRef}
             style={{ width: `${sidebarWidth}px` }}
           >
+            <div className="sidebar-title">Components</div>
             <ul className="sidebar-nav">
               <li className={`sidebar-nav-item ${activeComponent === 'menu' ? 'active' : ''}`}>
                 <a

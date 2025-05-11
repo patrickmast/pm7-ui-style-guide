@@ -1,0 +1,179 @@
+/* Sidebar styles for the examples app */
+
+/* Sidebar container */
+.sidebar {
+  /* width is now controlled by JavaScript */
+  background-color: var(--sidebar-bg);
+  padding: 0 0 1.5rem 0; /* Remove top padding to accommodate Components title */
+  flex-shrink: 0;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text);
+  border-right: 1px solid #DEDEDE;
+}
+.dark .sidebar {
+  background-color: var(--sidebar-bg);
+  color: var(--text);
+  border-right: 1px solid #444;
+}
+
+/* Sidebar title */
+.sidebar-title {
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text);
+  background-color: inherit;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  margin-bottom: 0;
+  z-index: 20; /* Higher than resize handle */
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+/* Sidebar title right border (pseudo-element) */
+.sidebar-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1px;
+  width: 1px;
+  height: 100%;
+  background: #DEDEDE;
+  z-index: 21;
+}
+.dark .sidebar-title::after {
+  background: #444;
+}
+
+/* Sidebar navigation list */
+.sidebar-nav {
+  list-style: none;
+  border-right: 1px solid #DEDEDE;
+}
+.dark .sidebar-nav {
+  border-right: 1px solid #444;
+}
+
+/* Sidebar navigation item */
+.sidebar-nav-item {
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+/* Sidebar navigation item hover */
+.sidebar-nav-item:hover {
+  background-color: var(--sidebar-active);
+}
+.dark .sidebar-nav-item:hover {
+  background-color: var(--sidebar-active);
+}
+/* Sidebar navigation item active */
+.sidebar-nav-item.active {
+  background-color: var(--sidebar-active);
+  position: relative; /* Add position relative */
+}
+.dark .sidebar-nav-item.active {
+  background-color: var(--sidebar-active);
+}
+/* Sidebar navigation item active indicator (pseudo-element) */
+.sidebar-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--primary);
+  transition: background-color 0.3s ease;
+}
+.dark .sidebar-nav-item.active::before {
+  background-color: var(--primary);
+}
+
+/* Sidebar navigation link */
+.sidebar-nav-link {
+  color: var(--text);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  transition: color 0.3s ease;
+}
+.dark .sidebar-nav-link {
+  color: var(--text);
+}
+
+/* Sidebar resize handle */
+.resize-handle {
+  width: 4px;
+  background-color: var(--sidebar-bg); /* Match sidebar background */
+  cursor: col-resize;
+  transition: background-color 0.2s, border-color 0.2s;
+  z-index: 100;
+  position: absolute; /* Make it absolute positioned */
+  top: 0;
+  bottom: 0; /* Extend to full height */
+  left: auto; /* Position will be set by JavaScript */
+  border-left: 1px solid #DEDEDE;
+}
+.dark .resize-handle {
+  border-left: 1px solid #444;
+}
+/* Sidebar resize handle hover/active */
+.resize-handle:hover,
+.resize-handle:active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  width: 4px;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--header-text);
+  margin-left: 4px;
+  padding: 0;
+}
+
+/* Sidebar toggle button responsive display */
+@media (max-width: 799px) {
+  .sidebar-toggle-button {
+    display: flex;
+  }
+  main {
+    margin-left: 0 !important;
+  }
+}
+@media (min-width: 800px) {
+  .sidebar-toggle-button {
+    display: none;
+  }
+}
+
+/* Sidebar width control container */
+.sidebar-width-control {
+  padding: 1rem 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+/* Sidebar width control label */
+.sidebar-width-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--sidebar-width-label);
+}
+/* Sidebar width control slider */
+.sidebar-width-slider {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+/* Sidebar width control value */
+.sidebar-width-value {
+  font-size: 0.8rem;
+  color: var(--sidebar-width-value);
+  text-align: right;
+}
