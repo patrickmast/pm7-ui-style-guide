@@ -45,7 +45,7 @@ export default defineConfig(({ command, mode }) => {
       publicDir: '../public',
       server: {
         host: '0.0.0.0',
-        allowedHosts: 'all'
+        allowedHosts: ['all', '.replit.dev']
       },
     };
   }
