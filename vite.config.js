@@ -1,3 +1,4 @@
+
 // Enhancement: Updated Vite config to serve the examples app in dev mode and build the library in build mode.
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -40,10 +41,11 @@ export default defineConfig(({ command, mode }) => {
           '@': path.resolve(__dirname, './src'),
         },
       },
-      root: 'examples', // Serve from the examples directory
-      publicDir: '../public', // Optional: if you have a public directory
+      root: 'examples',
+      publicDir: '../public',
       server: {
-        open: true,
+        host: '0.0.0.0',
+        allowedHosts: 'all'
       },
     };
   }
