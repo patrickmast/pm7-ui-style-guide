@@ -72,7 +72,7 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   };
 
   return (
-    <div className="mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+    <>
       <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Input Examples</h3>
       {/* Basic Input */}
       <div className="mb-6">
@@ -229,7 +229,7 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
-    </div>
+    </>
   );
 };
 

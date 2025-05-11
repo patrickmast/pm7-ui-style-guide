@@ -2,7 +2,7 @@ import React from 'react';
 import { PM7Card } from '../src/components/card';
 
 const ExampleButtonUsage = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <PM7Card>
+  <>
     <div className="p-4">
       <h3 className="text-xl font-semibold mb-4">PM7Button Component</h3>
       <p className="mb-4">The PM7Button component is a customizable button that supports various styles, sizes, and states with automatic theme detection.</p>
@@ -136,7 +136,7 @@ const ExampleButtonUsage = ({ theme }: { theme: 'light' | 'dark' }) => (
         </table>
       </div>
     </div>
-  </PM7Card>
+  </>
 );
 
 export default ExampleButtonUsage;

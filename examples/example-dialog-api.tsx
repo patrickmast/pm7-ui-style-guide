@@ -71,11 +71,9 @@ import {
 MIT`;
 
 const ExampleDialogAPI = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <PM7Card className="mb-6">
-    <div className="markdown-container dark:text-white">
-      <ReactMarkdown>{dialogReadme}</ReactMarkdown>
-    </div>
-  </PM7Card>
+  <div className="markdown-container dark:text-white">
+    <ReactMarkdown>{dialogReadme}</ReactMarkdown>
+  </div>
 );
 
 export default ExampleDialogAPI;

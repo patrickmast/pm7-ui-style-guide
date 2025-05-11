@@ -45,7 +45,7 @@ const ExampleButtonExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   };
 
   return (
-    <PM7Card>
+    <>
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-4">Button Variants</h3>
         <div className="flex flex-wrap gap-4 mb-6">
@@ -115,7 +115,7 @@ const ExampleButtonExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
-    </PM7Card>
+    </>
   );
 };
 

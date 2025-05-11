@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ExampleInputOverview = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <div className="mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+  <>
     <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">PM7Input</h3>
     <p className="mb-4 text-gray-700 dark:text-gray-300">
       The PM7Input component provides a flexible, theme-aware input field with support for various states and styling options.
@@ -14,7 +14,7 @@ const ExampleInputOverview = ({ theme }: { theme: 'light' | 'dark' }) => (
       <li>Customizable via className and styling rules</li>
       <li>Compatible with all standard HTML input types</li>
     </ul>
-  </div>
+  </>
 );
 
 export default ExampleInputOverview;

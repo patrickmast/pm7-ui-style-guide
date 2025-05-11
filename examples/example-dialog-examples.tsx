@@ -29,7 +29,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <PM7Card className="mb-6">
+    <>
       <h3 className="text-xl font-semibold mb-3">Dialog Examples</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Column 1 */}
@@ -394,7 +394,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
-    </PM7Card>
+    </>
   );
 };
 

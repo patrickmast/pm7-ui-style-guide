@@ -32,6 +32,10 @@ import './examples-sidebar.css';
 const SIDEBAR_WIDTH_KEY = 'pm7-ui-style-guide-sidebar-width';
 const MIN_SIDEBAR_WIDTH = 150;
 
+// Add ThemeType definition
+/** Theme type for light/dark mode */
+type ThemeType = 'light' | 'dark';
+
 // SVG Components
 const SidebarCollapseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="24" height="24" strokeWidth="2">
@@ -62,11 +66,6 @@ const App = () => {
     const savedComponent = localStorage.getItem('pm7-ui-style-guide-active-component');
     return savedComponent || 'menu';
   });
-  // Initialize sidebar width from localStorage or default to 165px
-  const [sidebarWidth, setSidebarWidth] = useState(() => {
-    const savedWidth = localStorage.getItem(SIDEBAR_WIDTH_KEY);
-    return savedWidth ? parseInt(savedWidth, 10) : 165;
-  });
   // Initialize sidebar visibility from localStorage or default to true
   // Also consider window width for initial state
   const [sidebarVisible, setSidebarVisible] = useState(() => {
@@ -78,10 +77,10 @@ const App = () => {
     return savedVisibility ? savedVisibility === 'true' : true;
   });
   // Initialize theme state from localStorage or system preference
-  const [theme, setTheme] = useState(() => {
+  const [theme, setTheme] = useState<ThemeType>(() => {
     const savedTheme = localStorage.getItem('pm7-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') {
-      return savedTheme;
+      return savedTheme as ThemeType;
     }
     // Check system preference
     if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -91,15 +90,6 @@ const App = () => {
   });
 
   const [showVersionDialog, setShowVersionDialog] = useState(false);
-  const sidebarRef = useRef(null);
-  const resizingRef = useRef(false);
-  const startXRef = useRef(0);
-  const startWidthRef = useRef(0);
-
-  // Save sidebar width to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
-  }, [sidebarWidth]);
 
   // Save active component to localStorage whenever it changes
   useEffect(() => {
@@ -141,51 +131,18 @@ const App = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    resizingRef.current = true;
-    startXRef.current = e.clientX;
-    startWidthRef.current = sidebarWidth;
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!resizingRef.current) return;
-    const newWidth = startWidthRef.current + (e.clientX - startXRef.current);
-    if (newWidth >= MIN_SIDEBAR_WIDTH) {
-      setSidebarWidth(newWidth);
-    }
-  };
-
-  const handleMouseUp = () => {
-    resizingRef.current = false;
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
-  };
-
   const toggleSidebar = () => {
     const newVisibility = !sidebarVisible;
     setSidebarVisible(newVisibility);
     localStorage.setItem('pm7-ui-style-guide-sidebar-visible', newVisibility.toString());
   };
 
-  // Add a button to toggle sidebar on small screens
-  const renderSidebarToggle = () => {
-    return (
-      <button
-        className="sidebar-toggle-button"
-        onClick={toggleSidebar}
-        aria-label={sidebarVisible ? 'Hide sidebar' : 'Show sidebar'}
-      >
-        {sidebarVisible ? <SidebarCollapseIcon /> : <SidebarExpandIcon />}
-      </button>
-    );
-  };
+
 
   const renderComponent = () => {
     switch (activeComponent) {
       case 'menu':
-        return <MenuExample theme={theme} />;
+        return <MenuExample />;
       case 'button':
         return <ButtonExample theme={theme} />;
       case 'input':
@@ -197,7 +154,7 @@ const App = () => {
       case 'card':
         return <ExampleCard theme={theme} />;
       default:
-        return <MenuExample theme={theme} />;
+        return <MenuExample />;
     }
   };
 
@@ -326,8 +283,7 @@ const App = () => {
         {sidebarVisible && (
           <aside
             className="sidebar"
-            ref={sidebarRef}
-            style={{ width: `${sidebarWidth}px` }}
+            style={{ width: '165px' }}
           >
             <div className="sidebar-title">Components</div>
             <ul className="sidebar-nav">
@@ -405,13 +361,6 @@ const App = () => {
               </li>
             </ul>
           </aside>
-        )}
-        {sidebarVisible && (
-          <div
-            className="resize-handle"
-            onMouseDown={handleMouseDown}
-            style={{ left: `${sidebarWidth - 3}px` }}
-          ></div>
         )}
         <main data-theme={theme} className={theme === 'dark' ? 'dark' : ''} style={{ marginLeft: sidebarVisible ? undefined : '0' }}>
           {renderComponent()}

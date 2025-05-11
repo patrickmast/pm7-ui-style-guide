@@ -328,7 +328,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
     return descriptions[selectedLanguage]?.[key] || descriptions['en'][key] || key;
   };
   return (
-    <div className="p-0">
+    <div className="p-6">
       <div className="mb-8">
         <h3 className="text-xl font-semibold mb-3">{getDescription('basicMenu')}</h3>
         <div className="flex items-start gap-4">
