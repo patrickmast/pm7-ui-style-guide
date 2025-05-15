@@ -84,6 +84,66 @@ function MyComponent() {
 | `menuItems` | `PM7MenuItem[]` | `[]` | Array of menu items to display |
 | `theme` | `'light' \| 'dark'` | `'light'` | The current theme for the menu. Should be controlled by React state or context for instant updates. |
 | `mobileBreakpoint` | `number` | `768` | Pixel width at which to switch to mobile styling |
+| `menuAlignment` | `'start' \| 'center' \| 'end'` | `'start'` | Alignment of the menu relative to the trigger |
+| `menuIcon` | `React.ReactNode` | | Custom icon (SVG or React node) for the menu trigger. If not set, the default hamburger icon is used. |
+| `menuLabel` | `React.ReactNode` | | Custom label (string or React node) for the menu trigger. Can be used alone or with `menuIcon`. |
+| `menuTriggerIconColorLight` | `string` | `#000000` | Icon color for light mode. |
+| `menuTriggerIconColorDark` | `string` | `#FAFAFA` | Icon color for dark mode. |
+| `menuTriggerLabelColorLight` | `string` | `#000000` | Label color for light mode. |
+| `menuTriggerLabelColorDark` | `string` | `#FAFAFA` | Label color for dark mode. |
+| `showUncheckedIcon` | `boolean` | `false` | Whether to show an icon for unchecked items. |
+
+#### Icon and Label Coloring Rules
+- If `menuTriggerIconColorLight` is set, it is used for the icon in light mode; otherwise, black (`#000000`) is used.
+- If `menuTriggerIconColorDark` is set, it is used for the icon in dark mode; otherwise, white (`#FAFAFA`) is used.
+- If `menuTriggerLabelColorLight` is set, it is used for the label in light mode; otherwise, black (`#000000`) is used.
+- If `menuTriggerLabelColorDark` is set, it is used for the label in dark mode; otherwise, white (`#FAFAFA`) is used.
+
+#### Trigger Combinations
+- If only `menuLabel` is set, the trigger is a label (e.g., "File").
+- If only `menuIcon` is set, the trigger is an icon.
+- If both are set, the trigger is a label with an icon (icon appears before the label).
+- If neither is set, the trigger is the default hamburger icon.
+
+### Usage Examples
+
+**Default Hamburger Icon:**
+```tsx
+<PM7Menu menuItems={menuItems} />
+```
+
+**Custom Icon:**
+```tsx
+<PM7Menu
+  menuItems={menuItems}
+  menuIcon={<MyCustomIcon />}
+  menuTriggerIconColorLight="#1C86EF" // PM7 Blue
+  menuTriggerIconColorDark="#FFDD00"  // Yellow
+/>
+```
+
+**Label as Trigger:**
+```tsx
+<PM7Menu
+  menuItems={menuItems}
+  menuLabel="File"
+  menuTriggerLabelColorLight="#000000" // Black
+  menuTriggerLabelColorDark="#FAFAFA"  // White
+/>
+```
+
+**Label and Icon as Trigger:**
+```tsx
+<PM7Menu
+  menuItems={menuItems}
+  menuLabel="File"
+  menuIcon={<MyCustomIcon />}
+  menuTriggerIconColorLight="#1C86EF" // PM7 Blue
+  menuTriggerIconColorDark="#FFDD00"  // Yellow
+  menuTriggerLabelColorLight="#000000" // Black
+  menuTriggerLabelColorDark="#FAFAFA"  // White
+/>
+```
 
 ### Menu Item Interface
 

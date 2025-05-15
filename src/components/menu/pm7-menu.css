@@ -7,6 +7,12 @@
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
+  color: inherit !important;
+}
+
+.menu-item-icon svg {
+  stroke: currentColor !important;
+  fill: none !important;
 }
 
 /* Add spacing for the switch icon in switch-type menu items */
@@ -81,9 +87,7 @@
 }
 
 /* SVG icon coloring for menu items */
-.menu-item-svg-icon {
-  color: #000000;
-}
+/* .menu-item-svg-icon { color: #000000; } */
 .dark .menu-item-svg-icon {
   color: #FAFAFA;
 }

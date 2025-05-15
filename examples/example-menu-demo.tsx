@@ -430,8 +430,8 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
               }))
             }))}
             theme={theme}
-            menuIconColorLight={'#1C86EF'} // PM7 Blue
-            menuIconColorDark={'#FFDD00'} // Yellow
+            menuTriggerIconColorLight={'#1C86EF'} // PM7 Blue
+            menuTriggerIconColorDark={'#FFDD00'} // Yellow
           />
           <div className="ml-4">
             <p>{getDescription('iconColorDesc')} <code>menuIconColor</code> {getDescription('prop')}</p>
@@ -500,8 +500,8 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
               <path d="m9 11 3 3 3-3" />
             </svg>
           }
-          menuIconColorLight={'#1C86EF'} // PM7 Blue
-          menuIconColorDark={'#FFDD00'} // Yellow
+          menuTriggerIconColorLight={'#1C86EF'} // PM7 Blue
+          menuTriggerIconColorDark={'#FFDD00'} // Yellow
           menuTriggerLabelColorLight = {'#1C86EF'} // PM7 Blue
           menuTriggerLabelColorDark = {'#FFDD00'} // Yellow
         />

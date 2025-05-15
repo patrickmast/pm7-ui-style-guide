@@ -125,8 +125,8 @@ export default function AppHeader() {
       <Menu
         menuItems={menuItems}
         menuAlignment="start"
-        menuIconColorLight="#1C86EF"
-        menuIconColorDark="#FFDD00"
+        menuTriggerIconColorLight="#1C86EF"
+        menuTriggerIconColorDark="#FFDD00"
       />
     </header>
   );
@@ -219,8 +219,8 @@ export default function AppMenu() {
   return <Menu
     menuItems={menuItems}
     menuAlignment="start"
-    menuIconColorLight="#1C86EF"
-    menuIconColorDark="#FFDD00"
+    menuTriggerIconColorLight="#1C86EF"
+    menuTriggerIconColorDark="#FFDD00"
   />;
 }
 ```
@@ -232,7 +232,7 @@ export default function AppMenu() {
 - Follows all PM7 interaction patterns
 - Supports separators with `type: 'separator'`
 - Configurable menu alignment with `menuAlignment` prop (values: `start`, `center`, `end`)
-- Customizable menu icon color for light and dark mode with `menuIconColorLight` and `menuIconColorDark` props
+- Customizable menu icon color for light and dark mode with `menuTriggerIconColorLight` and `menuTriggerIconColorDark` props
 
 **AI Assistant Prompt Example:**
 
@@ -251,7 +251,7 @@ Add a menu to my React application using the pm7-ui-style-guide package. Specifi
    - An "About" item that shows version information
 
 3. Set the menuAlignment to "start" so the menu aligns with the left edge of the trigger button
-4. Set the menuIconColorLight to "#1C86EF" (PM7 Blue) and menuIconColorDark to "#FFDD00" (Yellow) to match the PM7 branding
+4. Set the menuTriggerIconColorLight to "#1C86EF" (PM7 Blue) and menuIconColorDark to "#FFDD00" (Yellow) to match the PM7 branding
 5. Make sure the menu appears when clicking a button in the header
 
 Please show the complete implementation including imports and the menuItems array definition.
@@ -486,8 +486,8 @@ function MyApp() {
           menuItems={menuItems}
           initialTheme={theme}
           menuAlignment="start"
-          menuIconColorLight="#1C86EF"
-          menuIconColorDark="#FFDD00"
+          menuTriggerIconColorLight="#1C86EF"
+          menuTriggerIconColorDark="#FFDD00"
         />
       </header>
       {/* Rest of your application */}
