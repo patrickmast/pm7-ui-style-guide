@@ -33,7 +33,7 @@ function MyComponent() {
   ];
 
   return (
-    <PM7Menu 
+    <PM7Menu
       menuItems={menuItems}
       initialTheme="light"
     />
@@ -115,7 +115,7 @@ function MultiLanguageMenu() {
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
     // Check if user has a language preference in localStorage
     if (typeof window !== 'undefined') {
-      const savedLanguage = localStorage.getItem('winfakt-language');
+      const savedLanguage = localStorage.getItem('PM7-language');
       if (savedLanguage) {
         return savedLanguage;
       }
@@ -132,7 +132,7 @@ function MultiLanguageMenu() {
   // Function to select language
   const selectLanguage = (language) => {
     setSelectedLanguage(language);
-    localStorage.setItem('winfakt-language', language);
+    localStorage.setItem('PM7-language', language);
   };
 
   // Define menu items with inline translations
@@ -179,7 +179,7 @@ function MultiLanguageMenu() {
   ];
 
   return (
-    <Menu 
+    <Menu
       menuItems={menuItems.map(item => ({
         ...item,
         label: getLabel(item),
@@ -239,7 +239,7 @@ function LanguageSwitchableMenu() {
   // Language state
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
     if (typeof window !== 'undefined') {
-      const savedLanguage = localStorage.getItem('winfakt-language');
+      const savedLanguage = localStorage.getItem('PM7-language');
       if (savedLanguage) {
         return savedLanguage;
       }
@@ -256,7 +256,7 @@ function LanguageSwitchableMenu() {
   // Language selection function
   const selectLanguage = (language) => {
     setSelectedLanguage(language);
-    localStorage.setItem('winfakt-language', language);
+    localStorage.setItem('PM7-language', language);
   };
 
   // Theme toggle function
@@ -379,7 +379,7 @@ function LanguageSwitchableMenu() {
   }, [theme]);
 
   return (
-    <Menu 
+    <Menu
       menuItems={menuItems.map(item => ({
         ...item,
         label: getLabel(item),
@@ -449,18 +449,18 @@ For custom menu implementations, you can use the individual primitives:
 
 ```tsx
 // For local development, use relative imports
-import { 
-  PM7MenuRoot, 
-  PM7MenuTrigger, 
-  PM7MenuContent, 
+import {
+  PM7MenuRoot,
+  PM7MenuTrigger,
+  PM7MenuContent,
   PM7MenuItem,
   PM7MenuSeparator
 } from '../src/components/menu/pm7-menu';
 // For production, use package imports
-// import { 
-//   PM7MenuRoot, 
-//   PM7MenuTrigger, 
-//   PM7MenuContent, 
+// import {
+//   PM7MenuRoot,
+//   PM7MenuTrigger,
+//   PM7MenuContent,
 //   PM7MenuItem,
 //   PM7MenuSeparator
 // } from 'pm7-ui-style-guide';
@@ -517,9 +517,9 @@ The button that toggles the menu. Use `asChild` to use a custom element as the t
 The dropdown content container.
 
 ```tsx
-<PM7MenuContent 
-  align="end" 
-  alignOffset={0} 
+<PM7MenuContent
+  align="end"
+  alignOffset={0}
   sideOffset={4}
   className="optional-extra-classes"
 >
@@ -538,8 +538,8 @@ The dropdown content container.
 Individual menu items.
 
 ```tsx
-<PM7MenuItem 
-  onClick={() => {}} 
+<PM7MenuItem
+  onClick={() => {}}
   className="optional-extra-classes"
 >
   Item Text
@@ -576,7 +576,7 @@ Example usage:
 
 ## Styling
 
-The menu components follow the Winfakt UI Style Guide specifications:
+The menu components follow the PM7 UI Style Guide specifications:
 
 - Menu items have 16px horizontal padding (`px-4`) and 8px vertical padding (`py-2`) on desktop
 - Menu items have 12px vertical padding (`py-3`) on mobile

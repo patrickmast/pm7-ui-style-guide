@@ -1,6 +1,6 @@
 // Refactor: Extracted the "Demo" tab content from example-menu.tsx to this file as ExampleMenuDemo.
 import React from 'react';
-import { PM7Menu } from '../src/components/menu';
+import { PM7Menu, PM7MenuIcon } from '../src/components/menu';
 import { HomeIcon, SettingsIcon, UserIcon, MoonIcon, SunIcon, LanguagesIcon } from 'lucide-react';
 
 interface Descriptions {
@@ -80,7 +80,15 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
     }
   };
 
-  const menuItems: ExtendedMenuItemType[] = [
+  // Memoized icons
+  const homeIcon = React.useMemo(() => <HomeIcon size={16} className="menu-item-svg-icon" />, []);
+  const profileIcon = React.useMemo(() => <UserIcon size={16} className="menu-item-svg-icon" />, []);
+  const settingsIcon = React.useMemo(() => <SettingsIcon size={16} className="menu-item-svg-icon" />, []);
+  const flagIcon = React.useMemo(() => <span style={{ fontSize: 16, marginRight: 4 }}>{getFlagIcon(selectedLanguage)}</span>, [selectedLanguage]);
+  const themeIcon = React.useMemo(() => theme === 'dark' ? <MoonIcon size={16} /> : <SunIcon size={16} />, [theme]);
+
+  // Memoize menuItems array
+  const menuItems = React.useMemo(() => [
     {
       id: 'home',
       label: 'Home',
@@ -92,7 +100,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       'label-nl-be': 'Home',
       'label-zh': '首页',
       onClick: () => console.log('Home selected'),
-      icon: <HomeIcon size={16} />
+      icon: homeIcon
     },
     {
       id: 'profile',
@@ -105,7 +113,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       'label-nl-be': 'Profiel',
       'label-zh': '个人资料',
       onClick: () => console.log('Profile selected'),
-      icon: <UserIcon size={16} />
+      icon: profileIcon
     },
     {
       id: 'settings',
@@ -118,7 +126,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       'label-nl-be': 'Instellingen',
       'label-zh': '设置',
       onClick: () => console.log('Settings selected'),
-      icon: <SettingsIcon size={16} />
+      icon: settingsIcon
     },
     {
       id: 'separator1',
@@ -136,7 +144,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       'label-nl-be': 'Taal',
       'label-zh': '语言',
       type: 'submenu',
-      icon: <span style={{ fontSize: 16, marginRight: 4 }}>{getFlagIcon(selectedLanguage)}</span>,
+      icon: flagIcon,
       submenuItems: [
         { id: 'en', label: 'English', type: 'check', checked: selectedLanguage === 'en', onClick: () => handleLanguageChange('en') },
         { id: 'es', label: 'Español', type: 'check', checked: selectedLanguage === 'es', onClick: () => handleLanguageChange('es') },
@@ -158,7 +166,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       'label-nl-be': `Thema: ${theme === 'dark' ? 'Donker' : 'Licht'}`,
       'label-zh': `主题: ${theme === 'dark' ? '深色' : '浅色'}`,
       type: 'switch',
-      icon: theme === 'dark' ? <MoonIcon size={16} /> : <SunIcon size={16} />,
+      icon: themeIcon,
       checked: theme === 'dark',
       onChange: () => {
         // Theme is now controlled by the App component
@@ -166,7 +174,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
         console.log('Theme toggle clicked in menu example')
       }
     }
-  ];
+  ], [homeIcon, profileIcon, settingsIcon, flagIcon, themeIcon, selectedLanguage, theme]);
 
   const descriptions: Descriptions = {
     en: {
@@ -341,7 +349,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
                 label: getLabel(subItem)
               }))
             }))}
-            initialTheme={theme}
+            theme={theme}
           />
           <div className="ml-4">
             <p>{getDescription('title')}</p>
@@ -372,7 +380,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
                   label: getLabel(subItem)
                 }))
               }))}
-              initialTheme={theme}
+              theme={theme}
               menuAlignment="start"
             />
           </div>
@@ -387,7 +395,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
                   label: getLabel(subItem)
                 }))
               }))}
-              initialTheme={theme}
+              theme={theme}
               menuAlignment="center"
             />
           </div>
@@ -402,7 +410,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
                   label: getLabel(subItem)
                 }))
               }))}
-              initialTheme={theme}
+              theme={theme}
               menuAlignment="end"
             />
           </div>
@@ -421,8 +429,9 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
                 label: getLabel(subItem)
               }))
             }))}
-            initialTheme={theme}
-            menuIconColor={theme === 'dark' ? '#FFDD00' : '#1C86EF'}
+            theme={theme}
+            menuIconColorLight={'#1C86EF'} // PM7 Blue
+            menuIconColorDark={'#FFDD00'} // Yellow
           />
           <div className="ml-4">
             <p>{getDescription('iconColorDesc')} <code>menuIconColor</code> {getDescription('prop')}</p>

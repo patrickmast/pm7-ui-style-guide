@@ -1,4 +1,4 @@
-/* Enhancement: Copied from Winfakt app/globals.css for full design consistency in pm7-ui-style-guide. Includes palette, border, radius, shadow, and font variables. */
+/* Enhancement: Copied from PM7 app/globals.css for full design consistency in pm7-ui-style-guide. Includes palette, border, radius, shadow, and font variables. */
 @import "./css/variables.css";
 
 @tailwind base;

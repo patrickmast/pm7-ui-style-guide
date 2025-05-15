@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PM7 Input Component provides a fully-styled input field that follows Winfakt's design system. It includes proper styling, focus states, and border handling according to Winfakt's UI guidelines.
+The PM7 Input Component provides a fully-styled input field that follows PM7's design system. It includes proper styling, focus states, and border handling according to PM7's UI guidelines.
 
 ## Import
 
@@ -57,17 +57,17 @@ function InputTypes() {
         <label htmlFor="text-input">Text Input</label>
         <PM7Input id="text-input" type="text" placeholder="Text input" />
       </div>
-      
+
       <div>
         <label htmlFor="email-input">Email Input</label>
         <PM7Input id="email-input" type="email" placeholder="Email input" />
       </div>
-      
+
       <div>
         <label htmlFor="password-input">Password Input</label>
         <PM7Input id="password-input" type="password" placeholder="Password input" />
       </div>
-      
+
       <div>
         <label htmlFor="number-input">Number Input</label>
         <PM7Input id="number-input" type="number" placeholder="Number input" />
@@ -199,7 +199,7 @@ function ContactForm() {
           required
         />
       </div>
-      
+
       <div className="space-y-2">
         <label htmlFor="email">Email</label>
         <PM7Input
@@ -212,7 +212,7 @@ function ContactForm() {
           required
         />
       </div>
-      
+
       <div className="space-y-2">
         <label htmlFor="message">Message</label>
         <textarea
@@ -226,7 +226,7 @@ function ContactForm() {
           required
         />
       </div>
-      
+
       <PM7Button type="submit">Submit</PM7Button>
     </form>
   );
@@ -235,11 +235,11 @@ function ContactForm() {
 
 ## Styling
 
-The input component comes pre-styled with Winfakt's design system. The styling includes:
+The input component comes pre-styled with PM7's design system. The styling includes:
 
-- Always visible border (as per Winfakt guidelines)
+- Always visible border (as per PM7 guidelines)
 - Focus state with primary color border (#1C86EF)
-- No focus ring (as per Winfakt guidelines)
+- No focus ring (as per PM7 guidelines)
 - Proper padding and sizing
 - Disabled state styling
 - Error state styling

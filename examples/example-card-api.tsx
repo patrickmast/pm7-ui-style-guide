@@ -50,9 +50,9 @@ import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } 
 MIT`;
 
 const ExampleCardAPI = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <div className="markdown-container dark:text-white">
-    <ReactMarkdown>{cardReadme}</ReactMarkdown>
-  </div>
+    <div className="markdown-container dark:text-white">
+      <ReactMarkdown>{cardReadme}</ReactMarkdown>
+    </div>
 );
 
 export default ExampleCardAPI;

@@ -1,4 +1,4 @@
-// Enhancement: Provides Winfakt-specific styling for ShadCN/UI Button component
+// Enhancement: Provides PM7-specific styling for ShadCN/UI Button component
 // Bug Fix: Enhanced PM7Button component to support multiple button variants
 import React from 'react';
 
@@ -6,8 +6,8 @@ import React from 'react';
 // for apps that already use ShadCN/UI
 export const buttonRules = {
   // Colors
-  primaryColor: '#1C86EF', // Winfakt primary blue for buttons
-  borderColor: '#D4D4D4', // Winfakt border color
+  primaryColor: '#1C86EF', // PM7 primary blue for buttons
+  borderColor: '#D4D4D4', // PM7 border color
 
   // Behavior
   cursor: 'pointer', // Always show pointer cursor on hover

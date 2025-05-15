@@ -4,6 +4,38 @@
 
 The PM7 Menu component provides a flexible, accessible dropdown menu system for the PM7 UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content. This component follows the project's component directory pattern, located at `src/components/menu/pm7-menu.tsx`.
 
+## PM7MenuIcon (Official Menu Icon)
+
+The `PM7MenuIcon` component provides the official hamburger menu icon used in the PM7Menu trigger and is recommended for use in menu items to ensure visual consistency across your application.
+
+- **Theme-aware:** The icon automatically adapts to the current theme (light/dark) via the `color` prop (defaults to `currentColor`).
+- **Consistent:** Using `PM7MenuIcon` for both the menu trigger and menu items guarantees a unified look, even if the icon design changes in the future.
+
+### Usage Example
+
+```tsx
+import { PM7Menu, PM7MenuIcon } from 'pm7-ui-style-guide';
+
+const menuItems = [
+  {
+    id: 'home',
+    label: 'Home',
+    icon: <PM7MenuIcon size={16} />
+  },
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: <PM7MenuIcon size={16} />
+  },
+  // ...other items
+];
+
+<PM7Menu menuItems={menuItems} theme="dark" />;
+```
+
+- The menu trigger button also uses `PM7MenuIcon` by default.
+- You can adjust the `size` and `color` props as needed (default color is `currentColor`).
+
 ## Usage
 
 ### Complete Menu Component
@@ -12,9 +44,9 @@ For a standard menu with hamburger icon and custom menu items:
 
 ```tsx
 // For local development, use relative imports
-import { PM7Menu } from '../src/components/menu/pm7-menu';
+import { PM7Menu, PM7MenuIcon } from '../src/components/menu';
 // For production, use package imports
-// import { PM7Menu } from 'pm7-ui-style-guide';
+// import { PM7Menu, PM7MenuIcon } from 'pm7-ui-style-guide';
 
 function MyComponent() {
   // Define your custom menu items
@@ -22,20 +54,24 @@ function MyComponent() {
     {
       id: 'language',
       label: 'Set language',
-      onClick: () => console.log('Language selected')
+      onClick: () => console.log('Language selected'),
+      icon: <PM7MenuIcon size={16} />
     },
     {
       id: 'theme',
       label: 'Theme: Light',
       onClick: () => toggleTheme(),
-      icon: <SunIcon />
+      icon: <PM7MenuIcon size={16} />
     }
   ];
 
+  // Theme should come from React state or context
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
   return (
-    <PM7Menu 
+    <PM7Menu
       menuItems={menuItems}
-      initialTheme="light"
+      theme={theme}
     />
   );
 }
@@ -46,7 +82,7 @@ function MyComponent() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `menuItems` | `PM7MenuItem[]` | `[]` | Array of menu items to display |
-| `initialTheme` | `'light' \| 'dark'` | System preference | Initial theme for the menu |
+| `theme` | `'light' \| 'dark'` | `'light'` | The current theme for the menu. Should be controlled by React state or context for instant updates. |
 | `mobileBreakpoint` | `number` | `768` | Pixel width at which to switch to mobile styling |
 
 ### Menu Item Interface
@@ -115,7 +151,7 @@ function MultiLanguageMenu() {
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
     // Check if user has a language preference in localStorage
     if (typeof window !== 'undefined') {
-      const savedLanguage = localStorage.getItem('winfakt-language');
+      const savedLanguage = localStorage.getItem('PM7-language');
       if (savedLanguage) {
         return savedLanguage;
       }
@@ -132,7 +168,7 @@ function MultiLanguageMenu() {
   // Function to select language
   const selectLanguage = (language) => {
     setSelectedLanguage(language);
-    localStorage.setItem('winfakt-language', language);
+    localStorage.setItem('PM7-language', language);
   };
 
   // Define menu items with inline translations
@@ -179,7 +215,7 @@ function MultiLanguageMenu() {
   ];
 
   return (
-    <Menu 
+    <Menu
       menuItems={menuItems.map(item => ({
         ...item,
         label: getLabel(item),
@@ -188,7 +224,7 @@ function MultiLanguageMenu() {
           label: getLabel(subItem)
         }))
       }))}
-      initialTheme="light"
+      theme="light"
     />
   );
 }
@@ -239,7 +275,7 @@ function LanguageSwitchableMenu() {
   // Language state
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
     if (typeof window !== 'undefined') {
-      const savedLanguage = localStorage.getItem('winfakt-language');
+      const savedLanguage = localStorage.getItem('PM7-language');
       if (savedLanguage) {
         return savedLanguage;
       }
@@ -256,7 +292,7 @@ function LanguageSwitchableMenu() {
   // Language selection function
   const selectLanguage = (language) => {
     setSelectedLanguage(language);
-    localStorage.setItem('winfakt-language', language);
+    localStorage.setItem('PM7-language', language);
   };
 
   // Theme toggle function
@@ -379,7 +415,7 @@ function LanguageSwitchableMenu() {
   }, [theme]);
 
   return (
-    <Menu 
+    <Menu
       menuItems={menuItems.map(item => ({
         ...item,
         label: getLabel(item),
@@ -388,7 +424,7 @@ function LanguageSwitchableMenu() {
           label: getLabel(subItem)
         }))
       }))}
-      initialTheme={theme}
+      theme={theme}
     />
   );
 }
@@ -449,18 +485,18 @@ For custom menu implementations, you can use the individual primitives:
 
 ```tsx
 // For local development, use relative imports
-import { 
-  PM7MenuRoot, 
-  PM7MenuTrigger, 
-  PM7MenuContent, 
+import {
+  PM7MenuRoot,
+  PM7MenuTrigger,
+  PM7MenuContent,
   PM7MenuItem,
   PM7MenuSeparator
 } from '../src/components/menu/pm7-menu';
 // For production, use package imports
-// import { 
-//   PM7MenuRoot, 
-//   PM7MenuTrigger, 
-//   PM7MenuContent, 
+// import {
+//   PM7MenuRoot,
+//   PM7MenuTrigger,
+//   PM7MenuContent,
 //   PM7MenuItem,
 //   PM7MenuSeparator
 // } from 'pm7-ui-style-guide';
@@ -517,9 +553,9 @@ The button that toggles the menu. Use `asChild` to use a custom element as the t
 The dropdown content container.
 
 ```tsx
-<PM7MenuContent 
-  align="end" 
-  alignOffset={0} 
+<PM7MenuContent
+  align="end"
+  alignOffset={0}
   sideOffset={4}
   className="optional-extra-classes"
 >
@@ -538,8 +574,8 @@ The dropdown content container.
 Individual menu items.
 
 ```tsx
-<PM7MenuItem 
-  onClick={() => {}} 
+<PM7MenuItem
+  onClick={() => {}}
   className="optional-extra-classes"
 >
   Item Text
@@ -576,7 +612,7 @@ Example usage:
 
 ## Styling
 
-The menu components follow the Winfakt UI Style Guide specifications:
+The menu components follow the PM7 UI Style Guide specifications:
 
 - Menu items have 16px horizontal padding (`px-4`) and 8px vertical padding (`py-2`) on desktop
 - Menu items have 12px vertical padding (`py-3`) on mobile

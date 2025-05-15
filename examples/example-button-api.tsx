@@ -72,9 +72,9 @@ The component automatically adapts to light and dark themes based on the \`theme
 `;
 
 const ExampleButtonAPI = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <div className="markdown-container dark:text-white">
-    <ReactMarkdown>{buttonReadme}</ReactMarkdown>
-  </div>
+    <div className="markdown-container dark:text-white">
+      <ReactMarkdown>{buttonReadme}</ReactMarkdown>
+    </div>
 );
 
 export default ExampleButtonAPI;

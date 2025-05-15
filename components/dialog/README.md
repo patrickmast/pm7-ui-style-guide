@@ -2,19 +2,19 @@
 
 ## Overview
 
-The PM7 Dialog Component provides a fully-styled modal dialog that follows Winfakt's design system. It includes a backdrop, proper animations, and focus management for accessibility.
+The PM7 Dialog Component provides a fully-styled modal dialog that follows PM7's design system. It includes a backdrop, proper animations, and focus management for accessibility.
 
 ## Import
 
 ```tsx
-import { 
+import {
   PM7Dialog,
   PM7DialogTrigger,
   PM7DialogContent,
   PM7DialogHeader,
   PM7DialogFooter,
   PM7DialogTitle,
-  PM7DialogDescription 
+  PM7DialogDescription
 } from 'pm7-ui-style-guide';
 ```
 
@@ -108,7 +108,7 @@ function ControlledDialog() {
       <PM7Button onClick={() => setOpen(true)}>
         Open Dialog
       </PM7Button>
-      
+
       <PM7Dialog open={open} onOpenChange={setOpen}>
         <PM7DialogContent>
           <PM7DialogHeader>
@@ -226,7 +226,7 @@ function WideDialog() {
 
 ## Styling
 
-The dialog component comes pre-styled with Winfakt's design system. The styling includes:
+The dialog component comes pre-styled with PM7's design system. The styling includes:
 
 - Proper backdrop with overlay
 - Animations for opening and closing
@@ -240,9 +240,9 @@ The dialog component comes pre-styled with Winfakt's design system. The styling 
 The package includes full TypeScript definitions for all dialog components:
 
 ```tsx
-import { 
-  PM7DialogProps, 
-  PM7DialogContentProps 
+import {
+  PM7DialogProps,
+  PM7DialogContentProps
 } from 'pm7-ui-style-guide';
 
 // Define dialog props with type checking

@@ -12,8 +12,8 @@ const ExampleTabSelectorOverview = ({ theme }: { theme: 'light' | 'dark' }) => (
       <li>Simple API for tab management</li>
     </ul>
     <h4 className="text-lg font-medium mb-2 mt-6">Live Example</h4>
-    <p className="mb-2">This entire example is using the PM7TabSelector component for navigation.</p>
-    <p>Try clicking on different tabs to see how it works!</p>
+      <p className="mb-2">This entire example is using the PM7TabSelector component for navigation.</p>
+      <p>Try clicking on different tabs to see how it works!</p>
   </>
 );
 

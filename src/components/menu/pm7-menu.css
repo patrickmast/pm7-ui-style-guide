@@ -1,4 +1,4 @@
-/* Winfakt Menu Component CSS - Self-contained styling for light and dark modes
+/* PM7 Menu Component CSS - Self-contained styling for light and dark modes
    ENHANCEMENT: Added spacing to the switch icon in switch-type menu items to ensure it is not too close to the label. */
 
 /* Base menu styles */
@@ -78,4 +78,37 @@
 /* Main menu positioning */
 [data-radix-dropdown-menu-content] {
   margin-top: -8px !important;
+}
+
+/* SVG icon coloring for menu items */
+.menu-item-svg-icon {
+  color: #000000;
+}
+.dark .menu-item-svg-icon {
+  color: #FAFAFA;
+}
+
+/* Highlighted or open state: force icon to white */
+[data-radix-dropdown-menu-item][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-checkbox-item][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-radio-item][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-subtrigger][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-subtrigger][data-state="open"] .menu-item-svg-icon {
+  color: #fff !important;
+}
+
+/* SVG icon coloring for menu trigger */
+.menu-trigger-icon {
+  color: #000000;
+}
+.dark .menu-trigger-icon {
+  color: #FAFAFA;
+}
+
+/* .menu-trigger-icon--custom: color is set via CSS variable for performance */
+.menu-trigger-icon--custom {
+  color: var(--menu-trigger-icon-color, #1C86EF);
+}
+.dark .menu-trigger-icon--custom {
+  color: var(--menu-trigger-icon-color-dark, #FFDD00);
 }

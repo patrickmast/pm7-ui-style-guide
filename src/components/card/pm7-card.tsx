@@ -2,45 +2,68 @@
 
 import * as React from "react"
 
+export interface PM7CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  theme?: 'light' | 'dark';
+  className?: string;
+}
+
 const PM7Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className = "", ...props }, ref) => (
+  PM7CardProps
+>(({ className = "", theme = 'light', ...props }, ref) => (
   <div
     ref={ref}
-    className={`pm7-card bg-background border p-6 sm:rounded-lg ${className}`}
+    className={`pm7-card ${className} ${theme === 'dark' ? 'dark' : ''}`}
     style={{
-      backgroundColor: className?.includes("dark") ? "#262626" : "white",
-      border: `1px solid ${className?.includes("dark") ? "#525252" : "#e2e8f0"}`,
+      backgroundColor: theme === 'dark' ? "#262626" : "white",
+      border: `1px solid ${theme === 'dark' ? "#525252" : "#e2e8f0"}`,
+      color: theme === 'dark' ? '#FAFAFA' : 'inherit',
+      ...props.style,
     }}
     {...props}
   />
 ))
 PM7Card.displayName = "PM7Card"
 
-const PM7CardHeader = ({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={`pm7-card-header flex flex-col space-y-1.5 text-center sm:text-left ${className}`} {...props} />
+export interface PM7CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  theme?: 'light' | 'dark';
+  className?: string;
+}
+const PM7CardHeader = ({ className = "", theme = 'light', ...props }: PM7CardHeaderProps) => (
+  <div className={`pm7-card-header flex flex-col space-y-1.5 text-center sm:text-left ${className} ${theme === 'dark' ? 'dark' : ''}`} {...props} />
 )
 PM7CardHeader.displayName = "PM7CardHeader"
 
-const PM7CardFooter = ({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={`pm7-card-footer flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 ${className}`} {...props} />
+export interface PM7CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  theme?: 'light' | 'dark';
+  className?: string;
+}
+const PM7CardFooter = ({ className = "", theme = 'light', ...props }: PM7CardFooterProps) => (
+  <div className={`pm7-card-footer flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 ${className} ${theme === 'dark' ? 'dark' : ''}`} {...props} />
 )
 PM7CardFooter.displayName = "PM7CardFooter"
 
+export interface PM7CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  theme?: 'light' | 'dark';
+  className?: string;
+}
 const PM7CardTitle = React.forwardRef<
   HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className = "", ...props }, ref) => (
-  <h3 ref={ref} className={`pm7-card-title text-lg font-semibold leading-none tracking-tight ${className}`} {...props} />
+  PM7CardTitleProps
+>(({ className = "", theme = 'light', ...props }, ref) => (
+  <h3 ref={ref} className={`pm7-card-title text-lg font-semibold leading-none tracking-tight ${className} ${theme === 'dark' ? 'dark' : ''}`} {...props} />
 ))
 PM7CardTitle.displayName = "PM7CardTitle"
 
+export interface PM7CardSubTitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  theme?: 'light' | 'dark';
+  className?: string;
+}
 const PM7CardSubTitle = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className = "", ...props }, ref) => (
-  <p ref={ref} className={`pm7-card-subtitle text-sm text-muted-foreground ${className}`} {...props} />
+  PM7CardSubTitleProps
+>(({ className = "", theme = 'light', ...props }, ref) => (
+  <p ref={ref} className={`pm7-card-subtitle text-sm text-muted-foreground ${className} ${theme === 'dark' ? 'dark' : ''}`} {...props} />
 ))
 PM7CardSubTitle.displayName = "PM7CardSubTitle"
 

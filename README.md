@@ -122,7 +122,12 @@ export default function AppHeader() {
   return (
     <header>
       <h1>PM7 Application</h1>
-      <Menu menuItems={menuItems} menuAlignment="start" /> {/* Pre-styled with PM7 branding */}
+      <Menu
+        menuItems={menuItems}
+        menuAlignment="start"
+        menuIconColorLight="#1C86EF"
+        menuIconColorDark="#FFDD00"
+      />
     </header>
   );
 }
@@ -211,7 +216,12 @@ export default function AppMenu() {
   ];
 
   // You can specify the menu alignment
-  return <Menu menuItems={menuItems} menuAlignment="start" menuIconColor="#1C86EF" />;
+  return <Menu
+    menuItems={menuItems}
+    menuAlignment="start"
+    menuIconColorLight="#1C86EF"
+    menuIconColorDark="#FFDD00"
+  />;
 }
 ```
 
@@ -222,7 +232,7 @@ export default function AppMenu() {
 - Follows all PM7 interaction patterns
 - Supports separators with `type: 'separator'`
 - Configurable menu alignment with `menuAlignment` prop (values: `start`, `center`, `end`)
-- Customizable menu icon color with `menuIconColor` prop
+- Customizable menu icon color for light and dark mode with `menuIconColorLight` and `menuIconColorDark` props
 
 **AI Assistant Prompt Example:**
 
@@ -241,7 +251,7 @@ Add a menu to my React application using the pm7-ui-style-guide package. Specifi
    - An "About" item that shows version information
 
 3. Set the menuAlignment to "start" so the menu aligns with the left edge of the trigger button
-4. Set the menuIconColor to "#1C86EF" to match the PM7 branding
+4. Set the menuIconColorLight to "#1C86EF" (PM7 Blue) and menuIconColorDark to "#FFDD00" (Yellow) to match the PM7 branding
 5. Make sure the menu appears when clicking a button in the header
 
 Please show the complete implementation including imports and the menuItems array definition.
@@ -343,18 +353,18 @@ import {
 
 export default function AppDialog() {
   const [theme, setTheme] = useState('light');
-  
+
   return (
     <PM7Dialog open={isOpen} onOpenChange={setIsOpen}>
       <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
         <PM7DialogHeader>
           <PM7DialogTitle>Dialog Title</PM7DialogTitle>
         </PM7DialogHeader>
-        
+
         <PM7DialogSeparator className={theme === 'dark' ? 'dark' : ''} marginTop="16px" marginBottom="16px" />
-        
+
         <div>Dialog content goes here</div>
-        
+
         <PM7DialogFooter>
           <button onClick={() => setIsOpen(false)}>Close</button>
         </PM7DialogFooter>
@@ -418,7 +428,7 @@ This guide provides detailed instructions for third-party developers who want to
    ```sh
    npm install pm7-ui-style-guide
    ```
-   
+
    Or using yarn:
    ```sh
    yarn add pm7-ui-style-guide
@@ -446,11 +456,11 @@ import { useState } from 'react';
 
 function MyApp() {
   const [theme, setTheme] = useState('light');
-  
+
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
-  
+
   const menuItems = [
     {
       id: 'theme',
@@ -467,16 +477,17 @@ function MyApp() {
       onClick: () => window.open('https://help.example.com', '_blank')
     }
   ];
-  
+
   return (
     <div className={theme}>
       <header>
         <h1>My Application</h1>
-        <Menu 
-          menuItems={menuItems} 
+        <Menu
+          menuItems={menuItems}
           initialTheme={theme}
           menuAlignment="start"
-          menuIconColor="#1C86EF"
+          menuIconColorLight="#1C86EF"
+          menuIconColorDark="#FFDD00"
         />
       </header>
       {/* Rest of your application */}
@@ -488,13 +499,13 @@ function MyApp() {
 #### Dialog Component
 
 ```tsx
-import { 
+import {
   PM7Dialog,
   PM7DialogTrigger,
   PM7DialogContent,
   PM7DialogHeader,
   PM7DialogTitle,
-  PM7DialogFooter 
+  PM7DialogFooter
 } from 'pm7-ui-style-guide';
 import '../node_modules/pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
 
@@ -532,16 +543,16 @@ function MyForm() {
     <form>
       <div className="form-group">
         <label htmlFor="name">Name</label>
-        <input 
-          id="name" 
-          type="text" 
+        <input
+          id="name"
+          type="text"
           style={{
             borderColor: inputRules.alwaysShowBorder ? '#D4D4D4' : 'transparent',
           }}
           className="focus:border-primary"
         />
       </div>
-      <button 
+      <button
         type="submit"
         style={{ cursor: buttonRules.cursor }}
       >
@@ -606,8 +617,8 @@ The PM7 UI Style Guide components support dark mode. To enable it:
 2. Pass the theme to components that accept it:
 
 ```tsx
-<Menu 
-  menuItems={menuItems} 
+<Menu
+  menuItems={menuItems}
   initialTheme={theme}
 />
 ```
@@ -679,11 +690,6 @@ If you encounter issues not covered here:
 
 ## Brand Guidelines
 
-### Brand Name
-
-- The brand name is "PM7" (not "WinFakt")
-- Only the first letter 'W' is uppercase, and the 'k' is lowercase
-
 ### Colors
 
 - **Primary Brand Color:** #1C86EF (bright blue)
@@ -705,7 +711,7 @@ If you encounter issues not covered here:
 - Border: 1px solid #D4D4D4 in light mode, #525252 in dark mode
 - Border Radius: 6px
 - Shadow: rgba(0,0,0,0.08) 0px 5px 15px 0px, rgba(25,28,33,0.2) 0px 15px 35px -5px
-- Menu Items: 
+- Menu Items:
   - Default: Black text/icons in light mode, White (#FAFAFA) in dark mode
   - Hover: White text/icons on #1C86EF background
 - Padding: 16px horizontal (px-4), 8px vertical (py-2) on desktop, 12px vertical (py-3) on mobile

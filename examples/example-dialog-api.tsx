@@ -71,9 +71,9 @@ import {
 MIT`;
 
 const ExampleDialogAPI = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <div className="markdown-container dark:text-white">
-    <ReactMarkdown>{dialogReadme}</ReactMarkdown>
-  </div>
+    <div className="markdown-container dark:text-white">
+      <ReactMarkdown>{dialogReadme}</ReactMarkdown>
+    </div>
 );
 
 export default ExampleDialogAPI;

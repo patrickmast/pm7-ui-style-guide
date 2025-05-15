@@ -3,10 +3,10 @@ import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } 
 
 const ExampleCardUsage = ({ theme }: { theme: 'light' | 'dark' }) => (
   <>
-    <h3 className="text-xl font-semibold mb-3">Basic Usage</h3>
-    <p className="mb-4">Here's how to use the PM7Card component in your React application:</p>
-    <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mb-4 overflow-x-auto">
-      <code className="font-mono">{`import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } from '@pm7-ui/card';
+      <h3 className="text-xl font-semibold mb-3">Basic Usage</h3>
+      <p className="mb-4">Here's how to use the PM7Card component in your React application:</p>
+      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mb-4 overflow-x-auto">
+        <code className="font-mono">{`import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } from '@pm7-ui/card';
 
 <PM7Card>
   <PM7CardHeader>
@@ -18,7 +18,7 @@ const ExampleCardUsage = ({ theme }: { theme: 'light' | 'dark' }) => (
     <button>Action</button>
   </PM7CardFooter>
 </PM7Card>`}</code>
-    </pre>
+      </pre>
   </>
 );
 

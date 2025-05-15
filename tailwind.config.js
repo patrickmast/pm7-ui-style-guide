@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Winfakt brand colors
+        // PM7 brand colors
         primary: "#1C86EF",
         border: "#D4D4D4",
       },

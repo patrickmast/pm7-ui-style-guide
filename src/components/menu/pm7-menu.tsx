@@ -287,56 +287,50 @@ export { PM7MenuShortcut };
 // Main menu component with self-contained dark mode
 export interface PM7MenuProps {
   menuItems: any[]; // Using any[] to avoid circular reference
-  initialTheme?: 'light' | 'dark';
+  theme?: 'light' | 'dark';
   mobileBreakpoint?: number;
   menuAlignment?: 'start' | 'center' | 'end';
   menuIconColor?: string;
+  menuIconColorLight?: string;
+  menuIconColorDark?: string;
   showUncheckedIcon?: boolean;
 }
 
-export const PM7Menu: React.FC<PM7MenuProps> = ({
+const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuItems = [],
-  initialTheme = 'light',
+  theme = 'light',
   mobileBreakpoint = 768,
   menuAlignment = 'start',
   menuIconColor,
+  menuIconColorLight,
+  menuIconColorDark,
   showUncheckedIcon = false
 }) => {
   // State for menu open/close
   const [isOpen, setIsOpen] = React.useState(false);
-  
+
   // State for mobile detection
   const [isMobile, setIsMobile] = React.useState(false);
-  
+
   // Refs for menu elements
   const menuRef = React.useRef<HTMLDivElement>(null);
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
-  
-  // State for theme (light/dark)
-  const [theme, setTheme] = React.useState(initialTheme);
-  
+
   // State for hover tracking
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
-  
+
   // State for tracking open submenu
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
-
-  // Update theme when initialTheme prop changes
-  React.useEffect(() => {
-    if (initialTheme) {
-      setTheme(initialTheme);
-    }
-  }, [initialTheme]);
 
   // Check for mobile viewport
   React.useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < mobileBreakpoint);
     };
-    
+
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
-    
+
     return () => {
       window.removeEventListener('resize', checkIfMobile);
     };
@@ -387,21 +381,24 @@ export const PM7Menu: React.FC<PM7MenuProps> = ({
             className={`flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none`}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke={menuIconColor || (theme === 'dark' ? '#FAFAFA' : 'currentColor')}
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="4" x2="20" y1="12" y2="12" />
-              <line x1="4" x2="20" y1="6" y2="6" />
-              <line x1="4" x2="20" y1="18" y2="18" />
-            </svg>
+            {/* Use CSS variables for instant theme-based switching */}
+            {menuIconColor === '#FFDD00' || menuIconColor === '#1C86EF' || menuIconColorLight || menuIconColorDark ? (
+              <span
+                className="menu-trigger-icon menu-trigger-icon--custom"
+                style={{
+                  fontSize: 24,
+                  lineHeight: 1,
+                  '--menu-trigger-icon-color': menuIconColorLight || '#1C86EF',
+                  '--menu-trigger-icon-color-dark': menuIconColorDark || '#FFDD00',
+                } as React.CSSProperties}
+              >
+                &#8801;
+              </span>
+            ) : (
+              <span className="menu-trigger-icon" style={{ fontSize: 24, lineHeight: 1 }}>
+                &#8801;
+              </span>
+            )}
           </button>
         </PM7MenuTrigger>
 
@@ -632,3 +629,26 @@ export const PM7Menu: React.FC<PM7MenuProps> = ({
     </div>
   );
 };
+
+export const PM7Menu = React.memo(PM7MenuComponent);
+
+// Add the PM7MenuIcon component at the top (after imports)
+export const PM7MenuIcon = ({ color = "currentColor", size = 24, className, style }: { color?: string; size?: number; className?: string; style?: React.CSSProperties }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    style={style}
+  >
+    <line x1="4" x2="20" y1="12" y2="12" />
+    <line x1="4" x2="20" y1="6" y2="6" />
+    <line x1="4" x2="20" y1="18" y2="18" />
+  </svg>
+);

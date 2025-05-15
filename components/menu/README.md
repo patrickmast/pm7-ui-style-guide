@@ -1,7 +1,7 @@
 # PM7 Menu Component
 
 ## Overview
-The Menu component provides a dropdown menu with Winfakt styling and fully configurable menu items. It's built on top of Radix UI's dropdown menu primitives but pre-styled according to the Winfakt design system.
+The Menu component provides a dropdown menu with PM7 styling and fully configurable menu items. It's built on top of Radix UI's dropdown menu primitives but pre-styled according to the PM7 design system.
 
 ## Installation
 
@@ -79,7 +79,7 @@ import { useNavigate } from 'react-router-dom';
 
 const NavigationMenu = () => {
   const navigate = useNavigate();
-  
+
   const menuItems = [
     {
       id: 'home',
@@ -173,13 +173,13 @@ const DarkModeMenu = () => {
 
 ## Styling
 
-The Menu component is pre-styled according to the Winfakt design system. The styling follows these rules:
+The Menu component is pre-styled according to the PM7 design system. The styling follows these rules:
 
 - Background: White (#FFFFFF) in light mode, Dark (#23272F) in dark mode
 - Border: 1px solid #D4D4D4 in light mode, #525252 in dark mode
 - Border Radius: 6px
 - Shadow: rgba(0,0,0,0.08) 0px 5px 15px 0px, rgba(25,28,33,0.2) 0px 15px 35px -5px
-- Menu Items: 
+- Menu Items:
   - Default: Black text/icons in light mode, White (#FAFAFA) in dark mode
   - Hover: White text/icons on #1C86EF background
 - Padding: 16px horizontal (px-4), 8px vertical (py-2) on desktop, 12px vertical (py-3) on mobile

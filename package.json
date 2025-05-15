@@ -1,7 +1,7 @@
 {
   "name": "pm7-ui-style-guide",
   "version": "1.3.0",
-  "description": "The official source of truth for UI, styling, and branding across all Winfakt applications.",
+  "description": "The official source of truth for UI, styling, and branding across all PM7 applications.",
   "main": "dist/pm7-ui-style-guide.umd.js",
   "module": "dist/pm7-ui-style-guide.es.js",
   "types": "index.d.ts",

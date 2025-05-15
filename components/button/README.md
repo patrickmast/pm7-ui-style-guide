@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PM7 Button Component provides a fully-styled button that follows Winfakt's design system. It includes proper styling, hover effects, and focus states that match the Winfakt brand guidelines.
+The PM7 Button Component provides a fully-styled button that follows PM7's design system. It includes proper styling, hover effects, and focus states that match the PM7 brand guidelines.
 
 ## Import
 
@@ -130,13 +130,13 @@ function ButtonAsLink() {
 
 ## Styling
 
-The button component comes pre-styled with Winfakt's design system. The styling includes:
+The button component comes pre-styled with PM7's design system. The styling includes:
 
 - Consistent border radius
 - Proper padding based on size
 - Hover and focus states
 - Disabled state styling
-- Pointer cursor on hover (as per Winfakt guidelines)
+- Pointer cursor on hover (as per PM7 guidelines)
 
 ## TypeScript Support
 

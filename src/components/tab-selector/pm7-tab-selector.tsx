@@ -19,14 +19,14 @@ export interface PM7TabSelectorProps {
   activeTab: string;
   onTabChange: (tabId: string) => void;
   className?: string;
-  initialTheme?: 'light' | 'dark';
+  theme?: 'light' | 'dark';
 }
 
 /**
  * PM7TabSelector Component
- * 
+ *
  * A reusable tab selector component that supports both light and dark themes.
- * 
+ *
  * @param props - Component props
  * @returns React component
  */
@@ -35,46 +35,10 @@ export const PM7TabSelector: React.FC<PM7TabSelectorProps> = ({
   activeTab,
   onTabChange,
   className = '',
-  initialTheme = 'light'
+  theme = 'light',
 }) => {
-  // Theme state management
-  const [theme, setTheme] = React.useState<'light' | 'dark'>(initialTheme);
-
-  // Effect to listen for theme changes in localStorage
-  React.useEffect(() => {
-    // Function to handle storage events
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'pm7-theme' && (e.newValue === 'light' || e.newValue === 'dark')) {
-        setTheme(e.newValue as 'light' | 'dark');
-      }
-    };
-
-    // Function to check theme in localStorage
-    const checkTheme = () => {
-      const savedTheme = localStorage.getItem('pm7-theme');
-      if (savedTheme === 'dark' || savedTheme === 'light') {
-        setTheme(savedTheme as 'light' | 'dark');
-      }
-    };
-
-    // Set up interval to check theme
-    const intervalId = setInterval(checkTheme, 500);
-
-    // Add storage event listener
-    window.addEventListener('storage', handleStorageChange);
-
-    // Initial check
-    checkTheme();
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      clearInterval(intervalId);
-    };
-  }, []);
-
   return (
-    <div 
+    <div
       className={`pm7-tab-container ${className} ${theme === 'dark' ? 'dark' : ''}`}
       data-component-name="PM7TabSelector"
     >

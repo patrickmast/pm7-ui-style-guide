@@ -17,7 +17,7 @@
   position: relative;
   border-bottom: 1px solid transparent;
   margin-bottom: -1px; /* This overlaps the container border */
-  transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+  /* transition: opacity 0.2s, background-color 0.2s, color 0.2s; */
 }
 
 .pm7-tab-button.pm7-tab-active {

@@ -42,24 +42,24 @@ const ExampleMenuOverview = ({ selectedLanguage, theme }: { selectedLanguage: La
   const t = descriptions[selectedLanguage] || descriptions['en'];
   return (
     <>
-      <h2 className="text-2xl font-bold mb-4">{t.heading}</h2>
-      <p className="mb-4">{t.intro}</p>
-      <ul className="list-disc ml-5 mb-6">
-        <li className="mb-2">{t.multiLanguage}</li>
-        <li className="mb-2">{t.themeSwitching}</li>
-        <li className="mb-2">{t.submenu}</li>
-        <li className="mb-2">{t.icons}</li>
-        <li className="mb-2">{t.separators}</li>
-        <li className="mb-2">{t.checkboxes}</li>
-        <li className="mb-2">{t.alignment}</li>
-        <li className="mb-2">{t.customIconColor}</li>
-      </ul>
-      <p className="mb-4">Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.</p>
-      <h3 className="text-lg font-semibold mb-2">{t.gettingStarted}</h3>
-      <p>{t.usage}</p>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto">
-        <code>{`// For local development, use relative imports\nimport { PM7Menu } from '../src/components/menu';\n\n// Basic usage\n<PM7Menu\n  menuItems={menuItems}\n  initialTheme=\"light\"\n/>`}</code>
-      </pre>
+        <h2 className="text-2xl font-bold mb-4">{t.heading}</h2>
+        <p className="mb-4">{t.intro}</p>
+        <ul className="list-disc ml-5 mb-6">
+          <li className="mb-2">{t.multiLanguage}</li>
+          <li className="mb-2">{t.themeSwitching}</li>
+          <li className="mb-2">{t.submenu}</li>
+          <li className="mb-2">{t.icons}</li>
+          <li className="mb-2">{t.separators}</li>
+          <li className="mb-2">{t.checkboxes}</li>
+          <li className="mb-2">{t.alignment}</li>
+          <li className="mb-2">{t.customIconColor}</li>
+        </ul>
+        <p className="mb-4">Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.</p>
+          <h3 className="text-lg font-semibold mb-2">{t.gettingStarted}</h3>
+          <p>{t.usage}</p>
+          <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto">
+            <code>{`// For local development, use relative imports\nimport { PM7Menu } from '../src/components/menu';\n\n// Basic usage\n<PM7Menu\n  menuItems={menuItems}\n  initialTheme=\"light\"\n/>`}</code>
+          </pre>
     </>
   );
 };

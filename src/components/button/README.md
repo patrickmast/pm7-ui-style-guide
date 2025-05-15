@@ -37,22 +37,22 @@ import { PM7Button } from '../src/components/button/pm7-button';
 function MyButtons() {
   // The theme prop can be 'light' or 'dark'
   const theme = 'light'; // or 'dark' based on your app's theme
-  
+
   return (
     <div className="space-y-4">
       {/* Default button */}
       <PM7Button theme={theme}>Default Button</PM7Button>
-      
+
       {/* Button variants */}
       <PM7Button theme={theme} className={buttonRules.outline}>Outline Button</PM7Button>
       <PM7Button theme={theme} className={buttonRules.secondary}>Secondary Button</PM7Button>
       <PM7Button theme={theme} className={buttonRules.ghost}>Ghost Button</PM7Button>
       <PM7Button theme={theme} className={buttonRules.link}>Link Button</PM7Button>
-      
+
       {/* Button sizes */}
       <PM7Button theme={theme} className={buttonRules.small}>Small Button</PM7Button>
       <PM7Button theme={theme} className={buttonRules.large}>Large Button</PM7Button>
-      
+
       {/* Disabled state */}
       <PM7Button theme={theme} disabled>Disabled Button</PM7Button>
       <PM7Button theme={theme} className={buttonRules.disabled}>Disabled via Class</PM7Button>
@@ -143,8 +143,8 @@ The button rules are implemented as a JavaScript object that exports styling pro
 // Button rules for pm7-ui-style-guide
 export const buttonRules = {
   // Colors
-  primaryColor: '#1C86EF', // Winfakt primary blue for buttons
-  borderColor: '#D4D4D4', // Winfakt border color
+  primaryColor: '#1C86EF', // PM7 primary blue for buttons
+  borderColor: '#D4D4D4', // PM7 border color
 
   // Behavior
   cursor: 'pointer', // Always show pointer cursor on hover
@@ -181,13 +181,13 @@ function DialogWithButtons() {
     <PM7Dialog>
       {/* Dialog content */}
       <PM7DialogFooter>
-        <button 
+        <button
           style={{ cursor: buttonRules.cursor }}
           className="cancel-button"
         >
           Cancel
         </button>
-        <button 
+        <button
           style={{ cursor: buttonRules.cursor }}
           className="confirm-button"
         >
