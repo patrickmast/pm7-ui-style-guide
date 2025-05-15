@@ -209,7 +209,7 @@ const App = () => {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" strokeWidth="2">
           <path d="M6 21a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3zM18 5h-8v14h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1"/>
         </svg>
-      )
+      ),
     },
     {
       id: 'divider-2',
@@ -234,7 +234,12 @@ const App = () => {
       <header>
         <div className="header-controls">
           <div className="menu-wrapper">
-            <Menu menuItems={menuItems} menuAlignment="start" menuIconColor="white" initialTheme={theme as 'light' | 'dark'} />
+            <Menu menuItems={menuItems}
+                  menuAlignment="start"
+                  menuTriggerIconColorLight="#FFFFFF"
+                  menuTriggerIconColorDark="#FFFFFF"
+                  theme={theme as 'light' | 'dark'}
+            />
           </div>
           <div className="theme-toggle" style={{ marginRight: '-5px', position: 'relative', left: '-5px' }}>
             <div

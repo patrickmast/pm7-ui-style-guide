@@ -290,7 +290,6 @@ export interface PM7MenuProps {
   theme?: 'light' | 'dark';
   mobileBreakpoint?: number;
   menuAlignment?: 'start' | 'center' | 'end';
-  menuIconColor?: string;
   menuIcon?: React.ReactNode; // New: custom icon
   menuTriggerIconColorLight?: string;
   menuTriggerIconColorDark?: string;
@@ -300,25 +299,11 @@ export interface PM7MenuProps {
   showUncheckedIcon?: boolean;
 }
 
-// Helper function to safely add className to React elements
-function addMenuItemSvgIconClass(icon: React.ReactNode) {
-  if (
-    React.isValidElement(icon) &&
-    (typeof icon.type === 'string' || (icon.props && 'className' in icon.props))
-  ) {
-    return React.cloneElement(icon, {
-      className: [icon.props.className, 'menu-item-svg-icon'].filter(Boolean).join(' ')
-    });
-  }
-  return icon;
-}
-
 const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuItems = [],
   theme = 'light',
   mobileBreakpoint = 768,
   menuAlignment = 'start',
-  menuIconColor,
   menuTriggerIconColorLight,
   menuTriggerIconColorDark,
   menuIcon,
@@ -422,7 +407,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                       '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
                     } as React.CSSProperties}
                   >
-                    {addMenuItemSvgIconClass(menuIcon)}
+                    {menuIcon}
                   </span>
                 )}
                 {menuLabel}
@@ -437,7 +422,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
                 } as React.CSSProperties}
               >
-                {addMenuItemSvgIconClass(menuIcon)}
+                {menuIcon}
               </span>
             ) : (
               <span
@@ -492,7 +477,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                     disabled={item.disabled}
                   >
                     {item.icon && (
-                      <span className="menu-item-icon">{addMenuItemSvgIconClass(item.icon)}</span>
+                      <span className="menu-item-icon">{item.icon}</span>
                     )}
                     <span className="flex-1">{item.label}</span>
                   </PM7MenuSubTrigger>
@@ -524,7 +509,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                             className={theme === 'dark' ? 'dark' : ''}
                           >
                             {subItem.icon && (
-                              <span className="menu-item-icon">{addMenuItemSvgIconClass(subItem.icon)}</span>
+                              <span className="menu-item-icon">{subItem.icon}</span>
                             )}
                             <span className="flex-1">{subItem.label}</span>
                           </PM7MenuCheckboxItem>
@@ -540,7 +525,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                             onMouseLeave={() => setHoveredItem(null)}
                           >
                             {subItem.icon && (
-                              <span className="menu-item-icon">{addMenuItemSvgIconClass(subItem.icon)}</span>
+                              <span className="menu-item-icon">{subItem.icon}</span>
                             )}
                             <span className="flex-1">{subItem.label}</span>
                           </PM7MenuItem>
@@ -566,7 +551,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   className={theme === 'dark' ? 'dark' : ''}
                 >
                   {item.icon && (
-                    <span className="menu-item-icon">{addMenuItemSvgIconClass(item.icon)}</span>
+                    <span className="menu-item-icon">{item.icon}</span>
                   )}
                   <span className="flex-1">{item.label}</span>
                 </PM7MenuCheckboxItem>
@@ -588,7 +573,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   onMouseLeave={() => setHoveredItem(null)}
                 >
                   {item.icon && (
-                    <span className="menu-item-icon">{addMenuItemSvgIconClass(item.icon)}</span>
+                    <span className="menu-item-icon">{item.icon}</span>
                   )}
                   <span className="flex-1">{item.label}</span>
                   {item.type === 'switch' && (
@@ -622,7 +607,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   onMouseLeave={() => setHoveredItem(null)}
                 >
                   {item.icon && (
-                    <span className="menu-item-icon">{addMenuItemSvgIconClass(item.icon)}</span>
+                    <span className="menu-item-icon">{item.icon}</span>
                   )}
                   <span className="flex-1">{item.label}</span>
                 </PM7MenuItem>

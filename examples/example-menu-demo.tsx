@@ -434,7 +434,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
             menuTriggerIconColorDark={'#FFDD00'} // Yellow
           />
           <div className="ml-4">
-            <p>{getDescription('iconColorDesc')} <code>menuIconColor</code> {getDescription('prop')}</p>
+            <p>{getDescription('iconColorDesc')} <code>menuTriggerIconColorLight</code> / <code>menuTriggerIconColorDark</code> {getDescription('prop')}</p>
             <p className="mt-2">{getDescription('exampleUses')} {theme === 'dark' ? getDescription('yellow') : getDescription('primaryBlue')} {getDescription('color')} <code>{theme === 'dark' ? '#FFDD00' : '#1C86EF'}</code></p>
           </div>
         </div>
