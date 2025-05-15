@@ -293,6 +293,10 @@ export interface PM7MenuProps {
   menuIconColor?: string;
   menuIconColorLight?: string;
   menuIconColorDark?: string;
+  menuIcon?: React.ReactNode; // New: custom icon
+  menuLabel?: React.ReactNode; // New: custom label (string or ReactNode)
+  menuTriggerLabelColorLight?: string; // New: label color for light mode
+  menuTriggerLabelColorDark?: string;  // New: label color for dark mode
   showUncheckedIcon?: boolean;
 }
 
@@ -304,6 +308,10 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuIconColor,
   menuIconColorLight,
   menuIconColorDark,
+  menuIcon,
+  menuLabel,
+  menuTriggerLabelColorLight,
+  menuTriggerLabelColorDark,
   showUncheckedIcon = false
 }) => {
   // State for menu open/close
@@ -381,21 +389,53 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
             className={`flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none`}
             onClick={() => setIsOpen(!isOpen)}
           >
-            {/* Use CSS variables for instant theme-based switching */}
-            {menuIconColor === '#FFDD00' || menuIconColor === '#1C86EF' || menuIconColorLight || menuIconColorDark ? (
+            {/* Priority: menuLabel (with optional icon), then menuIcon, then default icon */}
+            {menuLabel ? (
+              <span
+                className="menu-trigger-label flex items-center gap-2"
+                style={{
+                  color: theme === 'dark'
+                    ? (menuTriggerLabelColorDark || '#FAFAFA')
+                    : (menuTriggerLabelColorLight || '#000000'),
+                }}
+              >
+                {menuIcon && (
+                  <span
+                    className="menu-trigger-icon menu-trigger-icon--custom"
+                    style={{
+                      fontSize: 24,
+                      lineHeight: 1,
+                      '--menu-trigger-icon-color': menuIconColorLight || '#000000', // Black fallback
+                      '--menu-trigger-icon-color-dark': menuIconColorDark || '#FAFAFA', // White fallback
+                    } as React.CSSProperties}
+                  >
+                    {menuIcon}
+                  </span>
+                )}
+                {menuLabel}
+              </span>
+            ) : menuIcon ? (
               <span
                 className="menu-trigger-icon menu-trigger-icon--custom"
                 style={{
                   fontSize: 24,
                   lineHeight: 1,
-                  '--menu-trigger-icon-color': menuIconColorLight || '#1C86EF',
-                  '--menu-trigger-icon-color-dark': menuIconColorDark || '#FFDD00',
+                  '--menu-trigger-icon-color': menuIconColorLight || '#000000', // Black fallback
+                  '--menu-trigger-icon-color-dark': menuIconColorDark || '#FAFAFA', // White fallback
                 } as React.CSSProperties}
               >
-                &#8801;
+                {menuIcon}
               </span>
             ) : (
-              <span className="menu-trigger-icon" style={{ fontSize: 24, lineHeight: 1 }}>
+              <span
+                className="menu-trigger-icon menu-trigger-icon--custom"
+                style={{
+                  fontSize: 24,
+                  lineHeight: 1,
+                  '--menu-trigger-icon-color': menuIconColorLight || '#000000', // Black fallback
+                  '--menu-trigger-icon-color-dark': menuIconColorDark || '#FAFAFA', // White fallback
+                } as React.CSSProperties}
+              >
                 &#8801;
               </span>
             )}

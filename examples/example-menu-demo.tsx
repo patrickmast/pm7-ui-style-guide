@@ -439,6 +439,73 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
           </div>
         </div>
       </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+      {/* 1. Custom SVG as menu icon */}
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold mb-3">Custom SVG Icon as Menu Trigger</h3>
+        <p className="mb-2">This example uses a custom SVG as the menu trigger icon.</p>
+        <PM7Menu
+          menuItems={menuItems.slice(0, 3).map((item: any) => ({
+            ...item,
+            label: getLabel(item),
+            submenuItems: item.submenuItems?.map((subItem: any) => ({
+              ...subItem,
+              label: getLabel(subItem)
+            }))
+          }))}
+          theme={theme}
+          menuIcon={
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width={24} height={24}>
+              <path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <path d="m9 11 3 3 3-3" />
+            </svg>
+          }
+        />
+      </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+      {/* 2. Label as menu trigger */}
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold mb-3">Label as Menu Trigger</h3>
+        <p className="mb-2">This example uses a label ("File") as the menu trigger, similar to classic desktop apps.</p>
+        <PM7Menu
+          menuItems={[
+            { id: 'new', label: 'New', onClick: () => console.log('New') },
+            { id: 'open', label: 'Open', onClick: () => console.log('Open') },
+            { id: 'save', label: 'Save', onClick: () => console.log('Save') },
+            { id: 'sep', type: 'separator' },
+            { id: 'close', label: 'Close', onClick: () => console.log('Close') },
+          ]}
+          theme={theme}
+          menuLabel="File"
+        />
+      </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+      {/* 3. Label and SVG as menu trigger */}
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold mb-3">Label and SVG as Menu Trigger</h3>
+        <p className="mb-2">This example uses both a label ("File") and a custom SVG as the menu trigger.</p>
+        <PM7Menu
+          menuItems={[
+            { id: 'new', label: 'New', onClick: () => console.log('New') },
+            { id: 'open', label: 'Open', onClick: () => console.log('Open') },
+            { id: 'save', label: 'Save', onClick: () => console.log('Save') },
+            { id: 'sep', type: 'separator' },
+            { id: 'close', label: 'Close', onClick: () => console.log('Close') },
+          ]}
+          theme={theme}
+          menuLabel="File"
+          menuIcon={
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width={16} height={16}>
+              <path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <path d="m9 11 3 3 3-3" />
+            </svg>
+          }
+          menuIconColorLight={'#1C86EF'} // PM7 Blue
+          menuIconColorDark={'#FFDD00'} // Yellow
+          menuTriggerLabelColorLight = {'#1C86EF'} // PM7 Blue
+          menuTriggerLabelColorDark = {'#FFDD00'} // Yellow
+        />
+      </div>
     </div>
   );
 };
