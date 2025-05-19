@@ -1,4 +1,4 @@
-// Refactor: Extracted the "Demo" tab content from example-menu.tsx to this file as ExampleMenuDemo.
+// Enhancement: Synced with README. Updated to demonstrate all new props and best practices, including showUncheckedIcon and custom label color props. Added clear comments for each demo section.
 import React from 'react';
 import { PM7Menu, PM7MenuIcon } from '../src/components/menu';
 import { HomeIcon, SettingsIcon, UserIcon, MoonIcon, SunIcon, LanguagesIcon } from 'lucide-react';
@@ -370,7 +370,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
         </div>
       </div>
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-3">{getDescription('basicMenu')}</h3>
+        <h2 className="text-2xl font-bold mb-4">{getDescription('basicMenu')}</h2>
         <div className="flex items-start gap-4">
           <PM7Menu
             menuItems={menuItems.map((item: any) => ({
@@ -401,7 +401,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       </div>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-3">{getDescription('menuAlignment')}</h3>
+        <h2 className="text-2xl font-bold mb-4">{getDescription('menuAlignment')}</h2>
         <div className="flex flex-wrap gap-8">
           <div className="flex flex-col items-start">
             <p className="mb-2">{getDescription('startAlignment')}</p>
@@ -452,7 +452,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       </div>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-3">{getDescription('customIconColor')}</h3>
+        <h2 className="text-2xl font-bold mb-4">{getDescription('customIconColor')}</h2>
         <div className="flex items-start gap-4">
           <PM7Menu
             menuItems={menuItems.slice(0, 3).map((item: any) => ({
@@ -474,9 +474,43 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
         </div>
       </div>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+
+      {/* DEMO: showUncheckedIcon prop */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Show Unchecked Icon (showUncheckedIcon)</h2>
+        <p className="mb-2">This example shows check items with both checked and unchecked states. The <code>showUncheckedIcon</code> prop is enabled, so all items show an icon (checked or unchecked).</p>
+        <PM7Menu
+          menuItems={[
+            { id: 'check1', label: 'Checked Item', type: 'check', checked: true },
+            { id: 'check2', label: 'Unchecked Item', type: 'check', checked: false },
+            { id: 'radio1', label: 'Radio 1', type: 'radio', checked: false },
+            { id: 'radio2', label: 'Radio 2', type: 'radio', checked: true },
+          ]}
+          theme={theme}
+          showUncheckedIcon={true}
+        />
+      </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+
+      {/* DEMO: menuTriggerLabelColorLight / menuTriggerLabelColorDark props */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Custom Trigger Label Color</h2>
+        <p className="mb-2">This example uses a label as the menu trigger with custom label colors for light and dark mode.</p>
+        <PM7Menu
+          menuItems={[
+            { id: 'about', label: 'About', onClick: () => console.log('About') },
+            { id: 'help', label: 'Help', onClick: () => console.log('Help') },
+          ]}
+          theme={theme}
+          menuLabel="Help"
+          menuTriggerLabelColorLight="#1C86EF" // PM7 Blue
+          menuTriggerLabelColorDark="#FFDD00" // Yellow
+        />
+      </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
       {/* 1. Custom SVG as menu icon */}
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-3">Custom SVG Icon as Menu Trigger</h3>
+        <h2 className="text-2xl font-bold mb-4">Custom SVG Icon as Menu Trigger</h2>
         <p className="mb-2">This example uses a custom SVG as the menu trigger icon.</p>
         <PM7Menu
           menuItems={menuItems.slice(0, 3).map((item: any) => ({
@@ -499,7 +533,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
       {/* 2. Label as menu trigger */}
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-3">Label as Menu Trigger</h3>
+        <h2 className="text-2xl font-bold mb-4">Label as Menu Trigger</h2>
         <p className="mb-2">This example uses a label ("File") as the menu trigger, similar to classic desktop apps.</p>
         <PM7Menu
           menuItems={[
@@ -516,7 +550,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
       {/* 3. Label and SVG as menu trigger */}
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-3">Label and SVG as Menu Trigger</h3>
+        <h2 className="text-2xl font-bold mb-4">Label and SVG as Menu Trigger</h2>
         <p className="mb-2">This example uses both a label ("File") and a custom SVG as the menu trigger.</p>
         <PM7Menu
           menuItems={[

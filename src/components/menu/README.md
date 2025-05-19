@@ -81,27 +81,48 @@ function MyComponent() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `menuItems` | `PM7MenuItem[]` | `[]` | Array of menu items to display |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `menuItems` | `PM7MenuItem[]` | `[]` | Array of menu items to display (required) |
 | `theme` | `'light' \| 'dark'` | `'light'` | The current theme for the menu. Should be controlled by React state or context for instant updates. |
 | `mobileBreakpoint` | `number` | `768` | Pixel width at which to switch to mobile styling |
 | `menuAlignment` | `'start' \| 'center' \| 'end'` | `'start'` | Alignment of the menu relative to the trigger |
-| `menuIcon` | `React.ReactNode` | | Custom icon (SVG or React node) for the menu trigger. If not set, the default hamburger icon is used. |
-| `menuLabel` | `React.ReactNode` | | Custom label (string or React node) for the menu trigger. Can be used alone or with `menuIcon`. |
+| `menuIcon` | `React.ReactNode` | `undefined` | Custom icon (SVG or React node) for the menu trigger. If not set, the default hamburger icon is used. |
+| `menuLabel` | `React.ReactNode` | `undefined` | Custom label (string or React node) for the menu trigger. Can be used alone or with `menuIcon`. |
 | `menuTriggerIconColorLight` | `string` | `#000000` | Icon color for light mode. |
 | `menuTriggerIconColorDark` | `string` | `#FAFAFA` | Icon color for dark mode. |
 | `menuTriggerLabelColorLight` | `string` | `#000000` | Label color for light mode. |
 | `menuTriggerLabelColorDark` | `string` | `#FAFAFA` | Label color for dark mode. |
 | `showUncheckedIcon` | `boolean` | `false` | Whether to show an icon for unchecked items. |
-| `menuTriggerBordered` | `boolean` | `false` | If true, always show a border and subtle background on the menu trigger. |
-| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a border and subtle background only on hover of the trigger. |
+| `menuTriggerBordered` | `boolean` | `false` | If true, always show a border and subtle background on the menu trigger. Takes precedence over `menuTriggerBorderedOnHover`. |
+| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a border and subtle background only on hover of the trigger. Ignored if `menuTriggerBordered` is true. |
 
-#### Icon and Label Coloring Rules
+### Menu Item Interface
+
+```tsx
+interface PM7MenuItem {
+  id: string;            // Unique identifier for the menu item (required)
+  label: React.ReactNode; // Text or component to display (required)
+  type?: 'normal' | 'check' | 'radio' | 'submenu' | 'separator' | 'switch'; // Menu item type
+  icon?: React.ReactNode; // Optional icon to display before the label
+  rightIcon?: React.ReactNode; // Optional icon to display after the label
+  disabled?: boolean;   // Whether the item is disabled (default: false)
+  checked?: boolean;    // For check/radio/switch items, whether it's checked (default: false)
+  onChange?: (checked: boolean) => void; // For check/radio/switch items
+  onClick?: () => void;  // Click handler
+  submenuItems?: PM7MenuItem[]; // For submenu items
+  // Language-specific labels (e.g., 'label-en', 'label-es', 'label-fr', etc.)
+  [key: string]: any;
+}
+```
+
+### Icon and Label Coloring Rules
 - If `menuTriggerIconColorLight` is set, it is used for the icon in light mode; otherwise, black (`#000000`) is used.
 - If `menuTriggerIconColorDark` is set, it is used for the icon in dark mode; otherwise, white (`#FAFAFA`) is used.
 - If `menuTriggerLabelColorLight` is set, it is used for the label in light mode; otherwise, black (`#000000`) is used.
 - If `menuTriggerLabelColorDark` is set, it is used for the label in dark mode; otherwise, white (`#FAFAFA`) is used.
 
-#### Trigger Combinations
+### Trigger Combinations
 - If only `menuLabel` is set, the trigger is a label (e.g., "File").
 - If only `menuIcon` is set, the trigger is an icon.
 - If both are set, the trigger is a label with an icon (icon appears before the label).
@@ -147,19 +168,23 @@ function MyComponent() {
 />
 ```
 
-### Menu Trigger Border & Background (New)
+### Menu Trigger Border & Background
 
-You can now control whether the menu trigger (icon or label) has a border and subtle background, either always or only on hover:
+Control the appearance of the menu trigger (icon or label) with these props:
 
-| Prop                        | Type      | Default | Description                                                                 |
-|-----------------------------|-----------|---------|-----------------------------------------------------------------------------|
-| `menuTriggerBordered`       | boolean   | false   | If true, always show a border and subtle background on the menu trigger.    |
-| `menuTriggerBorderedOnHover`| boolean   | false   | If true, show a border and subtle background only on hover of the trigger.  |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `menuTriggerBordered` | `boolean` | `false` | If true, always show a border and subtle background on the menu trigger. Takes precedence over `menuTriggerBorderedOnHover`. |
+| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a border and subtle background only on hover of the trigger. Ignored if `menuTriggerBordered` is true. |
 
-- If both are false (default), the trigger is plain (no border/background).
-- If both are true, `menuTriggerBordered` takes precedence (always on).
+#### Examples
 
-#### Example: Always Show Border/Background
+**Default (no border):**
+```tsx
+<PM7Menu menuItems={menuItems} />
+```
+
+**Always show border/background:**
 ```tsx
 <PM7Menu
   menuItems={menuItems}
@@ -167,7 +192,7 @@ You can now control whether the menu trigger (icon or label) has a border and su
 />
 ```
 
-#### Example: Show Border/Background Only On Hover
+**Show border/background on hover only:**
 ```tsx
 <PM7Menu
   menuItems={menuItems}
@@ -175,13 +200,17 @@ You can now control whether the menu trigger (icon or label) has a border and su
 />
 ```
 
-#### Example: Combined with Custom Icon and Label
+**Combined with custom icon and label:**
 ```tsx
 <PM7Menu
   menuItems={menuItems}
   menuLabel="File"
   menuIcon={<PM7MenuIcon size={20} />}
   menuTriggerBorderedOnHover={true}
+  menuTriggerIconColorLight="#1C86EF"
+  menuTriggerLabelColorLight="#1C86EF"
+  menuTriggerIconColorDark="#FFDD00"
+  menuTriggerLabelColorDark="#FFDD00"
 />
 ```
 
@@ -532,19 +561,123 @@ function LanguageSwitchableMenu() {
 
 ### Best Practices
 
-1. **Consistent Keys**: Use consistent language code keys across your application (e.g., always use 'en' for English, not mixing 'en' and 'english').
+1. **Use PM7MenuIcon for Consistency**
+   - Always use the `PM7MenuIcon` component for menu items to maintain visual consistency with the menu trigger.
+   - Example:
+     ```tsx
+     import { PM7MenuIcon } from 'pm7-ui-style-guide';
+     
+     const menuItems = [
+       {
+         id: 'home',
+         label: 'Home',
+         icon: <PM7MenuIcon size={16} />
+       },
+       // ...
+     ];
+     ```
 
-2. **Fallback Labels**: Always provide a default `label` property as a fallback for languages that aren't explicitly supported.
+2. **Handle Theme Changes**
+   - Always control the `theme` prop using React state or context to ensure the menu updates when the theme changes.
+   - Example:
+     ```tsx
+     const [theme, setTheme] = useState('light');
+     
+     // Toggle theme
+     const toggleTheme = () => {
+       setTheme(theme === 'light' ? 'dark' : 'light');
+     };
+     
+     // In your component:
+     <PM7Menu
+       menuItems={menuItems}
+       theme={theme}
+     />
+     ```
 
-3. **Language Persistence**: Store the selected language in localStorage or another persistent storage to maintain the user's language preference across sessions.
+3. **Menu Item Organization**
+   - Use `type: 'separator'` to group related menu items visually.
+   - Use `type: 'submenu'` for hierarchical navigation to avoid overwhelming users with too many options.
+   - Example:
+     ```tsx
+     const menuItems = [
+       { id: 'home', label: 'Home', icon: <HomeIcon size={16} /> },
+       { id: 'profile', label: 'Profile', icon: <UserIcon size={16} /> },
+       { type: 'separator' },
+       {
+         id: 'settings',
+         label: 'Settings',
+         type: 'submenu',
+         submenuItems: [
+           { id: 'account', label: 'Account' },
+           { id: 'privacy', label: 'Privacy' },
+           { id: 'notifications', label: 'Notifications', type: 'check', checked: true },
+         ]
+       }
+     ];
+     ```
 
-4. **Dynamic Content**: For content that changes based on state (like theme labels), update all language variants when the state changes.
+4. **Accessibility**
+   - Always provide an `id` and `label` for each menu item.
+   - Use `aria-label` for icon-only buttons.
+   - Ensure proper keyboard navigation support.
+   - Test with screen readers to ensure all menu items are properly announced.
 
-5. **Accessibility**: Ensure that language selection is accessible to all users, including those using screen readers.
+5. **Performance**
+   - Memoize menu items and callbacks to prevent unnecessary re-renders.
+   - Example:
+     ```tsx
+     const menuItems = React.useMemo(() => [
+       { id: 'home', label: 'Home', onClick: handleHomeClick },
+       // ...other items
+     ], [handleHomeClick]);
+     ```
 
-6. **Consistent Naming**: Use ISO language codes where possible (e.g., 'en', 'es', 'fr') for better internationalization support.
+6. **Responsive Design**
+   - Use the `mobileBreakpoint` prop to adjust the menu's behavior on different screen sizes.
+   - Test the menu on various devices to ensure proper touch handling.
+   - Ensure the menu is usable on both touch and mouse devices.
 
-### Adding New Languages
+7. **Customization**
+   - Use the `menuTriggerIconColorLight`, `menuTriggerIconColorDark`, `menuTriggerLabelColorLight`, and `menuTriggerLabelColorDark` props to match your application's color scheme.
+   - For advanced customization, you can override the default styles using the provided CSS classes.
+   - Consider creating wrapper components for commonly used menu patterns in your application.
+
+8. **Testing**
+   - Test all interactive elements, including submenus, checkboxes, and radio buttons.
+   - Verify that the menu works correctly with keyboard navigation and screen readers.
+   - Test the menu in both light and dark themes.
+   - Test with different languages and RTL (right-to-left) text.
+
+9. **Error Handling**
+   - Always provide fallback content for dynamic labels and icons.
+   - Handle edge cases, such as empty menu items or missing required props.
+   - Implement proper error boundaries around menu components.
+
+10. **Internationalization**
+    - Use consistent language code keys across your application (e.g., always use 'en' for English, not mixing 'en' and 'english').
+    - Always provide a default `label` property as a fallback for languages that aren't explicitly supported.
+    - Consider using a proper i18n library for larger applications with many languages.
+    - Test with different text lengths as translations may vary significantly in size.
+
+11. **State Management**
+    - Keep the menu's state (open/closed, selected items) in a parent component when needed for the application logic.
+    - Use React Context or a state management library for global menu state if needed across multiple components.
+    - Consider using the `onOpenChange` callback to handle menu open/close events.
+    - Example:
+      ```tsx
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+      
+      return (
+        <PM7Menu
+          menuItems={menuItems}
+          onOpenChange={setIsMenuOpen}
+          // ...other props
+        />
+      );
+      ```
+
+## Adding New Languages
 
 To add support for a new language:
 
