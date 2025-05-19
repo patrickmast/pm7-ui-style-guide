@@ -3,11 +3,11 @@ import React from 'react';
 
 const ExampleMenuDocumentation = () => (
   <div className="p-6 text-base leading-relaxed dark:text-white">
-    <h1 className="text-3xl font-bold mb-6">PM7 Menu Component</h1>
+    <h1 className="text-3xl font-bold mb-6">PM7Menu Component</h1>
     <section>
       <h2 className="text-2xl font-bold mb-4">Overview</h2>
       <p className="mb-4">
-        The PM7 Menu component provides a flexible, accessible dropdown menu system for the PM7 UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content. This component follows the project's component directory pattern, located at <code>src/components/menu/pm7-menu.tsx</code>.
+        The PM7Menu component provides a flexible, accessible dropdown menu system for the PM7 UI Style Guide. It can be used with fully configurable menu items, allowing for complete customization of the menu content. This component follows the project's component directory pattern, located at <code>src/components/menu/pm7-menu.tsx</code>.
       </p>
     </section>
     <section>

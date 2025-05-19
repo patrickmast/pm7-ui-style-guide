@@ -1,4 +1,4 @@
-# PM7 Menu Component
+# PM7Menu Component
 
 ## Overview
 The Menu component provides a dropdown menu with PM7 styling and fully configurable menu items. It's built on top of Radix UI's dropdown menu primitives but pre-styled according to the PM7 design system.

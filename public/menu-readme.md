@@ -1,8 +1,8 @@
-# PM7 Menu Component
+# PM7Menu Component
 
 ## Overview
 
-The PM7 Menu component provides a flexible, accessible dropdown menu system for the PM7 UI Style Guide. It supports fully configurable menu items, custom icons, dark/light themes, and multi-language labels. The component is located at `src/components/menu/pm7-menu.tsx`.
+The PM7Menu component provides a flexible, accessible dropdown menu system for the PM7 UI Style Guide. It supports fully configurable menu items, custom icons, dark/light themes, and multi-language labels. The component is located at `src/components/menu/pm7-menu.tsx`.
 
 ## Main Component vs. Primitives
 

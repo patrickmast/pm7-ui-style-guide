@@ -1,5 +1,5 @@
 /**
- * PM7 Menu Component TypeScript definitions
+ * PM7Menu Component TypeScript definitions
  */
 
 // Export all primitive components from pm7-menu
