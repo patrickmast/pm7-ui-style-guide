@@ -34,7 +34,7 @@ const ExampleMenuUsage = ({ selectedLanguage }: { selectedLanguage: LanguageType
   const t = descriptions[selectedLanguage] || descriptions['en'];
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">{t.heading}</h2>
+      <h1 className="text-3xl font-bold mb-6">{t.heading}</h1>
       <h2 className="text-2xl font-bold mb-4">{t.mainComponent}</h2>
       <p className="mb-4">The <code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7Menu</code> is the primary component that renders a complete dropdown menu with a hamburger icon trigger.</p>
       <div className="mb-6">

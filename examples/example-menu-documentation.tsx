@@ -3,7 +3,7 @@ import React from 'react';
 
 const ExampleMenuDocumentation = () => (
   <div className="p-6 text-base leading-relaxed dark:text-white">
-    <h1 className="text-3xl font-bold mb-6 mt-8">PM7 Menu Component</h1>
+    <h1 className="text-3xl font-bold mb-6">PM7 Menu Component</h1>
     <section>
       <h2 className="text-2xl font-bold mb-4">Overview</h2>
       <p className="mb-4">
@@ -113,23 +113,6 @@ function MyComponent() {
     </section>
 
     <section>
-      <h2 className="text-2xl font-bold mb-4">Menu Item Interface</h2>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto text-sm mb-4">
-        <code>{`interface PM7MenuItem {
-  id: string;            // Unique identifier for the menu item (required)
-  label: React.ReactNode; // Text or component to display (required)
-  type?: 'normal' | 'check' | 'radio' | 'submenu' | 'separator' | 'switch'; // Menu item type
-  icon?: React.ReactNode; // Optional icon to display before the label
-  rightIcon?: React.ReactNode; // Optional icon to display after the label
-  disabled?: boolean;   // Whether the item is disabled (default: false)
-  checked?: boolean;    // For check/radio/switch items, whether it's checked (default: false)
-  onChange?: (checked: boolean) => void; // For check/radio/switch items
-  onClick?: () => void;  // Click handler
-  submenuItems?: PM7MenuItem[]; // For submenu items
-  // Language-specific labels (e.g., 'label-en', 'label-es', 'label-fr', etc.)
-  [key: string]: any;
-}`}</code>
-      </pre>
       <h3 className="text-xl font-semibold mb-2">Icon and Label Coloring Rules</h3>
       <ul className="list-disc ml-5 mb-4">
         <li>If <code>menuTriggerIconColorLight</code> is set, it is used for the icon in light mode; otherwise, black (<code>#000000</code>) is used.</li>

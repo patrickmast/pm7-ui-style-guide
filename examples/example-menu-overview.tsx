@@ -15,6 +15,8 @@ interface Descriptions {
     customIconColor: string;
     gettingStarted: string;
     usage: string;
+    props: string;
+    mainComponent: string;
   };
 }
 
@@ -34,6 +36,8 @@ const descriptions: Descriptions = {
     customIconColor: 'Customizable icon colors',
     gettingStarted: 'Getting Started',
     usage: 'To use the PM7Menu component in your project:',
+    props: 'Props',
+    mainComponent: 'Main Component'
   },
   // Add other languages as needed...
 };
@@ -42,7 +46,8 @@ const ExampleMenuOverview = ({ selectedLanguage }: { selectedLanguage: LanguageT
   const t = descriptions[selectedLanguage] || descriptions['en'];
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">{t.heading}</h2>
+      <h1 className="text-3xl font-bold mb-6">{t.heading}</h1>
+      <h2 className="text-2xl font-bold mb-4">{t.props}</h2>
       <p className="mb-4">{t.intro}</p>
       <ul className="list-disc ml-5 mb-6">
         <li className="mb-2">{t.multiLanguage}</li>
@@ -55,7 +60,7 @@ const ExampleMenuOverview = ({ selectedLanguage }: { selectedLanguage: LanguageT
         <li className="mb-2">{t.customIconColor}</li>
       </ul>
       <p className="mb-4">Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.</p>
-      <h2 className="text-2xl font-bold mb-4">{t.gettingStarted}</h2>
+      <h2 className="text-2xl font-bold mb-4">{t.mainComponent}</h2>
       <p>{t.usage}</p>
       <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto">
         <code>{`// For local development, use relative imports
