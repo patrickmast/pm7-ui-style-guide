@@ -101,18 +101,73 @@
   color: #fff !important;
 }
 
+/* .menu-trigger-icon--custom: color is set via CSS variable for performance */
+.menu-trigger-icon--custom {
+  color: var(--menu-trigger-icon-color, #1C86EF) !important;
+}
+.dark .menu-trigger-icon--custom {
+  color: var(--menu-trigger-icon-color-dark, #FFDD00) !important;
+}
+
 /* SVG icon coloring for menu trigger */
 .menu-trigger-icon {
   color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: 1;
+  height: 32px;
+  width: 32px;
+  margin-top: -1px;
+  margin-bottom: 3px;
+  margin-left: -1px;
+  margin-right: -1px;
+  flex-shrink: 0;
 }
 .dark .menu-trigger-icon {
   color: #FAFAFA;
 }
 
-/* .menu-trigger-icon--custom: color is set via CSS variable for performance */
-.menu-trigger-icon--custom {
-  color: var(--menu-trigger-icon-color, #1C86EF);
+.menu-trigger--bordered,
+.menu-trigger--bordered-hover {
+  border: 1px solid transparent;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.dark .menu-trigger-icon--custom {
-  color: var(--menu-trigger-icon-color-dark, #FFDD00);
+.menu-trigger--bordered {
+  border-color: #D5D5D5;
+  background: #f1f1f1;
+}
+.menu-trigger--bordered-hover:hover {
+  border-color: #D5D5D5;
+  background: #e8e7e7;
+}
+
+/* Apply dark mode styles */
+.dark .menu-trigger--bordered,
+.dark .menu-trigger--bordered-hover {
+  border: 1px solid transparent;
+}
+
+.dark .menu-trigger--bordered,
+.dark .menu-trigger--bordered-hover:hover {
+  border-color: #525252;
+  background: #23272F;
+}
+
+/* Ensure hover works even when bordered is also true */
+.menu-trigger--bordered.menu-trigger--bordered-hover:hover,
+.dark .menu-trigger--bordered.menu-trigger--bordered-hover:hover {
+  background: #e8e7e7;
+  border-color: #D5D5D5;
+}
+
+.dark .menu-trigger--bordered.menu-trigger--bordered-hover:hover {
+  background: #2f333d;
+  border-color: #525252;
 }

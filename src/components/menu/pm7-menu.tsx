@@ -297,6 +297,14 @@ export interface PM7MenuProps {
   menuTriggerLabelColorDark?: string;  // New: label color for dark mode
   menuLabel?: React.ReactNode; // New: custom label (string or ReactNode)
   showUncheckedIcon?: boolean;
+  /**
+   * If true, always show a border and subtle background on the menu trigger (icon or label). Default: false
+   */
+  menuTriggerBordered?: boolean;
+  /**
+   * If true, show a border and subtle background only on hover of the menu trigger (icon or label). Default: false
+   */
+  menuTriggerBorderedOnHover?: boolean;
 }
 
 const PM7MenuComponent: React.FC<PM7MenuProps> = ({
@@ -310,7 +318,9 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuLabel,
   menuTriggerLabelColorLight,
   menuTriggerLabelColorDark,
-  showUncheckedIcon = false
+  showUncheckedIcon = false,
+  menuTriggerBordered = false,
+  menuTriggerBorderedOnHover = false,
 }) => {
   // State for menu open/close
   const [isOpen, setIsOpen] = React.useState(false);
@@ -384,7 +394,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
           <button
             ref={menuButtonRef}
             aria-label="Open menu"
-            className={`flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none`}
+            className={cn(
+              'flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none',
+              menuTriggerBordered && 'menu-trigger--bordered',
+              menuTriggerBorderedOnHover && 'menu-trigger--bordered-hover'
+            )}
             onClick={() => setIsOpen(!isOpen)}
           >
             {/* Priority: menuLabel (with optional icon), then menuIcon, then default icon */}
@@ -401,7 +415,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   <span
                     className="menu-trigger-icon menu-trigger-icon--custom"
                     style={{
-                      fontSize: 24,
+                      fontSize: 32,
                       lineHeight: 1,
                       '--menu-trigger-icon-color': menuTriggerIconColorLight || '#000000', // Black fallback
                       '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
@@ -416,7 +430,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               <span
                 className="menu-trigger-icon menu-trigger-icon--custom"
                 style={{
-                  fontSize: 24,
+                  fontSize: 32,
                   lineHeight: 1,
                   '--menu-trigger-icon-color': menuTriggerIconColorLight || '#000000', // Black fallback
                   '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
@@ -428,7 +442,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               <span
                 className="menu-trigger-icon menu-trigger-icon--custom"
                 style={{
-                  fontSize: 24,
+                  fontSize: 32,
                   lineHeight: 1,
                   '--menu-trigger-icon-color': menuTriggerIconColorLight || '#000000', // Black fallback
                   '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback

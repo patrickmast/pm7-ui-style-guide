@@ -54,6 +54,11 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
     return 'en';
   });
 
+  // Add state for trigger border demo
+  const [showTriggerBorder, setShowTriggerBorder] = React.useState(true);
+  // Add state for trigger hover border demo
+  const [showTriggerHoverBorder, setShowTriggerHoverBorder] = React.useState(true);
+
   const handleLanguageChange = (lang: LanguageType) => {
     setSelectedLanguage(lang);
     if (typeof window !== 'undefined') {
@@ -337,6 +342,33 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
   };
   return (
     <div className="p-6">
+      {/* Checkbox for trigger border demo */}
+      <div className="mb-4 flex flex-col gap-2">
+        <div className="flex items-center">
+          <input
+            id="show-trigger-border"
+            type="checkbox"
+            className="mr-2"
+            checked={showTriggerBorder}
+            onChange={e => setShowTriggerBorder(e.target.checked)}
+          />
+          <label htmlFor="show-trigger-border" className="select-none cursor-pointer">
+            Show trigger icon or label with border.
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="show-trigger-hover-border"
+            type="checkbox"
+            className="mr-2"
+            checked={showTriggerHoverBorder}
+            onChange={e => setShowTriggerHoverBorder(e.target.checked)}
+          />
+          <label htmlFor="show-trigger-hover-border" className="select-none cursor-pointer">
+            Show trigger icon or label on hover border.
+          </label>
+        </div>
+      </div>
       <div className="mb-8">
         <h3 className="text-xl font-semibold mb-3">{getDescription('basicMenu')}</h3>
         <div className="flex items-start gap-4">
@@ -350,6 +382,8 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
               }))
             }))}
             theme={theme}
+            menuTriggerBordered={showTriggerBorder}
+            menuTriggerBorderedOnHover={showTriggerHoverBorder}
           />
           <div className="ml-4">
             <p>{getDescription('title')}</p>

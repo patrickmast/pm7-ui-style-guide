@@ -92,6 +92,8 @@ function MyComponent() {
 | `menuTriggerLabelColorLight` | `string` | `#000000` | Label color for light mode. |
 | `menuTriggerLabelColorDark` | `string` | `#FAFAFA` | Label color for dark mode. |
 | `showUncheckedIcon` | `boolean` | `false` | Whether to show an icon for unchecked items. |
+| `menuTriggerBordered` | `boolean` | `false` | If true, always show a border and subtle background on the menu trigger. |
+| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a border and subtle background only on hover of the trigger. |
 
 #### Icon and Label Coloring Rules
 - If `menuTriggerIconColorLight` is set, it is used for the icon in light mode; otherwise, black (`#000000`) is used.
@@ -142,6 +144,44 @@ function MyComponent() {
   menuTriggerIconColorDark="#FFDD00"  // Yellow
   menuTriggerLabelColorLight="#000000" // Black
   menuTriggerLabelColorDark="#FAFAFA"  // White
+/>
+```
+
+### Menu Trigger Border & Background (New)
+
+You can now control whether the menu trigger (icon or label) has a border and subtle background, either always or only on hover:
+
+| Prop                        | Type      | Default | Description                                                                 |
+|-----------------------------|-----------|---------|-----------------------------------------------------------------------------|
+| `menuTriggerBordered`       | boolean   | false   | If true, always show a border and subtle background on the menu trigger.    |
+| `menuTriggerBorderedOnHover`| boolean   | false   | If true, show a border and subtle background only on hover of the trigger.  |
+
+- If both are false (default), the trigger is plain (no border/background).
+- If both are true, `menuTriggerBordered` takes precedence (always on).
+
+#### Example: Always Show Border/Background
+```tsx
+<PM7Menu
+  menuItems={menuItems}
+  menuTriggerBordered={true}
+/>
+```
+
+#### Example: Show Border/Background Only On Hover
+```tsx
+<PM7Menu
+  menuItems={menuItems}
+  menuTriggerBorderedOnHover={true}
+/>
+```
+
+#### Example: Combined with Custom Icon and Label
+```tsx
+<PM7Menu
+  menuItems={menuItems}
+  menuLabel="File"
+  menuIcon={<PM7MenuIcon size={20} />}
+  menuTriggerBorderedOnHover={true}
 />
 ```
 
