@@ -160,7 +160,18 @@
   background: #23272F;
 }
 
-/* Ensure hover works even when bordered is also true */
+/* Hover effect when only bordered-hover is true (lighter effect) */
+.menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: transparent;
+}
+
+.dark .menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: transparent;
+}
+
+/* Hover effect when both bordered and bordered-hover are true (darker effect) */
 .menu-trigger--bordered.menu-trigger--bordered-hover:hover,
 .dark .menu-trigger--bordered.menu-trigger--bordered-hover:hover {
   background: #e8e7e7;

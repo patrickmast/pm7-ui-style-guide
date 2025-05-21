@@ -62,16 +62,20 @@ const ExampleMenuOverview = ({ selectedLanguage }: { selectedLanguage: LanguageT
       <p className="mb-4">Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.</p>
       <h2 className="text-2xl font-bold mb-4">{t.mainComponent}</h2>
       <p>{t.usage}</p>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto">
-        <code>{`// For local development, use relative imports
+      <div className="mt-2 rounded-md overflow-hidden">
+        <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
+          <code className="text-gray-800 dark:text-gray-200">
+            {`// For local development, use relative imports
 import { PM7Menu } from '../src/components/menu';
 
 // Basic usage
 <PM7Menu
   menuItems={menuItems}
   theme="light"
-/>`}</code>
-      </pre>
+/>`}
+          </code>
+        </pre>
+      </div>
     </div>
   );
 };

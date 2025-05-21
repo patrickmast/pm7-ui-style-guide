@@ -95,7 +95,7 @@ function MyComponent() {
 | `menuTriggerLabelColorDark` | `string` | `#FAFAFA` | Label color for dark mode. |
 | `showUncheckedIcon` | `boolean` | `false` | Whether to show an icon for unchecked items. |
 | `menuTriggerBordered` | `boolean` | `false` | If true, always show a border and subtle background on the menu trigger. Takes precedence over `menuTriggerBorderedOnHover`. |
-| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a border and subtle background only on hover of the trigger. Ignored if `menuTriggerBordered` is true. |
+| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a subtle background (no border) on hover of the trigger. When combined with `menuTriggerBordered`, shows a border and stronger background on hover. Ignored if `menuTriggerBordered` is true. |
 
 ### Menu Item Interface
 
@@ -175,7 +175,7 @@ Control the appearance of the menu trigger (icon or label) with these props:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `menuTriggerBordered` | `boolean` | `false` | If true, always show a border and subtle background on the menu trigger. Takes precedence over `menuTriggerBorderedOnHover`. |
-| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a border and subtle background only on hover of the trigger. Ignored if `menuTriggerBordered` is true. |
+| `menuTriggerBorderedOnHover` | `boolean` | `false` | If true, show a subtle background (no border) on hover of the trigger. When combined with `menuTriggerBordered`, shows a border and stronger background on hover. Ignored if `menuTriggerBordered` is true. |
 
 #### Examples
 

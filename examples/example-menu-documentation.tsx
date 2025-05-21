@@ -19,8 +19,10 @@ const ExampleMenuDocumentation = () => (
       </ul>
       <div className="mb-4">
         <span className="font-semibold">Usage Example:</span>
-        <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto text-sm">
-          <code>{`import { PM7Menu, PM7MenuIcon } from 'pm7-ui-style-guide';
+        <div className="mt-2 rounded-md overflow-hidden">
+          <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
+            <code className="text-gray-800 dark:text-gray-200">
+{`import { PM7Menu, PM7MenuIcon } from 'pm7-ui-style-guide';
 
 const menuItems = [
   {
@@ -36,8 +38,10 @@ const menuItems = [
   // ...other items
 ];
 
-<PM7Menu menuItems={menuItems} theme="dark" />`}</code>
-        </pre>
+<PM7Menu menuItems={menuItems} theme="dark" />`}
+            </code>
+          </pre>
+        </div>
         <ul className="list-disc ml-5 mt-2">
           <li>The menu trigger button also uses <code>PM7MenuIcon</code> by default.</li>
           <li>You can adjust the <code>size</code> and <code>color</code> props as needed (default color is <code>currentColor</code>).</li>
@@ -47,8 +51,10 @@ const menuItems = [
     <section>
       <h2 className="text-2xl font-bold mb-4">Usage</h2>
       <h3 className="text-xl font-semibold mb-2">Complete Menu Component</h3>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto text-sm mb-4">
-        <code>{`// For local development, use relative imports
+      <div className="rounded-md overflow-hidden mb-4">
+        <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
+          <code className="text-gray-800 dark:text-gray-200">
+{`// For local development, use relative imports
 import { PM7Menu, PM7MenuIcon } from '../src/components/menu';
 // For production, use package imports
 // import { PM7Menu, PM7MenuIcon } from 'pm7-ui-style-guide';
@@ -79,8 +85,10 @@ function MyComponent() {
       theme={theme}
     />
   );
-}`}</code>
-      </pre>
+}`}
+          </code>
+        </pre>
+      </div>
 
       <h3 className="text-xl font-semibold mb-2">Props</h3>
       <div className="overflow-x-auto mb-4">
@@ -129,8 +137,10 @@ function MyComponent() {
       </ul>
       <div className="mb-4">
         <span className="font-semibold">Usage Examples:</span>
-        <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto text-sm mb-4">
-          <code>{`// Default Hamburger Icon
+        <div className="mt-2 rounded-md overflow-hidden">
+          <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
+            <code className="text-gray-800 dark:text-gray-200">
+{`// Default Hamburger Icon
 <PM7Menu menuItems={menuItems} />
 
 // Custom Icon
@@ -158,8 +168,10 @@ function MyComponent() {
   menuTriggerIconColorDark="#FFDD00"  // Yellow
   menuTriggerLabelColorLight="#000000" // Black
   menuTriggerLabelColorDark="#FAFAFA"  // White
-/>`}</code>
-        </pre>
+/>`}
+            </code>
+          </pre>
+        </div>
       </div>
       <h3 className="text-xl font-semibold mb-2">Menu Trigger Border &amp; Background</h3>
       <div className="overflow-x-auto mb-4">
@@ -179,8 +191,10 @@ function MyComponent() {
         </table>
       </div>
       <span className="font-semibold">Examples:</span>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto text-sm mb-4">
-        <code>{`// Default (no border)
+      <div className="mt-2 rounded-md overflow-hidden">
+        <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
+          <code className="text-gray-800 dark:text-gray-200">
+{`// Default (no border)
 <PM7Menu menuItems={menuItems} />
 
 // Always show border/background
@@ -205,8 +219,10 @@ function MyComponent() {
   menuTriggerLabelColorLight="#1C86EF"
   menuTriggerIconColorDark="#FFDD00"
   menuTriggerLabelColorDark="#FFDD00"
-/>`}</code>
-      </pre>
+/>`}
+          </code>
+        </pre>
+      </div>
     </section>
 
     <section>
@@ -229,8 +245,10 @@ function MyComponent() {
         <li>RTL support: menu adapts to <code>dir="rtl"</code> on the HTML element</li>
         <li>Test with various languages and text lengths</li>
       </ul>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-3 rounded mt-2 overflow-x-auto text-sm">
-        <code>{`const menuItems = [
+      <div className="mt-2 rounded-md overflow-hidden">
+        <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
+          <code className="text-gray-800 dark:text-gray-200">
+{`const menuItems = [
   {
     id: 'profile',
     label: 'Profile',
@@ -240,8 +258,10 @@ function MyComponent() {
     // ...other languages
     onClick: () => {}
   },
-];`}</code>
-      </pre>
+];`}
+          </code>
+        </pre>
+      </div>
     </section>
 
     <section>
