@@ -4,9 +4,9 @@
  */
 
 // Main component exports with both PM7-prefixed and alias versions
-import { PM7Menu } from './components/menu';
-import { buttonRules } from './components/button';
-import { inputRules } from './components/input';
+import { PM7Menu } from './src/components/menu';
+import { buttonRules } from './src/components/button';
+import { inputRules } from './src/components/input';
 
 export { PM7Menu, PM7Menu as Menu };
 export { buttonRules };
@@ -23,12 +23,13 @@ export {
   PM7DialogTitle, 
   PM7DialogSubTitle, 
   PM7DialogDescription 
-} from './components/dialog';
+} from './src/components/dialog';
 
 // Export all component types and utilities
-export * from './components/menu';
-export * from './components/button';
-export * from './components/input';
-export * from './components/dialog';
+export * from './src/components/menu';
+export * from './src/components/button';
+export * from './src/components/input';
+export * from './src/components/dialog';
+export * from './src/components/card';
 export * from './colors';
 export * from './tokens';
