@@ -2,35 +2,37 @@
 
 ## Overview
 
-The PM7 Dialog component provides a flexible, accessible modal dialog system for the PM7 UI Style Guide. It's built on top of Radix UI's Dialog primitive and styled according to PM7's design specifications.
+The PM7 Dialog component provides a flexible, accessible modal dialog system built on Radix UI primitives with PM7 styling. It includes automatic light/dark theme support, responsive design, and accessibility features.
+
+## Installation
+
+```bash
+npm install pm7-ui-style-guide
+```
+
+## Required Dependencies
+
+The Dialog component depends on Radix UI Dialog primitives. Install the peer dependency:
+
+```bash
+npm install @radix-ui/react-dialog
+```
 
 ## Usage
 
-### Basic Dialog
+### Basic Setup
 
 ```tsx
-// For local development, use relative imports
 import {
   PM7Dialog,
   PM7DialogTrigger,
   PM7DialogContent,
   PM7DialogHeader,
-  PM7DialogFooter,
   PM7DialogTitle,
-  PM7DialogDescription,
-  PM7DialogClose
-} from '../src/components/dialog/pm7-dialog';
-// For production, use package imports
-// import {
-//   PM7Dialog,
-//   PM7DialogTrigger,
-//   PM7DialogContent,
-//   PM7DialogHeader,
-//   PM7DialogFooter,
-//   PM7DialogTitle,
-//   PM7DialogDescription,
-//   PM7DialogClose
-// } from 'pm7-ui-style-guide';
+  PM7DialogSubTitle,
+  PM7DialogFooter
+} from 'pm7-ui-style-guide';
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css'; // Required CSS
 
 function BasicDialog() {
   return (
@@ -41,17 +43,16 @@ function BasicDialog() {
       <PM7DialogContent>
         <PM7DialogHeader>
           <PM7DialogTitle>Dialog Title</PM7DialogTitle>
-          <PM7DialogDescription>
+          <PM7DialogSubTitle>
             This is a description of the dialog content.
-          </PM7DialogDescription>
+          </PM7DialogSubTitle>
         </PM7DialogHeader>
-        <div className="py-4">
-          {/* Your dialog content goes here */}
+        <div style={{ padding: '1rem 0' }}>
           <p>Main content of the dialog</p>
         </div>
         <PM7DialogFooter>
-          <button className="secondary-button">Cancel</button>
-          <button className="primary-button">Save</button>
+          <button>Cancel</button>
+          <button>Save</button>
         </PM7DialogFooter>
       </PM7DialogContent>
     </PM7Dialog>
@@ -59,186 +60,279 @@ function BasicDialog() {
 }
 ```
 
-### Dialog with Custom Trigger
+### Dark Theme Dialog
 
 ```tsx
-// For local development, use relative imports
-import {
-  PM7Dialog,
-  PM7DialogTrigger,
-  PM7DialogContent,
-  PM7DialogHeader,
-  PM7DialogTitle
-} from '../src/components/dialog/pm7-dialog';
-// For production, use package imports
-// import {
-//   PM7Dialog,
-//   PM7DialogTrigger,
-//   PM7DialogContent,
-//   PM7DialogHeader,
-//   PM7DialogTitle
-// } from 'pm7-ui-style-guide';
-
-function DialogWithCustomTrigger() {
+function DarkDialog() {
   return (
     <PM7Dialog>
       <PM7DialogTrigger asChild>
-        <button className="custom-button">
-          <span>Custom Trigger</span>
-          <IconSettings />
-        </button>
+        <button>Open Dark Dialog</button>
       </PM7DialogTrigger>
-      <PM7DialogContent>
+      <PM7DialogContent className="dark">
         <PM7DialogHeader>
-          <PM7DialogTitle>Settings</PM7DialogTitle>
+          <PM7DialogTitle>Dark Theme Dialog</PM7DialogTitle>
+          <PM7DialogSubTitle>
+            This dialog uses dark theme styling.
+          </PM7DialogSubTitle>
         </PM7DialogHeader>
-        {/* Dialog content */}
+        <div style={{ padding: '1rem 0' }}>
+          <p>Content in dark mode with proper contrast.</p>
+        </div>
+        <PM7DialogFooter>
+          <button>Cancel</button>
+          <button>Save</button>
+        </PM7DialogFooter>
       </PM7DialogContent>
     </PM7Dialog>
   );
 }
 ```
 
-## Component API
+### Controlled Dialog
+
+```tsx
+function ControlledDialog() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <PM7Dialog open={open} onOpenChange={setOpen}>
+      <PM7DialogTrigger asChild>
+        <button>Open Controlled Dialog</button>
+      </PM7DialogTrigger>
+      <PM7DialogContent>
+        <PM7DialogHeader>
+          <PM7DialogTitle>Controlled Dialog</PM7DialogTitle>
+        </PM7DialogHeader>
+        <div style={{ padding: '1rem 0' }}>
+          <p>This dialog's state is controlled externally.</p>
+        </div>
+        <PM7DialogFooter>
+          <button onClick={() => setOpen(false)}>Cancel</button>
+          <button onClick={() => setOpen(false)}>Save</button>
+        </PM7DialogFooter>
+      </PM7DialogContent>
+    </PM7Dialog>
+  );
+}
+```
+
+### Dialog with Separator
+
+```tsx
+import { PM7DialogSeparator } from 'pm7-ui-style-guide';
+
+function DialogWithSeparator() {
+  return (
+    <PM7Dialog>
+      <PM7DialogTrigger asChild>
+        <button>Open Dialog</button>
+      </PM7DialogTrigger>
+      <PM7DialogContent className="dark">
+        <PM7DialogHeader>
+          <PM7DialogTitle>Settings</PM7DialogTitle>
+          <PM7DialogSubTitle>Configure your preferences</PM7DialogSubTitle>
+        </PM7DialogHeader>
+        
+        <PM7DialogSeparator 
+          className="dark" 
+          marginTop="16px" 
+          marginBottom="16px" 
+        />
+        
+        <div>
+          <p>Settings content here</p>
+        </div>
+        
+        <PM7DialogSeparator 
+          className="dark" 
+          marginTop="16px" 
+          marginBottom="16px" 
+        />
+        
+        <PM7DialogFooter>
+          <button>Cancel</button>
+          <button>Save</button>
+        </PM7DialogFooter>
+      </PM7DialogContent>
+    </PM7Dialog>
+  );
+}
+```
+
+## API Reference
 
 ### PM7Dialog
 
-Root component that manages the state of the dialog.
-
-```tsx
-<PM7Dialog open={boolean} onOpenChange={(open: boolean) => void}>
-  {/* children */}
-</PM7Dialog>
-```
+Root component that manages dialog state. Extends all Radix UI Dialog.Root props.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `open` | `boolean` | `undefined` | Controls the open state of the dialog |
-| `onOpenChange` | `(open: boolean) => void` | `undefined` | Callback when open state changes |
+| `open` | `boolean` | `undefined` | Controls the open state |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Callback when state changes |
+| `defaultOpen` | `boolean` | `false` | Default open state for uncontrolled usage |
+| `modal` | `boolean` | `true` | Whether dialog is modal |
 
 ### PM7DialogTrigger
 
-The button that opens the dialog. Use `asChild` to use a custom element as the trigger.
+Button that opens the dialog. Extends all Radix UI Dialog.Trigger props.
 
-```tsx
-<PM7DialogTrigger asChild>
-  <button>Open Dialog</button>
-</PM7DialogTrigger>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as child element instead of button |
 
 ### PM7DialogContent
 
-The container for the dialog content.
+Main dialog container. Extends all Radix UI Dialog.Content props.
 
-```tsx
-<PM7DialogContent className="optional-extra-classes">
-  {/* dialog content */}
-</PM7DialogContent>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `''` | Additional CSS classes (use 'dark' for dark theme) |
+| `children` | `React.ReactNode` | - | Dialog content |
+| `...props` | `React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>` | - | All Radix UI Dialog.Content props |
+
+**Dark Theme**: Add `className="dark"` to enable dark theme styling.
 
 ### PM7DialogHeader
 
-Container for the dialog title and description.
+Container for title and subtitle with proper spacing.
 
-```tsx
-<PM7DialogHeader>
-  <PM7DialogTitle>Title</PM7DialogTitle>
-  <PM7DialogDescription>Description</PM7DialogDescription>
-</PM7DialogHeader>
-```
-
-### PM7DialogFooter
-
-Container for dialog action buttons, aligned to the right.
-
-```tsx
-<PM7DialogFooter>
-  <button>Cancel</button>
-  <button>Submit</button>
-</PM7DialogFooter>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `''` | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Header content |
+| `...props` | `React.HTMLAttributes<HTMLDivElement>` | - | All standard div attributes |
 
 ### PM7DialogTitle
 
-The title of the dialog.
+Dialog title using Radix UI Dialog.Title for accessibility. Extends all Radix UI Dialog.Title props.
 
-```tsx
-<PM7DialogTitle>Dialog Title</PM7DialogTitle>
-```
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `''` | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Title content |
 
 ### PM7DialogSubTitle / PM7DialogDescription
 
-A description or subtitle for the dialog. `PM7DialogDescription` is kept for backward compatibility.
+Dialog subtitle/description using Radix UI Dialog.Description. Both names refer to the same component.
 
-```tsx
-<PM7DialogSubTitle>Additional information about the dialog</PM7DialogSubTitle>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `''` | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Description content |
 
-{/* Or using the backward-compatible name */}
-<PM7DialogDescription>Additional information about the dialog</PM7DialogDescription>
-```
+**Note**: `PM7DialogDescription` is maintained for backward compatibility.
 
-**Note:** The `PM7DialogSubTitle` component was introduced to provide better semantic meaning for the dialog's secondary text. The `PM7DialogDescription` component is maintained for backward compatibility and is functionally identical to `PM7DialogSubTitle`.
+### PM7DialogFooter
+
+Container for action buttons with responsive layout.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `''` | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Footer content (typically buttons) |
+| `...props` | `React.HTMLAttributes<HTMLDivElement>` | - | All standard div attributes |
+
+### PM7DialogSeparator
+
+Visual separator with theme support.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `''` | Additional CSS classes (use 'dark' for dark theme) |
+| `marginTop` | `string` | `'0px'` | Top margin spacing |
+| `marginBottom` | `string` | `'0px'` | Bottom margin spacing |
+| `...props` | `React.HTMLAttributes<HTMLDivElement>` | - | All standard div attributes |
 
 ### PM7DialogClose
 
-A button that closes the dialog when clicked.
+Button that closes the dialog. Extends all Radix UI Dialog.Close props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as child element instead of button |
+
+### Additional Components
+
+The following Radix UI primitives are also exported for advanced usage:
+
+- `PM7DialogPortal` - Portal container
+- `PM7DialogOverlay` - Background overlay
+
+## Visual Appearance
+
+### Light Theme (default)
+- Background: White
+- Border: 1px solid #e2e8f0
+- Close button: #333333
+- Overlay: Semi-transparent black with blur
+
+### Dark Theme (className="dark")
+- Background: #262626 (dark gray)
+- Border: 1px solid #525252
+- Close button: White
+- Overlay: Semi-transparent black with blur
+
+### Layout Features
+- **Responsive**: Mobile-first design with desktop optimizations
+- **Centered**: Fixed position at viewport center
+- **Animated**: Smooth fade and zoom transitions
+- **Auto-close**: Built-in close button in top-right corner
+
+## Theme Management
+
+Enable dark theme by adding `className="dark"` to `PM7DialogContent`:
 
 ```tsx
-<PM7DialogClose asChild>
-  <button>Close</button>
-</PM7DialogClose>
+// Light theme (default)
+<PM7DialogContent>
+
+// Dark theme
+<PM7DialogContent className="dark">
+
+// Dark theme with additional classes
+<PM7DialogContent className="dark my-custom-class">
 ```
 
-## Styling
+For separators in dark theme:
+```tsx
+<PM7DialogSeparator className="dark" />
+```
 
-- **Close Icon Color:** The dialog close (X) icon is #333333 in light mode and white in dark mode, ensuring it is always clearly visible and theme-consistent. This is achieved by setting the `color` property on the button, which the SVG icon inherits via `currentColor`.
+## CSS Requirements
 
-The dialog components follow the PM7 UI Style Guide specifications:
+Import the required CSS file:
 
-- **Dialog Overlay**:
-  - Semi-transparent black background (`bg-black/50`) with blur effect (`backdrop-blur-sm`)
-  - Uses pointer cursor to indicate it's clickable to close the dialog
-  - Animated fade-in and fade-out transitions when opening and closing
+```tsx
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
+```
 
-- **Dialog Content**:
-  - Padding: 24px (p-6)
-  - Rounded corners: 6px on medium screens and larger (sm:rounded-lg)
-  - Fixed positioning in the center of the viewport
-  - Animated entrance/exit with zoom and slide effects
-  - Default cursor to indicate non-clickable area
+This provides:
+- Animation keyframes
+- Responsive layout styles
+- Typography styles
+- Theme-specific styling
 
-- **Dark Mode Support**:
-  - Background color: `#262626` in dark mode, `white` in light mode
-  - Border color: `#525252` in dark mode, `#e2e8f0` in light mode
+## Accessibility Features
 
-- **Close Button**:
-  - Positioned in the top-right corner (right-4 top-4)
-  - Partially transparent (opacity-70) with increased opacity on hover (hover:opacity-100)
-  - Uses the PM7Button component with transparent background
-  - Includes an SVG X icon and screen-reader text for accessibility
-
-- **Footer**:
-  - Mobile: Column layout with reverse order (buttons stacked with primary action on top)
-  - Desktop: Row layout with buttons aligned to the right (sm:flex-row sm:justify-end)
-  - Space between buttons on desktop (sm:space-x-2)
-
-## Accessibility
-
-The PM7Dialog component is built with accessibility in mind:
-
-- Keyboard navigation: Dialog can be closed with the Escape key
-- Focus management: Focus is trapped inside the dialog when open
-- Screen readers: Appropriate ARIA attributes are applied
-- Close button has a visible icon and screen reader text
+- **Keyboard Navigation**: Escape key closes dialog
+- **Focus Management**: Focus trapped within dialog when open
+- **Screen Readers**: Proper ARIA attributes and roles
+- **Close Button**: Visible icon with screen reader text
+- **Backdrop**: Clickable overlay to close dialog
 
 ## Best Practices
 
-1. **Clear Titles**: Always provide a clear, concise title that describes the purpose of the dialog
+1. **Always include title**: Use PM7DialogTitle for accessibility
+2. **Responsive content**: Ensure content works on all screen sizes
+3. **Clear actions**: Place primary action on the right
+4. **Theme consistency**: Use same theme throughout dialog
+5. **Escape routes**: Always provide a way to close the dialog
+6. **Content structure**: Use header/footer for organized layout
 
-2. **Descriptive Text**: Include a description when the purpose of the dialog needs additional explanation
+## Integration Notes
 
-3. **Action Buttons**: Place the primary action button on the right in the footer
-
-4. **Responsive Design**: The dialog is responsive by default, but ensure your content adapts to different screen sizes
-
-5. **Error Handling**: If the dialog contains a form, provide clear error messages within the dialog
+- Works seamlessly with PM7Button components
+- Compatible with PM7 theme system
+- Follows PM7 design system guidelines
+- Built on proven Radix UI accessibility patterns

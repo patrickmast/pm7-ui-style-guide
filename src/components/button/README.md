@@ -2,198 +2,188 @@
 
 ## Overview
 
-The PM7 Button component provides styling rules for buttons in the PM7 UI Style Guide. It ensures consistent button behavior and appearance across all PM7 applications. The component supports multiple button variants and sizes, providing a comprehensive solution for all button styling needs. This component follows the project's component directory pattern, located at `src/components/button/pm7-button.tsx`.
+The PM7 Button component provides styling rules and a ready-to-use button component for the PM7 UI Style Guide. It ensures consistent button behavior and appearance across all PM7 applications with support for multiple variants, sizes, and themes.
+
+## Installation
+
+```bash
+npm install pm7-ui-style-guide
+```
 
 ## Usage
 
-### Basic Usage
+### Using PM7Button Component
+
+```tsx
+import { PM7Button, buttonRules } from 'pm7-ui-style-guide';
+
+function MyButtons() {
+  return (
+    <div>
+      {/* Default button */}
+      <PM7Button theme="light">Default Button</PM7Button>
+
+      {/* Button variants */}
+      <PM7Button theme="light" className={buttonRules.outline}>
+        Outline Button
+      </PM7Button>
+      <PM7Button theme="light" className={buttonRules.secondary}>
+        Secondary Button
+      </PM7Button>
+      <PM7Button theme="light" className={buttonRules.ghost}>
+        Ghost Button
+      </PM7Button>
+      <PM7Button theme="light" className={buttonRules.link}>
+        Link Button
+      </PM7Button>
+
+      {/* Button sizes */}
+      <PM7Button theme="light" className={buttonRules.small}>
+        Small Button
+      </PM7Button>
+      <PM7Button theme="light" className={buttonRules.large}>
+        Large Button
+      </PM7Button>
+
+      {/* Disabled state */}
+      <PM7Button theme="light" disabled>
+        Disabled Button
+      </PM7Button>
+    </div>
+  );
+}
+```
+
+### Using Button Rules with Existing Components
+
+For applications that already use ShadCN/UI or other button components:
 
 ```tsx
 import { buttonRules } from 'pm7-ui-style-guide';
-import { Button } from '@/components/ui/button'; // Your button component
+import { Button } from '@/components/ui/button'; // Your existing button
 
 function StyledButton() {
   return (
-    <Button
-      style={{ cursor: buttonRules.cursor }}
-      // Add other styling as needed
-    >
+    <Button style={{ cursor: buttonRules.cursor }}>
       Click Me
     </Button>
   );
 }
 ```
 
-### Using the PM7Button Component
+## API Reference
 
-For applications that don't already use ShadCN/UI, you can use the included PM7Button component:
+### PM7Button Props
 
-```tsx
-// For local development, use relative imports
-import { PM7Button } from '../src/components/button/pm7-button';
-// For production, use package imports
-// import { PM7Button } from 'pm7-ui-style-guide';
-
-function MyButtons() {
-  // The theme prop can be 'light' or 'dark'
-  const theme = 'light'; // or 'dark' based on your app's theme
-
-  return (
-    <div className="space-y-4">
-      {/* Default button */}
-      <PM7Button theme={theme}>Default Button</PM7Button>
-
-      {/* Button variants */}
-      <PM7Button theme={theme} className={buttonRules.outline}>Outline Button</PM7Button>
-      <PM7Button theme={theme} className={buttonRules.secondary}>Secondary Button</PM7Button>
-      <PM7Button theme={theme} className={buttonRules.ghost}>Ghost Button</PM7Button>
-      <PM7Button theme={theme} className={buttonRules.link}>Link Button</PM7Button>
-
-      {/* Button sizes */}
-      <PM7Button theme={theme} className={buttonRules.small}>Small Button</PM7Button>
-      <PM7Button theme={theme} className={buttonRules.large}>Large Button</PM7Button>
-
-      {/* Disabled state */}
-      <PM7Button theme={theme} disabled>Disabled Button</PM7Button>
-      <PM7Button theme={theme} className={buttonRules.disabled}>Disabled via Class</PM7Button>
-    </div>
-  );
-}
-```
-
-## Button Rules
-
-### Props
-
-The PM7Button component accepts the following props:
+The PM7Button component extends all standard HTML button attributes and adds:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `theme` | `'light' or 'dark'` | `undefined` | Sets the button's theme. In dark mode, certain button variants like outline and ghost will use white text for better visibility |
-| `className` | `string` | `''` | CSS class names to apply to the button |
-| `disabled` | `boolean` | `false` | Whether the button is disabled |
+| `theme` | `'light' \| 'dark'` | `undefined` | Controls text color for certain variants in dark mode |
+| `className` | `string` | `''` | CSS classes for variants (use buttonRules constants) |
+| `disabled` | `boolean` | `false` | Disables the button |
+| `children` | `React.ReactNode` | - | Button content |
+| `...props` | `React.ButtonHTMLAttributes` | - | All standard button attributes (onClick, type, etc.) |
 
-In addition, the PM7Button component accepts all standard HTML button attributes.
+### Button Rules Object
 
-### Style Properties
+The `buttonRules` object provides styling constants:
 
-The `buttonRules` object provides standardized styling properties for buttons:
-
+#### Colors
 | Property | Value | Description |
 |----------|-------|-------------|
-| `cursor` | `'pointer'` | Always displays a pointer cursor on hover to indicate clickability |
-| `primaryColor` | `'#1C86EF'` | PM7 primary blue for buttons |
-| `borderColor` | `'#D4D4D4'` | PM7 border color for buttons |
-| `focusRingColor` | `'#1C86EF'` | Primary color for focus rings that appears when the button is focused |
+| `primaryColor` | `'#1C86EF'` | PM7 primary blue |
+| `borderColor` | `'#D4D4D4'` | PM7 border color |
+| `focusRingColor` | `'#1C86EF'` | Focus color (for reference) |
+| `cursor` | `'pointer'` | Cursor style for all buttons |
 
-**Note:** The current implementation uses inline styles for focus states rather than a focus ring.
+#### Variant Classes
+| Property | Value | Description |
+|----------|-------|-------------|
+| `button` | `'pm7-button'` | Default button style |
+| `outline` | `'pm7-button-outline'` | Transparent background with border |
+| `secondary` | `'pm7-button-secondary'` | Light gray background |
+| `ghost` | `'pm7-button-ghost'` | Transparent background, no border |
+| `link` | `'pm7-button-link'` | Text link style with underline |
 
-### Button Variants
+#### Size Classes
+| Property | Value | Description |
+|----------|-------|-------------|
+| `small` | `'pm7-button-small'` | Smaller padding and font size |
+| `large` | `'pm7-button-large'` | Larger padding and font size |
 
-The `buttonRules` object also includes CSS class names for different button variants:
+#### State Classes
+| Property | Value | Description |
+|----------|-------|-------------|
+| `disabled` | `'pm7-button-disabled'` | Disabled styling |
 
-| Property | Description |
-|----------|-------------|
-| `button` | Default button style with primary color background |
-| `outline` | Button with transparent background and border |
-| `secondary` | Button with light gray background |
-| `ghost` | Button with transparent background and no border |
-| `link` | Button styled as a text link with underline |
+## Button Variants
 
-### Button Sizes
+### Default Button
+- Background: PM7 primary blue (#1C86EF)
+- Text: White
+- Border: None
 
-The `buttonRules` object includes CSS class names for different button sizes:
+### Outline Button
+- Background: Transparent
+- Text: Inherits from parent (white in dark theme)
+- Border: 1px solid #D4D4D4
 
-| Property | Description |
-|----------|-------------|
-| `small` | Smaller button with reduced padding (0.25rem 0.5rem) and font size (0.75rem) |
-| `large` | Larger button with increased padding (0.75rem 1.5rem) and font size (1.125rem) |
+### Secondary Button
+- Background: Light gray (#f3f4f6)
+- Text: Dark gray (#111827)
+- Border: None
 
-### Button States
+### Ghost Button
+- Background: Transparent
+- Text: Inherits from parent (white in dark theme)
+- Border: None
 
-| Property | Description |
-|----------|-------------|
-| `disabled` | Styling for disabled button state with light gray background (#E5E7EB) and muted text color (#9CA3AF) |
+### Link Button
+- Background: Transparent
+- Text: PM7 primary blue (#1C86EF)
+- Border: None
+- Decoration: Underline
 
-### Focus Behavior
+## Button Sizes
 
-The PM7Button component implements custom focus behavior:
+### Small
+- Font size: 0.75rem
+- Padding: 0.25rem 0.5rem
 
-- When a button receives focus, it removes the default outline
-- Custom focus styles are applied using inline styles
-- On blur, these styles are removed
+### Default
+- Font size: 0.875rem
+- Padding: 0.5rem 1rem
 
-This ensures a consistent focus appearance across all browsers while maintaining accessibility.
+### Large
+- Font size: 1.125rem
+- Padding: 0.75rem 1.5rem
+
+## Theme Support
+
+The `theme` prop affects text color for certain variants:
+
+- **Outline/Ghost buttons**: Use white text in dark theme for better contrast
+- **Other variants**: Theme has no effect as they have explicit colors
+
+## Focus Behavior
+
+The PM7Button implements accessible focus handling:
+
+- Removes default browser outline for consistent appearance
+- Maintains focus functionality for keyboard navigation
+- No additional visual focus indicators (relies on browser defaults internally)
 
 ## Best Practices
 
-1. **Consistent Cursor**: Always apply the `cursor: 'pointer'` style to all clickable buttons to maintain a consistent user experience.
+1. **Always use pointer cursor**: Applied automatically by the component
+2. **Use theme prop**: Pass current theme for proper text contrast
+3. **Use buttonRules constants**: Instead of hardcoding class names
+4. **Maintain consistency**: Use the same variant patterns throughout your app
 
-2. **Visual Feedback**: Consider adding hover and active states to provide visual feedback to users.
+## Implementation Notes
 
-3. **Accessibility**: Ensure buttons have appropriate contrast ratios and are keyboard accessible.
-
-4. **Size Consistency**: Maintain consistent button sizes throughout your application.
-
-## Implementation Details
-
-The button rules are implemented as a JavaScript object that exports styling properties. These properties can be applied to any button component in your application.
-
-```typescript
-// Button rules for pm7-ui-style-guide
-export const buttonRules = {
-  // Colors
-  primaryColor: '#1C86EF', // PM7 primary blue for buttons
-  borderColor: '#D4D4D4', // PM7 border color
-
-  // Behavior
-  cursor: 'pointer', // Always show pointer cursor on hover
-
-  // Focus state
-  focusRingColor: '#1C86EF', // Use primary color for focus rings
-
-  // CSS Classes for different button variants
-  button: 'pm7-button',
-  outline: 'pm7-button-outline',
-  secondary: 'pm7-button-secondary',
-  ghost: 'pm7-button-ghost',
-  link: 'pm7-button-link',
-  small: 'pm7-button-small',
-  large: 'pm7-button-large',
-  disabled: 'pm7-button-disabled'
-};
-```
-
-## Integration with Other Components
-
-The button rules can be used in conjunction with other PM7 UI Style Guide components to create a cohesive user interface. For example, you can use the button rules with the dialog component to create dialog action buttons.
-
-```tsx
-// For local development, use relative imports
-import { buttonRules } from '../src/components/button/pm7-button';
-import { PM7Dialog, PM7DialogFooter } from '../src/components/dialog/pm7-dialog';
-// For production, use package imports
-// import { buttonRules } from 'pm7-ui-style-guide';
-// import { PM7Dialog, PM7DialogFooter } from 'pm7-ui-style-guide';
-
-function DialogWithButtons() {
-  return (
-    <PM7Dialog>
-      {/* Dialog content */}
-      <PM7DialogFooter>
-        <button
-          style={{ cursor: buttonRules.cursor }}
-          className="cancel-button"
-        >
-          Cancel
-        </button>
-        <button
-          style={{ cursor: buttonRules.cursor }}
-          className="confirm-button"
-        >
-          Confirm
-        </button>
-      </PM7DialogFooter>
-    </PM7Dialog>
-  );
-}
+- Variants are detected by checking if className contains specific buttonRules values
+- Disabled state can be set via `disabled` prop or `buttonRules.disabled` class
+- All styling is applied via inline styles for maximum compatibility
+- Component maintains all standard button functionality and accessibility

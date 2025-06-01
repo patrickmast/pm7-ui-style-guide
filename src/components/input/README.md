@@ -1,139 +1,274 @@
-# PM7 Input Component
+# PM7 Input Rules
 
 ## Overview
 
-The PM7 Input component provides styling rules for input fields in the PM7 UI Style Guide. It ensures consistent input behavior and appearance across all PM7 applications. This component follows the project's component directory pattern, located at `src/components/input/pm7-input.ts`.
+The PM7 Input rules provide styling guidelines for input fields to ensure consistent appearance across all PM7 applications. This module exports configuration rules rather than a complete input component, allowing maximum flexibility with existing input implementations.
+
+## Installation
+
+```bash
+npm install pm7-ui-style-guide
+```
 
 ## Usage
 
+### Basic Usage with Existing Components
+
 ```tsx
-// For local development, use relative imports
-import { inputRules } from '../src/components/input/pm7-input';
-// For production, use package imports
-// import { inputRules } from 'pm7-ui-style-guide';
-import { Input } from '@/components/ui/input'; // Your input component
+import { inputRules } from 'pm7-ui-style-guide';
 
 function StyledInput() {
   return (
-    <Input
+    <input
       style={{
-        borderColor: inputRules.alwaysShowBorder ? '#D4D4D4' : 'transparent',
+        border: inputRules.alwaysShowBorder ? '1px solid #D4D4D4' : 'none',
+        borderRadius: '6px',
+        padding: '0.5rem',
       }}
-      className="focus:border-primary"
-      // Add other styling as needed
+      className="focus:border-blue-500" // Use #1C86EF for PM7 primary
       placeholder="Enter text..."
     />
   );
 }
 ```
 
-## Input Rules
-
-The `inputRules` object provides standardized styling properties for input fields:
-
-| Property | Value | Description |
-|----------|-------|-------------|
-| `focusBorderColor` | `'primary'` | Use primary color for border on focus |
-| `alwaysShowBorder` | `true` | Always display a border around input fields |
-
-## Best Practices
-
-1. **Consistent Borders**: Always apply borders to input fields for better visibility and user experience.
-
-2. **Focus States**: Use the primary color for focus states to provide clear visual feedback.
-
-3. **Accessibility**: Ensure inputs have appropriate labels and meet accessibility standards.
-
-4. **Validation States**: Consider adding styling for different validation states (error, success, warning).
-
-## Implementation Details
-
-The input rules are implemented as a simple JavaScript object that exports styling properties. These properties can be applied to any input component in your application.
-
-```typescript
-// Input rules for pm7-ui-style-guide
-export const inputRules = {
-  focusBorderColor: 'primary', // Use primary color for border on focus
-  alwaysShowBorder: true,
-};
-```
-
-The implementation is intentionally minimal, focusing only on the key styling rules that ensure consistency across PM7 applications. This design allows for maximum flexibility when applying these rules to various input components while maintaining the core PM7 styling principles.
-
-**Note:** The current implementation only provides the basic rules. If you need more advanced input styling, you may need to extend these rules with your own custom styles.
-
-## Integration with Forms
-
-The input rules can be used in conjunction with form components to create cohesive and consistent forms:
+### With Tailwind CSS Classes
 
 ```tsx
-// For local development, use relative imports
-import { inputRules } from '../src/components/input/pm7-input';
-// For production, use package imports
-// import { inputRules } from 'pm7-ui-style-guide';
+import { inputRules } from 'pm7-ui-style-guide';
 
-function LoginForm() {
+function TailwindInput() {
+  const borderClass = inputRules.alwaysShowBorder ? 'border border-gray-300' : 'border-0';
+  
+  return (
+    <input
+      className={`${borderClass} rounded-md px-3 py-2 focus:outline-none focus:border-blue-500`}
+      placeholder="Enter text..."
+    />
+  );
+}
+```
+
+### With CSS-in-JS
+
+```tsx
+import { inputRules } from 'pm7-ui-style-guide';
+
+const inputStyles = {
+  border: inputRules.alwaysShowBorder ? '1px solid #D4D4D4' : 'none',
+  borderRadius: '6px',
+  padding: '0.5rem 0.75rem',
+  fontSize: '0.875rem',
+  outline: 'none',
+  transition: 'border-color 0.2s',
+  ':focus': {
+    borderColor: '#1C86EF' // PM7 primary color
+  }
+};
+
+function CSSInJSInput() {
+  return (
+    <input
+      style={inputStyles}
+      placeholder="Enter text..."
+    />
+  );
+}
+```
+
+### Form Example
+
+```tsx
+import { inputRules } from 'pm7-ui-style-guide';
+
+function ContactForm() {
+  const inputClassName = `
+    w-full px-3 py-2 rounded-md
+    ${inputRules.alwaysShowBorder ? 'border border-gray-300' : 'border-0'}
+    focus:outline-none focus:border-blue-500
+    transition-colors
+  `;
+
   return (
     <form className="space-y-4">
       <div>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="name" className="block text-sm font-medium mb-1">
+          Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          className={inputClassName}
+          placeholder="Your name"
+        />
+      </div>
+      
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium mb-1">
+          Email
+        </label>
         <input
           id="email"
           type="email"
-          style={{
-            borderColor: inputRules.alwaysShowBorder ? '#D4D4D4' : 'transparent',
-          }}
-          className="w-full p-2 rounded focus:border-primary"
-          placeholder="Enter your email"
+          className={inputClassName}
+          placeholder="your@email.com"
         />
       </div>
+      
       <div>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          style={{
-            borderColor: inputRules.alwaysShowBorder ? '#D4D4D4' : 'transparent',
-          }}
-          className="w-full p-2 rounded focus:border-primary"
-          placeholder="Enter your password"
+        <label htmlFor="message" className="block text-sm font-medium mb-1">
+          Message
+        </label>
+        <textarea
+          id="message"
+          className={inputClassName}
+          rows={4}
+          placeholder="Your message"
         />
       </div>
-      <button type="submit" className="w-full p-2 bg-primary text-white rounded">
-        Login
+      
+      <button 
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+      >
+        Send Message
       </button>
     </form>
   );
 }
 ```
 
-## Customization
+## API Reference
 
-While the input rules provide default styling, you can customize them to fit your specific needs:
+### inputRules Object
+
+| Property | Type | Value | Description |
+|----------|------|-------|-------------|
+| `focusBorderColor` | `string` | `'primary'` | Indicates to use PM7 primary color (#1C86EF) for focus border |
+| `alwaysShowBorder` | `boolean` | `true` | Input fields should always have a visible border |
+
+### Color Values
+
+When `focusBorderColor` is `'primary'`, use the PM7 primary color:
+- **PM7 Primary**: `#1C86EF` (bright blue)
+- **Border Default**: `#D4D4D4` (light gray)
+
+## Implementation Guidelines
+
+### Border Styling
+```tsx
+// Always show border according to PM7 rules
+const borderStyle = inputRules.alwaysShowBorder 
+  ? '1px solid #D4D4D4' 
+  : 'none';
+```
+
+### Focus States
+```tsx
+// Use PM7 primary color for focus
+const focusStyle = {
+  borderColor: '#1C86EF' // PM7 primary when focusBorderColor is 'primary'
+};
+```
+
+### Complete Input Styling
+```tsx
+const pm7InputStyle = {
+  // Base styling
+  border: inputRules.alwaysShowBorder ? '1px solid #D4D4D4' : 'none',
+  borderRadius: '6px',
+  padding: '0.5rem 0.75rem',
+  fontSize: '0.875rem',
+  outline: 'none',
+  transition: 'border-color 0.2s ease-in-out',
+  
+  // Focus state
+  ':focus': {
+    borderColor: '#1C86EF' // PM7 primary
+  }
+};
+```
+
+## Dark Mode Support
+
+For dark mode implementations, adjust colors accordingly:
 
 ```tsx
-// For local development, use relative imports
-import { inputRules } from '../src/components/input/pm7-input';
-// For production, use package imports
-// import { inputRules } from 'pm7-ui-style-guide';
+import { inputRules } from 'pm7-ui-style-guide';
 
-function CustomInput() {
-  const customStyles = {
-    ...inputRules,
-    // Override or add custom properties
-    borderRadius: '8px',
-    padding: '12px',
-  };
-
+function DarkModeInput({ isDark }) {
+  const borderColor = isDark ? '#525252' : '#D4D4D4';
+  const backgroundColor = isDark ? '#262626' : 'white';
+  const textColor = isDark ? '#FAFAFA' : 'inherit';
+  
   return (
     <input
       style={{
-        borderColor: customStyles.alwaysShowBorder ? '#D4D4D4' : 'transparent',
-        borderRadius: customStyles.borderRadius,
-        padding: customStyles.padding,
+        border: inputRules.alwaysShowBorder ? `1px solid ${borderColor}` : 'none',
+        backgroundColor,
+        color: textColor,
+        borderRadius: '6px',
+        padding: '0.5rem 0.75rem',
       }}
-      className="focus:border-primary"
-      placeholder="Customized input"
+      className="focus:border-blue-500" // #1C86EF primary remains the same
+      placeholder="Enter text..."
     />
   );
 }
+```
+
+## Validation States
+
+Extend the base rules for validation feedback:
+
+```tsx
+import { inputRules } from 'pm7-ui-style-guide';
+
+function ValidatedInput({ error, success }) {
+  let borderColor = '#D4D4D4'; // Default
+  
+  if (error) borderColor = '#EF4444'; // Red
+  if (success) borderColor = '#10B981'; // Green
+  
+  return (
+    <input
+      style={{
+        border: inputRules.alwaysShowBorder ? `1px solid ${borderColor}` : 'none',
+        borderRadius: '6px',
+        padding: '0.5rem 0.75rem',
+      }}
+      className="focus:border-blue-500"
+      placeholder="Enter text..."
+    />
+  );
+}
+```
+
+## Best Practices
+
+1. **Always show borders**: Follow the `alwaysShowBorder` rule for consistency
+2. **Use PM7 primary for focus**: Apply #1C86EF for focus states
+3. **Consistent spacing**: Use standard padding (0.5rem 0.75rem)
+4. **Smooth transitions**: Add transition effects for better UX
+5. **Proper labeling**: Always include labels for accessibility
+6. **Validation feedback**: Provide clear visual feedback for form states
+
+## Integration with PM7 Style Guide
+
+The input rules integrate seamlessly with other PM7 components:
+
+- **Colors**: Use the same primary color (#1C86EF) as PM7 buttons and other components
+- **Border radius**: 6px matches PM7 component styling
+- **Typography**: Use PM7 font sizing and spacing standards
+- **Theme support**: Compatible with PM7 light/dark theme system
+
+## Why Rules Instead of Components?
+
+The PM7 Input module provides rules rather than complete components because:
+
+1. **Flexibility**: Works with any existing input library or custom implementation
+2. **Framework agnostic**: Can be used with React, Vue, Angular, or vanilla JavaScript
+3. **Minimal overhead**: Only includes essential styling guidelines
+4. **Easy integration**: Doesn't interfere with existing form logic or validation
+
+This approach allows teams to maintain their current input implementations while ensuring PM7 design consistency.
