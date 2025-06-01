@@ -101,10 +101,26 @@ const TabSelectorExample = ({ theme }: { theme: ThemeType }) => {
         initialTheme={theme}
         className="mb-4"
       />
-      {activeTab === 'Overview' && <ExampleTabSelectorOverview theme={theme} />}
-      {activeTab === 'Usage' && <ExampleTabSelectorUsage theme={theme} />}
-      {activeTab === 'API' && <ExampleTabSelectorAPI theme={theme} />}
-      {activeTab === 'Examples' && <ExampleTabSelectorExamples theme={theme} />}
+      {activeTab === 'Overview' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleTabSelectorOverview theme={theme} />
+        </div>
+      )}
+      {activeTab === 'Usage' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleTabSelectorUsage theme={theme} />
+        </div>
+      )}
+      {activeTab === 'API' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleTabSelectorAPI theme={theme} />
+        </div>
+      )}
+      {activeTab === 'Examples' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleTabSelectorExamples theme={theme} />
+        </div>
+      )}
     </>
   );
 };

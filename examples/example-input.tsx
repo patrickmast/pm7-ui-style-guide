@@ -207,7 +207,7 @@ const InputExample = ({ theme }: { theme: ThemeType }) => {
   };
 
   return (
-    <div className={`input-example ${theme === 'dark' ? 'dark' : ''}`}>
+    <>
       <PM7TabSelector
         tabs={[
           { id: 'Overview', label: 'Overview' },
@@ -220,11 +220,27 @@ const InputExample = ({ theme }: { theme: ThemeType }) => {
         initialTheme={theme}
         className="mb-4"
       />
-      {activeTab === 'Overview' && <ExampleInputOverview theme={theme} />}
-      {activeTab === 'Usage' && <ExampleInputUsage theme={theme} />}
-      {activeTab === 'API' && <ExampleInputAPI theme={theme} />}
-      {activeTab === 'Examples' && <ExampleInputExamples theme={theme} />}
-    </div>
+      {activeTab === 'Overview' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleInputOverview theme={theme} />
+        </div>
+      )}
+      {activeTab === 'Usage' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleInputUsage theme={theme} />
+        </div>
+      )}
+      {activeTab === 'API' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleInputAPI theme={theme} />
+        </div>
+      )}
+      {activeTab === 'Examples' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleInputExamples theme={theme} />
+        </div>
+      )}
+    </>
   );
 };
 

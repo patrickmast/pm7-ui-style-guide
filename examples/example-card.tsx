@@ -81,10 +81,26 @@ export default function ExampleCard({ theme }: { theme: ThemeType }) {
         initialTheme={theme}
         className="mb-4"
       />
-      {activeTab === "Overview" && <ExampleCardOverview theme={theme} />}
-      {activeTab === "Usage" && <ExampleCardUsage theme={theme} />}
-      {activeTab === "API" && <ExampleCardAPI theme={theme} />}
-      {activeTab === "Examples" && <ExampleCardExamples theme={theme} />}
+      {activeTab === "Overview" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleCardOverview theme={theme} />
+        </div>
+      )}
+      {activeTab === "Usage" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleCardUsage theme={theme} />
+        </div>
+      )}
+      {activeTab === "API" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleCardAPI theme={theme} />
+        </div>
+      )}
+      {activeTab === "Examples" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleCardExamples theme={theme} />
+        </div>
+      )}
     </>
   );
 }

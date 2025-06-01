@@ -116,10 +116,26 @@ const DialogExample = ({ theme }: { theme: ThemeType }) => {
         className="mb-4"
       />
 
-      {activeTab === "Overview" && <ExampleDialogOverview theme={theme} />}
-      {activeTab === "Usage" && <ExampleDialogUsage theme={theme} />}
-      {activeTab === "API" && <ExampleDialogAPI theme={theme} />}
-      {activeTab === "Examples" && <ExampleDialogExamples theme={theme} />}
+      {activeTab === "Overview" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleDialogOverview theme={theme} />
+        </div>
+      )}
+      {activeTab === "Usage" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleDialogUsage theme={theme} />
+        </div>
+      )}
+      {activeTab === "API" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleDialogAPI theme={theme} />
+        </div>
+      )}
+      {activeTab === "Examples" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleDialogExamples theme={theme} />
+        </div>
+      )}
     </>
   );
 };

@@ -35,10 +35,26 @@ const ButtonExample = ({ theme }: { theme: ThemeType }) => {
         className="mb-4"
       />
 
-      {activeTab === 'Overview' && <ExampleButtonOverview theme={theme} />}
-      {activeTab === 'Usage' && <ExampleButtonUsage theme={theme} />}
-      {activeTab === 'API' && <ExampleButtonAPI theme={theme} />}
-      {activeTab === 'Examples' && <ExampleButtonExamples theme={theme} />}
+      {activeTab === 'Overview' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleButtonOverview theme={theme} />
+        </div>
+      )}
+      {activeTab === 'Usage' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleButtonUsage theme={theme} />
+        </div>
+      )}
+      {activeTab === 'API' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleButtonAPI theme={theme} />
+        </div>
+      )}
+      {activeTab === 'Examples' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleButtonExamples theme={theme} />
+        </div>
+      )}
 
     </>
   );
