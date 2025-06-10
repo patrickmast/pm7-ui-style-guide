@@ -21,7 +21,14 @@
   "files": [
     "dist",
     "src/components/menu/pm7-menu.css",
-    "index.d.ts"
+    "src/components/dialog/pm7-dialog.css",
+    "src/components/card/pm7-card.css",
+    "src/components/tab-selector/pm7-tab-selector.css",
+    "src/css/variables.css",
+    "src/globals.css",
+    "index.d.ts",
+    "colors.d.ts",
+    "tokens.d.ts"
   ],
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.2",

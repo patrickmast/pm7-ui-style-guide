@@ -3,6 +3,8 @@
 // Core UI components
 export { PM7Menu as Menu } from './components/menu';
 export * from './components/dialog';
+export * from './components/card';
+export * from './components/tab-selector';
 
 // Form components
 export * from './components/input';
@@ -22,3 +24,13 @@ export {
   PM7MenuSeparator,
   PM7MenuPortal
 } from './components/menu';
+
+// Re-export card components with clean aliases
+export { PM7Card as Card } from './components/card';
+export { PM7CardHeader as CardHeader } from './components/card';
+export { PM7CardFooter as CardFooter } from './components/card';
+export { PM7CardTitle as CardTitle } from './components/card';
+export { PM7CardSubTitle as CardSubTitle } from './components/card';
+
+// Re-export tab selector with clean alias
+export { PM7TabSelector as TabSelector } from './components/tab-selector';

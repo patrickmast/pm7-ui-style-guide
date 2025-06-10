@@ -6,6 +6,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the PM7 UI Style Guide - a React component library that provides PM7-branded components and design tokens for consistent styling across all PM7 applications. The library is built on top of Radix UI primitives with Tailwind CSS and provides PM7-specific styling rules and overrides for ShadCN/UI components.
 
+**Purpose**: This library serves as the single source of truth for UI consistency across all PM7 applications, ensuring consistent branding without requiring individual applications to customize ShadCN/UI components themselves.
+
+## Key Architectural Decisions
+
+### Why This Library Exists
+- Applications should **NOT** install ShadCN/UI components directly
+- Instead, they import pre-styled components from this library
+- This ensures 100% consistency across all PM7 applications
+- Updates to PM7 branding can be rolled out centrally
+
+### Build Strategy
+- **Dual Vite Configuration**: Single `vite.config.js` handles both library builds and examples dev server
+- **Library Mode**: When building (`npm run build`), Vite builds the library for distribution
+- **Dev Mode**: When running (`npm run dev`), Vite serves the examples app for development
+- **Examples Build**: Separate config (`vite.config.examples.js`) for deploying examples to Vercel
+
+### Component Philosophy
+- Components are thin wrappers around Radix UI primitives
+- PM7 styling is applied through:
+  - CSS classes using Tailwind utilities
+  - CSS custom properties for theming
+  - Component-specific CSS files when needed
+- Components export both functionality and styling together
+
 ## Project Architecture
 
 The project follows a layered architecture:
@@ -49,11 +73,18 @@ examples/             # Example/demo app
 ### Library Development
 ```bash
 npm install                    # Install dependencies
-npm run dev                   # Start examples app (serves from /examples)
-npm run build                 # Build the library for distribution
-npm run build:examples       # Build examples app for deployment
-npm run lint                  # Run ESLint
+npm run dev                   # Start examples app (serves from /examples on port 5173)
+npm run build                 # Build the library for distribution to dist/
+npm run build:examples       # Build examples app for Vercel deployment
+npm run lint                  # Run ESLint with TypeScript checking
 npm run preview              # Preview built examples app
+```
+
+### Testing Changes Locally
+```bash
+# To test the library in another project locally:
+npm link                      # In this repository
+npm link pm7-ui-style-guide  # In the consuming project
 ```
 
 ### Key Development Patterns
@@ -142,6 +173,10 @@ The library requires these peer dependencies to be installed by consuming applic
 - Library builds to `dist/` with UMD and ES module formats
 - Examples app builds separately for Vercel deployment
 - External dependencies (React, React DOM) not bundled
+- Package.json `files` field includes:
+  - `dist/` - Built library files
+  - `src/components/menu/pm7-menu.css` - Menu component styles
+  - `index.d.ts` - TypeScript definitions
 
 ## Component Usage Patterns
 
@@ -184,3 +219,38 @@ import { colors, tokens } from 'pm7-ui-style-guide';
 - **Repository**: GitHub at `patrickmast/pm7-ui-style-guide`
 
 The examples app serves as both development environment and public documentation, demonstrating proper usage of all components with PM7 branding applied.
+
+## Release Process
+
+1. Ensure all changes are committed and pushed to GitHub
+2. Run `npm run lint` to ensure code quality
+3. Run `npm run build` to verify the library builds correctly
+4. Update version: `npm version patch|minor|major`
+5. Publish to npm: `npm publish --access public`
+6. Push the version tag to GitHub: `git push --tags`
+
+## Common Patterns for Component Development
+
+### Adding a New Component
+1. Create directory: `src/components/[component-name]/`
+2. Add files:
+   - `index.ts` - Re-exports
+   - `pm7-[name].tsx` - Implementation
+   - `pm7-[name].css` - Styles (if needed)
+   - `README.md` - Documentation
+3. Export from `src/index.ts` with both PM7-prefixed and clean names
+4. Create example in `examples/example-[name].tsx`
+5. Add route in `examples/App.tsx`
+
+### Component Export Pattern
+```typescript
+// In component's index.ts
+export { PM7ComponentName } from './pm7-component-name';
+
+// In src/index.ts
+export { PM7ComponentName, PM7ComponentName as ComponentName } from './components/component-name';
+```
+
+This allows consumers to use either:
+- `import { ComponentName } from 'pm7-ui-style-guide'`
+- `import { PM7ComponentName } from 'pm7-ui-style-guide'`
