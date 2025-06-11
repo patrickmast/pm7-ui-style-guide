@@ -1,0 +1,113 @@
+/* PM7 Theme Toggle Component Styles */
+
+:root {
+  --pm7-theme-switch-bg: white;
+  --pm7-theme-switch-dark-icon: white;
+  --pm7-theme-switch-dark-thumb-bg: #6E6E6E;
+  --pm7-theme-switch-light-icon: black;
+  --pm7-theme-switch-thumb-bg: #FFD43B;
+}
+
+.dark {
+  --pm7-theme-switch-bg: white;
+  --pm7-theme-switch-dark-icon: white;
+  --pm7-theme-switch-dark-thumb-bg: #6E6E6E;
+  --pm7-theme-switch-light-icon: black;
+  --pm7-theme-switch-thumb-bg: #FFD43B;
+}
+
+.pm7-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.pm7-theme-switch {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  background-color: var(--pm7-theme-switch-bg);
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.pm7-theme-switch:focus {
+  outline: 2px solid #1C86EF;
+  outline-offset: 2px;
+}
+
+.pm7-theme-switch.dark {
+  background-color: var(--pm7-theme-switch-bg);
+}
+
+.pm7-theme-switch-thumb {
+  position: relative;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background-color: var(--pm7-theme-switch-thumb-bg);
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.pm7-theme-switch.dark .pm7-theme-switch-thumb {
+  transform: translateX(28px);
+  background-color: var(--pm7-theme-switch-dark-thumb-bg);
+}
+
+.pm7-theme-switch .pm7-theme-icon {
+  width: 16px;
+  height: 16px;
+  transition: color 0.2s ease-in-out;
+}
+
+.pm7-theme-switch.dark .pm7-theme-icon {
+  color: var(--pm7-theme-switch-dark-icon);
+}
+
+.pm7-theme-switch:not(.dark) .pm7-theme-icon {
+  color: var(--pm7-theme-switch-light-icon);
+  stroke: var(--pm7-theme-switch-light-icon);
+}
+
+/* Size variants */
+.pm7-theme-toggle-small .pm7-theme-switch {
+  width: 42px;
+  height: 21px;
+  border-radius: 10.5px;
+}
+
+.pm7-theme-toggle-small .pm7-theme-switch-thumb {
+  width: 17px;
+  height: 17px;
+}
+
+.pm7-theme-toggle-small .pm7-theme-switch.dark .pm7-theme-switch-thumb {
+  transform: translateX(21px);
+}
+
+.pm7-theme-toggle-large .pm7-theme-switch {
+  width: 70px;
+  height: 35px;
+  border-radius: 17.5px;
+}
+
+.pm7-theme-toggle-large .pm7-theme-switch-thumb {
+  width: 31px;
+  height: 31px;
+}
+
+.pm7-theme-toggle-large .pm7-theme-switch.dark .pm7-theme-switch-thumb {
+  transform: translateX(35px);
+}

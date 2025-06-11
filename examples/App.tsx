@@ -1,5 +1,5 @@
 // Enhancement: Added a Button section to the examples app and integrated ButtonExample component into navigation and rendering logic.
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // Import package.json to access version information
 import packageJson from '../package.json';
 
@@ -10,6 +10,7 @@ import InputExample from './example-input';
 import DialogExample from './example-dialog';
 import TabSelectorExample from './example-tab-selector';
 import ExampleCard from './example-card';
+import ExampleThemeToggle from './example-theme-toggle';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
@@ -22,25 +23,23 @@ import {
   PM7DialogSeparator
 } from '../src/components/dialog';
 import '../src/components/dialog/pm7-dialog.css';
-import { MoonIcon, SunIcon } from 'lucide-react';
+import { PM7ThemeToggle, ThemeType } from '../src/components/theme-toggle';
 
 // Import CSS
 import './examples.css';
 import './examples-sidebar.css';
-
-// Constants
-const SIDEBAR_WIDTH_KEY = 'pm7-ui-style-guide-sidebar-width';
-const MIN_SIDEBAR_WIDTH = 150;
-
-// Add ThemeType definition
-/** Theme type for light/dark mode */
-type ThemeType = 'light' | 'dark';
 
 
 // Main App
 const App = () => {
   // Initialize active component from localStorage or default to 'menu'
   const [activeComponent, setActiveComponent] = useState(() => {
+    // Check URL path first for direct navigation
+    const path = window.location.pathname;
+    if (path.includes('/docs/PM7ThemeToggle')) {
+      return 'themeToggle';
+    }
+    
     const savedComponent = localStorage.getItem('pm7-ui-style-guide-active-component');
     return savedComponent || 'menu';
   });
@@ -72,6 +71,11 @@ const App = () => {
   // Save active component to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('pm7-ui-style-guide-active-component', activeComponent);
+    
+    // Reset to root URL when navigating between components
+    if (!window.location.pathname.includes('/docs/')) {
+      window.history.pushState({}, '', '/');
+    }
   }, [activeComponent]);
 
   // Apply theme to document when component mounts and when theme changes
@@ -86,10 +90,6 @@ const App = () => {
     }
   }, [theme]);
 
-  // Function to toggle theme
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
 
   // Add responsive behavior to hide sidebar when window width is less than 800px
   useEffect(() => {
@@ -109,11 +109,6 @@ const App = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const toggleSidebar = () => {
-    const newVisibility = !sidebarVisible;
-    setSidebarVisible(newVisibility);
-    localStorage.setItem('pm7-ui-style-guide-sidebar-visible', newVisibility.toString());
-  };
 
 
 
@@ -131,6 +126,8 @@ const App = () => {
         return <TabSelectorExample theme={theme} />;
       case 'card':
         return <ExampleCard theme={theme} />;
+      case 'themeToggle':
+        return <ExampleThemeToggle theme={theme} />;
       default:
         return <MenuExample />;
     }
@@ -189,6 +186,13 @@ const App = () => {
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'card',
           onClick: () => setActiveComponent('card')
+        },
+        {
+          id: 'theme-toggle-component',
+          label: 'Theme Toggle',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'themeToggle',
+          onClick: () => setActiveComponent('themeToggle')
         }
       ]
     },
@@ -241,23 +245,13 @@ const App = () => {
                   theme={theme as 'light' | 'dark'}
             />
           </div>
-          <div className="theme-toggle" style={{ marginRight: '-5px', position: 'relative', left: '-5px' }}>
-            <div
-              role="button"
-              tabIndex={0}
-              className={`theme-switch ${theme === 'dark' ? 'dark' : ''}`}
-              onClick={toggleTheme}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  toggleTheme();
-                }
-              }}
+          <div style={{ marginRight: '-5px', position: 'relative', left: '-5px' }}>
+            <PM7ThemeToggle 
+              theme={theme}
+              onThemeChange={setTheme}
+              size="medium"
               data-component-name="App"
-            >
-              <div className="theme-switch-thumb">
-                {theme === 'dark' ? <MoonIcon className="theme-icon" size={16} /> : <SunIcon className="theme-icon" size={16} />}
-              </div>
-            </div>
+            />
           </div>
         </div>
         <h1>PM7 UI Style Guide</h1>
@@ -340,6 +334,18 @@ const App = () => {
                   }}
                 >
                   Card
+                </a>
+              </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'themeToggle' ? 'active' : ''}`}>
+                <a
+                  href="#themeToggle"
+                  className="sidebar-nav-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveComponent('themeToggle');
+                  }}
+                >
+                  Theme Toggle
                 </a>
               </li>
             </ul>

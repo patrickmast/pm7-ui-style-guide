@@ -34,3 +34,7 @@ export { PM7CardSubTitle as CardSubTitle } from './components/card';
 
 // Re-export tab selector with clean alias
 export { PM7TabSelector as TabSelector } from './components/tab-selector';
+
+// Theme toggle component
+export * from './components/theme-toggle';
+export { PM7ThemeToggle as ThemeToggle } from './components/theme-toggle';
