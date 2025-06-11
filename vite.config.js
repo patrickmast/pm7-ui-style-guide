@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command }) => {
   if (command === 'build') {
     // Library build config
     return {
@@ -22,7 +22,15 @@ export default defineConfig(({ command, mode }) => {
           fileName: (format) => `pm7-ui-style-guide.${format}.js`,
         },
         rollupOptions: {
-          external: ['react', 'react-dom'],
+          external: [
+            'react', 
+            'react-dom',
+            'react/jsx-runtime',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-slot',
+            'lucide-react'
+          ],
           output: {
             globals: {
               react: 'React',
