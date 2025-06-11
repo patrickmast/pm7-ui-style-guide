@@ -25,6 +25,18 @@ export {
   PM7DialogDescription 
 } from './src/components/dialog';
 
+export {
+  PM7Card, PM7Card as Card,
+  PM7CardHeader, PM7CardHeader as CardHeader,
+  PM7CardFooter, PM7CardFooter as CardFooter,
+  PM7CardTitle, PM7CardTitle as CardTitle,
+  PM7CardSubTitle, PM7CardSubTitle as CardSubTitle
+} from './src/components/card';
+
+export {
+  PM7TabSelector, PM7TabSelector as TabSelector
+} from './src/components/tab-selector';
+
 // Export all component types and utilities
 export * from './src/components/menu';
 export * from './src/components/button';
