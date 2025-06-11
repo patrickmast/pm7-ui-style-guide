@@ -1,5 +1,4 @@
 import React from 'react';
-import { PM7ThemeToggle } from '../src';
 
 const ExampleThemeToggleTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
   return (

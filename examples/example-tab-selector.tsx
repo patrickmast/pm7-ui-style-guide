@@ -2,14 +2,17 @@
 // This example demonstrates how to use the PM7TabSelector component in isolation
 
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import ReactMarkdown from 'react-markdown';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleTabSelectorOverview from './example-tab-selector-overview';
 import ExampleTabSelectorUsage from './example-tab-selector-usage';
 import ExampleTabSelectorAPI from './example-tab-selector-api';
 import ExampleTabSelectorExamples from './example-tab-selector-examples';
+import ExampleTabSelectorTLDR from './example-tab-selector-tldr';
 
-type TabType = 'Overview' | 'Usage' | 'API' | 'Examples';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation' | 'tldr';
 type ThemeType = 'light' | 'dark';
 
 // Static README content to avoid import issues
@@ -71,7 +74,7 @@ const MyComponent = () => {
 | \`activeTab\` | \`string\` | Yes | - | ID of the currently active tab |
 | \`onTabChange\` | \`(tabId: string) => void\` | Yes | - | Function called when a tab is clicked |
 | \`className\` | \`string\` | No | \`''\` | Additional CSS class names to apply to the container |
-| \`initialTheme\` | \`'light' \| 'dark'\` | No | \`'light'\` | Initial theme to use |
+| \`initialTheme\` | \`'light' | 'dark'\` | No | \`'light'\` | Initial theme to use |
 
 ## Theme Support
 
@@ -79,46 +82,53 @@ The component automatically detects theme changes by listening to the \`pm7-them
 `;
 
 const TabSelectorExample = ({ theme }: { theme: ThemeType }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('Overview');
+  const navigate = useNavigate();
+  const { '*': tabPath } = useParams();
+  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
 
   const handleTabChange = (tabId: string) => {
-    if (tabId === 'Overview' || tabId === 'Usage' || tabId === 'API' || tabId === 'Examples') {
-      setActiveTab(tabId as TabType);
-    }
+    saveActiveTab(tabId);
+    navigate(`/tabselector/${tabId}`);
   };
 
   return (
     <>
       <PM7TabSelector
         tabs={[
-          { id: 'Overview', label: 'Overview' },
-          { id: 'Usage', label: 'Usage' },
-          { id: 'API', label: 'API' },
-          { id: 'Examples', label: 'Examples' }
+          { id: 'demo', label: 'Demo' },
+          { id: 'overview', label: 'Overview' },
+          { id: 'usage', label: 'Usage' },
+          { id: 'documentation', label: 'Documentation' },
+          { id: 'tldr', label: 'TL;DR' }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
         initialTheme={theme}
         className="mb-4"
       />
-      {activeTab === 'Overview' && (
+      {activeTab === 'demo' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleTabSelectorExamples theme={theme} />
+        </div>
+      )}
+      {activeTab === 'overview' && (
         <div style={{ padding: '1rem' }}>
           <ExampleTabSelectorOverview theme={theme} />
         </div>
       )}
-      {activeTab === 'Usage' && (
+      {activeTab === 'usage' && (
         <div style={{ padding: '1rem' }}>
           <ExampleTabSelectorUsage theme={theme} />
         </div>
       )}
-      {activeTab === 'API' && (
+      {activeTab === 'documentation' && (
         <div style={{ padding: '1rem' }}>
           <ExampleTabSelectorAPI theme={theme} />
         </div>
       )}
-      {activeTab === 'Examples' && (
+      {activeTab === 'tldr' && (
         <div style={{ padding: '1rem' }}>
-          <ExampleTabSelectorExamples theme={theme} />
+          <ExampleTabSelectorTLDR theme={theme} />
         </div>
       )}
     </>

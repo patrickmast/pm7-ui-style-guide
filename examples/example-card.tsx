@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import { PM7TabSelector } from "../src/components/tab-selector";
 import ExampleCardOverview from "./example-card-overview";
 import ExampleCardUsage from "./example-card-usage";
 import ExampleCardAPI from "./example-card-api";
 import ExampleCardExamples from "./example-card-examples";
+import ExampleCardTLDR from "./example-card-tldr";
 import "../src/components/card/pm7-card.css";
 import "../src/components/tab-selector/pm7-tab-selector.css";
 
@@ -55,50 +58,57 @@ import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } 
 ## License
 MIT`;
 
-type TabType = "Overview" | "Usage" | "API" | "Examples";
+type TabType = "demo" | "overview" | "usage" | "documentation" | "tldr";
 type ThemeType = "light" | "dark";
 
 export default function ExampleCard({ theme }: { theme: ThemeType }) {
-  const [activeTab, setActiveTab] = useState<TabType>("Overview");
+  const navigate = useNavigate();
+  const { '*': tabPath } = useParams();
+  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
 
   const handleTabChange = (tabId: string) => {
-    if (tabId === "Overview" || tabId === "Usage" || tabId === "API" || tabId === "Examples") {
-      setActiveTab(tabId as TabType);
-    }
+    saveActiveTab(tabId);
+    navigate(`/card/${tabId}`);
   };
 
   return (
     <>
       <PM7TabSelector
         tabs={[
-          { id: "Overview", label: "Overview" },
-          { id: "Usage", label: "Usage" },
-          { id: "API", label: "API" },
-          { id: "Examples", label: "Examples" }
+          { id: "demo", label: "Demo" },
+          { id: "overview", label: "Overview" },
+          { id: "usage", label: "Usage" },
+          { id: "documentation", label: "Documentation" },
+          { id: "tldr", label: "TL;DR" }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
         initialTheme={theme}
         className="mb-4"
       />
-      {activeTab === "Overview" && (
+      {activeTab === "demo" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleCardExamples theme={theme} />
+        </div>
+      )}
+      {activeTab === "overview" && (
         <div style={{ padding: '1rem' }}>
           <ExampleCardOverview theme={theme} />
         </div>
       )}
-      {activeTab === "Usage" && (
+      {activeTab === "usage" && (
         <div style={{ padding: '1rem' }}>
           <ExampleCardUsage theme={theme} />
         </div>
       )}
-      {activeTab === "API" && (
+      {activeTab === "documentation" && (
         <div style={{ padding: '1rem' }}>
           <ExampleCardAPI theme={theme} />
         </div>
       )}
-      {activeTab === "Examples" && (
+      {activeTab === "tldr" && (
         <div style={{ padding: '1rem' }}>
-          <ExampleCardExamples theme={theme} />
+          <ExampleCardTLDR theme={theme} />
         </div>
       )}
     </>

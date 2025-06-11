@@ -1,33 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleButtonOverview from './example-button-overview';
 import ExampleButtonUsage from './example-button-usage';
 import ExampleButtonAPI from './example-button-api';
 import ExampleButtonExamples from './example-button-examples';
+import ExampleButtonTLDR from './example-button-tldr';
 
 // Type definitions for tabs and theme
-type TabType = 'Overview' | 'Usage' | 'API' | 'Examples';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation' | 'tldr';
 type ThemeType = 'light' | 'dark';
 
 const ButtonExample = ({ theme }: { theme: ThemeType }) => {
-  // Tab state
-  const [activeTab, setActiveTab] = useState<TabType>('Overview');
+  const navigate = useNavigate();
+  const { '*': tabPath } = useParams();
+  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
 
   // Function to handle tab changes
   const handleTabChange = (tabId: string) => {
-    if (tabId === 'Overview' || tabId === 'Usage' || tabId === 'API' || tabId === 'Examples') {
-      setActiveTab(tabId as TabType);
-    }
+    saveActiveTab(tabId);
+    navigate(`/button/${tabId}`);
   };
 
   return (
     <>
       <PM7TabSelector
         tabs={[
-          { id: 'Overview', label: 'Overview' },
-          { id: 'Usage', label: 'Usage' },
-          { id: 'API', label: 'API' },
-          { id: 'Examples', label: 'Examples' }
+          { id: 'demo', label: 'Demo' },
+          { id: 'overview', label: 'Overview' },
+          { id: 'usage', label: 'Usage' },
+          { id: 'documentation', label: 'Documentation' },
+          { id: 'tldr', label: 'TL;DR' }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -35,24 +39,29 @@ const ButtonExample = ({ theme }: { theme: ThemeType }) => {
         className="mb-4"
       />
 
-      {activeTab === 'Overview' && (
+      {activeTab === 'demo' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleButtonExamples theme={theme} />
+        </div>
+      )}
+      {activeTab === 'overview' && (
         <div style={{ padding: '1rem' }}>
           <ExampleButtonOverview theme={theme} />
         </div>
       )}
-      {activeTab === 'Usage' && (
+      {activeTab === 'usage' && (
         <div style={{ padding: '1rem' }}>
           <ExampleButtonUsage theme={theme} />
         </div>
       )}
-      {activeTab === 'API' && (
+      {activeTab === 'documentation' && (
         <div style={{ padding: '1rem' }}>
           <ExampleButtonAPI theme={theme} />
         </div>
       )}
-      {activeTab === 'Examples' && (
+      {activeTab === 'tldr' && (
         <div style={{ padding: '1rem' }}>
-          <ExampleButtonExamples theme={theme} />
+          <ExampleButtonTLDR theme={theme} />
         </div>
       )}
 

@@ -1,22 +1,26 @@
 // Refactor: Split tab content into separate files for each tab (Demo, Overview, Usage, Documentation). Updated MenuExample to import and render these new files. No other logic or content was changed.
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, Routes, Route, Navigate } from 'react-router-dom';
+import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleMenuDemo from './example-menu-demo';
 import ExampleMenuOverview from './example-menu-overview';
 import ExampleMenuUsage from './example-menu-usage';
 import ExampleMenuDocumentation from './example-menu-documentation';
+import ExampleMenuTLDR from './example-menu-tldr';
 
 const tabSelectorReadme = `# PM7TabSelector Component
 
 A reusable tab selector component for the PM7 UI Style Guide.`;
 
-type TabType = 'Overview' | 'Demo' | 'Usage' | 'Documentation';
+type TabType = 'overview' | 'demo' | 'usage' | 'documentation' | 'tldr';
 type ThemeType = 'light' | 'dark';
 type LanguageType = 'en' | 'es' | 'fr' | 'de' | 'nl' | 'nl-be' | 'zh';
 
 const MenuExample = () => {
-  // Tab state for tab row
-  const [activeTab, setActiveTab] = useState<TabType>('Demo');
+  const navigate = useNavigate();
+  const { '*': tabPath } = useParams();
+  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
 
   // State for README markdown content
   const [readmeContent, setReadmeContent] = useState<string>('');
@@ -64,7 +68,7 @@ const MenuExample = () => {
 
   // Load README content when Documentation tab is selected
   useEffect(() => {
-    if (activeTab === 'Documentation') {
+    if (activeTab === 'documentation') {
       // Use the imported README
       setReadmeContent(tabSelectorReadme);
     }
@@ -76,29 +80,38 @@ return (
     {/* Tab row using PM7TabSelector */}
     <PM7TabSelector
       tabs={[
-        { id: 'Demo', label: 'Demo' },
-        { id: 'Overview', label: 'Overview' },
-        { id: 'Usage', label: 'Usage' },
-        { id: 'Documentation', label: 'Documentation' }
+        { id: 'demo', label: 'Demo' },
+        { id: 'overview', label: 'Overview' },
+        { id: 'usage', label: 'Usage' },
+        { id: 'documentation', label: 'Documentation' },
+        { id: 'tldr', label: 'TL;DR' }
       ]}
       activeTab={activeTab}
-      onTabChange={(tabId) => setActiveTab(tabId as TabType)}
+      onTabChange={(tabId) => {
+        saveActiveTab(tabId);
+        navigate(`/menu/${tabId}`);
+      }}
       initialTheme={theme}
       className="mb-4"
     />
 
     {/* Tab content */}
-    {activeTab === 'Overview' && (
+    {activeTab === 'overview' && (
         <ExampleMenuOverview selectedLanguage={'en'} theme={theme} />
     )}
-    {activeTab === 'Demo' && (
+    {activeTab === 'demo' && (
         <ExampleMenuDemo theme={theme} />
     )}
-    {activeTab === 'Usage' && (
+    {activeTab === 'usage' && (
         <ExampleMenuUsage selectedLanguage={'en'} />
     )}
-    {activeTab === 'Documentation' && (
+    {activeTab === 'documentation' && (
       <ExampleMenuDocumentation readmeContent={readmeContent} />
+    )}
+    {activeTab === 'tldr' && (
+      <div style={{ padding: '1rem' }}>
+        <ExampleMenuTLDR theme={theme} />
+      </div>
     )}
   </>
 );

@@ -1,5 +1,7 @@
 // Enhancement: Added a Button section to the examples app and integrated ButtonExample component into navigation and rendering logic.
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, useParams, Navigate, useNavigate } from 'react-router-dom';
+import { getActiveTab } from './utils/tab-persistence';
 // Import package.json to access version information
 import packageJson from '../package.json';
 
@@ -30,19 +32,13 @@ import './examples.css';
 import './examples-sidebar.css';
 
 
-// Main App
-const App = () => {
-  // Initialize active component from localStorage or default to 'menu'
-  const [activeComponent, setActiveComponent] = useState(() => {
-    // Check URL path first for direct navigation
-    const path = window.location.pathname;
-    if (path.includes('/docs/PM7ThemeToggle')) {
-      return 'themeToggle';
-    }
-    
-    const savedComponent = localStorage.getItem('pm7-ui-style-guide-active-component');
-    return savedComponent || 'menu';
-  });
+// Component wrapper that handles routing
+const ComponentPage = () => {
+  const { component } = useParams<{ component: string }>();
+  const navigate = useNavigate();
+
+  const activeComponent = component || 'menu';
+
   // Initialize sidebar visibility from localStorage or default to true
   // Also consider window width for initial state
   const [sidebarVisible, setSidebarVisible] = useState(() => {
@@ -68,15 +64,14 @@ const App = () => {
 
   const [showVersionDialog, setShowVersionDialog] = useState(false);
 
-  // Save active component to localStorage whenever it changes
+  // Handle legacy localStorage and redirect if needed
   useEffect(() => {
-    localStorage.setItem('pm7-ui-style-guide-active-component', activeComponent);
-    
-    // Reset to root URL when navigating between components
-    if (!window.location.pathname.includes('/docs/')) {
-      window.history.pushState({}, '', '/');
+    const savedComponent = localStorage.getItem('pm7-ui-style-guide-active-component');
+    if (savedComponent && !component) {
+      navigate(`/${savedComponent}`);
+      localStorage.removeItem('pm7-ui-style-guide-active-component');
     }
-  }, [activeComponent]);
+  }, [component, navigate]);
 
   // Apply theme to document when component mounts and when theme changes
   useEffect(() => {
@@ -122,11 +117,11 @@ const App = () => {
         return <InputExample theme={theme} />;
       case 'dialog':
         return <DialogExample theme={theme} />;
-      case 'tabSelector':
+      case 'tabselector':
         return <TabSelectorExample theme={theme} />;
       case 'card':
         return <ExampleCard theme={theme} />;
-      case 'themeToggle':
+      case 'themetoggle':
         return <ExampleThemeToggle theme={theme} />;
       default:
         return <MenuExample />;
@@ -150,49 +145,49 @@ const App = () => {
           label: 'Menu',
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'menu',
-          onClick: () => setActiveComponent('menu')
+          onClick: () => navigate('/menu')
         },
         {
           id: 'button-component',
           label: 'Button',
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'button',
-          onClick: () => setActiveComponent('button')
+          onClick: () => navigate('/button')
         },
         {
           id: 'input-component',
           label: 'Input',
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'input',
-          onClick: () => setActiveComponent('input')
+          onClick: () => navigate('/input')
         },
         {
           id: 'dialog-component',
           label: 'Dialog',
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'dialog',
-          onClick: () => setActiveComponent('dialog')
+          onClick: () => navigate('/dialog')
         },
         {
           id: 'tab-selector-component',
           label: 'Tab Selector',
           type: 'check' as PM7MenuItemType,
-          checked: activeComponent === 'tabSelector',
-          onClick: () => setActiveComponent('tabSelector')
+          checked: activeComponent === 'tabselector',
+          onClick: () => navigate('/tabselector')
         },
         {
           id: 'card-component',
           label: 'Card',
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'card',
-          onClick: () => setActiveComponent('card')
+          onClick: () => navigate('/card')
         },
         {
           id: 'theme-toggle-component',
           label: 'Theme Toggle',
           type: 'check' as PM7MenuItemType,
-          checked: activeComponent === 'themeToggle',
-          onClick: () => setActiveComponent('themeToggle')
+          checked: activeComponent === 'themetoggle',
+          onClick: () => navigate('/themetoggle')
         }
       ]
     },
@@ -245,11 +240,11 @@ const App = () => {
                   theme={theme as 'light' | 'dark'}
             />
           </div>
-          <div style={{ marginRight: '-5px', position: 'relative', left: '-5px' }}>
-            <PM7ThemeToggle 
+          <div style={{ marginRight: '-5px', position: 'relative', left: '-5px', top: '1px' }}>
+            <PM7ThemeToggle
               theme={theme}
               onThemeChange={setTheme}
-              size="medium"
+              size="small"
               data-component-name="App"
             />
           </div>
@@ -265,88 +260,60 @@ const App = () => {
             <div className="sidebar-title">Components</div>
             <ul className="sidebar-nav">
               <li className={`sidebar-nav-item ${activeComponent === 'menu' ? 'active' : ''}`}>
-                <a
-                  href="#menu"
+                <Link
+                  to={`/menu/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('menu');
-                  }}
                 >
                   Menu
-                </a>
+                </Link>
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'button' ? 'active' : ''}`}>
-                <a
-                  href="#button"
+                <Link
+                  to={`/button/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('button');
-                  }}
                 >
                   Button
-                </a>
+                </Link>
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'input' ? 'active' : ''}`}>
-                <a
-                  href="#input"
+                <Link
+                  to={`/input/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('input');
-                  }}
                 >
                   Input
-                </a>
+                </Link>
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'dialog' ? 'active' : ''}`}>
-                <a
-                  href="#dialog"
+                <Link
+                  to={`/dialog/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('dialog');
-                  }}
                 >
                   Dialog
-                </a>
+                </Link>
               </li>
-              <li className={`sidebar-nav-item ${activeComponent === 'tabSelector' ? 'active' : ''}`}>
-                <a
-                  href="#tabSelector"
+              <li className={`sidebar-nav-item ${activeComponent === 'tabselector' ? 'active' : ''}`}>
+                <Link
+                  to={`/tabselector/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('tabSelector');
-                  }}
                 >
                   Tab Selector
-                </a>
+                </Link>
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'card' ? 'active' : ''}`}>
-                <a
-                  href="#card"
+                <Link
+                  to={`/card/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('card');
-                  }}
                 >
                   Card
-                </a>
+                </Link>
               </li>
-              <li className={`sidebar-nav-item ${activeComponent === 'themeToggle' ? 'active' : ''}`}>
-                <a
-                  href="#themeToggle"
+              <li className={`sidebar-nav-item ${activeComponent === 'themetoggle' ? 'active' : ''}`}>
+                <Link
+                  to={`/themetoggle/${getActiveTab('demo')}`}
                   className="sidebar-nav-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveComponent('themeToggle');
-                  }}
                 >
                   Theme Toggle
-                </a>
+                </Link>
               </li>
             </ul>
           </aside>
@@ -407,6 +374,18 @@ const App = () => {
         </PM7DialogContent>
       </PM7Dialog>
     </div>
+  );
+};
+
+// Main App with Router
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/menu" replace />} />
+        <Route path="/:component/*" element={<ComponentPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

@@ -296,7 +296,6 @@ export interface PM7MenuProps {
   menuTriggerLabelColorLight?: string; // New: label color for light mode
   menuTriggerLabelColorDark?: string;  // New: label color for dark mode
   menuLabel?: React.ReactNode; // New: custom label (string or ReactNode)
-  showUncheckedIcon?: boolean;
   /**
    * If true, always show a border and subtle background on the menu trigger (icon or label). Default: false
    */
@@ -318,7 +317,6 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuLabel,
   menuTriggerLabelColorLight,
   menuTriggerLabelColorDark,
-  showUncheckedIcon = false,
   menuTriggerBordered = false,
   menuTriggerBorderedOnHover = false,
 }) => {

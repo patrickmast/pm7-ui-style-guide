@@ -1,5 +1,7 @@
 // Enhancement: Rebuilt the Dialog example to match the styling and layout of TabSelector and Card examples.
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import ReactMarkdown from 'react-markdown';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import { PM7Card } from '../src/components/card';
@@ -19,6 +21,7 @@ import ExampleDialogOverview from './example-dialog-overview';
 import ExampleDialogUsage from './example-dialog-usage';
 import ExampleDialogAPI from './example-dialog-api';
 import ExampleDialogExamples from './example-dialog-examples';
+import ExampleDialogTLDR from './example-dialog-tldr';
 
 // Static README content for API tab
 const dialogReadme = `# PM7Dialog
@@ -89,26 +92,28 @@ import {
 ## License
 MIT`;
 
-type TabType = 'Overview' | 'Usage' | 'API' | 'Examples';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation' | 'tldr';
 type ThemeType = 'light' | 'dark';
 
 const DialogExample = ({ theme }: { theme: ThemeType }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('Overview');
+  const navigate = useNavigate();
+  const { '*': tabPath } = useParams();
+  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
 
   const handleTabChange = (tabId: string) => {
-    if (tabId === 'Overview' || tabId === 'Usage' || tabId === 'API' || tabId === 'Examples') {
-      setActiveTab(tabId as TabType);
-    }
+    saveActiveTab(tabId);
+    navigate(`/dialog/${tabId}`);
   };
 
   return (
     <>
       <PM7TabSelector
         tabs={[
-          { id: "Overview", label: "Overview" },
-          { id: "Usage", label: "Usage" },
-          { id: "API", label: "API" },
-          { id: "Examples", label: "Examples" }
+          { id: "demo", label: "Demo" },
+          { id: "overview", label: "Overview" },
+          { id: "usage", label: "Usage" },
+          { id: "documentation", label: "Documentation" },
+          { id: "tldr", label: "TL;DR" }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -116,24 +121,29 @@ const DialogExample = ({ theme }: { theme: ThemeType }) => {
         className="mb-4"
       />
 
-      {activeTab === "Overview" && (
+      {activeTab === "demo" && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleDialogExamples theme={theme} />
+        </div>
+      )}
+      {activeTab === "overview" && (
         <div style={{ padding: '1rem' }}>
           <ExampleDialogOverview theme={theme} />
         </div>
       )}
-      {activeTab === "Usage" && (
+      {activeTab === "usage" && (
         <div style={{ padding: '1rem' }}>
           <ExampleDialogUsage theme={theme} />
         </div>
       )}
-      {activeTab === "API" && (
+      {activeTab === "documentation" && (
         <div style={{ padding: '1rem' }}>
           <ExampleDialogAPI theme={theme} />
         </div>
       )}
-      {activeTab === "Examples" && (
+      {activeTab === "tldr" && (
         <div style={{ padding: '1rem' }}>
-          <ExampleDialogExamples theme={theme} />
+          <ExampleDialogTLDR theme={theme} />
         </div>
       )}
     </>

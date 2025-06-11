@@ -76,11 +76,11 @@ export const PM7ThemeToggle: React.FC<PM7ThemeToggleProps> = ({
   };
 
   return (
-    <div className={`pm7-theme-toggle ${className}`}>
+    <div className={`pm7-theme-toggle ${getSizeClass()} ${className}`}>
       <div
         role="button"
         tabIndex={0}
-        className={`pm7-theme-switch ${currentTheme === 'dark' ? 'dark' : ''} ${getSizeClass()}`}
+        className={`pm7-theme-switch ${currentTheme === 'dark' ? 'dark' : ''}`}
         onClick={toggleTheme}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {

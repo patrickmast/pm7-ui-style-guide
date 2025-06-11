@@ -1,6 +1,8 @@
 // Bug Fix: Fixed syntax error in inputReadme markdown string by removing the duplicate PM7Input function definition and properly closing the template literal. File now compiles correctly.
 
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import ReactMarkdown from 'react-markdown';
 import { inputRules } from '../src/components/input/pm7-input';
 import { PM7TabSelector } from '../src/components/tab-selector';
@@ -17,6 +19,7 @@ import ExampleInputOverview from './example-input-overview';
 import ExampleInputUsage from './example-input-usage';
 import ExampleInputAPI from './example-input-api';
 import ExampleInputExamples from './example-input-examples';
+import ExampleInputTLDR from './example-input-tldr';
 
 // Static README content for API tab
 const inputReadme = `# PM7Input Component
@@ -88,7 +91,7 @@ const usageContent = (
   </div>
 );
 
-type TabType = 'Overview' | 'Usage' | 'API' | 'Examples';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation' | 'tldr';
 type ThemeType = 'light' | 'dark';
 
 // Custom styled input component for examples
@@ -198,46 +201,53 @@ const Separator = ({ theme }: { theme: 'light' | 'dark' }) => (
 );
 
 const InputExample = ({ theme }: { theme: ThemeType }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('Overview');
+  const navigate = useNavigate();
+  const { '*': tabPath } = useParams();
+  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
 
   const handleTabChange = (tabId: string) => {
-    if (tabId === 'Overview' || tabId === 'Usage' || tabId === 'API' || tabId === 'Examples') {
-      setActiveTab(tabId as TabType);
-    }
+    saveActiveTab(tabId);
+    navigate(`/input/${tabId}`);
   };
 
   return (
     <>
       <PM7TabSelector
         tabs={[
-          { id: 'Overview', label: 'Overview' },
-          { id: 'Usage', label: 'Usage' },
-          { id: 'API', label: 'API' },
-          { id: 'Examples', label: 'Examples' }
+          { id: 'demo', label: 'Demo' },
+          { id: 'overview', label: 'Overview' },
+          { id: 'usage', label: 'Usage' },
+          { id: 'documentation', label: 'Documentation' },
+          { id: 'tldr', label: 'TL;DR' }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
         initialTheme={theme}
         className="mb-4"
       />
-      {activeTab === 'Overview' && (
+      {activeTab === 'demo' && (
+        <div style={{ padding: '1rem' }}>
+          <ExampleInputExamples theme={theme} />
+        </div>
+      )}
+      {activeTab === 'overview' && (
         <div style={{ padding: '1rem' }}>
           <ExampleInputOverview theme={theme} />
         </div>
       )}
-      {activeTab === 'Usage' && (
+      {activeTab === 'usage' && (
         <div style={{ padding: '1rem' }}>
           <ExampleInputUsage theme={theme} />
         </div>
       )}
-      {activeTab === 'API' && (
+      {activeTab === 'documentation' && (
         <div style={{ padding: '1rem' }}>
           <ExampleInputAPI theme={theme} />
         </div>
       )}
-      {activeTab === 'Examples' && (
+      {activeTab === 'tldr' && (
         <div style={{ padding: '1rem' }}>
-          <ExampleInputExamples theme={theme} />
+          <ExampleInputTLDR theme={theme} />
         </div>
       )}
     </>
