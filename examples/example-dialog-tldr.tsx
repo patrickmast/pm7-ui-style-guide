@@ -15,12 +15,22 @@ const ExampleDialogTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       <section style={{ marginBottom: '2rem' }}>
         <h3>Quick Start</h3>
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
-          <pre><code>{`# 1. Install the package
+          <pre><code>{`# 1. Install the package and required peer dependencies
 npm install pm7-ui-style-guide
 
+# If you encounter peer dependency conflicts, update these first:
+npm install lucide-react@^0.501.0 @radix-ui/react-dialog@^1.0.5
+
 # 2. Import the component and CSS
-import { PM7Dialog } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/dist/components/dialog/pm7-dialog.css';
+import { 
+  PM7Dialog,
+  PM7DialogContent,
+  PM7DialogHeader,
+  PM7DialogFooter,
+  PM7DialogTitle,
+  PM7DialogDescription
+} from 'pm7-ui-style-guide';
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
 
 # 3. Use in your component
 function App() {
@@ -30,15 +40,16 @@ function App() {
     <>
       <button onClick={() => setOpen(true)}>Open Dialog</button>
       <PM7Dialog open={open} onOpenChange={setOpen}>
-        <PM7Dialog.Content>
-          <PM7Dialog.Header>
-            <PM7Dialog.Title>Dialog Title</PM7Dialog.Title>
-          </PM7Dialog.Header>
+        <PM7DialogContent>
+          <PM7DialogHeader>
+            <PM7DialogTitle>Dialog Title</PM7DialogTitle>
+            <PM7DialogDescription>Dialog description</PM7DialogDescription>
+          </PM7DialogHeader>
           <p>Dialog content goes here</p>
-          <PM7Dialog.Footer>
-            <PM7Dialog.Close>Close</PM7Dialog.Close>
-          </PM7Dialog.Footer>
-        </PM7Dialog.Content>
+          <PM7DialogFooter>
+            <button onClick={() => setOpen(false)}>Close</button>
+          </PM7DialogFooter>
+        </PM7DialogContent>
       </PM7Dialog>
     </>
   );
@@ -303,6 +314,43 @@ function App() {
             <li><strong>PM7Dialog.Footer</strong> - Dialog footer for actions</li>
             <li><strong>PM7Dialog.Close</strong> - Button that closes the dialog</li>
           </ul>
+        </div>
+      </section>
+
+      {/* Installation & Troubleshooting */}
+      <section style={{ marginBottom: '2rem' }}>
+        <h3>Installation & Troubleshooting</h3>
+        
+        <h4>Peer Dependencies</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#3a2a2a' : '#fff5f5', padding: '1rem', borderRadius: '8px', border: `1px solid ${theme === 'dark' ? '#663333' : '#ffcccc'}`, marginBottom: '1rem' }}>
+          <p style={{ margin: '0 0 0.5rem 0' }}><strong>Required peer dependencies:</strong></p>
+          <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '0.5rem', borderRadius: '4px', fontFamily: 'monospace' }}>
+            <div>• @radix-ui/react-dialog@^1.0.5</div>
+            <div>• lucide-react@^0.501.0</div>
+            <div>• react@^18.2.0 || ^19.0.0</div>
+            <div>• react-dom@^18.2.0 || ^19.0.0</div>
+          </div>
+        </div>
+
+        <h4>Common Issues & Solutions</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
+          <p><strong>Error: "Cannot resolve dependency tree"</strong></p>
+          <div style={{ backgroundColor: theme === 'dark' ? '#3a3a3a' : '#e5e5e5', padding: '0.5rem', borderRadius: '4px', fontFamily: 'monospace', marginBottom: '0.5rem' }}>
+            npm install lucide-react@^0.501.0 --save
+          </div>
+          <p style={{ fontSize: '0.9rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+            This resolves peer dependency conflicts by upgrading lucide-react to the required version.
+          </p>
+        </div>
+
+        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
+          <p><strong>Dialog not showing/styling issues</strong></p>
+          <div style={{ backgroundColor: theme === 'dark' ? '#3a3a3a' : '#e5e5e5', padding: '0.5rem', borderRadius: '4px', fontFamily: 'monospace', marginBottom: '0.5rem' }}>
+            import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
+          </div>
+          <p style={{ fontSize: '0.9rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+            Make sure to import the CSS file. The dialog requires PM7 styles to render correctly.
+          </p>
         </div>
       </section>
 

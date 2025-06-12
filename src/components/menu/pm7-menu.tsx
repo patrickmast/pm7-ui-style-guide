@@ -252,16 +252,14 @@ const PM7MenuSeparator = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <div className="py-2 flex items-center justify-center">
-    <DropdownMenuPrimitive.Separator
-      ref={ref}
-      className={cn(
-        "w-[95%] h-[1px] bg-[#D5D5D5] dark:bg-[#525252]",
-        className || ""
-      )}
-      {...props}
-    />
-  </div>
+  <DropdownMenuPrimitive.Separator
+    ref={ref}
+    className={cn(
+      "h-[1px] bg-[#D5D5D5] dark:bg-[#525252] my-2 mx-0 border-none",
+      className || ""
+    )}
+    {...props}
+  />
 ));
 PM7MenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
 export { PM7MenuSeparator };
@@ -459,6 +457,8 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
             borderColor: currentTheme.borderColor,
             color: currentTheme.textColor,
             boxShadow: MENU_STYLES.CONTAINER_SHADOW,
+            borderRadius: '6px',
+            border: `1px solid ${currentTheme.borderColor}`,
             minWidth: isMobile ? MENU_STYLES.CONTAINER_MIN_WIDTH_MOBILE : MENU_STYLES.CONTAINER_MIN_WIDTH_DESKTOP,
             maxWidth: MENU_STYLES.CONTAINER_MAX_WIDTH,
           }}

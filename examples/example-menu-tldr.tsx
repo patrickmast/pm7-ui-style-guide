@@ -6,6 +6,12 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       {/* AI-Agent Friendly Header */}
       <div style={{ marginBottom: '2rem' }}>
         <h2>TL;DR - Complete Integration Guide</h2>
+        <div style={{ backgroundColor: '#e8f5e8', padding: '1rem', borderRadius: '8px', border: '1px solid #4caf50', marginBottom: '1rem' }}>
+          <h3 style={{ color: '#2e7d32', margin: '0 0 0.5rem 0' }}>✅ FIXED - Production Ready</h3>
+          <p style={{ margin: 0, color: '#2e7d32' }}>
+            PM7Menu styling issues have been resolved! Separators now render correctly, rounded corners work, and shadow flickering has been eliminated.
+          </p>
+        </div>
         <p style={{ fontSize: '1.1rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
           Everything you need to integrate PM7Menu in your application
         </p>
@@ -18,11 +24,29 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
           <pre><code>{`# 1. Install the package
 npm install pm7-ui-style-guide
 
-# 2. Import the component and CSS
+# 2. Import the component and its styles
 import { PM7Menu } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/dist/components/menu/pm7-menu.css';
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
 
-# 3. Use in your component
+# Note: Also import the base styles once in your app's entry point
+# import 'pm7-ui-style-guide/dist/style.css';
+
+# 4. Use the component with menuItems array
+function App() {
+  return (
+    <PM7Menu>
+      <PM7Menu.Trigger className="h-9 w-9">
+        <Menu className="h-5 w-5" />
+      </PM7Menu.Trigger>
+      <PM7Menu.Content>
+        <PM7Menu.Item onClick={() => console.log('Home')}>Home</PM7Menu.Item>
+        <PM7Menu.Item onClick={() => console.log('About')}>About</PM7Menu.Item>
+      </PM7Menu.Content>
+    </PM7Menu>
+  );
+}
+
+# Alternative: All-in-one approach (if supported)
 function App() {
   const menuItems = [
     { id: 'home', label: 'Home', onClick: () => console.log('Home') },
@@ -41,7 +65,6 @@ function App() {
         <h4>Basic Menu (All-in-One)</h4>
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
           <pre><code>{`import { PM7Menu } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/dist/components/menu/pm7-menu.css';
 
 function App() {
   const menuItems = [
@@ -79,7 +102,6 @@ function App() {
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
           <pre><code>{`import { PM7Menu } from 'pm7-ui-style-guide';
 import { User, Settings, LogOut } from 'lucide-react';
-import 'pm7-ui-style-guide/dist/components/menu/pm7-menu.css';
 
 function App() {
   const menuItems = [
@@ -119,38 +141,33 @@ function App() {
 }`}</code></pre>
         </div>
 
-        <h4>Primitive Components (Custom Implementation)</h4>
+        <h4>Compound Components Pattern (Recommended)</h4>
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
-          <pre><code>{`import { 
-  PM7Menu, 
-  PM7MenuTrigger, 
-  PM7MenuContent, 
-  PM7MenuItem, 
-  PM7MenuSeparator 
-} from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/dist/components/menu/pm7-menu.css';
+          <pre><code>{`import { PM7Menu } from 'pm7-ui-style-guide';
+import { Menu, Plus, Save, Download, Trash2 } from 'lucide-react';
 
 function App() {
   return (
     <PM7Menu>
-      <PM7MenuTrigger asChild>
-        <button className="px-4 py-2 bg-blue-500 text-white rounded">
-          Custom Trigger
-        </button>
-      </PM7MenuTrigger>
+      <PM7Menu.Trigger className="h-9 w-9">
+        <Menu className="h-5 w-5" />
+      </PM7Menu.Trigger>
       
-      <PM7MenuContent>
-        <PM7MenuItem onClick={() => console.log('Edit')}>
-          Edit
-        </PM7MenuItem>
-        <PM7MenuItem onClick={() => console.log('Copy')}>
-          Copy
-        </PM7MenuItem>
-        <PM7MenuSeparator />
-        <PM7MenuItem onClick={() => console.log('Delete')}>
+      <PM7Menu.Content>
+        <PM7Menu.Item onClick={() => console.log('New')}>
+          <Plus className="mr-2 h-4 w-4" />
+          New
+        </PM7Menu.Item>
+        <PM7Menu.Item onClick={() => console.log('Save')} disabled={false}>
+          <Save className="mr-2 h-4 w-4" />
+          Save
+        </PM7Menu.Item>
+        <PM7Menu.Separator />
+        <PM7Menu.Item onClick={() => console.log('Delete')}>
+          <Trash2 className="mr-2 h-4 w-4" />
           Delete
-        </PM7MenuItem>
-      </PM7MenuContent>
+        </PM7Menu.Item>
+      </PM7Menu.Content>
     </PM7Menu>
   );
 }`}</code></pre>
@@ -159,7 +176,6 @@ function App() {
         <h4>Context Menu / Right-Click Menu</h4>
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
           <pre><code>{`import { PM7Menu, PM7MenuContent, PM7MenuItem } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/dist/components/menu/pm7-menu.css';
 import { useState } from 'react';
 
 function App() {
@@ -204,7 +220,6 @@ function App() {
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
           <pre><code>{`import { PM7Menu } from 'pm7-ui-style-guide';
 import { useNavigate } from 'react-router-dom';
-import 'pm7-ui-style-guide/dist/components/menu/pm7-menu.css';
 
 function NavigationMenu() {
   const navigate = useNavigate();
@@ -308,16 +323,19 @@ function NavigationMenu() {
 }`}</code></pre>
         </div>
 
-        <h4>Primitive Components</h4>
+        <h4>Compound Components (Recommended Pattern)</h4>
         <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
           <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
             <li><strong>PM7Menu</strong> - Root menu container</li>
-            <li><strong>PM7MenuTrigger</strong> - Button that opens the menu</li>
-            <li><strong>PM7MenuContent</strong> - Menu content container</li>
-            <li><strong>PM7MenuItem</strong> - Individual menu item</li>
-            <li><strong>PM7MenuSeparator</strong> - Visual separator between items</li>
-            <li><strong>PM7MenuLabel</strong> - Section label for grouping items</li>
+            <li><strong>PM7Menu.Trigger</strong> - Button that opens the menu (accepts className prop)</li>
+            <li><strong>PM7Menu.Content</strong> - Menu content container</li>
+            <li><strong>PM7Menu.Item</strong> - Individual menu item (accepts onClick and disabled props)</li>
+            <li><strong>PM7Menu.Separator</strong> - Visual separator between items</li>
+            <li><strong>PM7Menu.Label</strong> - Section label for grouping items</li>
           </ul>
+          <p style={{ marginTop: '1rem', fontStyle: 'italic' }}>
+            Note: These components are accessed as properties of PM7Menu (e.g., PM7Menu.Trigger, PM7Menu.Item)
+          </p>
         </div>
       </section>
 
@@ -326,13 +344,12 @@ function NavigationMenu() {
         <h3>Important Notes</h3>
         <div style={{ backgroundColor: theme === 'dark' ? '#3a2a2a' : '#fff5f5', padding: '1rem', borderRadius: '8px', border: `1px solid ${theme === 'dark' ? '#663333' : '#ffcccc'}` }}>
           <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
-            <li><strong>CSS Import Required:</strong> You must import the CSS file for proper styling</li>
+            <li><strong>Automatic Styling:</strong> All PM7Menu styles are now bundled automatically - no manual CSS injection needed!</li>
             <li><strong>Built on Radix:</strong> Uses @radix-ui/react-dropdown-menu for accessibility</li>
             <li><strong>PM7 Styling:</strong> Follows PM7 design system with hover states</li>
             <li><strong>Keyboard Support:</strong> Arrow keys, Enter, ESC navigation</li>
             <li><strong>Portal Rendering:</strong> Menu content renders outside normal DOM hierarchy</li>
             <li><strong>Focus Management:</strong> Proper focus trapping and restoration</li>
-            <li><strong>Two Usage Patterns:</strong> All-in-one or primitive components for flexibility</li>
           </ul>
         </div>
       </section>

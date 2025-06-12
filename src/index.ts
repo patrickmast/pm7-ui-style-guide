@@ -1,5 +1,8 @@
 // Enhancement: Updated exports to allow selective importing of components and renamed PM7MenuComponent to PM7Menu for consistency
 
+// Import main CSS bundle to ensure all styles are included
+import './style.css';
+
 // Core UI components
 export { PM7Menu as Menu } from './components/menu';
 export * from './components/dialog';
