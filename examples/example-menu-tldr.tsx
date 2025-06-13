@@ -7,9 +7,10 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       <div style={{ marginBottom: '2rem' }}>
         <h2>TL;DR - Complete Integration Guide</h2>
         <div style={{ backgroundColor: '#e8f5e8', padding: '1rem', borderRadius: '8px', border: '1px solid #4caf50', marginBottom: '1rem' }}>
-          <h3 style={{ color: '#2e7d32', margin: '0 0 0.5rem 0' }}>✅ FIXED - Production Ready</h3>
+          <h3 style={{ color: '#2e7d32', margin: '0 0 0.5rem 0' }}>✅ Production Ready - v1.3.13+</h3>
           <p style={{ margin: 0, color: '#2e7d32' }}>
-            PM7Menu styling issues have been resolved! Separators now render correctly, rounded corners work, and shadow flickering has been eliminated.
+            PM7Menu is now 100% self-contained! Beautiful menu item shadows, stable container shadows, 
+            and separators all work perfectly. No local CSS overrides needed.
           </p>
         </div>
         <p style={{ fontSize: '1.1rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>

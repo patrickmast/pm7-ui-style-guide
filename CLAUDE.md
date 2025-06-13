@@ -53,10 +53,12 @@ src/
       index.ts         # Exports
       pm7-button.tsx   # Implementation
       README.md        # Component docs
+    card/
     dialog/
     input/
     menu/
     tab-selector/
+    theme-toggle/
   css/
     variables.css      # CSS custom properties
   colors.ts           # PM7 brand colors
@@ -161,7 +163,8 @@ The library requires these peer dependencies to be installed by consuming applic
 
 ### CSS Integration
 - Main CSS variables in `src/css/variables.css`
-- Component-specific CSS files (e.g., `pm7-menu.css`, `pm7-dialog.css`)
+- Component-specific CSS files (e.g., `pm7-menu.css`, `pm7-dialog.css`, `pm7-card.css`, `pm7-tab-selector.css`, `pm7-theme-toggle.css`)
+- Global styles in `src/globals.css`
 - Consuming apps must import component CSS files as needed
 
 ### TypeScript Configuration
@@ -175,8 +178,9 @@ The library requires these peer dependencies to be installed by consuming applic
 - External dependencies (React, React DOM) not bundled
 - Package.json `files` field includes:
   - `dist/` - Built library files
-  - `src/components/menu/pm7-menu.css` - Menu component styles
-  - `index.d.ts` - TypeScript definitions
+  - Component-specific CSS files (`pm7-menu.css`, `pm7-dialog.css`, `pm7-card.css`, `pm7-tab-selector.css`, `pm7-theme-toggle.css`)
+  - `src/css/variables.css` and `src/globals.css` - Global styles
+  - `index.d.ts`, `colors.d.ts`, `tokens.d.ts` - TypeScript definitions
 
 ## Component Usage Patterns
 
@@ -234,13 +238,14 @@ The examples app serves as both development environment and public documentation
 ### Adding a New Component
 1. Create directory: `src/components/[component-name]/`
 2. Add files:
-   - `index.ts` - Re-exports
+   - `index.ts` or `index.tsx` - Re-exports
    - `pm7-[name].tsx` - Implementation
    - `pm7-[name].css` - Styles (if needed)
-   - `README.md` - Documentation
+   - `README.md` - Component documentation
 3. Export from `src/index.ts` with both PM7-prefixed and clean names
-4. Create example in `examples/example-[name].tsx`
-5. Add route in `examples/App.tsx`
+4. Update `package.json` `files` array to include CSS file if created
+5. Create example in `examples/example-[name].tsx`
+6. Add route in `examples/App.tsx`
 
 ### Component Export Pattern
 ```typescript
@@ -254,3 +259,10 @@ export { PM7ComponentName, PM7ComponentName as ComponentName } from './component
 This allows consumers to use either:
 - `import { ComponentName } from 'pm7-ui-style-guide'`
 - `import { PM7ComponentName } from 'pm7-ui-style-guide'`
+
+## Deployment Workflow
+
+When I say "Deploy npm", do these tasks:
+1. Bumped the version of our npm package in package.json
+2. Built the npm package with `npm run build`
+3. Published the package to npm with `npm publish`

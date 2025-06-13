@@ -42,164 +42,687 @@
   cursor: pointer !important;
 }
 
-/* Separator styling - CRITICAL MISSING STYLES */
-[data-radix-dropdown-menu-separator] {
+/* Separator styling - MAXIMUM SPECIFICITY to override Tailwind and other CSS frameworks */
+*[data-radix-dropdown-menu-separator],
+*[data-radix-dropdown-menu-separator=""],
+div[data-radix-dropdown-menu-separator],
+hr[data-radix-dropdown-menu-separator],
+span[data-radix-dropdown-menu-separator],
+[role="separator"],
+.separator,
+[data-separator],
+[aria-orientation="horizontal"],
+.pm7-menu-separator,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content] div[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content] hr[data-radix-dropdown-menu-separator] {
   height: 1px !important;
   background-color: #D5D5D5 !important;
   border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
   margin: 8px 0 !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
   pointer-events: none !important; /* Prevent mouse events causing flicker */
   user-select: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
 }
 
-.dark [data-radix-dropdown-menu-separator] {
+/* Dark mode separator styling with maximum specificity */
+.dark *[data-radix-dropdown-menu-separator],
+.dark *[data-radix-dropdown-menu-separator=""],
+.dark div[data-radix-dropdown-menu-separator],
+.dark hr[data-radix-dropdown-menu-separator],
+.dark span[data-radix-dropdown-menu-separator],
+.dark [role="separator"],
+.dark .separator,
+.dark [data-separator],
+.dark [aria-orientation="horizontal"],
+.dark .pm7-menu-separator,
+.dark [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-content] div[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-content] hr[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content].dark [data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content].dark div[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content].dark hr[data-radix-dropdown-menu-separator] {
   background-color: #525252 !important;
 }
 
-/* Menu content border radius and shadow - ensure inline styles work */
-[data-radix-dropdown-menu-content] {
+/* Menu content border radius and shadow - MAXIMUM SPECIFICITY to prevent flickering and framework conflicts */
+[data-radix-dropdown-menu-content],
+div[data-radix-dropdown-menu-content],
+[data-radix-dropdown-menu-subcontent],
+div[data-radix-dropdown-menu-subcontent],
+[data-radix-popper-content-wrapper] [data-radix-dropdown-menu-content],
+[data-radix-popper-content-wrapper] div[data-radix-dropdown-menu-content],
+[data-radix-popper-content-wrapper] [data-radix-dropdown-menu-subcontent],
+[data-radix-popper-content-wrapper] div[data-radix-dropdown-menu-subcontent],
+*[data-radix-dropdown-menu-content],
+*[data-radix-dropdown-menu-subcontent],
+html [data-radix-dropdown-menu-content],
+html div[data-radix-dropdown-menu-content],
+html [data-radix-dropdown-menu-subcontent],
+html div[data-radix-dropdown-menu-subcontent],
+body [data-radix-dropdown-menu-content],
+body div[data-radix-dropdown-menu-content],
+body [data-radix-dropdown-menu-subcontent],
+body div[data-radix-dropdown-menu-subcontent] {
   border-radius: 6px !important;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  /* Prevent shadow flickering by stabilizing positioning */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  /* Ensure proper layering */
+  z-index: 1000 !important;
+  position: relative !important;
+  /* Anti-framework protection */
+  filter: none !important;
+  backdrop-filter: none !important;
 }
 
-/* Dark mode styling */
+/* Dark mode styling - HIGH SPECIFICITY */
 .dark [data-radix-dropdown-menu-content],
-.dark [data-radix-dropdown-menu-subcontent] {
+.dark div[data-radix-dropdown-menu-content],
+.dark [data-radix-dropdown-menu-subcontent],
+.dark div[data-radix-dropdown-menu-subcontent],
+[data-radix-dropdown-menu-content].dark,
+div[data-radix-dropdown-menu-content].dark,
+[data-radix-dropdown-menu-subcontent].dark,
+div[data-radix-dropdown-menu-subcontent].dark {
   background-color: #262626 !important;
   border-color: #525252 !important;
+  border: 1px solid #525252 !important;
+  color: #FAFAFA !important;
 }
 
-/* Highlighted state styling (hover) */
+/* Highlighted state styling (hover) with beautiful shadow - MAXIMUM SPECIFICITY to override inline styles and CSS frameworks */
+html body [data-radix-dropdown-menu-item][data-highlighted],
+html body div[data-radix-dropdown-menu-item][data-highlighted],
+html body [data-radix-dropdown-menu-checkbox-item][data-highlighted],
+html body div[data-radix-dropdown-menu-checkbox-item][data-highlighted],
+html body [data-radix-dropdown-menu-radio-item][data-highlighted],
+html body div[data-radix-dropdown-menu-radio-item][data-highlighted],
+html body [data-radix-dropdown-menu-subtrigger][data-highlighted],
+html body div[data-radix-dropdown-menu-subtrigger][data-highlighted],
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item][data-highlighted],
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item][data-highlighted],
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item][data-highlighted],
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-highlighted],
 [data-radix-dropdown-menu-item][data-highlighted],
+div[data-radix-dropdown-menu-item][data-highlighted],
 [data-radix-dropdown-menu-checkbox-item][data-highlighted],
+div[data-radix-dropdown-menu-checkbox-item][data-highlighted],
 [data-radix-dropdown-menu-radio-item][data-highlighted],
-[data-radix-dropdown-menu-subtrigger][data-highlighted] {
+div[data-radix-dropdown-menu-radio-item][data-highlighted],
+[data-radix-dropdown-menu-subtrigger][data-highlighted],
+div[data-radix-dropdown-menu-subtrigger][data-highlighted],
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item][data-highlighted],
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item][data-highlighted],
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item][data-highlighted],
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-highlighted] {
   background-color: #1C86EF !important;
   color: white !important;
+  /* Beautiful shadow effect for highlighted menu items */
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  /* Prevent text color inheritance issues */
+  text-decoration: none !important;
+  opacity: 1 !important;
+  /* Ensure proper layering for shadow */
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
 }
 
+/* Ensure all child elements inherit the white color on hover */
 [data-radix-dropdown-menu-item][data-highlighted] *,
+div[data-radix-dropdown-menu-item][data-highlighted] *,
 [data-radix-dropdown-menu-checkbox-item][data-highlighted] *,
+div[data-radix-dropdown-menu-checkbox-item][data-highlighted] *,
 [data-radix-dropdown-menu-radio-item][data-highlighted] *,
-[data-radix-dropdown-menu-subtrigger][data-highlighted] * {
+div[data-radix-dropdown-menu-radio-item][data-highlighted] *,
+[data-radix-dropdown-menu-subtrigger][data-highlighted] *,
+div[data-radix-dropdown-menu-subtrigger][data-highlighted] *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item][data-highlighted] *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item][data-highlighted] *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item][data-highlighted] *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-highlighted] * {
   color: white !important;
 }
 
-/* Open state styling */
-[data-radix-dropdown-menu-subtrigger][data-state="open"] {
+/* Open state styling with beautiful shadow - HIGH SPECIFICITY */
+[data-radix-dropdown-menu-subtrigger][data-state="open"],
+div[data-radix-dropdown-menu-subtrigger][data-state="open"],
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-state="open"] {
   background-color: #1C86EF !important;
   color: white !important;
+  opacity: 1 !important;
+  /* Beautiful shadow effect for open submenu triggers */
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  /* Ensure proper layering for shadow */
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
 }
 
-[data-radix-dropdown-menu-subtrigger][data-state="open"] * {
+[data-radix-dropdown-menu-subtrigger][data-state="open"] *,
+div[data-radix-dropdown-menu-subtrigger][data-state="open"] *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-state="open"] * {
   color: white !important;
 }
 
-/* Submenu positioning */
-[data-radix-dropdown-menu-subcontent] {
+/* Submenu positioning - HIGH SPECIFICITY */
+[data-radix-dropdown-menu-subcontent],
+div[data-radix-dropdown-menu-subcontent] {
   margin-top: -10px !important;
   margin-left: 4px !important;
+  /* Ensure proper positioning isn't overridden */
+  position: absolute !important;
 }
 
-/* Main menu positioning */
-[data-radix-dropdown-menu-content] {
+/* Main menu positioning - HIGH SPECIFICITY */
+[data-radix-dropdown-menu-content],
+div[data-radix-dropdown-menu-content] {
   margin-top: -8px !important;
+  /* Ensure proper positioning isn't overridden */
+  position: absolute !important;
 }
 
-/* SVG icon coloring for menu items */
-/* .menu-item-svg-icon { color: #000000; } */
-.dark .menu-item-svg-icon {
-  color: #FAFAFA;
+/* SVG icon coloring for menu items - HIGH SPECIFICITY */
+.menu-item-svg-icon,
+span.menu-item-svg-icon,
+[data-radix-dropdown-menu-content] .menu-item-svg-icon,
+[data-radix-dropdown-menu-subcontent] .menu-item-svg-icon {
+  color: #000000 !important;
 }
 
-/* Highlighted or open state: force icon to white */
+.dark .menu-item-svg-icon,
+.dark span.menu-item-svg-icon,
+.dark [data-radix-dropdown-menu-content] .menu-item-svg-icon,
+.dark [data-radix-dropdown-menu-subcontent] .menu-item-svg-icon,
+[data-radix-dropdown-menu-content].dark .menu-item-svg-icon,
+[data-radix-dropdown-menu-subcontent].dark .menu-item-svg-icon {
+  color: #FAFAFA !important;
+}
+
+/* Highlighted or open state: force icon to white - HIGH SPECIFICITY */
 [data-radix-dropdown-menu-item][data-highlighted] .menu-item-svg-icon,
 [data-radix-dropdown-menu-checkbox-item][data-highlighted] .menu-item-svg-icon,
 [data-radix-dropdown-menu-radio-item][data-highlighted] .menu-item-svg-icon,
 [data-radix-dropdown-menu-subtrigger][data-highlighted] .menu-item-svg-icon,
-[data-radix-dropdown-menu-subtrigger][data-state="open"] .menu-item-svg-icon {
+[data-radix-dropdown-menu-subtrigger][data-state="open"] .menu-item-svg-icon,
+div[data-radix-dropdown-menu-item][data-highlighted] .menu-item-svg-icon,
+div[data-radix-dropdown-menu-checkbox-item][data-highlighted] .menu-item-svg-icon,
+div[data-radix-dropdown-menu-radio-item][data-highlighted] .menu-item-svg-icon,
+div[data-radix-dropdown-menu-subtrigger][data-highlighted] .menu-item-svg-icon,
+div[data-radix-dropdown-menu-subtrigger][data-state="open"] .menu-item-svg-icon,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-highlighted] .menu-item-svg-icon,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger][data-state="open"] .menu-item-svg-icon {
   color: #fff !important;
 }
 
-/* .menu-trigger-icon--custom: color is set via CSS variable for performance */
-.menu-trigger-icon--custom {
+/* Menu trigger icon custom styling with CSS variables - HIGH SPECIFICITY */
+.menu-trigger-icon--custom,
+span.menu-trigger-icon--custom,
+button .menu-trigger-icon--custom {
   color: var(--menu-trigger-icon-color, #1C86EF) !important;
 }
-.dark .menu-trigger-icon--custom {
+
+.dark .menu-trigger-icon--custom,
+.dark span.menu-trigger-icon--custom,
+.dark button .menu-trigger-icon--custom,
+button.dark .menu-trigger-icon--custom {
   color: var(--menu-trigger-icon-color-dark, #FFDD00) !important;
 }
 
-/* SVG icon coloring for menu trigger */
-.menu-trigger-icon {
-  color: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  line-height: 1;
-  height: 32px;
-  width: 32px;
-  margin-top: -1px;
-  margin-bottom: 3px;
-  margin-left: -1px;
-  margin-right: -1px;
-  flex-shrink: 0;
+/* SVG icon coloring for menu trigger - HIGH SPECIFICITY */
+.menu-trigger-icon,
+span.menu-trigger-icon,
+button .menu-trigger-icon {
+  color: #000000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  height: 32px !important;
+  width: 32px !important;
+  margin-top: -1px !important;
+  margin-bottom: 3px !important;
+  margin-left: -1px !important;
+  margin-right: -1px !important;
+  flex-shrink: 0 !important;
 }
-.dark .menu-trigger-icon {
-  color: #FAFAFA;
+
+.dark .menu-trigger-icon,
+.dark span.menu-trigger-icon,
+.dark button .menu-trigger-icon,
+button.dark .menu-trigger-icon {
+  color: #FAFAFA !important;
+}
+
+/* Menu trigger bordered styles - HIGH SPECIFICITY */
+.menu-trigger--bordered,
+button.menu-trigger--bordered,
+.menu-trigger--bordered-hover,
+button.menu-trigger--bordered-hover {
+  border: 1px solid transparent !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .menu-trigger--bordered,
-.menu-trigger--bordered-hover {
-  border: 1px solid transparent;
-  height: 32px;
-  min-width: 32px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.menu-trigger--bordered {
-  border-color: #D5D5D5;
-  background: #f1f1f1;
-}
-.menu-trigger--bordered-hover:hover {
-  border-color: #D5D5D5;
-  background: #e8e7e7;
+button.menu-trigger--bordered {
+  border-color: #D5D5D5 !important;
+  background: #f1f1f1 !important;
 }
 
-/* Apply dark mode styles */
+.menu-trigger--bordered-hover:hover,
+button.menu-trigger--bordered-hover:hover {
+  border-color: #D5D5D5 !important;
+  background: #e8e7e7 !important;
+}
+
+/* Apply dark mode styles - HIGH SPECIFICITY */
 .dark .menu-trigger--bordered,
-.dark .menu-trigger--bordered-hover {
-  border: 1px solid transparent;
+.dark button.menu-trigger--bordered,
+.dark .menu-trigger--bordered-hover,
+.dark button.menu-trigger--bordered-hover,
+button.dark.menu-trigger--bordered,
+button.dark.menu-trigger--bordered-hover {
+  border: 1px solid transparent !important;
 }
 
 .dark .menu-trigger--bordered,
-.dark .menu-trigger--bordered-hover:hover {
-  border-color: #525252;
-  background: #23272F;
+.dark button.menu-trigger--bordered,
+.dark .menu-trigger--bordered-hover:hover,
+.dark button.menu-trigger--bordered-hover:hover,
+button.dark.menu-trigger--bordered,
+button.dark.menu-trigger--bordered-hover:hover {
+  border-color: #525252 !important;
+  background: #23272F !important;
 }
 
-/* Hover effect when only bordered-hover is true (lighter effect) */
-.menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: transparent;
+/* Hover effect when only bordered-hover is true (lighter effect) - HIGH SPECIFICITY */
+.menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover,
+button.menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: transparent !important;
 }
 
-.dark .menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: transparent;
+.dark .menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover,
+.dark button.menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover,
+button.dark.menu-trigger--bordered-hover:not(.menu-trigger--bordered):hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: transparent !important;
 }
 
-/* Hover effect when both bordered and bordered-hover are true (darker effect) */
+/* Hover effect when both bordered and bordered-hover are true (darker effect) - HIGH SPECIFICITY */
 .menu-trigger--bordered.menu-trigger--bordered-hover:hover,
-.dark .menu-trigger--bordered.menu-trigger--bordered-hover:hover {
-  background: #e8e7e7;
-  border-color: #D5D5D5;
+button.menu-trigger--bordered.menu-trigger--bordered-hover:hover {
+  background: #e8e7e7 !important;
+  border-color: #D5D5D5 !important;
 }
 
-.dark .menu-trigger--bordered.menu-trigger--bordered-hover:hover {
-  background: #2f333d;
-  border-color: #525252;
+.dark .menu-trigger--bordered.menu-trigger--bordered-hover:hover,
+.dark button.menu-trigger--bordered.menu-trigger--bordered-hover:hover,
+button.dark.menu-trigger--bordered.menu-trigger--bordered-hover:hover {
+  background: #2f333d !important;
+  border-color: #525252 !important;
+}
+
+/* Hover state styling with beautiful shadow - MAXIMUM SPECIFICITY to override inline styles */
+html body [data-radix-dropdown-menu-item]:hover,
+html body div[data-radix-dropdown-menu-item]:hover,
+html body [data-radix-dropdown-menu-checkbox-item]:hover,
+html body div[data-radix-dropdown-menu-checkbox-item]:hover,
+html body [data-radix-dropdown-menu-radio-item]:hover,
+html body div[data-radix-dropdown-menu-radio-item]:hover,
+html body [data-radix-dropdown-menu-subtrigger]:hover,
+html body div[data-radix-dropdown-menu-subtrigger]:hover,
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item]:hover,
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item]:hover,
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item]:hover,
+html body [data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger]:hover,
+[data-radix-dropdown-menu-item]:hover,
+div[data-radix-dropdown-menu-item]:hover,
+[data-radix-dropdown-menu-checkbox-item]:hover,
+div[data-radix-dropdown-menu-checkbox-item]:hover,
+[data-radix-dropdown-menu-radio-item]:hover,
+div[data-radix-dropdown-menu-radio-item]:hover,
+[data-radix-dropdown-menu-subtrigger]:hover,
+div[data-radix-dropdown-menu-subtrigger]:hover,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item]:hover,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item]:hover,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item]:hover,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger]:hover {
+  background-color: #1C86EF !important;
+  color: white !important;
+  /* Beautiful shadow effect for hovered menu items */
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  /* Prevent text color inheritance issues */
+  text-decoration: none !important;
+  opacity: 1 !important;
+  /* Ensure proper layering for shadow */
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+}
+
+/* Ensure all child elements inherit the white color on hover */
+[data-radix-dropdown-menu-item]:hover *,
+div[data-radix-dropdown-menu-item]:hover *,
+[data-radix-dropdown-menu-checkbox-item]:hover *,
+div[data-radix-dropdown-menu-checkbox-item]:hover *,
+[data-radix-dropdown-menu-radio-item]:hover *,
+div[data-radix-dropdown-menu-radio-item]:hover *,
+[data-radix-dropdown-menu-subtrigger]:hover *,
+div[data-radix-dropdown-menu-subtrigger]:hover *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-item]:hover *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-checkbox-item]:hover *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-radio-item]:hover *,
+[data-radix-dropdown-menu-content] [data-radix-dropdown-menu-subtrigger]:hover * {
+  color: white !important;
+}
+
+/* ===== MENU ITEM SHADOW ENFORCEMENT - COUNTER INLINE STYLES ===== */
+
+/* Force shadows on menu items with inline styles (highest priority) - This targets the inline style issue */
+[data-radix-dropdown-menu-item][style*="background-color"]:hover,
+[data-radix-dropdown-menu-checkbox-item][style*="background-color"]:hover,
+[data-radix-dropdown-menu-radio-item][style*="background-color"]:hover,
+[data-radix-dropdown-menu-subtrigger][style*="background-color"]:hover,
+div[data-radix-dropdown-menu-item][style*="background-color"]:hover,
+div[data-radix-dropdown-menu-checkbox-item][style*="background-color"]:hover,
+div[data-radix-dropdown-menu-radio-item][style*="background-color"]:hover,
+div[data-radix-dropdown-menu-subtrigger][style*="background-color"]:hover,
+[data-radix-dropdown-menu-item][style*="background-color"][data-highlighted],
+[data-radix-dropdown-menu-checkbox-item][style*="background-color"][data-highlighted],
+[data-radix-dropdown-menu-radio-item][style*="background-color"][data-highlighted],
+[data-radix-dropdown-menu-subtrigger][style*="background-color"][data-highlighted],
+div[data-radix-dropdown-menu-item][style*="background-color"][data-highlighted],
+div[data-radix-dropdown-menu-checkbox-item][style*="background-color"][data-highlighted],
+div[data-radix-dropdown-menu-radio-item][style*="background-color"][data-highlighted],
+div[data-radix-dropdown-menu-subtrigger][style*="background-color"][data-highlighted] {
+  /* Force beautiful shadow even when inline styles are present */
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  /* Ensure proper layering for shadow */
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  /* Anti-framework interference */
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Additional coverage for submenu triggers in open state with inline styles */
+[data-radix-dropdown-menu-subtrigger][style*="background-color"][data-state="open"],
+div[data-radix-dropdown-menu-subtrigger][style*="background-color"][data-state="open"] {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ===== SHADOW FIX - ULTIMATE SPECIFICITY TO PREVENT FRAMEWORK OVERRIDES ===== */
+
+/* Ultimate shadow protection with custom class - overrides ALL frameworks */
+.pm7-menu-content-shadow-fix,
+div.pm7-menu-content-shadow-fix,
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix,
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix,
+html *[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix,
+html *[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix,
+body *[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix,
+body *[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix,
+[data-radix-popper-content-wrapper] *[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix,
+[data-radix-popper-content-wrapper] *[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  border-radius: 6px !important;
+  /* Prevent ANY framework interference */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  z-index: 1000 !important;
+  position: relative !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  /* Defensive positioning and display */
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
+  /* Anti-Tailwind and framework resets */
+  margin: 0 !important;
+  padding: 12px !important;
+  overflow: visible !important;
+  background-clip: padding-box !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  box-sizing: border-box !important;
+}
+
+/* Dark mode shadow protection with custom class */
+.dark .pm7-menu-content-shadow-fix,
+.dark div.pm7-menu-content-shadow-fix,
+.dark *[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix,
+.dark *[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix,
+.pm7-menu-content-shadow-fix.dark,
+div.pm7-menu-content-shadow-fix.dark,
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix.dark,
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix.dark {
+  background-color: #262626 !important;
+  border-color: #525252 !important;
+  color: #FAFAFA !important;
+}
+
+/* State-based shadow protection - ensure shadow persists in ALL states */
+.pm7-menu-content-shadow-fix:hover,
+.pm7-menu-content-shadow-fix:focus,
+.pm7-menu-content-shadow-fix:active,
+.pm7-menu-content-shadow-fix[data-state="open"],
+.pm7-menu-content-shadow-fix[data-state="closed"],
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix:hover,
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix:focus,
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix:active,
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix[data-state="open"],
+*[data-radix-dropdown-menu-content].pm7-menu-content-shadow-fix[data-state="closed"],
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix:hover,
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix:focus,
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix:active,
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix[data-state="open"],
+*[data-radix-dropdown-menu-subcontent].pm7-menu-content-shadow-fix[data-state="closed"] {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  border-radius: 6px !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  z-index: 1000 !important;
+  position: relative !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ABSOLUTE FINAL DEFENSE - Nuclear option for shadow persistence */
+[data-radix-dropdown-menu-content]:not([style*="box-shadow"]),
+[data-radix-dropdown-menu-subcontent]:not([style*="box-shadow"]),
+div[data-radix-dropdown-menu-content]:not([style*="box-shadow"]),
+div[data-radix-dropdown-menu-subcontent]:not([style*="box-shadow"]) {
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+}
+
+/* ULTIMATE MENU ITEM SHADOW ENFORCEMENT - NUCLEAR OPTION */
+/* This is the most aggressive approach to force shadows on menu items regardless of inline styles */
+[data-radix-dropdown-menu-item],
+[data-radix-dropdown-menu-checkbox-item], 
+[data-radix-dropdown-menu-radio-item],
+[data-radix-dropdown-menu-subtrigger],
+div[data-radix-dropdown-menu-item],
+div[data-radix-dropdown-menu-checkbox-item],
+div[data-radix-dropdown-menu-radio-item], 
+div[data-radix-dropdown-menu-subtrigger] {
+  /* CSS Custom property to store our shadow value */
+  --pm7-menu-item-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px;
+}
+
+/* Apply shadow when background is blue (indicating hover/highlighted state) */
+[data-radix-dropdown-menu-item][style*="#1C86EF"],
+[data-radix-dropdown-menu-checkbox-item][style*="#1C86EF"],
+[data-radix-dropdown-menu-radio-item][style*="#1C86EF"],
+[data-radix-dropdown-menu-subtrigger][style*="#1C86EF"],
+div[data-radix-dropdown-menu-item][style*="#1C86EF"],
+div[data-radix-dropdown-menu-checkbox-item][style*="#1C86EF"],
+div[data-radix-dropdown-menu-radio-item][style*="#1C86EF"],
+div[data-radix-dropdown-menu-subtrigger][style*="#1C86EF"],
+/* Also cover lowercase hex */
+[data-radix-dropdown-menu-item][style*="#1c86ef"],
+[data-radix-dropdown-menu-checkbox-item][style*="#1c86ef"],
+[data-radix-dropdown-menu-radio-item][style*="#1c86ef"],
+[data-radix-dropdown-menu-subtrigger][style*="#1c86ef"],
+div[data-radix-dropdown-menu-item][style*="#1c86ef"],
+div[data-radix-dropdown-menu-checkbox-item][style*="#1c86ef"],
+div[data-radix-dropdown-menu-radio-item][style*="#1c86ef"],
+div[data-radix-dropdown-menu-subtrigger][style*="#1c86ef"] {
+  box-shadow: var(--pm7-menu-item-shadow) !important;
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ===== ENHANCED SHADOW SUPPORT FOR INLINE STYLE INTEGRATION ===== */
+
+/* Cover data-highlighted state regardless of inline styles */
+[data-radix-dropdown-menu-item][data-highlighted],
+[data-radix-dropdown-menu-checkbox-item][data-highlighted],
+[data-radix-dropdown-menu-radio-item][data-highlighted],
+[data-radix-dropdown-menu-subtrigger][data-highlighted],
+div[data-radix-dropdown-menu-item][data-highlighted],
+div[data-radix-dropdown-menu-checkbox-item][data-highlighted],
+div[data-radix-dropdown-menu-radio-item][data-highlighted],
+div[data-radix-dropdown-menu-subtrigger][data-highlighted] {
+  /* Force shadow even when component has inline styles */
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+}
+
+/* Cover data-state=open for submenu triggers regardless of inline styles */
+[data-radix-dropdown-menu-subtrigger][data-state="open"],
+div[data-radix-dropdown-menu-subtrigger][data-state="open"] {
+  /* Force shadow even when component has inline styles */
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px !important;
+  z-index: 10 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+}
+
+/* ===== ADDITIONAL DEFENSIVE CSS AGAINST FRAMEWORK CONFLICTS ===== */
+
+/* Anti-Tailwind separator protection - Ultimate specificity */
+[data-radix-dropdown-menu-content] > *[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content] > *[data-radix-dropdown-menu-separator=""],
+[data-radix-dropdown-menu-content] > div[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content] > hr[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content] > span[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content] > [role="separator"],
+[data-radix-dropdown-menu-content] > .separator,
+[data-radix-dropdown-menu-content] > [data-separator],
+[data-radix-dropdown-menu-content] > [aria-orientation="horizontal"],
+[data-radix-dropdown-menu-subcontent] > *[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-subcontent] > *[data-radix-dropdown-menu-separator=""],
+[data-radix-dropdown-menu-subcontent] > div[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-subcontent] > hr[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-subcontent] > span[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-subcontent] > [role="separator"],
+[data-radix-dropdown-menu-subcontent] > .separator,
+[data-radix-dropdown-menu-subcontent] > [data-separator],
+[data-radix-dropdown-menu-subcontent] > [aria-orientation="horizontal"],
+div[data-radix-dropdown-menu-content] > div[data-radix-dropdown-menu-separator],
+div[data-radix-dropdown-menu-subcontent] > div[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  border: 0 !important;
+  margin: 8px 0 !important;
+  width: 100% !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* Reset any framework transforms or filters */
+  transform: none !important;
+  filter: none !important;
+  /* Prevent hidden or display issues */
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Dark mode anti-framework protection */
+.dark [data-radix-dropdown-menu-content] > *[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-content] > *[data-radix-dropdown-menu-separator=""],
+.dark [data-radix-dropdown-menu-content] > div[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-content] > hr[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-content] > span[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-content] > [role="separator"],
+.dark [data-radix-dropdown-menu-content] > .separator,
+.dark [data-radix-dropdown-menu-content] > [data-separator],
+.dark [data-radix-dropdown-menu-content] > [aria-orientation="horizontal"],
+.dark [data-radix-dropdown-menu-subcontent] > *[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-subcontent] > *[data-radix-dropdown-menu-separator=""],
+.dark [data-radix-dropdown-menu-subcontent] > div[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-subcontent] > hr[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-subcontent] > span[data-radix-dropdown-menu-separator],
+.dark [data-radix-dropdown-menu-subcontent] > [role="separator"],
+.dark [data-radix-dropdown-menu-subcontent] > .separator,
+.dark [data-radix-dropdown-menu-subcontent] > [data-separator],
+.dark [data-radix-dropdown-menu-subcontent] > [aria-orientation="horizontal"],
+.dark div[data-radix-dropdown-menu-content] > div[data-radix-dropdown-menu-separator],
+.dark div[data-radix-dropdown-menu-subcontent] > div[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-content].dark > [data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-subcontent].dark > [data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
+}
+
+/* Menu content anti-framework protection */
+[data-radix-dropdown-menu-content][data-state="open"],
+[data-radix-dropdown-menu-subcontent][data-state="open"],
+div[data-radix-dropdown-menu-content][data-state="open"],
+div[data-radix-dropdown-menu-subcontent][data-state="open"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  /* Prevent framework hiding */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
 }

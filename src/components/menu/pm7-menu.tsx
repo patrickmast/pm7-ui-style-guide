@@ -91,7 +91,7 @@ const PM7MenuSubTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
     inset?: boolean;
   }
->(({ className, inset, children, ...props }, ref) => (
+>(({ className, inset, children, style, ...props }, ref) => (
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
@@ -103,6 +103,16 @@ const PM7MenuSubTrigger = React.forwardRef<
       "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className
     )}
+    style={{
+      ...style,
+      // Enhance data-highlighted and data-state=open states with shadow
+      ...((props['data-highlighted'] || props['data-state'] === 'open') && {
+        boxShadow: 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px',
+        zIndex: 10,
+        position: 'relative',
+        transform: 'translateZ(0)'
+      })
+    }}
     {...props}
   >
     {children}
@@ -157,7 +167,7 @@ const PM7MenuItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean;
   }
->(({ className, inset, ...props }, ref) => (
+>(({ className, inset, style, ...props }, ref) => (
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
@@ -167,6 +177,16 @@ const PM7MenuItem = React.forwardRef<
       "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className || ""
     )}
+    style={{
+      ...style,
+      // Enhance data-highlighted state with shadow - this ensures keyboard navigation also shows shadows
+      ...(props['data-highlighted'] && {
+        boxShadow: 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px',
+        zIndex: 10,
+        position: 'relative',
+        transform: 'translateZ(0)'
+      })
+    }}
     {...props}
   />
 ));
@@ -177,15 +197,26 @@ export { PM7MenuItem };
 const PM7MenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
->(({ className, children, checked, ...props }, ref) => (
+>(({ className, children, checked, style, ...props }, ref) => (
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
       "relative flex cursor-pointer select-none items-center rounded-md py-2 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[#1C86EF] focus:text-white data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       "hover:bg-[#1C86EF] hover:text-white",
+      "data-[highlighted]:bg-[#1C86EF] data-[highlighted]:text-white",
       "text-black dark:text-[#FAFAFA] dark:text-opacity-100 !important",
       className || ""
     )}
+    style={{
+      ...style,
+      // Enhance data-highlighted state with shadow - this ensures keyboard navigation also shows shadows
+      ...(props['data-highlighted'] && {
+        boxShadow: 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px',
+        zIndex: 10,
+        position: 'relative',
+        transform: 'translateZ(0)'
+      })
+    }}
     checked={checked}
     {...props}
   >
@@ -461,8 +492,19 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
             border: `1px solid ${currentTheme.borderColor}`,
             minWidth: isMobile ? MENU_STYLES.CONTAINER_MIN_WIDTH_MOBILE : MENU_STYLES.CONTAINER_MIN_WIDTH_DESKTOP,
             maxWidth: MENU_STYLES.CONTAINER_MAX_WIDTH,
+            // Additional inline styles for maximum specificity against framework conflicts
+            zIndex: 1000,
+            position: 'relative',
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            willChange: 'auto',
+            filter: 'none',
+            backdropFilter: 'none'
           }}
-          className={theme === 'dark' ? 'dark' : ''}
+          className={cn(
+            'pm7-menu-content-shadow-fix',
+            theme === 'dark' ? 'dark' : ''
+          )}
         >
           {menuItems.map((item) => (
             <React.Fragment key={item.id}>
@@ -482,7 +524,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   <PM7MenuSubTrigger
                     style={{
                       backgroundColor: hoveredItem === item.id ? '#1C86EF' : 'transparent',
-                      color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black')
+                      color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                      boxShadow: hoveredItem === item.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                      zIndex: hoveredItem === item.id ? 10 : 'auto',
+                      position: 'relative',
+                      transform: hoveredItem === item.id ? 'translateZ(0)' : 'none'
                     }}
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
@@ -499,8 +545,22 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                       backgroundColor: currentTheme.bgColor,
                       borderColor: currentTheme.borderColor,
                       color: currentTheme.textColor,
+                      boxShadow: MENU_STYLES.CONTAINER_SHADOW,
+                      borderRadius: '6px',
+                      border: `1px solid ${currentTheme.borderColor}`,
+                      // Additional inline styles for maximum specificity against framework conflicts
+                      zIndex: 1000,
+                      position: 'relative',
+                      transform: 'translateZ(0)',
+                      backfaceVisibility: 'hidden',
+                      willChange: 'auto',
+                      filter: 'none',
+                      backdropFilter: 'none'
                     }}
-                    className={theme === 'dark' ? 'dark' : ''}
+                    className={cn(
+                      'pm7-menu-content-shadow-fix',
+                      theme === 'dark' ? 'dark' : ''
+                    )}
                   >
                     {item.submenuItems.map((subItem: any) => (
                       <React.Fragment key={subItem.id}>
@@ -514,7 +574,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                             disabled={subItem.disabled}
                             style={{
                               backgroundColor: hoveredItem === subItem.id ? '#1C86EF' : 'transparent',
-                              color: hoveredItem === subItem.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black')
+                              color: hoveredItem === subItem.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                              boxShadow: hoveredItem === subItem.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                              zIndex: hoveredItem === subItem.id ? 10 : 'auto',
+                              position: 'relative',
+                              transform: hoveredItem === subItem.id ? 'translateZ(0)' : 'none'
                             }}
                             onMouseEnter={() => setHoveredItem(subItem.id)}
                             onMouseLeave={() => setHoveredItem(null)}
@@ -531,7 +595,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                             disabled={subItem.disabled}
                             style={{
                               backgroundColor: hoveredItem === subItem.id ? '#1C86EF' : 'transparent',
-                              color: hoveredItem === subItem.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black')
+                              color: hoveredItem === subItem.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                              boxShadow: hoveredItem === subItem.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                              zIndex: hoveredItem === subItem.id ? 10 : 'auto',
+                              position: 'relative',
+                              transform: hoveredItem === subItem.id ? 'translateZ(0)' : 'none'
                             }}
                             onMouseEnter={() => setHoveredItem(subItem.id)}
                             onMouseLeave={() => setHoveredItem(null)}
@@ -556,7 +624,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   disabled={item.disabled}
                   style={{
                     backgroundColor: hoveredItem === item.id ? '#1C86EF' : 'transparent',
-                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black')
+                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                    boxShadow: hoveredItem === item.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                    zIndex: hoveredItem === item.id ? 10 : 'auto',
+                    position: 'relative',
+                    transform: hoveredItem === item.id ? 'translateZ(0)' : 'none'
                   }}
                   onMouseEnter={() => setHoveredItem(item.id)}
                   onMouseLeave={() => setHoveredItem(null)}
@@ -579,7 +651,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   disabled={item.disabled}
                   style={{
                     backgroundColor: hoveredItem === item.id ? '#1C86EF' : 'transparent',
-                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black')
+                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                    boxShadow: hoveredItem === item.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                    zIndex: hoveredItem === item.id ? 10 : 'auto',
+                    position: 'relative',
+                    transform: hoveredItem === item.id ? 'translateZ(0)' : 'none'
                   }}
                   onMouseEnter={() => setHoveredItem(item.id)}
                   onMouseLeave={() => setHoveredItem(null)}
@@ -613,7 +689,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   disabled={item.disabled}
                   style={{
                     backgroundColor: hoveredItem === item.id ? '#1C86EF' : 'transparent',
-                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black')
+                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                    boxShadow: hoveredItem === item.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                    zIndex: hoveredItem === item.id ? 10 : 'auto',
+                    position: 'relative',
+                    transform: hoveredItem === item.id ? 'translateZ(0)' : 'none'
                   }}
                   onMouseEnter={() => setHoveredItem(item.id)}
                   onMouseLeave={() => setHoveredItem(null)}

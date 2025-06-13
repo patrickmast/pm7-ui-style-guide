@@ -39,8 +39,8 @@ function BasicMenu() {
       onClick: () => console.log('Settings clicked')
     },
     {
-      id: 'separator1',
-      type: 'separator'
+      id: 'separator1',     // Both id and type are required
+      type: 'separator'    // Must be exactly 'separator'
     },
     {
       id: 'logout',
@@ -251,10 +251,36 @@ interface PM7MenuItem {
 ```
 
 ### Separator Items
+
+**Important:** Separators require both `id` and `type` properties to function correctly.
+
 ```tsx
 {
-  id: 'separator1',
-  type: 'separator'
+  id: 'separator1',  // Required for React keys
+  type: 'separator'  // Required to identify as separator
+}
+```
+
+#### CSS Requirements for Separators
+
+The PM7Menu CSS file includes critical styles for separators. If separators are not appearing, ensure:
+
+1. The PM7Menu CSS is imported: `import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css'`
+2. No conflicting CSS is overriding the separator styles
+3. Both `id` and `type: 'separator'` are provided in the menu item
+
+If you encounter issues with separator visibility, you may need to add this CSS override:
+
+```css
+/* Override for separator visibility issues */
+[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  margin: 8px 0 !important;
+}
+
+.dark [data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
 }
 ```
 
@@ -424,6 +450,82 @@ This provides:
 - Responsive behavior
 - Hover and focus states
 
+## CSS Framework Integration
+
+### Tailwind CSS Projects
+
+When using PM7Menu in Tailwind CSS or shadcn/ui projects, follow these guidelines for optimal compatibility:
+
+#### CSS Import Order
+
+**Critical:** Import order matters to ensure PM7Menu styles take precedence over framework defaults:
+
+```tsx
+// 1. First: Framework CSS
+import './globals.css'; // Contains Tailwind directives
+
+// 2. Second: PM7Menu CSS (must come after framework CSS)
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+
+// 3. Third: Your custom overrides (optional)
+import './custom-menu-overrides.css';
+```
+
+**Why order matters:** CSS frameworks like Tailwind use reset styles that can interfere with Radix UI's default styling. PM7Menu CSS must be loaded after the framework to ensure proper component appearance.
+
+#### CSS Overrides for Separator Visibility
+
+In Tailwind/shadcn projects, separators may not be visible due to CSS framework conflicts. Add these overrides to ensure separator visibility:
+
+```css
+/* Required overrides for Tailwind CSS compatibility */
+*[data-radix-dropdown-menu-separator],
+div[data-radix-dropdown-menu-separator],
+hr[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  margin: 8px 0 !important;
+  border: none !important;
+}
+
+/* Dark mode support */
+.dark *[data-radix-dropdown-menu-separator],
+.dark div[data-radix-dropdown-menu-separator],
+.dark hr[data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
+}
+```
+
+**Note:** These selectors use multiple element types (`*`, `div`, `hr`) to ensure compatibility across different Radix UI versions and rendering contexts.
+
+#### Recommended Integration Pattern
+
+```tsx
+// In your main CSS file (globals.css or similar)
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PM7Menu overrides - place after Tailwind */
+@import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+
+/* Separator visibility fixes */
+*[data-radix-dropdown-menu-separator],
+div[data-radix-dropdown-menu-separator],
+hr[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  margin: 8px 0 !important;
+  border: none !important;
+}
+
+.dark *[data-radix-dropdown-menu-separator],
+.dark div[data-radix-dropdown-menu-separator],
+.dark hr[data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
+}
+```
+
 ## Responsive Design
 
 - **Mobile** (≤768px): Larger padding, minimum width 16rem
@@ -445,6 +547,80 @@ This provides:
 4. **Meaningful Icons**: Use icons that clearly represent actions
 5. **Logical Grouping**: Use separators to group related items
 6. **Responsive Testing**: Test on mobile and desktop breakpoints
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+#### Separators Not Appearing
+
+This is the most common issue when integrating PM7Menu with CSS frameworks like Tailwind CSS or shadcn/ui.
+
+**Root Cause:** CSS framework reset styles override Radix UI's default separator styling, making separators invisible.
+
+**Solution:** Use the proven CSS overrides with proper specificity:
+
+1. **Check the separator format** - Must include both properties:
+   ```tsx
+   {
+     id: 'separator1',    // Required for React keys
+     type: 'separator'    // Required to identify as separator
+   }
+   ```
+
+2. **Verify CSS import order** - PM7Menu CSS must come after framework CSS:
+   ```tsx
+   // ❌ Wrong order
+   import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+   import './globals.css'; // Tailwind CSS
+   
+   // ✅ Correct order
+   import './globals.css'; // Tailwind CSS first
+   import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css'; // PM7Menu second
+   ```
+
+3. **Add CSS framework compatibility overrides** - Use these tested selectors:
+   ```css
+   /* Working CSS Override Example - tested with Tailwind CSS */
+   *[data-radix-dropdown-menu-separator],
+   div[data-radix-dropdown-menu-separator],
+   hr[data-radix-dropdown-menu-separator] {
+     height: 1px !important;
+     background-color: #D5D5D5 !important;
+     margin: 8px 0 !important;
+     border: none !important;
+   }
+   
+   /* Dark mode support */
+   .dark *[data-radix-dropdown-menu-separator],
+   .dark div[data-radix-dropdown-menu-separator],
+   .dark hr[data-radix-dropdown-menu-separator] {
+     background-color: #525252 !important;
+   }
+   ```
+
+**Why these selectors work:**
+- Multiple element selectors (`*`, `div`, `hr`) ensure compatibility across Radix UI versions
+- `!important` declarations override framework reset styles
+- `border: none` prevents framework border styles from interfering
+
+#### Menu Items Not Responding to Clicks
+
+- Ensure `onClick` handlers are properly defined
+- Check that menu items are not disabled
+- Verify no z-index issues with overlapping elements
+
+#### Theme Changes Not Applying
+
+- Theme prop should be controlled by React state
+- Ensure dark mode CSS classes are applied to parent elements
+- Check that the theme value is exactly 'light' or 'dark'
+
+#### Multi-Language Labels Not Working
+
+- Verify `selectedLanguage` prop matches the language code used in menu items
+- Always provide a fallback `label` property
+- Check language codes match exactly (e.g., 'en' not 'EN')
 
 ## Integration with PM7 Style Guide
 
