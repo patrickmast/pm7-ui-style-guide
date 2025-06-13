@@ -333,6 +333,14 @@ export interface PM7MenuProps {
    * If true, show a border and subtle background only on hover of the menu trigger (icon or label). Default: false
    */
   menuTriggerBorderedOnHover?: boolean;
+  /**
+   * Background color for the menu trigger button
+   */
+  menuTriggerBackgroundColor?: string;
+  /**
+   * Background color for the dropdown menu content
+   */
+  menuBackgroundColor?: string;
 }
 
 const PM7MenuComponent: React.FC<PM7MenuProps> = ({
@@ -348,6 +356,8 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   menuTriggerLabelColorDark,
   menuTriggerBordered = false,
   menuTriggerBorderedOnHover = false,
+  menuTriggerBackgroundColor,
+  menuBackgroundColor,
 }) => {
   // State for menu open/close
   const [isOpen, setIsOpen] = React.useState(false);
@@ -426,6 +436,9 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               menuTriggerBordered && 'menu-trigger--bordered',
               menuTriggerBorderedOnHover && 'menu-trigger--bordered-hover'
             )}
+            style={{
+              backgroundColor: menuTriggerBackgroundColor,
+            }}
             onClick={() => setIsOpen(!isOpen)}
           >
             {/* Priority: menuLabel (with optional icon), then menuIcon, then default icon */}
@@ -484,7 +497,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
         <PM7MenuContent
           align={menuAlignment}
           style={{
-            backgroundColor: currentTheme.bgColor,
+            backgroundColor: menuBackgroundColor || currentTheme.bgColor,
             borderColor: currentTheme.borderColor,
             color: currentTheme.textColor,
             boxShadow: MENU_STYLES.CONTAINER_SHADOW,
@@ -542,7 +555,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
 
                   <PM7MenuSubContent
                     style={{
-                      backgroundColor: currentTheme.bgColor,
+                      backgroundColor: menuBackgroundColor || currentTheme.bgColor,
                       borderColor: currentTheme.borderColor,
                       color: currentTheme.textColor,
                       boxShadow: MENU_STYLES.CONTAINER_SHADOW,
