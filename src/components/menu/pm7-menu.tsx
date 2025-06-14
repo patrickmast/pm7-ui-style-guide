@@ -437,7 +437,12 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               menuTriggerBorderedOnHover && 'menu-trigger--bordered-hover'
             )}
             style={{
-              backgroundColor: menuTriggerBackgroundColor,
+              ...(menuTriggerBackgroundColor && {
+                backgroundColor: menuTriggerBackgroundColor,
+                background: menuTriggerBackgroundColor,
+                // Force CSS custom property for maximum specificity
+                '--menu-trigger-bg': menuTriggerBackgroundColor,
+              }),
             }}
             onClick={() => setIsOpen(!isOpen)}
           >

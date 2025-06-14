@@ -336,6 +336,12 @@ button.menu-trigger--bordered {
   background: #f1f1f1 !important;
 }
 
+/* Allow inline styles to override bordered background - LOWER SPECIFICITY */
+.menu-trigger--bordered[style*="background"],
+button.menu-trigger--bordered[style*="background"] {
+  background: inherit !important;
+}
+
 .menu-trigger--bordered-hover:hover,
 button.menu-trigger--bordered-hover:hover {
   border-color: #D5D5D5 !important;
@@ -360,6 +366,23 @@ button.dark.menu-trigger--bordered,
 button.dark.menu-trigger--bordered-hover:hover {
   border-color: #525252 !important;
   background: #23272F !important;
+}
+
+/* Allow inline styles to override dark mode bordered background */
+.dark .menu-trigger--bordered[style*="background"],
+.dark button.menu-trigger--bordered[style*="background"],
+button.dark.menu-trigger--bordered[style*="background"] {
+  background: inherit !important;
+}
+
+/* ULTIMATE OVERRIDE: Use CSS custom property for menuTriggerBackgroundColor */
+.menu-trigger--bordered[style*="--menu-trigger-bg"],
+button.menu-trigger--bordered[style*="--menu-trigger-bg"],
+.dark .menu-trigger--bordered[style*="--menu-trigger-bg"],
+.dark button.menu-trigger--bordered[style*="--menu-trigger-bg"],
+button.dark.menu-trigger--bordered[style*="--menu-trigger-bg"] {
+  background: var(--menu-trigger-bg) !important;
+  background-color: var(--menu-trigger-bg) !important;
 }
 
 /* Hover effect when only bordered-hover is true (lighter effect) - HIGH SPECIFICITY */
