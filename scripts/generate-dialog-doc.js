@@ -388,6 +388,7 @@ const htmlTemplate = `<!DOCTYPE html>
     <title>PM7Dialog Component Documentation - AI Optimized</title>
     <meta name="description" content="Complete PM7Dialog component documentation optimized for AI tools and WebFetch">
     <meta name="keywords" content="PM7, UI, React, Dialog, Component, Documentation, AI">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-XBk62bpz.svg">
     
     <style>
         /* Minimal styling for AI readability */
@@ -407,7 +408,7 @@ const htmlTemplate = `<!DOCTYPE html>
             font-weight: 600;
         }
         
-        h1 { font-size: 2rem; color: #1a1a1a; }
+        h1 { font-size: 2rem; color: #1a1a1a; border-bottom: 3px solid #1C86EF; padding-bottom: 0.5rem; }
         h2 { font-size: 1.5rem; color: #2a2a2a; }
         h3 { font-size: 1.25rem; color: #3a3a3a; }
         

@@ -7,7 +7,7 @@
   "redirects": [
     {
       "source": "/dialog/docs", 
-      "destination": "/dialog/doc.html"
+      "destination": "/dialog/docs.html"
     }
   ],
   "rewrites": [

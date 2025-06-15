@@ -1,0 +1,485 @@
+#!/usr/bin/env node
+/**
+ * Generator script for pure AI-optimized PM7TabSelector documentation
+ * Creates a clean HTML file specifically for AI tools and WebFetch
+ * NO menus, NO JavaScript, NO UI elements - only content
+ */
+
+const fs = require('fs-extra');
+const path = require('path');
+
+console.log('📄 Generating PM7TabSelector AI documentation...');
+
+// PM7TabSelector specific documentation content
+const tabSelectorDocContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM7TabSelector Component Documentation - AI Optimized</title>
+    <meta name="description" content="Complete PM7TabSelector component documentation optimized for AI tools and WebFetch">
+    <meta name="keywords" content="PM7, UI, React, TabSelector, Tabs, Component, Documentation, AI">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-XBk62bpz.svg">
+    
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fff;
+        }
+        h1, h2, h3 { color: #1a1a1a; margin-top: 2rem; }
+        h1 { border-bottom: 3px solid #1C86EF; padding-bottom: 0.5rem; }
+        h2 { border-bottom: 1px solid #ddd; padding-bottom: 0.3rem; }
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .feature-list {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .feature-list ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .api-table th,
+        .api-table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .api-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>PM7TabSelector Component - Complete Integration Guide</h1>
+    
+    <p><strong>PM7TabSelector</strong> is a React tab navigation component that provides PM7-branded styling for creating tabbed interfaces. It offers horizontal tab navigation with active states, keyboard support, and PM7's signature styling.</p>
+
+    <h2>Installation & Usage</h2>
+    
+    <h3>Basic Import</h3>
+    <pre><code>import { PM7TabSelector } from 'pm7-ui-style-guide';
+// or
+import { TabSelector } from 'pm7-ui-style-guide';</code></pre>
+
+    <h3>CSS Import (Required)</h3>
+    <pre><code>import 'pm7-ui-style-guide/pm7-tab-selector.css';</code></pre>
+
+    <h2>Basic Examples</h2>
+
+    <h3>Simple Tab Selector</h3>
+    <pre><code>import React, { useState } from 'react';
+import { PM7TabSelector } from 'pm7-ui-style-guide';
+import 'pm7-ui-style-guide/pm7-tab-selector.css';
+
+function MyComponent() {
+  const [activeTab, setActiveTab] = useState('tab1');
+
+  const tabs = [
+    { id: 'tab1', label: 'Overview' },
+    { id: 'tab2', label: 'Details' },
+    { id: 'tab3', label: 'Settings' }
+  ];
+
+  return (
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+    /&gt;
+  );
+}</code></pre>
+
+    <h3>Tabs with Icons</h3>
+    <pre><code>import React, { useState } from 'react';
+import { PM7TabSelector } from 'pm7-ui-style-guide';
+import { Home, Settings, User } from 'lucide-react';
+
+function TabsWithIcons() {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const tabs = [
+    { 
+      id: 'home', 
+      label: 'Home', 
+      icon: &lt;Home size={16} /&gt; 
+    },
+    { 
+      id: 'profile', 
+      label: 'Profile', 
+      icon: &lt;User size={16} /&gt; 
+    },
+    { 
+      id: 'settings', 
+      label: 'Settings', 
+      icon: &lt;Settings size={16} /&gt; 
+    }
+  ];
+
+  return (
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+    /&gt;
+  );
+}</code></pre>
+
+    <h3>Disabled Tabs</h3>
+    <pre><code>const tabs = [
+  { id: 'available', label: 'Available' },
+  { id: 'pending', label: 'Pending', disabled: true },
+  { id: 'archived', label: 'Archived' }
+];
+
+&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+/&gt;</code></pre>
+
+    <h2>Tab Content Integration</h2>
+
+    <h3>Complete Tabbed Interface</h3>
+    <pre><code>import React, { useState } from 'react';
+import { PM7TabSelector } from 'pm7-ui-style-guide';
+
+function TabbedInterface() {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'analytics', label: 'Analytics' },
+    { id: 'reports', label: 'Reports' },
+    { id: 'settings', label: 'Settings' }
+  ];
+
+  const renderTabContent = () =&gt; {
+    switch (activeTab) {
+      case 'overview':
+        return &lt;div&gt;Overview content here&lt;/div&gt;;
+      case 'analytics':
+        return &lt;div&gt;Analytics dashboard&lt;/div&gt;;
+      case 'reports':
+        return &lt;div&gt;Reports and data&lt;/div&gt;;
+      case 'settings':
+        return &lt;div&gt;Settings panel&lt;/div&gt;;
+      default:
+        return &lt;div&gt;Select a tab&lt;/div&gt;;
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;PM7TabSelector
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      /&gt;
+      
+      &lt;div className="tab-content mt-4"&gt;
+        {renderTabContent()}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+    <h2>API Reference</h2>
+
+    <table class="api-table">
+        <thead>
+            <tr>
+                <th>Prop</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>tabs</code></td>
+                <td>Tab[]</td>
+                <td>Yes</td>
+                <td>Array of tab objects</td>
+            </tr>
+            <tr>
+                <td><code>activeTab</code></td>
+                <td>string</td>
+                <td>Yes</td>
+                <td>ID of the currently active tab</td>
+            </tr>
+            <tr>
+                <td><code>onTabChange</code></td>
+                <td>function</td>
+                <td>Yes</td>
+                <td>Callback when tab is changed: (tabId: string) =&gt; void</td>
+            </tr>
+            <tr>
+                <td><code>className</code></td>
+                <td>string</td>
+                <td>No</td>
+                <td>Additional CSS classes for the container</td>
+            </tr>
+            <tr>
+                <td><code>variant</code></td>
+                <td>'default' | 'pills'</td>
+                <td>No</td>
+                <td>Visual style variant (default: 'default')</td>
+            </tr>
+            <tr>
+                <td><code>size</code></td>
+                <td>'sm' | 'md' | 'lg'</td>
+                <td>No</td>
+                <td>Size of the tabs (default: 'md')</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tab Object Interface</h3>
+    <pre><code>interface Tab {
+  id: string;           // Unique identifier for the tab
+  label: string;        // Display text for the tab
+  icon?: ReactNode;     // Optional icon to display
+  disabled?: boolean;   // Whether the tab is disabled
+  badge?: string;       // Optional badge/count to display
+}</code></pre>
+
+    <h2>Styling Variants</h2>
+
+    <h3>Default Variant</h3>
+    <pre><code>&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  variant="default"
+/&gt;</code></pre>
+
+    <h3>Pills Variant</h3>
+    <pre><code>&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  variant="pills"
+/&gt;</code></pre>
+
+    <h3>Different Sizes</h3>
+    <pre><code>// Small tabs
+&lt;PM7TabSelector size="sm" /&gt;
+
+// Medium tabs (default)
+&lt;PM7TabSelector size="md" /&gt;
+
+// Large tabs
+&lt;PM7TabSelector size="lg" /&gt;</code></pre>
+
+    <h2>PM7 Styling & Theming</h2>
+
+    <h3>PM7 Brand Colors</h3>
+    <ul>
+        <li><strong>Active Tab:</strong> #1C86EF (PM7 primary blue)</li>
+        <li><strong>Hover State:</strong> Light blue background</li>
+        <li><strong>Border:</strong> #D4D4D4 (light mode), #525252 (dark mode)</li>
+        <li><strong>Text:</strong> High contrast for accessibility</li>
+    </ul>
+
+    <h3>Custom Styling</h3>
+    <pre><code>&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  className="custom-tabs shadow-lg"
+/&gt;</code></pre>
+
+    <h2>Advanced Features</h2>
+
+    <h3>Tabs with Badges</h3>
+    <pre><code>const tabs = [
+  { id: 'inbox', label: 'Inbox', badge: '12' },
+  { id: 'sent', label: 'Sent' },
+  { id: 'drafts', label: 'Drafts', badge: '3' }
+];
+
+&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+/&gt;</code></pre>
+
+    <h3>Responsive Tab Behavior</h3>
+    <pre><code>// Tabs automatically stack on mobile
+&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  className="responsive-tabs"
+/&gt;</code></pre>
+
+    <h2>Accessibility Features</h2>
+
+    <div class="feature-list">
+        <p><strong>Built-in Accessibility:</strong></p>
+        <ul>
+            <li>Full keyboard navigation (Tab, Arrow keys, Enter, Space)</li>
+            <li>ARIA attributes for screen readers</li>
+            <li>Focus management and visible focus indicators</li>
+            <li>Proper role and state announcements</li>
+            <li>High contrast support</li>
+            <li>Disabled state handling</li>
+        </ul>
+    </div>
+
+    <h2>Keyboard Navigation</h2>
+
+    <ul>
+        <li><strong>Tab:</strong> Move focus to tab selector</li>
+        <li><strong>Arrow Keys:</strong> Navigate between tabs</li>
+        <li><strong>Enter/Space:</strong> Activate focused tab</li>
+        <li><strong>Home:</strong> Go to first tab</li>
+        <li><strong>End:</strong> Go to last tab</li>
+    </ul>
+
+    <h2>Best Practices</h2>
+
+    <div class="feature-list">
+        <p><strong>Recommended Usage:</strong></p>
+        <ul>
+            <li>Keep tab labels concise and descriptive</li>
+            <li>Use icons consistently across all tabs or none</li>
+            <li>Limit the number of tabs to 5-7 for optimal UX</li>
+            <li>Provide clear visual feedback for active states</li>
+            <li>Consider mobile responsiveness in your layout</li>
+            <li>Use badges sparingly for important notifications</li>
+            <li>Test keyboard navigation thoroughly</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <p><strong>Important:</strong> The PM7TabSelector component requires the PM7 CSS file to be imported for proper styling. Make sure to include <code>import 'pm7-ui-style-guide/pm7-tab-selector.css';</code> in your application.</p>
+    </div>
+
+    <h2>Common Patterns</h2>
+
+    <h3>Router Integration</h3>
+    <pre><code>import { useSearchParams } from 'react-router-dom';
+
+function RoutedTabs() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get('tab') || 'overview';
+
+  const handleTabChange = (tabId) =&gt; {
+    setSearchParams({ tab: tabId });
+  };
+
+  return (
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={handleTabChange}
+    /&gt;
+  );
+}</code></pre>
+
+    <h3>State Persistence</h3>
+    <pre><code>import { useState, useEffect } from 'react';
+
+function PersistentTabs() {
+  const [activeTab, setActiveTab] = useState(() =&gt; {
+    return localStorage.getItem('activeTab') || 'overview';
+  });
+
+  useEffect(() =&gt; {
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
+
+  return (
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+    /&gt;
+  );
+}</code></pre>
+
+    <h2>Performance Considerations</h2>
+
+    <ul>
+        <li>Component is lightweight with minimal re-renders</li>
+        <li>Use React.memo for tab content components when needed</li>
+        <li>Consider lazy loading tab content for complex interfaces</li>
+        <li>Debounce rapid tab switching if content is expensive to render</li>
+    </ul>
+
+    <h2>Browser Support</h2>
+
+    <p>PM7TabSelector supports all modern browsers including:</p>
+    <ul>
+        <li>Chrome 88+</li>
+        <li>Firefox 85+</li>
+        <li>Safari 14+</li>
+        <li>Edge 88+</li>
+    </ul>
+
+    <p><em>For older browser support, ensure appropriate polyfills are included in your build process.</em></p>
+</body>
+</html>`;
+
+// Generate the documentation file
+async function generateTabSelectorDocumentation() {
+  try {
+    // Ensure the static directory exists
+    const staticDir = path.join(process.cwd(), 'static');
+    await fs.ensureDir(staticDir);
+    
+    // Write the documentation file
+    const filePath = path.join(staticDir, 'tab-selector-doc.html');
+    await fs.writeFile(filePath, tabSelectorDocContent);
+    
+    console.log(`✅ Generated: ${filePath}`);
+    console.log('🤖 This file is optimized for AI tools and WebFetch');
+    
+  } catch (error) {
+    console.error('❌ Error generating tab-selector documentation:', error);
+    process.exit(1);
+  }
+}
+
+// Run the generator
+generateTabSelectorDocumentation();

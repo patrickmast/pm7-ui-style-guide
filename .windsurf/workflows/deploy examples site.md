@@ -31,7 +31,7 @@ This deploys the examples site to Vercel using the production environment. The `
 Once deployed, the site will be available at both the Vercel-generated URL and our custom domain.
 
 ### 6. URL
-After deployment, ONLY mention the custom domain URL: https://ui-style-guide.pm7.tools
+After deployment, ONLY mention the custom domain URL: https://pm7.tools
 
 Do NOT mention or display the Vercel-generated URL in the response, even if it appears in the deployment output.
 

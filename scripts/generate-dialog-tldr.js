@@ -362,7 +362,7 @@ const NewConfirmDialog = ({ open, onOpenChange, onConfirm }) => {
     <div style="background-color: #f5f5f5; padding: 1rem; border-radius: 8px;">
       <p style="margin: 0.25rem 0;"><strong>NPM:</strong> pm7-ui-style-guide</p>
       <p style="margin: 0.25rem 0;"><strong>Repository:</strong> https://github.com/patrickmast/pm7-ui-style-guide</p>
-      <p style="margin: 0.25rem 0;"><strong>Direct URL:</strong> https://ui-style-guide.pm7.tools/docs/PM7Dialog</p>
+      <p style="margin: 0.25rem 0;"><strong>Direct URL:</strong> https://pm7.tools/docs/PM7Dialog</p>
       <p style="margin: 0.25rem 0;"><strong>Peer Dependency:</strong> @radix-ui/react-dialog</p>
     </div>
   </section>
@@ -548,7 +548,7 @@ function createStaticHtml(title, content) {
     <div class="footer">
         <p>PM7 UI Style Guide - Generated on ${new Date().toISOString().split('T')[0]}</p>
         <p><a href="https://github.com/patrickmast/pm7-ui-style-guide">View on GitHub</a> | 
-           <a href="https://ui-style-guide.pm7.tools">Live Documentation</a></p>
+           <a href="https://pm7.tools">Live Documentation</a></p>
     </div>
 </body>
 </html>`;
