@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM7Menu Component Documentation - AI Optimized</title>
+    <meta name="description" content="Complete PM7Menu component documentation optimized for AI tools and WebFetch">
+    <meta name="keywords" content="PM7, UI, React, Menu, Dropdown, Component, Documentation, AI">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-XBk62bpz.svg">
+    
+    <style>
+        /* Minimal styling for AI readability */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1, h2, h3 {
+            margin: 1.5rem 0 1rem 0;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        h1 { font-size: 2rem; color: #1a1a1a; border-bottom: 3px solid #1C86EF; padding-bottom: 0.5rem; }
+        h2 { font-size: 1.5rem; color: #2a2a2a; }
+        h3 { font-size: 1.25rem; color: #3a3a3a; }
+        
+        p, li {
+            margin: 0.5rem 0;
+        }
+        
+        ul {
+            padding-left: 2rem;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        section {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    
+<div style="font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; max-width: 100%; padding: 0;">
+
+  <!-- AI-Friendly Header -->
+  <section style="margin-bottom: 2rem;">
+    <h1>PM7Menu Component - Complete Integration Guide</h1>
+    <p><strong>Package:</strong> pm7-ui-style-guide</p>
+    <p><strong>Component:</strong> PM7Menu (React dropdown menu component based on Radix UI)</p>
+    <p><strong>CSS File:</strong> pm7-menu.css</p>
+    <p><strong>Peer Dependencies:</strong> @radix-ui/react-dropdown-menu, lucide-react</p>
+  </section>
+
+  <!-- Installation -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Installation</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>npm install pm7-ui-style-guide
+
+# Required peer dependencies:
+npm install @radix-ui/react-dropdown-menu@^2.0.6 lucide-react@^0.501.0</code></pre>
+  </section>
+
+  <!-- Import -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Import</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>// All-in-one Menu Component
+import { PM7Menu } from 'pm7-ui-style-guide';
+
+// Compound Components (Recommended)
+import { 
+  PM7Menu,
+  PM7MenuContent,
+  PM7MenuItem,
+  PM7MenuSeparator,
+  PM7MenuTrigger,
+  PM7MenuLabel 
+} from 'pm7-ui-style-guide';
+
+// CRITICAL: Import CSS for proper styling
+import 'pm7-ui-style-guide/pm7-menu.css';</code></pre>
+  </section>
+
+  <!-- Basic Usage -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Basic Usage - All-in-One Component</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
+import { PM7Menu } from 'pm7-ui-style-guide';
+import 'pm7-ui-style-guide/pm7-menu.css';
+
+function MyComponent() {
+  const menuItems = [
+    { 
+      id: 'profile', 
+      label: 'Profile', 
+      onClick: () => console.log('Profile clicked') 
+    },
+    { 
+      id: 'settings', 
+      label: 'Settings', 
+      onClick: () => console.log('Settings clicked') 
+    },
+    { 
+      id: 'sep1', 
+      type: 'separator' 
+    },
+    { 
+      id: 'logout', 
+      label: 'Logout', 
+      onClick: () => console.log('Logout clicked') 
+    }
+  ];
+
+  return (
+    &lt;PM7Menu 
+      menuItems={menuItems}
+      menuAlignment="start"
+      menuTriggerIconColorLight="#1C86EF"
+      menuTriggerIconColorDark="#FFDD00"
+    /&gt;
+  );
+}</code></pre>
+  </section>
+
+  <!-- Compound Components Pattern -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Compound Components Pattern (Recommended)</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
+import { PM7Menu } from 'pm7-ui-style-guide';
+import { Menu, Plus, Save, Trash2 } from 'lucide-react';
+import 'pm7-ui-style-guide/pm7-menu.css';
+
+function MyComponent() {
+  return (
+    &lt;PM7Menu&gt;
+      &lt;PM7Menu.Trigger className="h-9 w-9"&gt;
+        &lt;Menu className="h-5 w-5" /&gt;
+      &lt;/PM7Menu.Trigger&gt;
+      
+      &lt;PM7Menu.Content&gt;
+        &lt;PM7Menu.Item onClick={() =&gt; console.log('New')}&gt;
+          &lt;Plus className="mr-2 h-4 w-4" /&gt;
+          New
+        &lt;/PM7Menu.Item&gt;
+        &lt;PM7Menu.Item onClick={() =&gt; console.log('Save')} disabled={false}&gt;
+          &lt;Save className="mr-2 h-4 w-4" /&gt;
+          Save
+        &lt;/PM7Menu.Item&gt;
+        &lt;PM7Menu.Separator /&gt;
+        &lt;PM7Menu.Item onClick={() =&gt; console.log('Delete')}&gt;
+          &lt;Trash2 className="mr-2 h-4 w-4" /&gt;
+          Delete
+        &lt;/PM7Menu.Item&gt;
+      &lt;/PM7Menu.Content&gt;
+    &lt;/PM7Menu&gt;
+  );
+}</code></pre>
+  </section>
+
+  <!-- Menu with Icons -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Menu with Icons and Custom Trigger</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
+import { PM7Menu } from 'pm7-ui-style-guide';
+import { User, Settings, LogOut } from 'lucide-react';
+
+function UserAccountMenu() {
+  const menuItems = [
+    { 
+      id: 'profile', 
+      label: 'My Profile', 
+      icon: &lt;User size={16} /&gt;,
+      onClick: () =&gt; navigate('/profile') 
+    },
+    { 
+      id: 'settings', 
+      label: 'Settings', 
+      icon: &lt;Settings size={16} /&gt;,
+      onClick: () =&gt; navigate('/settings') 
+    },
+    { 
+      id: 'sep1', 
+      type: 'separator' 
+    },
+    { 
+      id: 'logout', 
+      label: 'Sign Out', 
+      icon: &lt;LogOut size={16} /&gt;,
+      onClick: () =&gt; handleLogout() 
+    }
+  ];
+
+  return (
+    &lt;PM7Menu 
+      menuItems={menuItems}
+      menuAlignment="end"
+      menuTriggerIconColorLight="#1C86EF"
+      menuTriggerIconColorDark="#FFDD00"
+      menuLabel="Account"
+    /&gt;
+  );
+}</code></pre>
+  </section>
+
+  <!-- Context Menu -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Context Menu / Right-Click Menu</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React, { useState } from 'react';
+import { PM7Menu, PM7MenuContent, PM7MenuItem } from 'pm7-ui-style-guide';
+
+function ContextMenuExample() {
+  const [contextMenuOpen, setContextMenuOpen] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleContextMenu = (e) =&gt; {
+    e.preventDefault();
+    setPosition({ x: e.clientX, y: e.clientY });
+    setContextMenuOpen(true);
+  };
+
+  return (
+    &lt;div onContextMenu={handleContextMenu} className="w-full h-64 bg-gray-100 dark:bg-gray-800"&gt;
+      &lt;p&gt;Right-click anywhere in this area&lt;/p&gt;
+      
+      &lt;PM7Menu open={contextMenuOpen} onOpenChange={setContextMenuOpen}&gt;
+        &lt;PM7MenuContent 
+          style={{ 
+            position: 'fixed', 
+            left: position.x, 
+            top: position.y 
+          }}
+        &gt;
+          &lt;PM7MenuItem onClick={() =&gt; console.log('Copy')}&gt;
+            Copy
+          &lt;/PM7MenuItem&gt;
+          &lt;PM7MenuItem onClick={() =&gt; console.log('Paste')}&gt;
+            Paste
+          &lt;/PM7MenuItem&gt;
+          &lt;PM7MenuItem onClick={() =&gt; console.log('Delete')}&gt;
+            Delete
+          &lt;/PM7MenuItem&gt;
+        &lt;/PM7MenuContent&gt;
+      &lt;/PM7Menu&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </section>
+
+  <!-- Critical Styling Requirements -->
+  <section style="margin-bottom: 2rem;">
+    <h2>🔧 Critical Styling Requirements</h2>
+    
+    <h3>PM7Menu Automatic Styling</h3>
+    <ul>
+      <li>All PM7Menu styles are now bundled automatically - no manual CSS injection needed!</li>
+      <li>PM7 styling follows PM7 design system with hover states (#1C86EF blue)</li>
+      <li>Beautiful menu item shadows and stable container shadows work perfectly</li>
+      <li>Separators are properly styled and spaced</li>
+    </ul>
+
+    <h3>Menu Trigger Styling</h3>
+    <ul>
+      <li>Use <code>className="h-9 w-9"</code> for standard trigger button size</li>
+      <li>Icon should be <code>className="h-5 w-5"</code> for proper proportions</li>
+      <li>Trigger automatically gets pointer cursor and focus states</li>
+    </ul>
+
+    <h3>Menu Content Behavior</h3>
+    <ul>
+      <li>Content automatically positions relative to trigger</li>
+      <li>Portal rendering ensures menu appears above other content</li>
+      <li>Min-width: 12rem desktop, 16rem mobile; Max-width: 18.8rem</li>
+      <li>Background: White (light mode), #262626 (dark mode)</li>
+      <li>Border: 1px solid with rounded corners (6px)</li>
+    </ul>
+  </section>
+
+  <!-- API Reference -->
+  <section style="margin-bottom: 2rem;">
+    <h2>API Reference</h2>
+    
+    <h3>PM7Menu (All-in-One) Props</h3>
+    <ul>
+      <li><code>menuItems: MenuItem[]</code> - Array of menu items</li>
+      <li><code>menuAlignment?: 'start' | 'center' | 'end'</code> - Menu content alignment (default: 'end')</li>
+      <li><code>menuLabel?: string</code> - Custom trigger text</li>
+      <li><code>menuIcon?: ReactNode</code> - Custom trigger icon</li>
+      <li><code>menuTriggerIconColorLight?: string</code> - Trigger icon color in light mode (default: '#1C86EF')</li>
+      <li><code>menuTriggerIconColorDark?: string</code> - Trigger icon color in dark mode (default: '#FFDD00')</li>
+      <li><code>theme?: 'light' | 'dark'</code> - Theme mode</li>
+      <li><code>mobileBreakpoint?: number</code> - Mobile breakpoint in pixels (default: 768)</li>
+    </ul>
+
+    <h3>MenuItem Interface</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px;"><code>interface MenuItem {
+  id: string;
+  label?: string;
+  icon?: ReactNode;
+  onClick?: () =&gt; void;
+  type?: 'item' | 'separator' | 'check' | 'switch' | 'submenu';
+  disabled?: boolean;
+  checked?: boolean; // For type: 'check' or 'switch'
+  onChange?: (checked: boolean) =&gt; void; // For type: 'check' or 'switch'
+  submenuItems?: MenuItem[]; // For type: 'submenu'
+}</code></pre>
+
+    <h3>Compound Components</h3>
+    <ul>
+      <li><strong>PM7Menu</strong> - Root menu container</li>
+      <li><strong>PM7Menu.Trigger</strong> - Button that opens the menu (accepts className prop)</li>
+      <li><strong>PM7Menu.Content</strong> - Menu content container</li>
+      <li><strong>PM7Menu.Item</strong> - Individual menu item (accepts onClick and disabled props)</li>
+      <li><strong>PM7Menu.Separator</strong> - Visual separator between items</li>
+      <li><strong>PM7Menu.Label</strong> - Section label for grouping items</li>
+    </ul>
+  </section>
+
+  <!-- Advanced Patterns -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Advanced Patterns</h2>
+    
+    <h3>Checkbox Menu Items</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>const menuItems = [
+  {
+    id: 'notifications',
+    label: 'Enable Notifications',
+    type: 'check',
+    checked: true,
+    onChange: (checked) =&gt; setNotificationsEnabled(checked)
+  },
+  {
+    id: 'darkmode',
+    label: 'Dark Mode',
+    type: 'check',
+    checked: false,
+    onChange: (checked) =&gt; setDarkMode(checked)
+  }
+];</code></pre>
+
+    <h3>Submenu Pattern</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>const menuItems = [
+  {
+    id: 'file',
+    label: 'File',
+    type: 'submenu',
+    submenuItems: [
+      { id: 'new', label: 'New', onClick: () =&gt; console.log('New') },
+      { id: 'open', label: 'Open', onClick: () =&gt; console.log('Open') },
+      { id: 'sep1', type: 'separator' },
+      { id: 'save', label: 'Save', onClick: () =&gt; console.log('Save') }
+    ]
+  }
+];</code></pre>
+
+    <h3>Navigation Menu</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { useNavigate } from 'react-router-dom';
+
+function NavigationMenu() {
+  const navigate = useNavigate();
+
+  const navigationItems = [
+    { 
+      id: 'dashboard', 
+      label: 'Dashboard', 
+      onClick: () =&gt; navigate('/dashboard') 
+    },
+    { 
+      id: 'projects', 
+      label: 'Projects', 
+      onClick: () =&gt; navigate('/projects') 
+    },
+    { 
+      id: 'reports', 
+      label: 'Reports', 
+      onClick: () =&gt; navigate('/reports') 
+    },
+    { 
+      id: 'sep1', 
+      type: 'separator' 
+    },
+    { 
+      id: 'help', 
+      label: 'Help & Support', 
+      onClick: () =&gt; navigate('/help') 
+    }
+  ];
+
+  return (
+    &lt;PM7Menu 
+      menuItems={navigationItems}
+      menuLabel="Navigation"
+      menuAlignment="center"
+    /&gt;
+  );
+}</code></pre>
+  </section>
+
+  <!-- Common Mistakes -->
+  <section style="margin-bottom: 2rem;">
+    <h2>❌ Common Mistakes to Avoid</h2>
+    <ul>
+      <li>❌ Forgetting to import pm7-menu.css</li>
+      <li>❌ Not installing required peer dependencies (@radix-ui/react-dropdown-menu, lucide-react)</li>
+      <li>❌ Using incorrect trigger button sizing (use h-9 w-9 for trigger, h-5 w-5 for icon)</li>
+      <li>❌ Not providing unique id props for menu items</li>
+      <li>❌ Missing onClick handlers for menu items</li>
+      <li>❌ Using complex JSX in menuItems array (use compound components instead)</li>
+      <li>❌ Forgetting to handle menu state for context menus</li>
+    </ul>
+  </section>
+
+  <!-- Complete Production Example -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Complete Production Example</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React, { useState } from 'react';
+import { PM7Menu } from 'pm7-ui-style-guide';
+import { MoreVertical, Edit, Copy, Trash2, Archive } from 'lucide-react';
+import 'pm7-ui-style-guide/pm7-menu.css';
+
+const TableRowActions = ({ item, onEdit, onCopy, onArchive, onDelete }) =&gt; {
+  const [isArchived, setIsArchived] = useState(item.archived);
+
+  const menuItems = [
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: &lt;Edit size={16} /&gt;,
+      onClick: () =&gt; onEdit(item.id)
+    },
+    {
+      id: 'copy',
+      label: 'Duplicate',
+      icon: &lt;Copy size={16} /&gt;,
+      onClick: () =&gt; onCopy(item.id)
+    },
+    {
+      id: 'sep1',
+      type: 'separator'
+    },
+    {
+      id: 'archive',
+      label: isArchived ? 'Unarchive' : 'Archive',
+      icon: &lt;Archive size={16} /&gt;,
+      type: 'check',
+      checked: isArchived,
+      onChange: (checked) =&gt; {
+        setIsArchived(checked);
+        onArchive(item.id, checked);
+      }
+    },
+    {
+      id: 'sep2',
+      type: 'separator'
+    },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: &lt;Trash2 size={16} /&gt;,
+      onClick: () =&gt; onDelete(item.id),
+      disabled: !item.canDelete
+    }
+  ];
+
+  return (
+    &lt;PM7Menu 
+      menuItems={menuItems}
+      menuAlignment="end"
+      menuIcon={&lt;MoreVertical size={16} /&gt;}
+      menuTriggerIconColorLight="#666"
+      menuTriggerIconColorDark="#a0a0a0"
+    /&gt;
+  );
+};</code></pre>
+  </section>
+
+  <!-- CSS Framework Integration -->
+  <section style="margin-bottom: 2rem;">
+    <h2>CSS Framework Integration</h2>
+    
+    <h3>Tailwind CSS Projects</h3>
+    <p style="margin-bottom: 1rem;">
+      When using PM7Menu in Tailwind CSS or shadcn/ui projects, follow these guidelines for optimal compatibility:
+    </p>
+    
+    <h4><strong>CSS Import Order</strong></h4>
+    <div style="background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
+      <p style="margin: 0; font-size: 0.9em;"><strong>Critical:</strong> Import order matters to ensure PM7Menu styles take precedence over framework defaults:</p>
+    </div>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>// 1. First: Framework CSS
+import './globals.css'; // Contains Tailwind directives
+
+// 2. Second: PM7Menu CSS (must come after framework CSS)
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+
+// 3. Third: Your custom overrides (optional)
+import './custom-menu-overrides.css';</code></pre>
+    <p style="margin-bottom: 1rem; font-size: 0.9em;">
+      <strong>Why order matters:</strong> CSS frameworks like Tailwind use reset styles that can interfere with Radix UI's default styling. PM7Menu CSS must be loaded after the framework to ensure proper component appearance.
+    </p>
+    
+    <h4><strong>CSS Overrides for Separator Visibility</strong></h4>
+    <p style="margin-bottom: 0.5rem;">
+      In Tailwind/shadcn projects, separators may not be visible due to CSS framework conflicts. Add these overrides to ensure separator visibility:
+    </p>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>/* Required overrides for Tailwind CSS compatibility */
+*[data-radix-dropdown-menu-separator],
+div[data-radix-dropdown-menu-separator],
+hr[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  margin: 8px 0 !important;
+  border: none !important;
+}
+
+/* Dark mode support */
+.dark *[data-radix-dropdown-menu-separator],
+.dark div[data-radix-dropdown-menu-separator],
+.dark hr[data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
+}</code></pre>
+    <div style="background: #e8f5e8; border: 1px solid #81c784; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
+      <p style="margin: 0; font-size: 0.9em;"><strong>Note:</strong> These selectors use multiple element types (<code>*</code>, <code>div</code>, <code>hr</code>) to ensure compatibility across different Radix UI versions and rendering contexts.</p>
+    </div>
+    
+    <h4><strong>Recommended Integration Pattern</strong></h4>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 2rem;"><code>// In your main CSS file (globals.css or similar)
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PM7Menu overrides - place after Tailwind */
+@import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+
+/* Separator visibility fixes */
+*[data-radix-dropdown-menu-separator],
+div[data-radix-dropdown-menu-separator],
+hr[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  margin: 8px 0 !important;
+  border: none !important;
+}
+
+.dark *[data-radix-dropdown-menu-separator],
+.dark div[data-radix-dropdown-menu-separator],
+.dark hr[data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
+}</code></pre>
+  </section>
+
+  <!-- Troubleshooting -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Troubleshooting</h2>
+    <h3>Common Issues and Solutions</h3>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <h4><strong>Separators Not Appearing</strong></h4>
+      <div style="background: #ffebee; border: 1px solid #ef5350; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
+        <p style="margin: 0; font-size: 0.9em;"><strong>This is the most common issue when integrating PM7Menu with CSS frameworks like Tailwind CSS or shadcn/ui.</strong></p>
+      </div>
+      <p style="margin-bottom: 0.5rem;"><strong>Root Cause:</strong> CSS framework reset styles override Radix UI's default separator styling, making separators invisible.</p>
+      <p style="margin-bottom: 1rem;"><strong>Solution:</strong> Use the proven CSS overrides with proper specificity:</p>
+      
+      <ol style="padding-left: 2rem; margin-bottom: 1rem;">
+        <li>Ensure both <code>id</code> and <code>type: 'separator'</code> are provided</li>
+        <li>Verify CSS import order - PM7Menu CSS must come after framework CSS:</li>
+      </ol>
+      <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>// ❌ Wrong order
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
+import './globals.css'; // Tailwind CSS
+
+// ✅ Correct order
+import './globals.css'; // Tailwind CSS first
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css'; // PM7Menu second</code></pre>
+      <ol style="padding-left: 2rem; margin-bottom: 1rem;" start="3">
+        <li>Add CSS framework compatibility overrides - use these tested selectors:</li>
+      </ol>
+      <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>/* Working CSS Override Example - tested with Tailwind CSS */
+*[data-radix-dropdown-menu-separator],
+div[data-radix-dropdown-menu-separator],
+hr[data-radix-dropdown-menu-separator] {
+  height: 1px !important;
+  background-color: #D5D5D5 !important;
+  margin: 8px 0 !important;
+  border: none !important;
+}
+
+/* Dark mode support */
+.dark *[data-radix-dropdown-menu-separator],
+.dark div[data-radix-dropdown-menu-separator],
+.dark hr[data-radix-dropdown-menu-separator] {
+  background-color: #525252 !important;
+}</code></pre>
+      <div style="background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
+        <p style="margin: 0; font-size: 0.9em;"><strong>Why these selectors work:</strong></p>
+        <ul style="margin: 0.5rem 0 0 1.5rem; font-size: 0.9em;">
+          <li>Multiple element selectors (<code>*</code>, <code>div</code>, <code>hr</code>) ensure compatibility across Radix UI versions</li>
+          <li><code>!important</code> declarations override framework reset styles</li>
+          <li><code>border: none</code> prevents framework border styles from interfering</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+      <h4><strong>Menu Items Not Clickable</strong></h4>
+      <ul style="padding-left: 2rem;">
+        <li>Verify <code>onClick</code> handlers are properly defined</li>
+        <li>Check that items are not disabled</li>
+        <li>Look for z-index conflicts with other elements</li>
+      </ul>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+      <h4><strong>Theme Not Updating</strong></h4>
+      <ul style="padding-left: 2rem;">
+        <li>Theme should be controlled by React state/context</li>
+        <li>Ensure theme value is exactly <code>'light'</code> or <code>'dark'</code></li>
+        <li>Check that dark mode classes are applied to parent elements</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PM7MenuIcon Documentation -->
+  <section style="margin-bottom: 2rem;">
+    <h2>PM7MenuIcon (Official Menu Icon)</h2>
+    <p style="margin-bottom: 1rem;">The <code>PM7MenuIcon</code> component provides the official hamburger menu icon used in the PM7Menu trigger and is recommended for use in menu items to ensure visual consistency across your application.</p>
+    <ul style="padding-left: 2rem; margin-bottom: 1rem;">
+      <li><strong>Theme-aware:</strong> The icon automatically adapts to the current theme (light/dark) via the <code>color</code> prop (defaults to <code>currentColor</code>).</li>
+      <li><strong>Consistent:</strong> Using <code>PM7MenuIcon</code> for both the menu trigger and menu items guarantees a unified look, even if the icon design changes in the future.</li>
+    </ul>
+    <div style="margin-bottom: 1rem;">
+      <p style="font-weight: 600; margin-bottom: 0.5rem;">Usage Example:</p>
+      <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { PM7Menu, PM7MenuIcon } from 'pm7-ui-style-guide';
+
+const menuItems = [
+  {
+    id: 'home',
+    label: 'Home',
+    icon: &lt;PM7MenuIcon size={16} /&gt;
+  },
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: &lt;PM7MenuIcon size={16} /&gt;
+  },
+  // ...other items
+];
+
+&lt;PM7Menu menuItems={menuItems} theme="dark" /&gt;</code></pre>
+      <ul style="padding-left: 2rem; margin-top: 0.5rem;">
+        <li>The menu trigger button also uses <code>PM7MenuIcon</code> by default.</li>
+        <li>You can adjust the <code>size</code> and <code>color</code> props as needed (default color is <code>currentColor</code>).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Internationalization Support -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Internationalization Support</h2>
+    <p style="margin-bottom: 1rem;">PM7Menu supports multi-language applications with flexible label management and RTL (right-to-left) text support.</p>
+    
+    <h3>Multi-language Label Support</h3>
+    <p style="margin-bottom: 0.5rem;">Use language-specific properties in menu items for internationalization:</p>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>const menuItems = [
+  {
+    id: 'home',
+    'label-en': 'Home',
+    'label-es': 'Inicio',
+    'label-fr': 'Accueil',
+    onClick: () => navigate('/home')
+  },
+  {
+    id: 'settings',
+    'label-en': 'Settings', 
+    'label-es': 'Configuración',
+    'label-fr': 'Paramètres',
+    onClick: () => navigate('/settings')
+  }
+];</code></pre>
+    
+    <h3>Language Fallback Pattern</h3>
+    <p style="margin-bottom: 0.5rem;">Implement fallback logic for missing translations:</p>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>const getLocalizedLabel = (item, currentLanguage = 'en') => {
+  return item[`label-${currentLanguage}`] || item['label-en'] || item.label || 'Untitled';
+};
+
+// Usage in component
+const processedMenuItems = menuItems.map(item => ({
+  ...item,
+  label: getLocalizedLabel(item, currentLanguage)
+}));</code></pre>
+    
+    <h3>RTL Support</h3>
+    <p style="margin-bottom: 0.5rem;">PM7Menu automatically supports RTL languages when the document direction is set:</p>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>// Set document direction for RTL languages
+document.dir = 'rtl'; // For Arabic, Hebrew, etc.
+document.dir = 'ltr'; // For English, Spanish, etc.
+
+// Menu automatically adapts alignment and icon positioning</code></pre>
+  </section>
+
+  <!-- Accessibility -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Accessibility Features</h2>
+    <ul>
+      <li><strong>Keyboard Navigation:</strong> Arrow keys, Enter, ESC navigation</li>
+      <li><strong>Focus Management:</strong> Proper focus trapping and restoration</li>
+      <li><strong>ARIA Labels:</strong> Built-in accessibility attributes from Radix UI</li>
+      <li><strong>Screen Reader Support:</strong> Proper announcement of menu items and states</li>
+      <li><strong>High Contrast:</strong> Meets WCAG contrast requirements</li>
+      <li><strong>Reduced Motion:</strong> Respects user's motion preferences</li>
+    </ul>
+  </section>
+
+</div>
+
+</body>
+</html>
