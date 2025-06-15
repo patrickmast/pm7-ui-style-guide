@@ -1,234 +1,215 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { PM7Card } from '../src/components/card/pm7-card';
 
 const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
-  return (
-    <div>
-      {/* AI-Agent Friendly Header */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h2>TL;DR - Complete Integration Guide</h2>
-        <p style={{ fontSize: '1.1rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
-          Everything you need to integrate PM7Button in your application
-        </p>
-      </div>
-
-      {/* Quick Start Section */}
-      <section style={{ marginBottom: '2rem' }}>
-        <h3>Quick Start</h3>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
-          <pre><code>{`# 1. Install the package
-npm install pm7-ui-style-guide
-
-# 2. Import the component
-import { PM7Button } from 'pm7-ui-style-guide';
-
-# 3. Use in your component
-function App() {
-  return <PM7Button>Click me</PM7Button>;
-}`}</code></pre>
-        </div>
-      </section>
-
-      {/* Complete Implementation Examples */}
-      <section style={{ marginBottom: '2rem' }}>
-        <h3>Implementation Examples</h3>
-        
-        <h4>Basic Button</h4>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
-          <pre><code>{`import { PM7Button } from 'pm7-ui-style-guide';
-
-function App() {
-  return (
-    <div>
-      <PM7Button onClick={() => alert('Clicked!')}>
-        Default Button
-      </PM7Button>
-    </div>
-  );
-}`}</code></pre>
-        </div>
-
-        <h4>Button Variants</h4>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
-          <pre><code>{`import { PM7Button } from 'pm7-ui-style-guide';
-
-function App() {
-  return (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <PM7Button variant="default">Default</PM7Button>
-      <PM7Button variant="destructive">Destructive</PM7Button>
-      <PM7Button variant="outline">Outline</PM7Button>
-      <PM7Button variant="secondary">Secondary</PM7Button>
-      <PM7Button variant="ghost">Ghost</PM7Button>
-      <PM7Button variant="link">Link</PM7Button>
-    </div>
-  );
-}`}</code></pre>
-        </div>
-
-        <h4>Button Sizes</h4>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
-          <pre><code>{`import { PM7Button } from 'pm7-ui-style-guide';
-
-function App() {
-  return (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <PM7Button size="sm">Small</PM7Button>
-      <PM7Button size="default">Default</PM7Button>
-      <PM7Button size="lg">Large</PM7Button>
-      <PM7Button size="icon">🎯</PM7Button>
-    </div>
-  );
-}`}</code></pre>
-        </div>
-
-        <h4>Button with Loading State</h4>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
-          <pre><code>{`import { PM7Button } from 'pm7-ui-style-guide';
-import { useState } from 'react';
-
-function App() {
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setLoading(false);
+  const [copied, setCopied] = useState(false);
+  
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('https://pm7.tools/button/docs.html');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   };
 
   return (
-    <PM7Button 
-      onClick={handleSubmit} 
-      disabled={loading}
-    >
-      {loading ? 'Loading...' : 'Submit'}
-    </PM7Button>
-  );
-}`}</code></pre>
-        </div>
-      </section>
+    <div style={{ 
+      maxWidth: '800px', 
+      margin: '0 auto', 
+      padding: '2rem',
+      backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff',
+      borderRadius: '12px',
+      border: `1px solid ${theme === 'dark' ? '#333' : '#e0e0e0'}`,
+      boxShadow: theme === 'dark' ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.1)'
+    }}>      
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <h2 style={{ 
+          fontSize: '1.75rem', 
+          fontWeight: '600',
+          color: theme === 'dark' ? '#ffffff' : '#1a1a1a',
+          marginBottom: '1rem'
+        }}>
+          PM7Button Component Documentation
+        </h2>
+        <p style={{ 
+          fontSize: '1.1rem', 
+          color: theme === 'dark' ? '#a0a0a0' : '#666',
+          lineHeight: '1.6'
+        }}>
+          Copieer deze link die kan gebruikt worden als documentatie voor dit component:
+        </p>
+      </div>
 
-      {/* API Reference */}
-      <section style={{ marginBottom: '2rem' }}>
-        <h3>API Reference</h3>
-        
-        <h4>Props</h4>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1rem' }}>
-          <thead>
-            <tr style={{ borderBottom: `2px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>
-              <th style={{ textAlign: 'left', padding: '0.5rem' }}>Prop</th>
-              <th style={{ textAlign: 'left', padding: '0.5rem' }}>Type</th>
-              <th style={{ textAlign: 'left', padding: '0.5rem' }}>Default</th>
-              <th style={{ textAlign: 'left', padding: '0.5rem' }}>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>variant</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>'default'</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>Button style variant</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>size</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>'default' | 'sm' | 'lg' | 'icon'</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>'default'</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>Button size</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>disabled</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>boolean</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>false</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>Disable button interactions</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>onClick</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>(event: MouseEvent) =&gt; void</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>undefined</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>Click handler function</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>className</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>string</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>''</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>Additional CSS classes</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>children</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>ReactNode</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>undefined</td>
-              <td style={{ padding: '0.5rem', borderBottom: `1px solid ${theme === 'dark' ? '#444' : '#e0e0e0'}` }}>Button content</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h4>HTML Attributes</h4>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
-          <p>PM7Button supports all standard HTML button attributes including:</p>
-          <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem' }}>
-            <li><code>type</code> - Button type (button, submit, reset)</li>
-            <li><code>form</code> - Associates button with a form</li>
-            <li><code>disabled</code> - Disables the button</li>
-            <li><code>aria-*</code> - Accessibility attributes</li>
-            <li><code>data-*</code> - Data attributes</li>
-          </ul>
-        </div>
-      </section>
-
-      {/* Important Notes */}
-      <section style={{ marginBottom: '2rem' }}>
-        <h3>Important Notes</h3>
-        <div style={{ backgroundColor: theme === 'dark' ? '#3a2a2a' : '#fff5f5', padding: '1rem', borderRadius: '8px', border: `1px solid ${theme === 'dark' ? '#663333' : '#ffcccc'}` }}>
-          <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
-            <li><strong>No CSS Import Required:</strong> Styles are included in the component</li>
-            <li><strong>PM7 Branding:</strong> Uses PM7 color scheme and styling guidelines</li>
-            <li><strong>Accessibility:</strong> Fully keyboard accessible with proper focus states</li>
-            <li><strong>Responsive:</strong> Adapts to different screen sizes</li>
-            <li><strong>Dark Mode:</strong> Automatically handles light/dark theme switching</li>
-          </ul>
-        </div>
-      </section>
-
-      {/* Common Use Cases */}
-      <section style={{ marginBottom: '2rem' }}>
-        <h3>Common Use Cases</h3>
-        
-        <div style={{ marginBottom: '1rem' }}>
-          <h4>Form Submit Button</h4>
-          <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '4px' }}>
-            <pre><code>{`<PM7Button type="submit" variant="default">
-  Submit Form
-</PM7Button>`}</code></pre>
+      {/* Copy Link Section */}
+      <div style={{ 
+        backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f8f9fa',
+        padding: '1.5rem',
+        borderRadius: '8px',
+        border: `1px solid ${theme === 'dark' ? '#444' : '#dee2e6'}`,
+        marginBottom: '1.5rem'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{ flex: '1', minWidth: '300px', position: 'relative' }}>
+            <code style={{ 
+              backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff',
+              padding: '0.75rem 2.5rem 0.75rem 1rem',
+              borderRadius: '6px',
+              border: `1px solid ${theme === 'dark' ? '#555' : '#ddd'}`,
+              fontSize: '0.9rem',
+              color: theme === 'dark' ? '#e0e0e0' : '#333',
+              display: 'block',
+              wordBreak: 'break-all'
+            }}>
+              https://pm7.tools/button/docs.html
+            </code>
+            <button
+              onClick={() => window.open('https://pm7.tools/button/docs.html', '_blank')}
+              style={{
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '4px',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                const svg = e.currentTarget.querySelector('svg');
+                if (svg) svg.style.stroke = '#1C86EF';
+              }}
+              onMouseOut={(e) => {
+                const svg = e.currentTarget.querySelector('svg');
+                if (svg) svg.style.stroke = theme === 'dark' ? '#a0a0a0' : '#666';
+              }}
+              title="Open in new tab"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke={theme === 'dark' ? '#a0a0a0' : '#666'}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ transition: 'stroke 0.2s ease' }}
+              >
+                <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" />
+                <path d="M11 13l9 -9" />
+                <path d="M15 4h5v5" />
+              </svg>
+            </button>
           </div>
+          
+          <button
+            onClick={copyToClipboard}
+            style={{
+              backgroundColor: copied ? '#22c55e' : '#1C86EF',
+              color: 'white',
+              border: 'none',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              fontWeight: '500',
+              transition: 'all 0.2s ease',
+              minWidth: '120px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
+            }}
+            onMouseOver={(e) => {
+              if (!copied) {
+                e.currentTarget.style.backgroundColor = '#1a73d1';
+              }
+            }}
+            onMouseOut={(e) => {
+              if (!copied) {
+                e.currentTarget.style.backgroundColor = '#1C86EF';
+              }
+            }}
+          >
+            {copied ? (
+              <>
+                <span>✓</span>
+                Gekopieerd!
+              </>
+            ) : (
+              <>
+                <span>📋</span>
+                Kopiëren
+              </>
+            )}
+          </button>
         </div>
+      </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <h4>Cancel/Close Action</h4>
-          <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '4px' }}>
-            <pre><code>{`<PM7Button variant="ghost" onClick={onClose}>
-  Cancel
-</PM7Button>`}</code></pre>
-          </div>
+      {/* Info Section */}
+      <div style={{ 
+        backgroundColor: theme === 'dark' ? '#2a2a2a' : '#e7f3ff',
+        padding: '1.5rem',
+        borderRadius: '8px',
+        border: `1px solid ${theme === 'dark' ? '#444' : '#b3d9ff'}`,
+        textAlign: 'center'
+      }}>
+        <h3 style={{ 
+          fontSize: '1.25rem',
+          fontWeight: '600',
+          color: theme === 'dark' ? '#ffffff' : '#1a1a1a',
+          marginBottom: '1rem'
+        }}>
+          🤖 AI-Geoptimaliseerde Documentatie
+        </h3>
+        <p style={{ 
+          fontSize: '1rem', 
+          color: theme === 'dark' ? '#a0a0a0' : '#666',
+          lineHeight: '1.6',
+          marginBottom: '1rem'
+        }}>
+          Deze link bevat pure HTML documentatie die perfect leesbaar is door AI-assistants, 
+          WebFetch tools, en andere automatische systemen. Geen JavaScript, geen menu's - 
+          alleen de essentiële PM7Button implementatie guidance.
+        </p>
+        <div style={{ 
+          fontSize: '0.9rem',
+          color: theme === 'dark' ? '#888' : '#777',
+          fontStyle: 'italic'
+        }}>
+          Perfect voor ChatGPT, Claude, en andere AI code assistants
         </div>
+      </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <h4>Delete/Destructive Action</h4>
-          <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '4px' }}>
-            <pre><code>{`<PM7Button variant="destructive" onClick={onDelete}>
-  Delete Item
-</PM7Button>`}</code></pre>
-          </div>
-        </div>
-      </section>
+      {/* AI Documentation iframe */}
+      <div style={{ marginTop: '2rem' }}>
+        <PM7Card theme={theme} style={{ padding: 0, overflow: 'hidden' }}>
+          <iframe
+            src="https://pm7.tools/button/docs.html"
+            title="PM7 Button AI Documentation"
+            style={{
+              width: '100%',
+              height: '600px',
+              border: 'none',
+              backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff'
+            }}
+          />
+        </PM7Card>
+      </div>
 
-      {/* Package Information */}
-      <section>
-        <h3>Package Information</h3>
-        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
-          <p style={{ margin: '0.25rem 0' }}><strong>NPM:</strong> pm7-ui-style-guide</p>
-          <p style={{ margin: '0.25rem 0' }}><strong>Repository:</strong> https://github.com/patrickmast/pm7-ui-style-guide</p>
-          <p style={{ margin: '0.25rem 0' }}><strong>Direct URL:</strong> https://ui-style-guide.pm7.tools/docs/PM7Button</p>
-        </div>
-      </section>
     </div>
   );
 };

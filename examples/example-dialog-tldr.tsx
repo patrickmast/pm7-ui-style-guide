@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { PM7Card } from '../src/components/card/pm7-card';
 
 const ExampleDialogTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [copied, setCopied] = useState(false);
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://ui-style-guide.pm7.tools/dialog/doc.html');
+      await navigator.clipboard.writeText('https://pm7.tools/dialog/docs.html');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -67,10 +68,10 @@ const ExampleDialogTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://ui-style-guide.pm7.tools/dialog/doc.html
+              https://pm7.tools/dialog/docs.html
             </code>
             <button
-              onClick={() => window.open('https://ui-style-guide.pm7.tools/dialog/doc.html', '_blank')}
+              onClick={() => window.open('https://pm7.tools/dialog/docs.html', '_blank')}
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -192,6 +193,23 @@ const ExampleDialogTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
           Perfect voor ChatGPT, Claude, en andere AI code assistants
         </div>
       </div>
+
+      {/* AI Documentation iframe */}
+      <div style={{ marginTop: '2rem' }}>
+        <PM7Card theme={theme} style={{ padding: 0, overflow: 'hidden' }}>
+          <iframe
+            src="https://pm7.tools/dialog/docs.html"
+            title="PM7 Dialog AI Documentation"
+            style={{
+              width: '100%',
+              height: '600px',
+              border: 'none',
+              backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff'
+            }}
+          />
+        </PM7Card>
+      </div>
+
     </div>
   );
 };

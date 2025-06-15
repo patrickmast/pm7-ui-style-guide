@@ -12,7 +12,7 @@ import ExampleTabSelectorAPI from './example-tab-selector-api';
 import ExampleTabSelectorExamples from './example-tab-selector-examples';
 import ExampleTabSelectorTLDR from './example-tab-selector-tldr';
 
-type TabType = 'demo' | 'overview' | 'usage' | 'documentation' | 'tldr';
+type TabType = 'demo' | 'overview' | 'usage' | 'tldr';
 type ThemeType = 'light' | 'dark';
 
 // Static README content to avoid import issues
@@ -98,7 +98,6 @@ const TabSelectorExample = ({ theme }: { theme: ThemeType }) => {
           { id: 'demo', label: 'Demo' },
           { id: 'overview', label: 'Overview' },
           { id: 'usage', label: 'Usage' },
-          { id: 'documentation', label: 'Documentation' },
           { id: 'tldr', label: 'TL;DR' }
         ]}
         activeTab={activeTab}
@@ -119,11 +118,6 @@ const TabSelectorExample = ({ theme }: { theme: ThemeType }) => {
       {activeTab === 'usage' && (
         <div style={{ padding: '1rem' }}>
           <ExampleTabSelectorUsage theme={theme} />
-        </div>
-      )}
-      {activeTab === 'documentation' && (
-        <div style={{ padding: '1rem' }}>
-          <ExampleTabSelectorAPI theme={theme} />
         </div>
       )}
       {activeTab === 'tldr' && (
