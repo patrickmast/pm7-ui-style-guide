@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:examples": "vite build --config vite.config.examples.js",
+    "build:examples": "vite build --config vite.config.examples.js && npm run build:dialog-tldr && mkdir -p examples/dist/dialog && cp static/dialog-tldr.html examples/dist/dialog/tldr.html",
     "build:static": "npm run build:examples && node scripts/prerender.js",
     "build:dialog-tldr": "node scripts/generate-dialog-tldr.js",
     "prerender": "node scripts/prerender.js",
