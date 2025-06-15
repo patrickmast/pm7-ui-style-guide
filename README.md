@@ -9,6 +9,7 @@
 - [PM7 UI Style Guide](#pm7-ui-style-guide)
   - [Table of Contents](#table-of-contents)
   - [Live Examples](#live-examples)
+  - [Static Documentation](#static-documentation)
   - [Purpose](#purpose)
   - [Why Use This Package?](#why-use-this-package)
   - [Installation](#installation)
@@ -64,6 +65,46 @@
 ## Live Examples
 
 View the live examples of all components at our [Vercel deployment](https://pm7-ui-style-guide-mqrvlm8a9-pm7-projects.vercel.app/).
+
+---
+
+## Static Documentation
+
+The PM7 UI Style Guide now includes pre-rendered static HTML documentation that can be accessed by tools like WebFetch, AI agents, and crawlers without requiring JavaScript execution.
+
+### Quick Access - Dialog TL;DR
+
+For immediate access to the Dialog component documentation:
+
+```bash
+npm run build:dialog-tldr
+```
+
+This generates `static/dialog-tldr.html` - a clean, WebFetch-friendly version of the complete Dialog integration guide.
+
+### Full Static Documentation
+
+To generate static HTML for all components and documentation pages:
+
+```bash
+npm run build:static
+```
+
+This creates static HTML files for all components (menu, button, input, dialog, tabselector, card, themetoggle) across all documentation tabs (demo, overview, usage, documentation, tldr) in both light and dark themes.
+
+**Generated files include:**
+- `static/dialog-tldr.html` - Complete Dialog integration guide  
+- `static/{component}-{tab}.html` - Light theme versions
+- `static/{component}-{tab}-dark.html` - Dark theme versions
+- `static/index.html` - Index of all generated pages
+
+**Benefits:**
+- **AI/Agent Accessible**: Tools like WebFetch can access documentation without JavaScript
+- **SEO Friendly**: Search engines can index the documentation content
+- **Fast Loading**: Static HTML loads faster than React applications
+- **Offline Access**: Documentation available without the full application
+
+For detailed information about the pre-rendering system, see [PRERENDER_README.md](./PRERENDER_README.md).
 
 ---
 

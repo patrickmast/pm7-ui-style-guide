@@ -5,7 +5,7 @@ const ExampleDialogTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
     <div>
       {/* AI-Agent Friendly Header */}
       <div style={{ marginBottom: '2rem' }}>
-        <h2>TL;DR - Complete Integration Guide</h2>
+        <h2>TEST - TL;DR - Complete Integration Guide</h2>
         <p style={{ fontSize: '1.1rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
           Everything you need to integrate PM7Dialog in your application
         </p>
@@ -400,6 +400,184 @@ function App() {
           <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '4px' }}>
             <p>Quick access to configuration options</p>
           </div>
+        </div>
+      </section>
+
+      {/* CRITICAL IMPLEMENTATION PATTERNS */}
+      <section style={{ marginBottom: '2rem' }}>
+        <h3>🎯 CRITICAL: Proper PM7Dialog Implementation</h3>
+        <div style={{ backgroundColor: theme === 'dark' ? '#3a2a2a' : '#fff3cd', padding: '1rem', borderRadius: '8px', border: `2px solid ${theme === 'dark' ? '#ffc107' : '#856404'}`, marginBottom: '1rem' }}>
+          <p style={{ margin: '0 0 1rem 0', fontWeight: 'bold', color: theme === 'dark' ? '#ffc107' : '#856404' }}>
+            ⚠️ IMPORTANT: The documentation examples above use a simplified API that may not match the actual component structure. 
+            Use the patterns below for production implementations.
+          </p>
+        </div>
+
+        <h4>✅ Correct Confirmation Dialog Pattern</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#1a3a1a' : '#e8f5e8', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', border: `1px solid ${theme === 'dark' ? '#4a8a4a' : '#c3e6c3'}` }}>
+          <pre><code>{`import { 
+  PM7Dialog, 
+  PM7DialogContent, 
+  PM7DialogHeader, 
+  PM7DialogTitle, 
+  PM7DialogDescription, 
+  PM7DialogFooter,
+  PM7DialogOverlay 
+} from 'pm7-ui-style-guide';
+import { Button } from '../ui/button'; // or your button component
+
+const NewConfirmDialog = ({ open, onOpenChange, onConfirm }) => {
+  const handleConfirm = () => {
+    onConfirm();
+    onOpenChange(false);
+  };
+
+  return (
+    <PM7Dialog open={open} onOpenChange={onOpenChange}>
+      <PM7DialogOverlay className="fixed inset-0 z-50 bg-black/30 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+      <PM7DialogContent className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] bg-background shadow-lg sm:rounded-lg p-0 overflow-hidden">
+        
+        <PM7DialogHeader className="p-6 pb-4">
+          <PM7DialogTitle className="text-lg font-semibold">
+            Nieuwe configuratie
+          </PM7DialogTitle>
+          <PM7DialogDescription className="mt-2 text-sm text-muted-foreground">
+            Weet je zeker dat je een nieuwe configuratie wilt starten?
+          </PM7DialogDescription>
+        </PM7DialogHeader>
+        
+        <div className="px-6 py-4">
+          {/* Additional content if needed */}
+        </div>
+        
+        <PM7DialogFooter className="flex flex-row justify-end space-x-2 bg-gray-50 px-6 py-4 border-t">
+          <Button 
+            variant="ghost" 
+            onClick={() => onOpenChange(false)}
+            className="mr-auto"
+          >
+            Annuleren
+          </Button>
+          <Button 
+            onClick={handleConfirm}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            Ja, nieuwe configuratie
+          </Button>
+        </PM7DialogFooter>
+        
+      </PM7DialogContent>
+    </PM7Dialog>
+  );
+};`}</code></pre>
+        </div>
+
+        <h4>🔧 Critical Styling Requirements</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#2a2a2a' : '#f5f5f5', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
+          <h5>PM7DialogContent MUST have:</h5>
+          <ul style={{ marginLeft: '1rem' }}>
+            <li><code>p-0 overflow-hidden</code> - Prevents white borders around footer</li>
+            <li><code>fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]</code> - Perfect centering</li>
+            <li><code>bg-background shadow-lg sm:rounded-lg</code> - Proper background and shadow</li>
+          </ul>
+
+          <h5>PM7DialogHeader should have:</h5>
+          <ul style={{ marginLeft: '1rem' }}>
+            <li><code>className="p-6 pb-4"</code> - Proper spacing</li>
+            <li>Title: <code>className="text-lg font-semibold"</code></li>
+            <li>Description: <code>className="mt-2 text-sm text-muted-foreground"</code></li>
+          </ul>
+
+          <h5>PM7DialogFooter MUST have:</h5>
+          <ul style={{ marginLeft: '1rem' }}>
+            <li><code>className="flex flex-row justify-end space-x-2 bg-gray-50 px-6 py-4 border-t"</code></li>
+            <li>Cancel button: <code>className="mr-auto"</code> to push it left</li>
+            <li>Action button: <code>className="bg-blue-600 hover:bg-blue-700 text-white"</code></li>
+          </ul>
+        </div>
+
+        <h4>❌ Common Mistakes to Avoid</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#3a1a1a' : '#ffeaea', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', border: `1px solid ${theme === 'dark' ? '#8a4a4a' : '#ffcaca'}` }}>
+          <ul style={{ marginLeft: '1rem' }}>
+            <li>❌ Using default padding on PM7DialogContent (causes white borders)</li>
+            <li>❌ Not setting <code>mr-auto</code> on cancel button (wrong positioning)</li>
+            <li>❌ Forgetting <code>bg-gray-50</code> on footer (no background contrast)</li>
+            <li>❌ Missing <code>border-t</code> on footer (no visual separation)</li>
+            <li>❌ Not using <code>overflow-hidden</code> (footer bleeds outside rounded corners)</li>
+            <li>❌ Using <code>flex-col-reverse sm:flex-row</code> instead of <code>flex-row</code></li>
+          </ul>
+        </div>
+
+        <h4>✅ Complete Form Dialog Example</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#1a3a1a' : '#e8f5e8', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
+          <pre><code>{`const SaveConfigDialog = ({ open, onOpenChange, configurationData }) => {
+  const [configName, setConfigName] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    if (!configName.trim()) return;
+    
+    setIsSaving(true);
+    try {
+      await saveConfig(configName.trim(), configurationData);
+      onOpenChange(false);
+    } catch (error) {
+      console.error('Save failed:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <PM7Dialog open={open} onOpenChange={onOpenChange}>
+      <PM7DialogOverlay className="fixed inset-0 z-50 bg-black/30 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+      <PM7DialogContent className="fixed left-[50%] top-[50%] z-50 w-full max-w-md translate-x-[-50%] translate-y-[-50%] bg-background shadow-lg sm:rounded-lg p-0 overflow-hidden">
+        
+        <PM7DialogHeader className="p-6 pb-4">
+          <PM7DialogTitle className="text-lg font-semibold">Opslaan</PM7DialogTitle>
+          <PM7DialogDescription className="mt-2 text-sm text-muted-foreground">
+            Geef een naam op voor deze configuratie.
+          </PM7DialogDescription>
+        </PM7DialogHeader>
+        
+        <div className="px-6 py-4 space-y-4">
+          <div className="space-y-2">
+            <label htmlFor="config-name" className="text-sm font-medium">
+              Configuratie naam
+            </label>
+            <input
+              id="config-name"
+              type="text"
+              value={configName}
+              onChange={(e) => setConfigName(e.target.value)}
+              placeholder="Nieuwe configuratie naam..."
+              className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              autoFocus
+            />
+          </div>
+        </div>
+        
+        <PM7DialogFooter className="flex flex-row justify-end space-x-2 bg-gray-50 px-6 py-4 border-t">
+          <Button
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            className="mr-auto"
+          >
+            Annuleren
+          </Button>
+          <Button
+            onClick={handleSave}
+            disabled={isSaving || !configName.trim()}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            {isSaving ? 'Bezig...' : 'Opslaan'}
+          </Button>
+        </PM7DialogFooter>
+        
+      </PM7DialogContent>
+    </PM7Dialog>
+  );
+};`}</code></pre>
         </div>
       </section>
 
