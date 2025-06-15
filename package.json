@@ -8,9 +8,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:examples": "vite build --config vite.config.examples.js && npm run build:dialog-tldr && mkdir -p examples/dist/dialog && cp static/dialog-tldr.html examples/dist/dialog/tldr.html",
+    "build:examples": "vite build --config vite.config.examples.js && npm run build:dialog-doc && mkdir -p examples/dist/dialog && cp static/dialog-doc.html examples/dist/dialog/doc.html",
     "build:static": "npm run build:examples && node scripts/prerender.js",
     "build:dialog-tldr": "node scripts/generate-dialog-tldr.js",
+    "build:dialog-doc": "node scripts/generate-dialog-doc.js",
     "prerender": "node scripts/prerender.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
