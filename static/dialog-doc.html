@@ -89,165 +89,79 @@ npm install @radix-ui/react-dialog@^1.0.5 lucide-react@^0.501.0</code></pre>
   <!-- Import -->
   <section style="margin-bottom: 2rem;">
     <h2>Import</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>// All Dialog Components
-import {
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { 
   PM7Dialog,
-  PM7DialogTrigger,
   PM7DialogContent,
   PM7DialogHeader,
-  PM7DialogTitle,
-  PM7DialogSubTitle,
-  PM7DialogDescription,
   PM7DialogFooter,
-  PM7DialogSeparator,
-  PM7DialogClose,
-  PM7DialogPortal,
-  PM7DialogOverlay
+  PM7DialogTitle,
+  PM7DialogDescription,
+  PM7DialogOverlay 
 } from 'pm7-ui-style-guide';
 
 // CRITICAL: Import CSS for proper styling
-import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';</code></pre>
+import 'pm7-ui-style-guide/pm7-dialog.css';</code></pre>
   </section>
 
   <!-- Basic Usage -->
   <section style="margin-bottom: 2rem;">
     <h2>Basic Usage</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
-import {
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React, { useState } from 'react';
+import { 
   PM7Dialog,
-  PM7DialogTrigger,
   PM7DialogContent,
   PM7DialogHeader,
+  PM7DialogFooter,
   PM7DialogTitle,
-  PM7DialogSubTitle,
-  PM7DialogFooter
+  PM7DialogDescription,
+  PM7DialogOverlay 
 } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
+import 'pm7-ui-style-guide/pm7-dialog.css';
 
-function BasicDialog() {
-  return (
-    &lt;PM7Dialog&gt;
-      &lt;PM7DialogTrigger asChild&gt;
-        &lt;button&gt;Open Dialog&lt;/button&gt;
-      &lt;/PM7DialogTrigger&gt;
-      &lt;PM7DialogContent&gt;
-        &lt;PM7DialogHeader&gt;
-          &lt;PM7DialogTitle&gt;Dialog Title&lt;/PM7DialogTitle&gt;
-          &lt;PM7DialogSubTitle&gt;
-            This is a description of the dialog content.
-          &lt;/PM7DialogSubTitle&gt;
-        &lt;/PM7DialogHeader&gt;
-        &lt;div style={{ padding: '1rem 0' }}&gt;
-          &lt;p&gt;Main content of the dialog&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;PM7DialogFooter&gt;
-          &lt;button&gt;Cancel&lt;/button&gt;
-          &lt;button&gt;Save&lt;/button&gt;
-        &lt;/PM7DialogFooter&gt;
-      &lt;/PM7DialogContent&gt;
-    &lt;/PM7Dialog&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Dark Theme Dialog -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Dark Theme Dialog</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>function DarkDialog() {
-  return (
-    &lt;PM7Dialog&gt;
-      &lt;PM7DialogTrigger asChild&gt;
-        &lt;button&gt;Open Dark Dialog&lt;/button&gt;
-      &lt;/PM7DialogTrigger&gt;
-      &lt;PM7DialogContent className="dark"&gt;
-        &lt;PM7DialogHeader&gt;
-          &lt;PM7DialogTitle&gt;Dark Theme Dialog&lt;/PM7DialogTitle&gt;
-          &lt;PM7DialogSubTitle&gt;
-            This dialog uses dark theme styling.
-          &lt;/PM7DialogSubTitle&gt;
-        &lt;/PM7DialogHeader&gt;
-        &lt;div style={{ padding: '1rem 0' }}&gt;
-          &lt;p&gt;Content in dark mode with proper contrast.&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;PM7DialogFooter&gt;
-          &lt;button&gt;Cancel&lt;/button&gt;
-          &lt;button&gt;Save&lt;/button&gt;
-        &lt;/PM7DialogFooter&gt;
-      &lt;/PM7DialogContent&gt;
-    &lt;/PM7Dialog&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Controlled Dialog -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Controlled Dialog</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React, { useState } from 'react';
-
-function ControlledDialog() {
+function MyComponent() {
   const [open, setOpen] = useState(false);
 
   return (
-    &lt;PM7Dialog open={open} onOpenChange={setOpen}&gt;
-      &lt;PM7DialogTrigger asChild&gt;
-        &lt;button&gt;Open Controlled Dialog&lt;/button&gt;
-      &lt;/PM7DialogTrigger&gt;
-      &lt;PM7DialogContent&gt;
-        &lt;PM7DialogHeader&gt;
-          &lt;PM7DialogTitle&gt;Controlled Dialog&lt;/PM7DialogTitle&gt;
-        &lt;/PM7DialogHeader&gt;
-        &lt;div style={{ padding: '1rem 0' }}&gt;
-          &lt;p&gt;This dialog's state is controlled externally.&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;PM7DialogFooter&gt;
-          &lt;button onClick={() =&gt; setOpen(false)}&gt;Cancel&lt;/button&gt;
-          &lt;button onClick={() =&gt; setOpen(false)}&gt;Save&lt;/button&gt;
-        &lt;/PM7DialogFooter&gt;
-      &lt;/PM7DialogContent&gt;
-    &lt;/PM7Dialog&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Dialog with Separator -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Dialog with Separator</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { PM7DialogSeparator } from 'pm7-ui-style-guide';
-
-function DialogWithSeparator() {
-  return (
-    &lt;PM7Dialog&gt;
-      &lt;PM7DialogTrigger asChild&gt;
-        &lt;button&gt;Open Dialog&lt;/button&gt;
-      &lt;/PM7DialogTrigger&gt;
-      &lt;PM7DialogContent className="dark"&gt;
-        &lt;PM7DialogHeader&gt;
-          &lt;PM7DialogTitle&gt;Settings&lt;/PM7DialogTitle&gt;
-          &lt;PM7DialogSubTitle&gt;Configure your preferences&lt;/PM7DialogSubTitle&gt;
-        &lt;/PM7DialogHeader&gt;
-        
-        &lt;PM7DialogSeparator 
-          className="dark" 
-          marginTop="16px" 
-          marginBottom="16px" 
-        /&gt;
-        
-        &lt;div&gt;
-          &lt;p&gt;Settings content here&lt;/p&gt;
-        &lt;/div&gt;
-        
-        &lt;PM7DialogSeparator 
-          className="dark" 
-          marginTop="16px" 
-          marginBottom="16px" 
-        /&gt;
-        
-        &lt;PM7DialogFooter&gt;
-          &lt;button&gt;Cancel&lt;/button&gt;
-          &lt;button&gt;Save&lt;/button&gt;
-        &lt;/PM7DialogFooter&gt;
-      &lt;/PM7DialogContent&gt;
-    &lt;/PM7Dialog&gt;
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setOpen(true)}&gt;
+        Open Dialog
+      &lt;/button&gt;
+      
+      &lt;PM7Dialog open={open} onOpenChange={setOpen}&gt;
+        &lt;PM7DialogOverlay className="fixed inset-0 z-50 bg-black/30" /&gt;
+        &lt;PM7DialogContent className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] bg-background shadow-lg sm:rounded-lg p-0 overflow-hidden"&gt;
+          
+          &lt;PM7DialogHeader className="p-6 pb-4"&gt;
+            &lt;PM7DialogTitle className="text-lg font-semibold"&gt;
+              Dialog Title
+            &lt;/PM7DialogTitle&gt;
+            &lt;PM7DialogDescription className="mt-2 text-sm text-muted-foreground"&gt;
+              Dialog description text here.
+            &lt;/PM7DialogDescription&gt;
+          &lt;/PM7DialogHeader&gt;
+          
+          &lt;div className="px-6 py-4"&gt;
+            &lt;p&gt;Your dialog content goes here.&lt;/p&gt;
+          &lt;/div&gt;
+          
+          &lt;PM7DialogFooter className="flex flex-row justify-end space-x-2 bg-gray-50 px-6 py-4 border-t"&gt;
+            &lt;button 
+              onClick={() =&gt; setOpen(false)}
+              className="mr-auto px-4 py-2 text-gray-600 hover:text-gray-800"
+            &gt;
+              Cancel
+            &lt;/button&gt;
+            &lt;button 
+              onClick={() =&gt; setOpen(false)}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+            &gt;
+              Confirm
+            &lt;/button&gt;
+          &lt;/PM7DialogFooter&gt;
+          
+        &lt;/PM7DialogContent&gt;
+      &lt;/PM7Dialog&gt;
+    &lt;/&gt;
   );
 }</code></pre>
   </section>
@@ -498,347 +412,24 @@ const SaveConfigDialog = ({ open, onOpenChange, configurationData }) =&gt; {
   <section style="margin-bottom: 2rem;">
     <h2>API Reference</h2>
     
-    <h3>PM7Dialog</h3>
-    <p style="margin-bottom: 1rem;">Root component that manages dialog state. Extends all Radix UI Dialog.Root props.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>open</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">undefined</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Controls the open state</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>onOpenChange</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">(open: boolean) => void</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">undefined</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Callback when state changes</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>defaultOpen</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">false</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Default open state for uncontrolled usage</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>modal</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">true</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Whether dialog is modal</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>PM7DialogTrigger</h3>
-    <p style="margin-bottom: 1rem;">Button that opens the dialog. Extends all Radix UI Dialog.Trigger props.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>asChild</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">false</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Render as child element instead of button</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>PM7DialogContent</h3>
-    <p style="margin-bottom: 1rem;">Main dialog container. Extends all Radix UI Dialog.Content props.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Additional CSS classes (use 'dark' for dark theme)</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>children</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">React.ReactNode</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Dialog content</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="margin-bottom: 1rem; padding: 1rem; background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px;"><strong>Dark Theme:</strong> Add <code>className="dark"</code> to enable dark theme styling.</p>
-
-    <h3>PM7DialogHeader</h3>
-    <p style="margin-bottom: 1rem;">Container for title and subtitle with proper spacing.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Additional CSS classes</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>children</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">React.ReactNode</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Header content</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>PM7DialogTitle</h3>
-    <p style="margin-bottom: 1rem;">Dialog title using Radix UI Dialog.Title for accessibility. Extends all Radix UI Dialog.Title props.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Additional CSS classes</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>children</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">React.ReactNode</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Title content</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>PM7DialogSubTitle / PM7DialogDescription</h3>
-    <p style="margin-bottom: 1rem;">Dialog subtitle/description using Radix UI Dialog.Description. Both names refer to the same component.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Additional CSS classes</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>children</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">React.ReactNode</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Description content</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="margin-bottom: 1rem; padding: 1rem; background: #fff3e0; border: 1px solid #ffb74d; border-radius: 6px;"><strong>Note:</strong> <code>PM7DialogDescription</code> is maintained for backward compatibility.</p>
-
-    <h3>PM7DialogFooter</h3>
-    <p style="margin-bottom: 1rem;">Container for action buttons with responsive layout.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Additional CSS classes</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>children</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">React.ReactNode</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Footer content (typically buttons)</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>PM7DialogSeparator</h3>
-    <p style="margin-bottom: 1rem;">Visual separator with theme support.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Additional CSS classes (use 'dark' for dark theme)</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>marginTop</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">'0px'</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Top margin spacing</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>marginBottom</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">'0px'</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Bottom margin spacing</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>PM7DialogClose</h3>
-    <p style="margin-bottom: 1rem;">Button that closes the dialog. Extends all Radix UI Dialog.Close props.</p>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.5rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><code>asChild</code></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">false</td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;">Render as child element instead of button</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Additional Components</h3>
-    <p style="margin-bottom: 1rem;">The following Radix UI primitives are also exported for advanced usage:</p>
-    <ul style="padding-left: 2rem;">
-      <li><strong>PM7DialogPortal</strong> - Portal container</li>
-      <li><strong>PM7DialogOverlay</strong> - Background overlay</li>
-    </ul>
-  </section>
-
-  <!-- Visual Appearance -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Visual Appearance</h2>
-    
-    <h3>Light Theme (default)</h3>
-    <ul style="padding-left: 2rem;">
-      <li>Background: White</li>
-      <li>Border: 1px solid #e2e8f0</li>
-      <li>Close button: #333333</li>
-      <li>Overlay: Semi-transparent black with blur</li>
+    <h3>PM7Dialog Props</h3>
+    <ul>
+      <li><code>open: boolean</code> - Controls dialog visibility</li>
+      <li><code>onOpenChange: (open: boolean) =&gt; void</code> - Callback when open state changes</li>
+      <li><code>children: ReactNode</code> - Dialog content (typically PM7DialogOverlay and PM7DialogContent)</li>
     </ul>
 
-    <h3>Dark Theme (className="dark")</h3>
-    <ul style="padding-left: 2rem;">
-      <li>Background: #262626 (dark gray)</li>
-      <li>Border: 1px solid #525252</li>
-      <li>Close button: White</li>
-      <li>Overlay: Semi-transparent black with blur</li>
+    <h3>PM7DialogContent Props</h3>
+    <ul>
+      <li><code>className: string</code> - CSS classes (MUST include proper positioning and overflow)</li>
+      <li><code>children: ReactNode</code> - Dialog content (header, body, footer)</li>
     </ul>
 
-    <h3>Layout Features</h3>
-    <ul style="padding-left: 2rem;">
-      <li><strong>Responsive:</strong> Mobile-first design with desktop optimizations</li>
-      <li><strong>Centered:</strong> Fixed position at viewport center</li>
-      <li><strong>Animated:</strong> Smooth fade and zoom transitions</li>
-      <li><strong>Auto-close:</strong> Built-in close button in top-right corner</li>
-    </ul>
-  </section>
+    <h3>Required CSS Classes for PM7DialogContent</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px;"><code>className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] bg-background shadow-lg sm:rounded-lg p-0 overflow-hidden"</code></pre>
 
-  <!-- Theme Management -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Theme Management</h2>
-    
-    <p style="margin-bottom: 1rem;">Enable dark theme by adding <code>className="dark"</code> to <code>PM7DialogContent</code>:</p>
-    
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem;"><code>// Light theme (default)
-&lt;PM7DialogContent&gt;
-
-// Dark theme
-&lt;PM7DialogContent className="dark"&gt;
-
-// Dark theme with additional classes
-&lt;PM7DialogContent className="dark my-custom-class"&gt;</code></pre>
-
-    <p style="margin-bottom: 0.5rem;">For separators in dark theme:</p>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>&lt;PM7DialogSeparator className="dark" /&gt;</code></pre>
-  </section>
-
-  <!-- Accessibility Features -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Accessibility Features</h2>
-    <ul style="padding-left: 2rem;">
-      <li><strong>Keyboard Navigation:</strong> Escape key closes dialog</li>
-      <li><strong>Focus Management:</strong> Focus trapped within dialog when open</li>
-      <li><strong>Screen Readers:</strong> Proper ARIA attributes and roles</li>
-      <li><strong>Close Button:</strong> Visible icon with screen reader text</li>
-      <li><strong>Backdrop:</strong> Clickable overlay to close dialog</li>
-    </ul>
-  </section>
-
-  <!-- Best Practices -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Best Practices</h2>
-    <ol style="padding-left: 2rem;">
-      <li><strong>Always include title:</strong> Use PM7DialogTitle for accessibility</li>
-      <li><strong>Responsive content:</strong> Ensure content works on all screen sizes</li>
-      <li><strong>Clear actions:</strong> Place primary action on the right</li>
-      <li><strong>Theme consistency:</strong> Use same theme throughout dialog</li>
-      <li><strong>Escape routes:</strong> Always provide a way to close the dialog</li>
-      <li><strong>Content structure:</strong> Use header/footer for organized layout</li>
-    </ul>
-  </section>
-
-  <!-- Integration Notes -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Integration Notes</h2>
-    <ul style="padding-left: 2rem;">
-      <li>Works seamlessly with PM7Button components</li>
-      <li>Compatible with PM7 theme system</li>
-      <li>Follows PM7 design system guidelines</li>
-      <li>Built on proven Radix UI accessibility patterns</li>
-    </ul>
+    <h3>Required CSS Classes for PM7DialogFooter</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px;"><code>className="flex flex-row justify-end space-x-2 bg-gray-50 px-6 py-4 border-t"</code></pre>
   </section>
 
 </div>

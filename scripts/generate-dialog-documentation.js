@@ -1,180 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dialog TL;DR - PM7 UI Style Guide</title>
-    <meta name="description" content="PM7 UI Style Guide documentation for Dialog TL;DR">
-    <meta name="keywords" content="PM7, UI, React, Dialog, Component, Style Guide">
-    
-    <style>
-        /* Basic CSS Reset and Typography */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            margin: 1.5rem 0 1rem 0;
-            line-height: 1.3;
-            font-weight: 600;
-        }
-        
-        h1 { font-size: 2.5rem; color: #1a1a1a; }
-        h2 { font-size: 2rem; color: #1a1a1a; }
-        h3 { font-size: 1.5rem; color: #2a2a2a; }
-        h4 { font-size: 1.25rem; color: #2a2a2a; }
-        h5 { font-size: 1.1rem; color: #3a3a3a; }
-        
-        p {
-            margin: 1rem 0;
-        }
-        
-        ul, ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-        
-        li {
-            margin: 0.5rem 0;
-        }
-        
-        code {
-            background: #f5f5f5;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'SF Mono', Monaco, 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #d73a49;
-            border: 1px solid #e1e4e8;
-        }
-        
-        pre {
-            background: #f6f8fa;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-            border: 1px solid #e1e4e8;
-        }
-        
-        pre code {
-            background: none;
-            padding: 0;
-            border: none;
-            color: #24292e;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            border: 1px solid #e1e4e8;
-        }
-        
-        th, td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #e1e4e8;
-        }
-        
-        th {
-            font-weight: 600;
-            background: #f6f8fa;
-            border-bottom: 2px solid #e1e4e8;
-        }
-        
-        a {
-            color: #0366d6;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #e1e4e8;
-        }
-        
-        .content {
-            max-width: none;
-        }
-        
-        .footer {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e1e4e8;
-            text-align: center;
-            color: #586069;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            
-            table {
-                font-size: 0.9rem;
-            }
-            
-            th, td {
-                padding: 0.5rem;
-            }
-        }
-        
-        /* Special styling for highlight boxes */
-        section {
-            margin-bottom: 2rem;
-        }
-        
-        section > div[style*="background-color: #fff3cd"] {
-            background-color: #fff3cd !important;
-            border: 2px solid #856404 !important;
-            color: #856404;
-        }
-        
-        section > div[style*="background-color: #e8f5e8"] {
-            background-color: #e8f5e8 !important;
-            border: 1px solid #c3e6c3 !important;
-        }
-        
-        section > div[style*="background-color: #fff5f5"] {
-            background-color: #fff5f5 !important;
-            border: 1px solid #ffcccc !important;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>PM7 UI Style Guide</h1>
-        <p>Dialog Component - TL;DR Documentation</p>
-    </div>
-    
-    <div class="content">
-        
+#!/usr/bin/env node
+/**
+ * Simple script to generate a clean HTML version of the Dialog TL;DR documentation
+ * This creates a WebFetch-friendly static HTML file
+ */
+
+const fs = require('fs-extra');
+const path = require('path');
+
+// The TL;DR content extracted from the React component
+const dialogTldrContent = `
 <div>
   <!-- AI-Agent Friendly Header -->
   <div style="margin-bottom: 2rem;">
-    <h2>TL;DR - Complete Integration Guide</h2>
+    <h2>Documentation - Complete Integration Guide</h2>
     <p style="font-size: 1.1rem; color: #666;">
       Everything you need to integrate PM7Dialog in your application
     </p>
@@ -524,18 +362,216 @@ const NewConfirmDialog = ({ open, onOpenChange, onConfirm }) => {
     <div style="background-color: #f5f5f5; padding: 1rem; border-radius: 8px;">
       <p style="margin: 0.25rem 0;"><strong>NPM:</strong> pm7-ui-style-guide</p>
       <p style="margin: 0.25rem 0;"><strong>Repository:</strong> https://github.com/patrickmast/pm7-ui-style-guide</p>
-      <p style="margin: 0.25rem 0;"><strong>Direct URL:</strong> https://ui-style-guide.pm7.tools/docs/PM7Dialog</p>
+      <p style="margin: 0.25rem 0;"><strong>Direct URL:</strong> https://pm7.tools/docs/PM7Dialog</p>
       <p style="margin: 0.25rem 0;"><strong>Peer Dependency:</strong> @radix-ui/react-dialog</p>
     </div>
   </section>
 </div>
+`;
 
+function createStaticHtml(title, content) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} - PM7 UI Style Guide</title>
+    <meta name="description" content="PM7 UI Style Guide documentation for ${title}">
+    <meta name="keywords" content="PM7, UI, React, Dialog, Component, Style Guide">
+    
+    <style>
+        /* Basic CSS Reset and Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin: 1.5rem 0 1rem 0;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        h1 { font-size: 2.5rem; color: #1a1a1a; }
+        h2 { font-size: 2rem; color: #1a1a1a; }
+        h3 { font-size: 1.5rem; color: #2a2a2a; }
+        h4 { font-size: 1.25rem; color: #2a2a2a; }
+        h5 { font-size: 1.1rem; color: #3a3a3a; }
+        
+        p {
+            margin: 1rem 0;
+        }
+        
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d73a49;
+            border: 1px solid #e1e4e8;
+        }
+        
+        pre {
+            background: #f6f8fa;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #e1e4e8;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: #24292e;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            border: 1px solid #e1e4e8;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        
+        th {
+            font-weight: 600;
+            background: #f6f8fa;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        
+        .content {
+            max-width: none;
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #586069;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* Special styling for highlight boxes */
+        section {
+            margin-bottom: 2rem;
+        }
+        
+        section > div[style*="background-color: #fff3cd"] {
+            background-color: #fff3cd !important;
+            border: 2px solid #856404 !important;
+            color: #856404;
+        }
+        
+        section > div[style*="background-color: #e8f5e8"] {
+            background-color: #e8f5e8 !important;
+            border: 1px solid #c3e6c3 !important;
+        }
+        
+        section > div[style*="background-color: #fff5f5"] {
+            background-color: #fff5f5 !important;
+            border: 1px solid #ffcccc !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PM7 UI Style Guide</h1>
+        <p>Dialog Component - TL;DR Documentation</p>
+    </div>
+    
+    <div class="content">
+        ${content}
     </div>
     
     <div class="footer">
-        <p>PM7 UI Style Guide - Generated on 2025-06-15</p>
+        <p>PM7 UI Style Guide - Generated on ${new Date().toISOString().split('T')[0]}</p>
         <p><a href="https://github.com/patrickmast/pm7-ui-style-guide">View on GitHub</a> | 
-           <a href="https://ui-style-guide.pm7.tools">Live Documentation</a></p>
+           <a href="https://pm7.tools">Live Documentation</a></p>
     </div>
 </body>
-</html>
+</html>`;
+}
+
+async function generateDialogTldr() {
+  console.log('📄 Generating Dialog TL;DR static HTML...');
+  
+  const staticDir = path.join(__dirname, '../static');
+  await fs.ensureDir(staticDir);
+  
+  const html = createStaticHtml('Dialog Documentation', dialogTldrContent);
+  const outputPath = path.join(staticDir, 'dialog-documentation.html');
+  
+  await fs.writeFile(outputPath, html, 'utf8');
+  
+  console.log(`✅ Generated: ${outputPath}`);
+  console.log('🌐 This file can now be accessed by WebFetch and other tools');
+}
+
+// Run if called directly
+if (require.main === module) {
+  generateDialogTldr().catch(console.error);
+}
+
+module.exports = { generateDialogTldr };

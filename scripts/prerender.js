@@ -19,8 +19,7 @@ const TABS = [
   'demo',
   'overview', 
   'usage',
-  'documentation',
-  'tldr'
+  'documentation'
 ];
 
 // Configuration

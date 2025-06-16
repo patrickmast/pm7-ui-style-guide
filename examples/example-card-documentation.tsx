@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { PM7Card } from '../src/components/card/pm7-card';
 
-const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
+const ExampleCardDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [copied, setCopied] = useState(false);
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://pm7.tools/button/docs.html');
+      await navigator.clipboard.writeText('https://pm7.tools/card/docs.html');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -23,7 +23,7 @@ const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       borderRadius: '12px',
       border: `1px solid ${theme === 'dark' ? '#333' : '#e0e0e0'}`,
       boxShadow: theme === 'dark' ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.1)'
-    }}>      
+    }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <h2 style={{ 
           fontSize: '1.75rem', 
@@ -31,7 +31,7 @@ const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
           color: theme === 'dark' ? '#ffffff' : '#1a1a1a',
           marginBottom: '1rem'
         }}>
-          PM7Button Component Documentation
+          PM7Card Component Documentation
         </h2>
         <p style={{ 
           fontSize: '1.1rem', 
@@ -68,10 +68,10 @@ const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://pm7.tools/button/docs.html
+              https://pm7.tools/card/docs.html
             </code>
             <button
-              onClick={() => window.open('https://pm7.tools/button/docs.html', '_blank')}
+              onClick={() => window.open('https://pm7.tools/card/docs.html', '_blank')}
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -183,7 +183,7 @@ const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
         }}>
           Deze link bevat pure HTML documentatie die perfect leesbaar is door AI-assistants, 
           WebFetch tools, en andere automatische systemen. Geen JavaScript, geen menu's - 
-          alleen de essentiële PM7Button implementatie guidance.
+          alleen de essentiële PM7Card implementatie guidance.
         </p>
         <div style={{ 
           fontSize: '0.9rem',
@@ -198,8 +198,8 @@ const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       <div style={{ marginTop: '2rem' }}>
         <PM7Card theme={theme} style={{ padding: 0, overflow: 'hidden' }}>
           <iframe
-            src="https://pm7.tools/button/docs.html"
-            title="PM7 Button AI Documentation"
+            src="https://pm7.tools/card/docs.html"
+            title="PM7 Card AI Documentation"
             style={{
               width: '100%',
               height: '600px',
@@ -214,4 +214,4 @@ const ExampleButtonTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
   );
 };
 
-export default ExampleButtonTLDR;
+export default ExampleCardDocumentation;

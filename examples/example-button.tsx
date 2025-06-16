@@ -6,10 +6,10 @@ import ExampleButtonOverview from './example-button-overview';
 import ExampleButtonUsage from './example-button-usage';
 import ExampleButtonAPI from './example-button-api';
 import ExampleButtonExamples from './example-button-examples';
-import ExampleButtonTLDR from './example-button-tldr';
+import ExampleButtonDocumentation from './example-button-documentation';
 
 // Type definitions for tabs and theme
-type TabType = 'demo' | 'overview' | 'usage' | 'tldr';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation';
 type ThemeType = 'light' | 'dark';
 
 const ButtonExample = ({ theme }: { theme: ThemeType }) => {
@@ -30,7 +30,7 @@ const ButtonExample = ({ theme }: { theme: ThemeType }) => {
           { id: 'demo', label: 'Demo' },
           { id: 'overview', label: 'Overview' },
           { id: 'usage', label: 'Usage' },
-          { id: 'tldr', label: 'TL;DR' }
+          { id: 'documentation', label: 'Documentation' }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -53,9 +53,9 @@ const ButtonExample = ({ theme }: { theme: ThemeType }) => {
           <ExampleButtonUsage theme={theme} />
         </div>
       )}
-      {activeTab === 'tldr' && (
+      {activeTab === 'documentation' && (
         <div style={{ padding: '1rem' }}>
-          <ExampleButtonTLDR theme={theme} />
+          <ExampleButtonDocumentation theme={theme} />
         </div>
       )}
 

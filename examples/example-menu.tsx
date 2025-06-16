@@ -6,13 +6,13 @@ import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleMenuDemo from './example-menu-demo';
 import ExampleMenuOverview from './example-menu-overview';
 import ExampleMenuUsage from './example-menu-usage';
-import ExampleMenuTLDR from './example-menu-tldr';
+import ExampleMenuDocumentation from './example-menu-documentation';
 
 const tabSelectorReadme = `# PM7TabSelector Component
 
 A reusable tab selector component for the PM7 UI Style Guide.`;
 
-type TabType = 'overview' | 'demo' | 'usage' | 'tldr';
+type TabType = 'overview' | 'demo' | 'usage' | 'documentation';
 type ThemeType = 'light' | 'dark';
 type LanguageType = 'en' | 'es' | 'fr' | 'de' | 'nl' | 'nl-be' | 'zh';
 
@@ -82,7 +82,7 @@ return (
         { id: 'demo', label: 'Demo' },
         { id: 'overview', label: 'Overview' },
         { id: 'usage', label: 'Usage' },
-        { id: 'tldr', label: 'TL;DR' }
+        { id: 'documentation', label: 'Documentation' }
       ]}
       activeTab={activeTab}
       onTabChange={(tabId) => {
@@ -103,9 +103,9 @@ return (
     {activeTab === 'usage' && (
         <ExampleMenuUsage selectedLanguage={'en'} />
     )}
-    {activeTab === 'tldr' && (
+    {activeTab === 'documentation' && (
       <div style={{ padding: '1rem' }}>
-        <ExampleMenuTLDR theme={theme} />
+        <ExampleMenuDocumentation theme={theme} />
       </div>
     )}
   </>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { PM7Card } from '../src/components/card/pm7-card';
 
-const ExampleTabSelectorTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
+const ExampleMenuDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [copied, setCopied] = useState(false);
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://pm7.tools/tab-selector/docs.html');
+      await navigator.clipboard.writeText('https://pm7.tools/menu/docs.html');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -31,7 +31,7 @@ const ExampleTabSelectorTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
           color: theme === 'dark' ? '#ffffff' : '#1a1a1a',
           marginBottom: '1rem'
         }}>
-          PM7TabSelector Component Documentation
+          PM7Menu Component Documentation
         </h2>
         <p style={{ 
           fontSize: '1.1rem', 
@@ -68,10 +68,10 @@ const ExampleTabSelectorTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://pm7.tools/tab-selector/docs.html
+              https://pm7.tools/menu/docs.html
             </code>
             <button
-              onClick={() => window.open('https://pm7.tools/tab-selector/docs.html', '_blank')}
+              onClick={() => window.open('https://pm7.tools/menu/docs.html', '_blank')}
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -183,7 +183,7 @@ const ExampleTabSelectorTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
         }}>
           Deze link bevat pure HTML documentatie die perfect leesbaar is door AI-assistants, 
           WebFetch tools, en andere automatische systemen. Geen JavaScript, geen menu's - 
-          alleen de essentiële PM7TabSelector implementatie guidance.
+          alleen de essentiële PM7Menu implementatie guidance.
         </p>
         <div style={{ 
           fontSize: '0.9rem',
@@ -198,8 +198,8 @@ const ExampleTabSelectorTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       <div style={{ marginTop: '2rem' }}>
         <PM7Card theme={theme} style={{ padding: 0, overflow: 'hidden' }}>
           <iframe
-            src="https://pm7.tools/tab-selector/docs.html"
-            title="PM7 Tab Selector AI Documentation"
+            src="https://pm7.tools/menu/docs.html"
+            title="PM7 Menu AI Documentation"
             style={{
               width: '100%',
               height: '600px',
@@ -214,4 +214,4 @@ const ExampleTabSelectorTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
   );
 };
 
-export default ExampleTabSelectorTLDR;
+export default ExampleMenuDocumentation;

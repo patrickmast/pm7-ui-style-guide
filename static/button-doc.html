@@ -72,7 +72,7 @@
   <section style="margin-bottom: 2rem;">
     <h1>PM7Button Component - Complete Integration Guide</h1>
     <p><strong>Package:</strong> pm7-ui-style-guide</p>
-    <p><strong>Component:</strong> PM7Button (React button component + buttonRules styling object)</p>
+    <p><strong>Component:</strong> PM7Button (React button component with PM7 styling)</p>
     <p><strong>CSS File:</strong> No separate CSS file required - styles are built-in</p>
     <p><strong>Dependencies:</strong> None - fully self-contained component</p>
   </section>
@@ -88,67 +88,87 @@
   <!-- Import -->
   <section style="margin-bottom: 2rem;">
     <h2>Import</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>// Import both component and rules object
-import { PM7Button, buttonRules } from 'pm7-ui-style-guide';
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>// Simple import - no CSS import needed
+import { PM7Button } from 'pm7-ui-style-guide';
 
 // All styling is built into the component</code></pre>
   </section>
 
   <!-- Basic Usage -->
   <section style="margin-bottom: 2rem;">
-    <h2>Using PM7Button Component</h2>
+    <h2>Basic Usage</h2>
     <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
-import { PM7Button, buttonRules } from 'pm7-ui-style-guide';
+import { PM7Button } from 'pm7-ui-style-guide';
 
-function MyButtons() {
+function MyComponent() {
   return (
-    &lt;div&gt;
-      {/* Default button */}
-      &lt;PM7Button theme="light"&gt;Default Button&lt;/PM7Button&gt;
+    &lt;PM7Button onClick={() =&gt; alert('Clicked!')}&gt;
+      Click me
+    &lt;/PM7Button&gt;
+  );
+}</code></pre>
+  </section>
 
-      {/* Button variants */}
-      &lt;PM7Button theme="light" className={buttonRules.outline}&gt;
-        Outline Button
-      &lt;/PM7Button&gt;
-      &lt;PM7Button theme="light" className={buttonRules.secondary}&gt;
-        Secondary Button
-      &lt;/PM7Button&gt;
-      &lt;PM7Button theme="light" className={buttonRules.ghost}&gt;
-        Ghost Button
-      &lt;/PM7Button&gt;
-      &lt;PM7Button theme="light" className={buttonRules.link}&gt;
-        Link Button
-      &lt;/PM7Button&gt;
+  <!-- Button Variants -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Button Variants</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
+import { PM7Button } from 'pm7-ui-style-guide';
 
-      {/* Button sizes */}
-      &lt;PM7Button theme="light" className={buttonRules.small}&gt;
-        Small Button
-      &lt;/PM7Button&gt;
-      &lt;PM7Button theme="light" className={buttonRules.large}&gt;
-        Large Button
-      &lt;/PM7Button&gt;
-
-      {/* Disabled state */}
-      &lt;PM7Button theme="light" disabled&gt;
-        Disabled Button
-      &lt;/PM7Button&gt;
+function MyComponent() {
+  return (
+    &lt;div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}&gt;
+      &lt;PM7Button variant="default"&gt;Default&lt;/PM7Button&gt;
+      &lt;PM7Button variant="destructive"&gt;Destructive&lt;/PM7Button&gt;
+      &lt;PM7Button variant="outline"&gt;Outline&lt;/PM7Button&gt;
+      &lt;PM7Button variant="secondary"&gt;Secondary&lt;/PM7Button&gt;
+      &lt;PM7Button variant="ghost"&gt;Ghost&lt;/PM7Button&gt;
+      &lt;PM7Button variant="link"&gt;Link&lt;/PM7Button&gt;
     &lt;/div&gt;
   );
 }</code></pre>
   </section>
 
-  <!-- Using Button Rules with Existing Components -->
+  <!-- Button Sizes -->
   <section style="margin-bottom: 2rem;">
-    <h2>Using Button Rules with Existing Components</h2>
-    <p>For applications that already use ShadCN/UI or other button components:</p>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { buttonRules } from 'pm7-ui-style-guide';
-import { Button } from '@/components/ui/button'; // Your existing button
+    <h2>Button Sizes</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
+import { PM7Button } from 'pm7-ui-style-guide';
 
-function StyledButton() {
+function MyComponent() {
   return (
-    &lt;Button style={{ cursor: buttonRules.cursor }}&gt;
-      Click Me
-    &lt;/Button&gt;
+    &lt;div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}&gt;
+      &lt;PM7Button size="sm"&gt;Small&lt;/PM7Button&gt;
+      &lt;PM7Button size="default"&gt;Default&lt;/PM7Button&gt;
+      &lt;PM7Button size="lg"&gt;Large&lt;/PM7Button&gt;
+      &lt;PM7Button size="icon"&gt;🎯&lt;/PM7Button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </section>
+
+  <!-- Loading State -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Loading State</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React, { useState } from 'react';
+import { PM7Button } from 'pm7-ui-style-guide';
+
+function MyComponent() {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () =&gt; {
+    setLoading(true);
+    await new Promise(resolve =&gt; setTimeout(resolve, 2000));
+    setLoading(false);
+  };
+
+  return (
+    &lt;PM7Button 
+      onClick={handleSubmit} 
+      disabled={loading}
+    &gt;
+      {loading ? 'Loading...' : 'Submit'}
+    &lt;/PM7Button&gt;
   );
 }</code></pre>
   </section>
@@ -158,270 +178,73 @@ function StyledButton() {
     <h2>API Reference</h2>
     
     <h3>PM7Button Props</h3>
-    <p>The PM7Button component extends all standard HTML button attributes and adds:</p>
-    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Prop</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Default</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>theme</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'light' | 'dark'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">undefined</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Controls text color for certain variants in dark mode</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>className</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">''</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">CSS classes for variants (use buttonRules constants)</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>disabled</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">false</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Disables the button</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>children</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">React.ReactNode</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Button content</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>...props</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">React.ButtonHTMLAttributes</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">-</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">All standard button attributes (onClick, type, etc.)</td>
-        </tr>
-      </tbody>
-    </table>
+    <ul>
+      <li><code>variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'</code> - Button style variant (default: 'default')</li>
+      <li><code>size?: 'default' | 'sm' | 'lg' | 'icon'</code> - Button size (default: 'default')</li>
+      <li><code>disabled?: boolean</code> - Disable button interactions (default: false)</li>
+      <li><code>onClick?: (event: MouseEvent) =&gt; void</code> - Click handler function</li>
+      <li><code>className?: string</code> - Additional CSS classes</li>
+      <li><code>children?: ReactNode</code> - Button content</li>
+      <li><code>type?: 'button' | 'submit' | 'reset'</code> - Button type (default: 'button')</li>
+    </ul>
 
-    <h3>Button Rules Object</h3>
-    <p>The <code>buttonRules</code> object provides styling constants:</p>
+    <h3>HTML Attributes</h3>
+    <p>PM7Button supports all standard HTML button attributes including:</p>
+    <ul>
+      <li><code>form</code> - Associates button with a form</li>
+      <li><code>aria-*</code> - Accessibility attributes</li>
+      <li><code>data-*</code> - Data attributes</li>
+    </ul>
+  </section>
+
+  <!-- Common Use Cases -->
+  <section style="margin-bottom: 2rem;">
+    <h2>Common Use Cases</h2>
     
-    <h4>Colors</h4>
-    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Property</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Value</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>primaryColor</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'#1C86EF'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">PM7 primary blue</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>borderColor</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'#D4D4D4'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">PM7 border color</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>focusRingColor</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'#1C86EF'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Focus color (for reference)</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>cursor</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pointer'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Cursor style for all buttons</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3>Form Submit Button</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>&lt;PM7Button type="submit" variant="default"&gt;
+  Submit Form
+&lt;/PM7Button&gt;</code></pre>
 
-    <h4>Variant Classes</h4>
-    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Property</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Value</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>button</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Default button style</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>outline</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-outline'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Transparent background with border</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>secondary</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-secondary'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Light gray background</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>ghost</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-ghost'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Transparent background, no border</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>link</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-link'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Text link style with underline</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3>Cancel/Close Action</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>&lt;PM7Button variant="ghost" onClick={onClose}&gt;
+  Cancel
+&lt;/PM7Button&gt;</code></pre>
 
-    <h4>Size Classes</h4>
-    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Property</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Value</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>small</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-small'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Smaller padding and font size</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>large</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-large'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Larger padding and font size</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3>Delete/Destructive Action</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>&lt;PM7Button variant="destructive" onClick={onDelete}&gt;
+  Delete Item
+&lt;/PM7Button&gt;</code></pre>
 
-    <h4>State Classes</h4>
-    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Property</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Value</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>disabled</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'pm7-button-disabled'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Disabled styling</td>
-        </tr>
-      </tbody>
-    </table>
+    <h3>Icon Button</h3>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>&lt;PM7Button size="icon" variant="outline"&gt;
+  ⚙️
+&lt;/PM7Button&gt;</code></pre>
   </section>
 
-  <!-- Button Variants -->
+  <!-- Important Notes -->
   <section style="margin-bottom: 2rem;">
-    <h2>Button Variants</h2>
-    
-    <h3>Default Button</h3>
+    <h2>Important Notes</h2>
     <ul>
-      <li>Background: PM7 primary blue (#1C86EF)</li>
-      <li>Text: White</li>
-      <li>Border: None</li>
-    </ul>
-
-    <h3>Outline Button</h3>
-    <ul>
-      <li>Background: Transparent</li>
-      <li>Text: Inherits from parent (white in dark theme)</li>
-      <li>Border: 1px solid #D4D4D4</li>
-    </ul>
-
-    <h3>Secondary Button</h3>
-    <ul>
-      <li>Background: Light gray (#f3f4f6)</li>
-      <li>Text: Dark gray (#111827)</li>
-      <li>Border: None</li>
-    </ul>
-
-    <h3>Ghost Button</h3>
-    <ul>
-      <li>Background: Transparent</li>
-      <li>Text: Inherits from parent (white in dark theme)</li>
-      <li>Border: None</li>
-    </ul>
-
-    <h3>Link Button</h3>
-    <ul>
-      <li>Background: Transparent</li>
-      <li>Text: PM7 primary blue (#1C86EF)</li>
-      <li>Border: None</li>
-      <li>Decoration: Underline</li>
+      <li><strong>No CSS Import Required:</strong> All styles are built into the component</li>
+      <li><strong>PM7 Branding:</strong> Uses PM7 color scheme (#1C86EF primary blue)</li>
+      <li><strong>Accessibility:</strong> Fully keyboard accessible with proper focus states</li>
+      <li><strong>Responsive:</strong> Adapts to different screen sizes</li>
+      <li><strong>Dark Mode:</strong> Automatically handles light/dark theme switching</li>
+      <li><strong>Self-contained:</strong> No external dependencies or peer dependencies required</li>
     </ul>
   </section>
 
-  <!-- Button Sizes -->
+  <!-- Accessibility -->
   <section style="margin-bottom: 2rem;">
-    <h2>Button Sizes</h2>
-    
-    <h3>Small</h3>
+    <h2>Accessibility Features</h2>
     <ul>
-      <li>Font size: 0.75rem</li>
-      <li>Padding: 0.25rem 0.5rem</li>
-    </ul>
-
-    <h3>Default</h3>
-    <ul>
-      <li>Font size: 0.875rem</li>
-      <li>Padding: 0.5rem 1rem</li>
-    </ul>
-
-    <h3>Large</h3>
-    <ul>
-      <li>Font size: 1.125rem</li>
-      <li>Padding: 0.75rem 1.5rem</li>
-    </ul>
-  </section>
-
-  <!-- Theme Support -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Theme Support</h2>
-    <p>The <code>theme</code> prop affects text color for certain variants:</p>
-    <ul>
-      <li><strong>Outline/Ghost buttons:</strong> Use white text in dark theme for better contrast</li>
-      <li><strong>Other variants:</strong> Theme has no effect as they have explicit colors</li>
-    </ul>
-  </section>
-
-  <!-- Focus Behavior -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Focus Behavior</h2>
-    <p>The PM7Button implements accessible focus handling:</p>
-    <ul>
-      <li>Removes default browser outline for consistent appearance</li>
-      <li>Maintains focus functionality for keyboard navigation</li>
-      <li>No additional visual focus indicators (relies on browser defaults internally)</li>
-    </ul>
-  </section>
-
-  <!-- Best Practices -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Best Practices</h2>
-    <ul>
-      <li><strong>Always use pointer cursor:</strong> Applied automatically by the component</li>
-      <li><strong>Use theme prop:</strong> Pass current theme for proper text contrast</li>
-      <li><strong>Use buttonRules constants:</strong> Instead of hardcoding class names</li>
-      <li><strong>Maintain consistency:</strong> Use the same variant patterns throughout your app</li>
-    </ul>
-  </section>
-
-  <!-- Implementation Notes -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Implementation Notes</h2>
-    <ul>
-      <li>Variants are detected by checking if className contains specific buttonRules values</li>
-      <li>Disabled state can be set via <code>disabled</code> prop or <code>buttonRules.disabled</code> class</li>
-      <li>All styling is applied via inline styles for maximum compatibility</li>
-      <li>Component maintains all standard button functionality and accessibility</li>
+      <li><strong>Keyboard Navigation:</strong> Fully keyboard accessible with Tab and Enter support</li>
+      <li><strong>Focus Management:</strong> Clear focus indicators and proper focus states</li>
+      <li><strong>ARIA Support:</strong> Compatible with all ARIA attributes</li>
+      <li><strong>Screen Reader Support:</strong> Proper button semantics for assistive technology</li>
+      <li><strong>High Contrast:</strong> Meets WCAG contrast requirements</li>
+      <li><strong>Reduced Motion:</strong> Respects user's motion preferences</li>
     </ul>
   </section>
 

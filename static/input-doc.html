@@ -3,519 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM7 Input Rules Documentation - AI Optimized</title>
-    <meta name="description" content="Complete PM7 Input Rules documentation optimized for AI tools and WebFetch">
-    <meta name="keywords" content="PM7, UI, React, Input, Rules, Styling, Documentation, AI">
+    <title>PM7Input Component Documentation - AI Optimized</title>
+    <meta name="description" content="Complete PM7Input component documentation optimized for AI tools and WebFetch">
+    <meta name="keywords" content="PM7, UI, React, Input, Form, Component, Documentation, AI">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon-XBk62bpz.svg">
     
     <style>
-        /* Minimal styling for AI readability */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: #fff;
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
+            background: #fff;
         }
-        
-        h1, h2, h3 {
-            margin: 1.5rem 0 1rem 0;
-            line-height: 1.3;
-            font-weight: 600;
-        }
-        
-        h1 { font-size: 2rem; color: #1a1a1a; border-bottom: 3px solid #1C86EF; padding-bottom: 0.5rem; }
-        h2 { font-size: 1.5rem; color: #2a2a2a; }
-        h3 { font-size: 1.25rem; color: #3a3a3a; }
-        
-        p, li {
-            margin: 0.5rem 0;
-        }
-        
-        ul {
-            padding-left: 2rem;
-        }
-        
+        h1, h2, h3 { color: #1a1a1a; margin-top: 2rem; }
+        h1 { border-bottom: 3px solid #1C86EF; padding-bottom: 0.5rem; }
+        h2 { border-bottom: 1px solid #ddd; padding-bottom: 0.3rem; }
         code {
             background: #f5f5f5;
             padding: 0.2rem 0.4rem;
             border-radius: 3px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Monaco', 'Menlo', monospace;
             font-size: 0.9em;
         }
-        
         pre {
-            background: #f5f5f5;
-            padding: 1rem;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 6px;
+            padding: 1rem;
             overflow-x: auto;
-            border: 1px solid #e0e0e0;
+            margin: 1rem 0;
         }
-        
         pre code {
             background: none;
             padding: 0;
         }
-        
-        section {
-            margin-bottom: 2rem;
+        .feature-list {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
         }
-        
-        table {
+        .feature-list ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .api-table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
         }
-        
-        th, td {
+        .api-table th,
+        .api-table td {
             border: 1px solid #ddd;
             padding: 0.75rem;
             text-align: left;
         }
-        
-        th {
+        .api-table th {
             background: #f8f9fa;
             font-weight: 600;
         }
     </style>
 </head>
 <body>
+    <h1>PM7Input Component - Complete Integration Guide</h1>
     
-<div style="font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; max-width: 100%; padding: 0;">
+    <p><strong>PM7Input</strong> is a React input component that provides PM7-branded styling on top of standard HTML input elements. It offers consistent styling, proper focus states, and support for various input types while maintaining accessibility standards.</p>
 
-  <!-- AI-Friendly Header -->
-  <section style="margin-bottom: 2rem;">
-    <h1>PM7 Input Rules - Complete Integration Guide</h1>
-    <p><strong>Package:</strong> pm7-ui-style-guide</p>
-    <p><strong>Component:</strong> PM7 Input Rules (Styling rules for input fields, not a component)</p>
-    <p><strong>CSS File:</strong> No separate CSS file - rules are applied via JavaScript/CSS</p>
-    <p><strong>Dependencies:</strong> None - pure styling rules</p>
-  </section>
+    <h2>Installation & Usage</h2>
+    
+    <h3>Basic Import</h3>
+    <pre><code>import { PM7Input } from 'pm7-ui-style-guide';
+// or
+import { Input } from 'pm7-ui-style-guide';</code></pre>
 
-  <!-- Overview -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Overview</h2>
-    <p style="margin-bottom: 1rem;">
-      The PM7 Input rules provide styling guidelines for input fields to ensure consistent appearance across all PM7 applications. This module exports configuration rules rather than a complete input component, allowing maximum flexibility with existing input implementations.
-    </p>
-    <div style="background: #e3f2fd; border: 1px solid #90caf9; border-radius: 6px; padding: 1rem; margin: 1rem 0;">
-      <p style="margin: 0; font-size: 0.9em;"><strong>Important:</strong> This is a rules-based approach, not a component. You apply these rules to your existing input elements.</p>
+    <h3>CSS Import (Required)</h3>
+    <pre><code>import 'pm7-ui-style-guide/pm7-input.css';</code></pre>
+
+    <h2>Basic Examples</h2>
+
+    <h3>Text Input</h3>
+    <pre><code>&lt;PM7Input
+  type="text"
+  placeholder="Enter your name"
+  value={value}
+  onChange={(e) =&gt; setValue(e.target.value)}
+/&gt;</code></pre>
+
+    <h3>Email Input</h3>
+    <pre><code>&lt;PM7Input
+  type="email"
+  placeholder="Enter your email"
+  required
+/&gt;</code></pre>
+
+    <h3>Password Input</h3>
+    <pre><code>&lt;PM7Input
+  type="password"
+  placeholder="Enter password"
+  minLength={8}
+/&gt;</code></pre>
+
+    <h3>Number Input</h3>
+    <pre><code>&lt;PM7Input
+  type="number"
+  placeholder="Enter amount"
+  min={0}
+  max={1000}
+  step={0.01}
+/&gt;</code></pre>
+
+    <h2>Input Types</h2>
+    
+    <div class="feature-list">
+        <p><strong>Supported Input Types:</strong></p>
+        <ul>
+            <li><code>text</code> - Standard text input</li>
+            <li><code>email</code> - Email input with validation</li>
+            <li><code>password</code> - Password input (masked)</li>
+            <li><code>number</code> - Numeric input</li>
+            <li><code>tel</code> - Telephone number input</li>
+            <li><code>url</code> - URL input</li>
+            <li><code>search</code> - Search input</li>
+            <li><code>date</code> - Date picker input</li>
+            <li><code>time</code> - Time picker input</li>
+            <li><code>datetime-local</code> - Date and time input</li>
+        </ul>
     </div>
-  </section>
 
-  <!-- Installation -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Installation</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>npm install pm7-ui-style-guide
+    <h2>Form Integration</h2>
 
-# No peer dependencies required - pure styling rules</code></pre>
-  </section>
+    <h3>With Form Labels</h3>
+    <pre><code>&lt;div&gt;
+  &lt;label htmlFor="username"&gt;Username&lt;/label&gt;
+  &lt;PM7Input
+    id="username"
+    type="text"
+    placeholder="Enter username"
+    required
+  /&gt;
+&lt;/div&gt;</code></pre>
 
-  <!-- Import -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Import</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';</code></pre>
-  </section>
+    <h3>With Error States</h3>
+    <pre><code>&lt;PM7Input
+  type="email"
+  placeholder="Enter email"
+  className={hasError ? 'border-red-500' : ''}
+  aria-invalid={hasError}
+  aria-describedby={hasError ? 'email-error' : undefined}
+/&gt;
+{hasError && (
+  &lt;p id="email-error" className="text-red-500 text-sm mt-1"&gt;
+    Please enter a valid email address
+  &lt;/p&gt;
+)}</code></pre>
 
-  <!-- Basic Usage -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Basic Usage with Existing Components</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';
-
-function StyledInput() {
-  return (
-    &lt;input
-      style={{
-        border: inputRules.alwaysShowBorder ? '1px solid #D4D4D4' : 'none',
-        borderRadius: '6px',
-        padding: '0.5rem',
-      }}
-      className="focus:border-blue-500" // Use #1C86EF for PM7 primary
-      placeholder="Enter text..."
-    /&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Tailwind CSS Usage -->
-  <section style="margin-bottom: 2rem;">
-    <h2>With Tailwind CSS Classes</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';
-
-function TailwindInput() {
-  const borderClass = inputRules.alwaysShowBorder ? 'border border-gray-300' : 'border-0';
-  
-  return (
-    &lt;input
-      className={`${borderClass} rounded-md px-3 py-2 focus:outline-none focus:border-blue-500`}
-      placeholder="Enter text..."
-    /&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- CSS-in-JS Usage -->
-  <section style="margin-bottom: 2rem;">
-    <h2>With CSS-in-JS</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';
-
-const inputStyles = {
-  border: inputRules.alwaysShowBorder ? '1px solid #D4D4D4' : 'none',
-  borderRadius: '6px',
-  padding: '0.5rem 0.75rem',
-  fontSize: '0.875rem',
-  outline: 'none',
-  transition: 'border-color 0.2s',
-  ':focus': {
-    borderColor: '#1C86EF' // PM7 primary color
-  }
-};
-
-function CSSInJSInput() {
-  return (
-    &lt;input
-      style={inputStyles}
-      placeholder="Enter text..."
-    /&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Form Example -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Complete Form Example</h2>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';
-
-function ContactForm() {
-  const inputClassName = `
-    w-full px-3 py-2 rounded-md
-    ${inputRules.alwaysShowBorder ? 'border border-gray-300' : 'border-0'}
-    focus:outline-none focus:border-blue-500
-    transition-colors
-  `;
-
-  return (
-    &lt;form className="space-y-4"&gt;
-      &lt;div&gt;
-        &lt;label htmlFor="name" className="block text-sm font-medium mb-1"&gt;
-          Name
-        &lt;/label&gt;
-        &lt;input
-          id="name"
-          type="text"
-          className={inputClassName}
-          placeholder="Your name"
-        /&gt;
-      &lt;/div&gt;
-      
-      &lt;div&gt;
-        &lt;label htmlFor="email" className="block text-sm font-medium mb-1"&gt;
-          Email
-        &lt;/label&gt;
-        &lt;input
-          id="email"
-          type="email"
-          className={inputClassName}
-          placeholder="your@email.com"
-        /&gt;
-      &lt;/div&gt;
-      
-      &lt;div&gt;
-        &lt;label htmlFor="message" className="block text-sm font-medium mb-1"&gt;
-          Message
-        &lt;/label&gt;
-        &lt;textarea
-          id="message"
-          className={inputClassName}
-          rows={4}
-          placeholder="Your message"
-        /&gt;
-      &lt;/div&gt;
-      
-      &lt;button 
-        type="submit"
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-      &gt;
-        Send Message
-      &lt;/button&gt;
-    &lt;/form&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- API Reference -->
-  <section style="margin-bottom: 2rem;">
     <h2>API Reference</h2>
-    
-    <h3>inputRules Object</h3>
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
-      <thead>
-        <tr style="border-bottom: 1px solid #ddd;">
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Property</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Type</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Value</th>
-          <th style="text-align: left; padding: 0.75rem; border: 1px solid #ddd;">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>focusBorderColor</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">string</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">'primary'</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Indicates to use PM7 primary color (#1C86EF) for focus border</td>
-        </tr>
-        <tr>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;"><code>alwaysShowBorder</code></td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">boolean</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">true</td>
-          <td style="padding: 0.75rem; border: 1px solid #ddd;">Input fields should always have a visible border</td>
-        </tr>
-      </tbody>
+
+    <table class="api-table">
+        <thead>
+            <tr>
+                <th>Prop</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>type</code></td>
+                <td>string</td>
+                <td>"text"</td>
+                <td>HTML input type (text, email, password, etc.)</td>
+            </tr>
+            <tr>
+                <td><code>placeholder</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Placeholder text</td>
+            </tr>
+            <tr>
+                <td><code>value</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Input value (for controlled components)</td>
+            </tr>
+            <tr>
+                <td><code>defaultValue</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Default value (for uncontrolled components)</td>
+            </tr>
+            <tr>
+                <td><code>onChange</code></td>
+                <td>function</td>
+                <td>-</td>
+                <td>Change event handler</td>
+            </tr>
+            <tr>
+                <td><code>onFocus</code></td>
+                <td>function</td>
+                <td>-</td>
+                <td>Focus event handler</td>
+            </tr>
+            <tr>
+                <td><code>onBlur</code></td>
+                <td>function</td>
+                <td>-</td>
+                <td>Blur event handler</td>
+            </tr>
+            <tr>
+                <td><code>disabled</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether the input is disabled</td>
+            </tr>
+            <tr>
+                <td><code>required</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether the input is required</td>
+            </tr>
+            <tr>
+                <td><code>readOnly</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether the input is read-only</td>
+            </tr>
+            <tr>
+                <td><code>autoComplete</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Autocomplete hint for the input</td>
+            </tr>
+            <tr>
+                <td><code>autoFocus</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether to auto-focus the input</td>
+            </tr>
+            <tr>
+                <td><code>maxLength</code></td>
+                <td>number</td>
+                <td>-</td>
+                <td>Maximum number of characters</td>
+            </tr>
+            <tr>
+                <td><code>minLength</code></td>
+                <td>number</td>
+                <td>-</td>
+                <td>Minimum number of characters</td>
+            </tr>
+            <tr>
+                <td><code>min</code></td>
+                <td>number/string</td>
+                <td>-</td>
+                <td>Minimum value (for number/date inputs)</td>
+            </tr>
+            <tr>
+                <td><code>max</code></td>
+                <td>number/string</td>
+                <td>-</td>
+                <td>Maximum value (for number/date inputs)</td>
+            </tr>
+            <tr>
+                <td><code>step</code></td>
+                <td>number/string</td>
+                <td>-</td>
+                <td>Step value (for number inputs)</td>
+            </tr>
+            <tr>
+                <td><code>pattern</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Regex pattern for validation</td>
+            </tr>
+            <tr>
+                <td><code>className</code></td>
+                <td>string</td>
+                <td>-</td>
+                <td>Additional CSS classes</td>
+            </tr>
+            <tr>
+                <td><code>style</code></td>
+                <td>object</td>
+                <td>-</td>
+                <td>Inline styles</td>
+            </tr>
+        </tbody>
     </table>
 
-    <h3>Color Values</h3>
-    <p style="margin-bottom: 0.5rem;">When <code>focusBorderColor</code> is <code>'primary'</code>, use the PM7 primary color:</p>
-    <ul style="padding-left: 2rem;">
-      <li><strong>PM7 Primary:</strong> <code>#1C86EF</code> (bright blue)</li>
-      <li><strong>Border Default:</strong> <code>#D4D4D4</code> (light gray)</li>
+    <h2>Styling & Theming</h2>
+
+    <h3>PM7 Brand Colors</h3>
+    <ul>
+        <li><strong>Primary Blue:</strong> #1C86EF (focus border)</li>
+        <li><strong>Border Color:</strong> #D4D4D4 (light mode), #525252 (dark mode)</li>
+        <li><strong>Background:</strong> White (light mode), Dark (dark mode)</li>
     </ul>
-  </section>
 
-  <!-- Implementation Guidelines -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Implementation Guidelines</h2>
-    
-    <h3>Border Styling</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>// Always show border according to PM7 rules
-const borderStyle = inputRules.alwaysShowBorder 
-  ? '1px solid #D4D4D4' 
-  : 'none';</code></pre>
+    <h3>Custom Styling</h3>
+    <pre><code>&lt;PM7Input
+  className="w-full bg-gray-50 border-2"
+  style={{ minHeight: '48px' }}
+/&gt;</code></pre>
 
-    <h3>Focus States</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>// Use PM7 primary color for focus
-const focusStyle = {
-  borderColor: '#1C86EF' // PM7 primary when focusBorderColor is 'primary'
-};</code></pre>
+    <h2>Accessibility Features</h2>
 
-    <h3>Complete Input Styling</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>const pm7InputStyle = {
-  // Base styling
-  border: inputRules.alwaysShowBorder ? '1px solid #D4D4D4' : 'none',
-  borderRadius: '6px',
-  padding: '0.5rem 0.75rem',
-  fontSize: '0.875rem',
-  outline: 'none',
-  transition: 'border-color 0.2s ease-in-out',
-  
-  // Focus state
-  ':focus': {
-    borderColor: '#1C86EF' // PM7 primary
+    <div class="feature-list">
+        <p><strong>Built-in Accessibility:</strong></p>
+        <ul>
+            <li>Proper keyboard navigation</li>
+            <li>Screen reader support</li>
+            <li>ARIA attributes support</li>
+            <li>Focus management</li>
+            <li>High contrast support</li>
+            <li>Label association</li>
+        </ul>
+    </div>
+
+    <h2>Form Validation</h2>
+
+    <h3>HTML5 Validation</h3>
+    <pre><code>&lt;PM7Input
+  type="email"
+  required
+  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"
+  title="Please enter a valid email address"
+/&gt;</code></pre>
+
+    <h3>Custom Validation</h3>
+    <pre><code>const [value, setValue] = useState('');
+const [error, setError] = useState('');
+
+const validateInput = (inputValue) =&gt; {
+  if (inputValue.length &lt; 3) {
+    setError('Input must be at least 3 characters');
+    return false;
   }
-};</code></pre>
-  </section>
-
-  <!-- Dark Mode Support -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Dark Mode Support</h2>
-    <p style="margin-bottom: 1rem;">For dark mode implementations, adjust colors accordingly:</p>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';
-
-function DarkModeInput({ isDark }) {
-  const borderColor = isDark ? '#525252' : '#D4D4D4';
-  const backgroundColor = isDark ? '#262626' : '#ffffff';
-  const textColor = isDark ? '#ffffff' : '#333333';
-  
-  return (
-    &lt;input
-      style={{
-        border: inputRules.alwaysShowBorder ? `1px solid ${borderColor}` : 'none',
-        backgroundColor,
-        color: textColor,
-        borderRadius: '6px',
-        padding: '0.5rem 0.75rem',
-        transition: 'border-color 0.2s ease-in-out'
-      }}
-      className="focus:border-blue-500" // PM7 primary #1C86EF
-      placeholder="Enter text..."
-    /&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Validation States -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Validation States</h2>
-    
-    <h3>Error State</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>function ErrorInput({ hasError }) {
-  const borderColor = hasError ? '#ef4444' : '#D4D4D4';
-  
-  return (
-    &lt;input
-      style={{
-        border: inputRules.alwaysShowBorder ? `1px solid ${borderColor}` : 'none',
-        borderRadius: '6px',
-        padding: '0.5rem 0.75rem'
-      }}
-      className={hasError ? 'focus:border-red-500' : 'focus:border-blue-500'}
-      placeholder="Enter text..."
-    /&gt;
-  );
-}</code></pre>
-
-    <h3>Success State</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>function SuccessInput({ isValid }) {
-  const borderColor = isValid ? '#22c55e' : '#D4D4D4';
-  
-  return (
-    &lt;input
-      style={{
-        border: inputRules.alwaysShowBorder ? `1px solid ${borderColor}` : 'none',
-        borderRadius: '6px',
-        padding: '0.5rem 0.75rem'
-      }}
-      className={isValid ? 'focus:border-green-500' : 'focus:border-blue-500'}
-      placeholder="Enter text..."
-    /&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Integration with Popular Libraries -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Integration with Popular Libraries</h2>
-    
-    <h3>React Hook Form Integration</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { useForm } from 'react-hook-form';
-import { inputRules } from 'pm7-ui-style-guide';
-
-function FormWithValidation() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
-  const getInputClassName = (fieldName) =&gt; {
-    const hasError = errors[fieldName];
-    const borderClass = inputRules.alwaysShowBorder 
-      ? `border ${hasError ? 'border-red-500' : 'border-gray-300'}` 
-      : 'border-0';
-    
-    return `${borderClass} rounded-md px-3 py-2 focus:outline-none ${
-      hasError ? 'focus:border-red-500' : 'focus:border-blue-500'
-    }`;
-  };
-
-  return (
-    &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
-      &lt;input
-        {...register('email', { required: true })}
-        className={getInputClassName('email')}
-        placeholder="Email"
-      /&gt;
-      {errors.email && &lt;span className="text-red-500"&gt;Email is required&lt;/span&gt;}
-    &lt;/form&gt;
-  );
-}</code></pre>
-
-    <h3>Formik Integration</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { Formik, Field } from 'formik';
-import { inputRules } from 'pm7-ui-style-guide';
-
-function FormikForm() {
-  return (
-    &lt;Formik
-      initialValues={{ email: '' }}
-      onSubmit={(values) =&gt; console.log(values)}
-    &gt;
-      {({ errors, touched }) =&gt; (
-        &lt;Field name="email"&gt;
-          {({ field }) =&gt; (
-            &lt;input
-              {...field}
-              style={{
-                border: inputRules.alwaysShowBorder 
-                  ? `1px solid ${errors.email && touched.email ? '#ef4444' : '#D4D4D4'}`
-                  : 'none',
-                borderRadius: '6px',
-                padding: '0.5rem 0.75rem'
-              }}
-              placeholder="Email"
-            /&gt;
-          )}
-        &lt;/Field&gt;
-      )}
-    &lt;/Formik&gt;
-  );
-}</code></pre>
-  </section>
-
-  <!-- Best Practices -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Best Practices</h2>
-    <ul style="padding-left: 2rem;">
-      <li><strong>Always apply PM7 rules:</strong> Use <code>inputRules.alwaysShowBorder</code> to ensure consistent border visibility</li>
-      <li><strong>Use PM7 primary color for focus:</strong> Apply <code>#1C86EF</code> for focus states when <code>focusBorderColor</code> is 'primary'</li>
-      <li><strong>Maintain accessibility:</strong> Ensure sufficient color contrast for all states</li>
-      <li><strong>Consistent padding:</strong> Use <code>0.5rem 0.75rem</code> for consistent input sizing</li>
-      <li><strong>Smooth transitions:</strong> Add <code>transition: 'border-color 0.2s ease-in-out'</code> for better UX</li>
-      <li><strong>Support validation states:</strong> Adjust border colors for error and success states</li>
-      <li><strong>Dark mode consideration:</strong> Adjust background and text colors for dark themes</li>
-    </ul>
-  </section>
-
-  <!-- Common Patterns -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Common Usage Patterns</h2>
-    
-    <h3>Utility Function for Consistent Styling</h3>
-    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import { inputRules } from 'pm7-ui-style-guide';
-
-// Create a utility function for consistent input styling
-export const getPM7InputStyle = (options = {}) =&gt; {
-  const { hasError = false, isSuccess = false, isDark = false } = options;
-  
-  let borderColor = '#D4D4D4';
-  if (hasError) borderColor = '#ef4444';
-  else if (isSuccess) borderColor = '#22c55e';
-  else if (isDark) borderColor = '#525252';
-  
-  return {
-    border: inputRules.alwaysShowBorder ? `1px solid ${borderColor}` : 'none',
-    borderRadius: '6px',
-    padding: '0.5rem 0.75rem',
-    fontSize: '0.875rem',
-    outline: 'none',
-    transition: 'border-color 0.2s ease-in-out',
-    backgroundColor: isDark ? '#262626' : '#ffffff',
-    color: isDark ? '#ffffff' : '#333333'
-  };
+  setError('');
+  return true;
 };
 
-// Usage
-function MyInput(props) {
-  return (
-    &lt;input
-      {...props}
-      style={getPM7InputStyle({ hasError: props.error, isDark: props.theme === 'dark' })}
-    /&gt;
-  );
-}</code></pre>
-  </section>
+&lt;PM7Input
+  value={value}
+  onChange={(e) =&gt; {
+    setValue(e.target.value);
+    validateInput(e.target.value);
+  }}
+  className={error ? 'border-red-500' : ''}
+/&gt;</code></pre>
 
-  <!-- Browser Support -->
-  <section style="margin-bottom: 2rem;">
-    <h2>Browser Support</h2>
-    <p style="margin-bottom: 0.5rem;">PM7 Input Rules support all modern browsers including:</p>
-    <ul style="padding-left: 2rem;">
-      <li>Chrome 88+</li>
-      <li>Firefox 85+</li>
-      <li>Safari 14+</li>
-      <li>Edge 88+</li>
+    <h2>Best Practices</h2>
+
+    <div class="feature-list">
+        <p><strong>Recommended Usage:</strong></p>
+        <ul>
+            <li>Always provide meaningful placeholder text</li>
+            <li>Use appropriate input types for better UX</li>
+            <li>Include proper labels for accessibility</li>
+            <li>Implement proper error handling and validation</li>
+            <li>Use autocomplete attributes when appropriate</li>
+            <li>Test with keyboard navigation</li>
+            <li>Ensure sufficient color contrast</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <p><strong>Important:</strong> The PM7Input component requires the PM7 CSS file to be imported for proper styling. Make sure to include <code>import 'pm7-ui-style-guide/pm7-input.css';</code> in your application.</p>
+    </div>
+
+    <h2>Performance Considerations</h2>
+
+    <ul>
+        <li>Component is lightweight and optimized for performance</li>
+        <li>Use controlled components only when necessary</li>
+        <li>Debounce onChange handlers for expensive operations</li>
+        <li>Consider using React.memo for static inputs</li>
     </ul>
-    <p style="margin-top: 1rem; font-style: italic; color: #666;">For older browser support, ensure appropriate polyfills are included in your build process.</p>
-  </section>
 
-</div>
+    <h2>Browser Support</h2>
 
+    <p>PM7Input supports all modern browsers including:</p>
+    <ul>
+        <li>Chrome 88+</li>
+        <li>Firefox 85+</li>
+        <li>Safari 14+</li>
+        <li>Edge 88+</li>
+    </ul>
+
+    <p><em>For older browser support, ensure appropriate polyfills are included in your build process.</em></p>
 </body>
 </html>

@@ -82,179 +82,86 @@
 
     <h2>Installation & Usage</h2>
     
-    <h3>Installation</h3>
-    <pre><code>npm install pm7-ui-style-guide</code></pre>
-    
     <h3>Basic Import</h3>
     <pre><code>import { PM7TabSelector } from 'pm7-ui-style-guide';
 // or
 import { TabSelector } from 'pm7-ui-style-guide';</code></pre>
 
     <h3>CSS Import (Required)</h3>
-    <pre><code>import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';</code></pre>
+    <pre><code>import 'pm7-ui-style-guide/pm7-tab-selector.css';</code></pre>
 
     <h2>Basic Examples</h2>
 
-    <h3>Basic Setup</h3>
+    <h3>Simple Tab Selector</h3>
     <pre><code>import React, { useState } from 'react';
 import { PM7TabSelector } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';
+import 'pm7-ui-style-guide/pm7-tab-selector.css';
 
-function BasicTabs() {
-  const [activeTab, setActiveTab] = useState('overview');
-  
+function MyComponent() {
+  const [activeTab, setActiveTab] = useState('tab1');
+
   const tabs = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'usage', label: 'Usage' },
-    { id: 'api', label: 'API' },
-    { id: 'examples', label: 'Examples' }
+    { id: 'tab1', label: 'Overview' },
+    { id: 'tab2', label: 'Details' },
+    { id: 'tab3', label: 'Settings' }
   ];
 
   return (
-    &lt;div&gt;
-      &lt;PM7TabSelector 
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        theme="light"
-      /&gt;
-      
-      {/* Tab content */}
-      {activeTab === 'overview' && (
-        &lt;div style={{ padding: '1rem' }}&gt;
-          &lt;h3&gt;Overview Content&lt;/h3&gt;
-          &lt;p&gt;This is the overview section.&lt;/p&gt;
-        &lt;/div&gt;
-      )}
-      {activeTab === 'usage' && (
-        &lt;div style={{ padding: '1rem' }}&gt;
-          &lt;h3&gt;Usage Content&lt;/h3&gt;
-          &lt;p&gt;This is the usage section.&lt;/p&gt;
-        &lt;/div&gt;
-      )}
-      {activeTab === 'api' && (
-        &lt;div style={{ padding: '1rem' }}&gt;
-          &lt;h3&gt;API Content&lt;/h3&gt;
-          &lt;p&gt;This is the API section.&lt;/p&gt;
-        &lt;/div&gt;
-      )}
-      {activeTab === 'examples' && (
-        &lt;div style={{ padding: '1rem' }}&gt;
-          &lt;h3&gt;Examples Content&lt;/h3&gt;
-          &lt;p&gt;This is the examples section.&lt;/p&gt;
-        &lt;/div&gt;
-      )}
-    &lt;/div&gt;
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+    /&gt;
   );
 }</code></pre>
 
-    <h3>Dark Theme Usage</h3>
-    <pre><code>function DarkTabs() {
-  const [activeTab, setActiveTab] = useState('settings');
-  const [theme, setTheme] = useState('dark');
-  
-  const tabs = [
-    { id: 'settings', label: 'Settings' },
-    { id: 'preferences', label: 'Preferences' },
-    { id: 'security', label: 'Security' }
-  ];
+    <h3>Tabs with Icons</h3>
+    <pre><code>import React, { useState } from 'react';
+import { PM7TabSelector } from 'pm7-ui-style-guide';
+import { Home, Settings, User } from 'lucide-react';
 
-  return (
-    &lt;div className={theme === 'dark' ? 'dark-mode' : ''}&gt;
-      &lt;PM7TabSelector 
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        theme={theme}
-        className="mb-4"
-      /&gt;
-      
-      &lt;div style={{ padding: '1rem' }}&gt;
-        {activeTab === 'settings' && &lt;p&gt;Settings content in dark mode&lt;/p&gt;}
-        {activeTab === 'preferences' && &lt;p&gt;Preferences content in dark mode&lt;/p&gt;}
-        {activeTab === 'security' && &lt;p&gt;Security content in dark mode&lt;/p&gt;}
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-
-    <h3>Tabs with Disabled States</h3>
-    <pre><code>function TabsWithDisabled() {
-  const [activeTab, setActiveTab] = useState('available');
-  
-  const tabs = [
-    { id: 'available', label: 'Available' },
-    { id: 'pending', label: 'Pending' },
-    { id: 'disabled', label: 'Disabled Feature', disabled: true },
-    { id: 'beta', label: 'Beta Features' }
-  ];
-
-  return (
-    &lt;div&gt;
-      &lt;PM7TabSelector 
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        theme="light"
-      /&gt;
-      
-      &lt;div style={{ padding: '1rem' }}&gt;
-        {activeTab === 'available' && &lt;p&gt;Available features content&lt;/p&gt;}
-        {activeTab === 'pending' && &lt;p&gt;Pending features content&lt;/p&gt;}
-        {activeTab === 'beta' && &lt;p&gt;Beta features content&lt;/p&gt;}
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-
-    <h3>Dynamic Tab Management</h3>
-    <pre><code>function DynamicTabs() {
+function TabsWithIcons() {
   const [activeTab, setActiveTab] = useState('home');
-  const [tabs, setTabs] = useState([
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' }
-  ]);
 
-  const addTab = () =&gt; {
-    const newTab = {
-      id: `tab-${Date.now()}`,
-      label: `Tab ${tabs.length + 1}`
-    };
-    setTabs([...tabs, newTab]);
-  };
-
-  const removeTab = (tabId) =&gt; {
-    const newTabs = tabs.filter(tab =&gt; tab.id !== tabId);
-    setTabs(newTabs);
-    
-    // If removing active tab, switch to first available
-    if (activeTab === tabId && newTabs.length &gt; 0) {
-      setActiveTab(newTabs[0].id);
+  const tabs = [
+    { 
+      id: 'home', 
+      label: 'Home', 
+      icon: &lt;Home size={16} /&gt; 
+    },
+    { 
+      id: 'profile', 
+      label: 'Profile', 
+      icon: &lt;User size={16} /&gt; 
+    },
+    { 
+      id: 'settings', 
+      label: 'Settings', 
+      icon: &lt;Settings size={16} /&gt; 
     }
-  };
+  ];
 
   return (
-    &lt;div&gt;
-      &lt;div style={{ marginBottom: '1rem' }}&gt;
-        &lt;button onClick={addTab}&gt;Add Tab&lt;/button&gt;
-      &lt;/div&gt;
-      
-      &lt;PM7TabSelector 
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        theme="light"
-      /&gt;
-      
-      &lt;div style={{ padding: '1rem' }}&gt;
-        &lt;p&gt;Active tab: {activeTab}&lt;/p&gt;
-        &lt;button onClick={() =&gt; removeTab(activeTab)}&gt;
-          Remove Active Tab
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+    /&gt;
   );
 }</code></pre>
+
+    <h3>Disabled Tabs</h3>
+    <pre><code>const tabs = [
+  { id: 'available', label: 'Available' },
+  { id: 'pending', label: 'Pending', disabled: true },
+  { id: 'archived', label: 'Archived' }
+];
+
+&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+/&gt;</code></pre>
 
     <h2>Tab Content Integration</h2>
 
@@ -304,131 +211,108 @@ function TabbedInterface() {
 
     <h2>API Reference</h2>
 
-    <h3>PM7TabSelector Props</h3>
     <table class="api-table">
         <thead>
             <tr>
                 <th>Prop</th>
                 <th>Type</th>
-                <th>Default</th>
+                <th>Required</th>
                 <th>Description</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td><code>tabs</code></td>
-                <td>PM7TabItem[]</td>
-                <td>-</td>
-                <td>Array of tab items to display (required)</td>
+                <td>Tab[]</td>
+                <td>Yes</td>
+                <td>Array of tab objects</td>
             </tr>
             <tr>
                 <td><code>activeTab</code></td>
                 <td>string</td>
-                <td>-</td>
-                <td>ID of the currently active tab (required)</td>
+                <td>Yes</td>
+                <td>ID of the currently active tab</td>
             </tr>
             <tr>
                 <td><code>onTabChange</code></td>
-                <td>(tabId: string) =&gt; void</td>
-                <td>-</td>
-                <td>Callback when a tab is clicked (required)</td>
-            </tr>
-            <tr>
-                <td><code>theme</code></td>
-                <td>'light' | 'dark'</td>
-                <td>'light'</td>
-                <td>Current theme for styling</td>
+                <td>function</td>
+                <td>Yes</td>
+                <td>Callback when tab is changed: (tabId: string) =&gt; void</td>
             </tr>
             <tr>
                 <td><code>className</code></td>
                 <td>string</td>
-                <td>''</td>
+                <td>No</td>
                 <td>Additional CSS classes for the container</td>
+            </tr>
+            <tr>
+                <td><code>variant</code></td>
+                <td>'default' | 'pills'</td>
+                <td>No</td>
+                <td>Visual style variant (default: 'default')</td>
+            </tr>
+            <tr>
+                <td><code>size</code></td>
+                <td>'sm' | 'md' | 'lg'</td>
+                <td>No</td>
+                <td>Size of the tabs (default: 'md')</td>
             </tr>
         </tbody>
     </table>
 
-    <h3>PM7TabItem Interface</h3>
-    <pre><code>interface PM7TabItem {
-  id: string;              // Unique identifier for the tab (required)
-  label: React.ReactNode;  // Tab label - can be text or JSX (required)  
-  disabled?: boolean;      // Whether the tab is disabled (optional)
+    <h3>Tab Object Interface</h3>
+    <pre><code>interface Tab {
+  id: string;           // Unique identifier for the tab
+  label: string;        // Display text for the tab
+  icon?: ReactNode;     // Optional icon to display
+  disabled?: boolean;   // Whether the tab is disabled
+  badge?: string;       // Optional badge/count to display
 }</code></pre>
 
-    <h3>Tab Label Examples</h3>
-    <pre><code>// Text labels
-{ id: 'text', label: 'Simple Text' }
+    <h2>Styling Variants</h2>
 
-// JSX labels with icons
-{ id: 'icon', label: &lt;&gt;&lt;FileIcon /&gt; Documents&lt;/&gt; }
-
-// Complex JSX labels
-{ 
-  id: 'complex', 
-  label: (
-    &lt;div className="flex items-center gap-2"&gt;
-      &lt;span&gt;Advanced&lt;/span&gt;
-      &lt;span className="badge"&gt;New&lt;/span&gt;
-    &lt;/div&gt;
-  )
-}</code></pre>
-
-    <h2>Visual Appearance</h2>
-
-    <h3>Light Theme (default)</h3>
-    <ul>
-        <li>Background: Transparent</li>
-        <li>Active tab: PM7 primary blue (#1C86EF) background with white text</li>
-        <li>Inactive tabs: Transparent background with dark text</li>
-        <li>Border: Bottom border on active tab</li>
-    </ul>
-
-    <h3>Dark Theme</h3>
-    <ul>
-        <li>Background: Transparent</li>
-        <li>Active tab: PM7 primary blue (#1C86EF) background with white text</li>
-        <li>Inactive tabs: Transparent background with light text (#FAFAFA)</li>
-        <li>Border: Bottom border on active tab</li>
-    </ul>
-
-    <h3>States</h3>
-    <ul>
-        <li><strong>Normal:</strong> Standard appearance with hover effects</li>
-        <li><strong>Active:</strong> Highlighted with PM7 primary color</li>
-        <li><strong>Disabled:</strong> Reduced opacity, no hover effects, not clickable</li>
-        <li><strong>Hover:</strong> Subtle background change on interactive tabs</li>
-    </ul>
-
-    <h2>CSS Requirements</h2>
-
-    <p>Import the required CSS file:</p>
-    <pre><code>import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';</code></pre>
-
-    <p>This provides:</p>
-    <ul>
-        <li>Base tab styling</li>
-        <li>Theme-specific colors</li>
-        <li>Active and hover states</li>
-        <li>Disabled state styling</li>
-        <li>Responsive behavior</li>
-    </ul>
-
-    <h2>Theme Management</h2>
-
-    <p>The component accepts a <code>theme</code> prop that should be managed by your application:</p>
-    <pre><code>const [theme, setTheme] = useState('light');
-
-// Update theme based on user preference or system setting
-useEffect(() =&gt; {
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  setTheme(mediaQuery.matches ? 'dark' : 'light');
-}, []);
-
-&lt;PM7TabSelector 
+    <h3>Default Variant</h3>
+    <pre><code>&lt;PM7TabSelector
   tabs={tabs}
   activeTab={activeTab}
   onTabChange={setActiveTab}
-  theme={theme}
+  variant="default"
+/&gt;</code></pre>
+
+    <h3>Pills Variant</h3>
+    <pre><code>&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  variant="pills"
+/&gt;</code></pre>
+
+    <h3>Different Sizes</h3>
+    <pre><code>// Small tabs
+&lt;PM7TabSelector size="sm" /&gt;
+
+// Medium tabs (default)
+&lt;PM7TabSelector size="md" /&gt;
+
+// Large tabs
+&lt;PM7TabSelector size="lg" /&gt;</code></pre>
+
+    <h2>PM7 Styling & Theming</h2>
+
+    <h3>PM7 Brand Colors</h3>
+    <ul>
+        <li><strong>Active Tab:</strong> #1C86EF (PM7 primary blue)</li>
+        <li><strong>Hover State:</strong> Light blue background</li>
+        <li><strong>Border:</strong> #D4D4D4 (light mode), #525252 (dark mode)</li>
+        <li><strong>Text:</strong> High contrast for accessibility</li>
+    </ul>
+
+    <h3>Custom Styling</h3>
+    <pre><code>&lt;PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  className="custom-tabs shadow-lg"
 /&gt;</code></pre>
 
     <h2>Advanced Features</h2>
@@ -460,68 +344,106 @@ useEffect(() =&gt; {
     <div class="feature-list">
         <p><strong>Built-in Accessibility:</strong></p>
         <ul>
-            <li><strong>Keyboard Navigation:</strong> Tabs are focusable and can be activated with Enter/Space</li>
-            <li><strong>ARIA Attributes:</strong> Proper role="tab" and aria-selected attributes</li>
-            <li><strong>Screen Readers:</strong> Clear labeling and state announcements</li>
-            <li><strong>Focus Management:</strong> Visible focus indicators and logical tab order</li>
-            <li><strong>Disabled State:</strong> Properly marked disabled tabs that can't be activated</li>
+            <li>Full keyboard navigation (Tab, Arrow keys, Enter, Space)</li>
+            <li>ARIA attributes for screen readers</li>
+            <li>Focus management and visible focus indicators</li>
+            <li>Proper role and state announcements</li>
+            <li>High contrast support</li>
+            <li>Disabled state handling</li>
         </ul>
     </div>
+
+    <h2>Keyboard Navigation</h2>
+
+    <ul>
+        <li><strong>Tab:</strong> Move focus to tab selector</li>
+        <li><strong>Arrow Keys:</strong> Navigate between tabs</li>
+        <li><strong>Enter/Space:</strong> Activate focused tab</li>
+        <li><strong>Home:</strong> Go to first tab</li>
+        <li><strong>End:</strong> Go to last tab</li>
+    </ul>
 
     <h2>Best Practices</h2>
 
     <div class="feature-list">
         <p><strong>Recommended Usage:</strong></p>
         <ul>
-            <li><strong>Unique Tab IDs:</strong> Always provide unique id values for each tab</li>
-            <li><strong>Clear Labels:</strong> Use descriptive labels that clearly indicate tab content</li>
-            <li><strong>Consistent Theming:</strong> Use the same theme across your entire application</li>
-            <li><strong>State Management:</strong> Properly manage activeTab state in parent component</li>
-            <li><strong>Content Association:</strong> Clearly associate tab content with selected tab</li>
-            <li><strong>Responsive Design:</strong> Test tabs on different screen sizes</li>
+            <li>Keep tab labels concise and descriptive</li>
+            <li>Use icons consistently across all tabs or none</li>
+            <li>Limit the number of tabs to 5-7 for optimal UX</li>
+            <li>Provide clear visual feedback for active states</li>
+            <li>Consider mobile responsiveness in your layout</li>
+            <li>Use badges sparingly for important notifications</li>
+            <li>Test keyboard navigation thoroughly</li>
         </ul>
     </div>
 
-    <h2>Integration with PM7 Style Guide</h2>
-
-    <ul>
-        <li>Uses PM7 primary color (#1C86EF) for active tab highlighting</li>
-        <li>Follows PM7 typography and spacing standards</li>
-        <li>Compatible with PM7 theme system</li>
-        <li>Consistent with other PM7 component styling</li>
-        <li>Integrates seamlessly with PM7 Cards, Dialogs, and other components</li>
-    </ul>
-
-    <h2>Common Use Cases</h2>
-
-    <h3>Documentation Pages</h3>
-    <pre><code>const docTabs = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'api', label: 'API Reference' },
-  { id: 'examples', label: 'Examples' },
-  { id: 'changelog', label: 'Changelog' }
-];</code></pre>
-
-    <h3>Settings Interfaces</h3>
-    <pre><code>const settingsTabs = [
-  { id: 'general', label: 'General' },
-  { id: 'privacy', label: 'Privacy' },
-  { id: 'notifications', label: 'Notifications' },
-  { id: 'advanced', label: 'Advanced' }
-];</code></pre>
-
-    <h3>Dashboard Views</h3>
-    <pre><code>const dashboardTabs = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'analytics', label: 'Analytics' },
-  { id: 'reports', label: 'Reports' },
-  { id: 'export', label: 'Export', disabled: !hasExportPermission }
-];</code></pre>
-
     <div class="warning">
-        <p><strong>Important:</strong> The PM7TabSelector component requires the PM7 CSS file to be imported for proper styling. Make sure to include <code>import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';</code> in your application.</p>
+        <p><strong>Important:</strong> The PM7TabSelector component requires the PM7 CSS file to be imported for proper styling. Make sure to include <code>import 'pm7-ui-style-guide/pm7-tab-selector.css';</code> in your application.</p>
     </div>
 
-    <p>The PM7 Tab Selector component provides a flexible, accessible solution for organizing content into tabbed interfaces while maintaining consistency with the PM7 design system.</p>
+    <h2>Common Patterns</h2>
+
+    <h3>Router Integration</h3>
+    <pre><code>import { useSearchParams } from 'react-router-dom';
+
+function RoutedTabs() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get('tab') || 'overview';
+
+  const handleTabChange = (tabId) =&gt; {
+    setSearchParams({ tab: tabId });
+  };
+
+  return (
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={handleTabChange}
+    /&gt;
+  );
+}</code></pre>
+
+    <h3>State Persistence</h3>
+    <pre><code>import { useState, useEffect } from 'react';
+
+function PersistentTabs() {
+  const [activeTab, setActiveTab] = useState(() =&gt; {
+    return localStorage.getItem('activeTab') || 'overview';
+  });
+
+  useEffect(() =&gt; {
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
+
+  return (
+    &lt;PM7TabSelector
+      tabs={tabs}
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+    /&gt;
+  );
+}</code></pre>
+
+    <h2>Performance Considerations</h2>
+
+    <ul>
+        <li>Component is lightweight with minimal re-renders</li>
+        <li>Use React.memo for tab content components when needed</li>
+        <li>Consider lazy loading tab content for complex interfaces</li>
+        <li>Debounce rapid tab switching if content is expensive to render</li>
+    </ul>
+
+    <h2>Browser Support</h2>
+
+    <p>PM7TabSelector supports all modern browsers including:</p>
+    <ul>
+        <li>Chrome 88+</li>
+        <li>Firefox 85+</li>
+        <li>Safari 14+</li>
+        <li>Edge 88+</li>
+    </ul>
+
+    <p><em>For older browser support, ensure appropriate polyfills are included in your build process.</em></p>
 </body>
 </html>

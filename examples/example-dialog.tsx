@@ -21,7 +21,7 @@ import ExampleDialogOverview from './example-dialog-overview';
 import ExampleDialogUsage from './example-dialog-usage';
 import ExampleDialogAPI from './example-dialog-api';
 import ExampleDialogExamples from './example-dialog-examples';
-import ExampleDialogTLDR from './example-dialog-tldr';
+import ExampleDialogDocumentation from './example-dialog-documentation';
 
 // Static README content for API tab
 const dialogReadme = `# PM7Dialog
@@ -92,7 +92,7 @@ import {
 ## License
 MIT`;
 
-type TabType = 'demo' | 'overview' | 'usage' | 'tldr';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation';
 type ThemeType = 'light' | 'dark';
 
 const DialogExample = ({ theme }: { theme: ThemeType }) => {
@@ -112,7 +112,7 @@ const DialogExample = ({ theme }: { theme: ThemeType }) => {
           { id: "demo", label: "Demo" },
           { id: "overview", label: "Overview" },
           { id: "usage", label: "Usage" },
-          { id: "tldr", label: "TL;DR" }
+          { id: "documentation", label: "Documentation" }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -135,9 +135,9 @@ const DialogExample = ({ theme }: { theme: ThemeType }) => {
           <ExampleDialogUsage theme={theme} />
         </div>
       )}
-      {activeTab === "tldr" && (
+      {activeTab === "documentation" && (
         <div style={{ padding: '1rem' }}>
-          <ExampleDialogTLDR theme={theme} />
+          <ExampleDialogDocumentation theme={theme} />
         </div>
       )}
     </>

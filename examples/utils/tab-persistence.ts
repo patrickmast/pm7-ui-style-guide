@@ -13,7 +13,7 @@ export const getActiveTab = (defaultTab: string = 'demo'): string => {
     const savedTab = localStorage.getItem(TAB_STORAGE_KEY);
     if (savedTab) {
       // Validate that the saved tab is one of the valid tabs
-      const validTabs = ['demo', 'overview', 'usage', 'documentation', 'tldr'];
+      const validTabs = ['demo', 'overview', 'usage', 'documentation'];
       if (validTabs.includes(savedTab)) {
         return savedTab;
       }

@@ -6,7 +6,7 @@ import ExampleCardOverview from "./example-card-overview";
 import ExampleCardUsage from "./example-card-usage";
 import ExampleCardAPI from "./example-card-api";
 import ExampleCardExamples from "./example-card-examples";
-import ExampleCardTLDR from "./example-card-tldr";
+import ExampleCardDocumentation from "./example-card-documentation";
 import "../src/components/card/pm7-card.css";
 import "../src/components/tab-selector/pm7-tab-selector.css";
 
@@ -58,7 +58,7 @@ import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } 
 ## License
 MIT`;
 
-type TabType = "demo" | "overview" | "usage" | "tldr";
+type TabType = "demo" | "overview" | "usage" | "documentation";
 type ThemeType = "light" | "dark";
 
 export default function ExampleCard({ theme }: { theme: ThemeType }) {
@@ -78,7 +78,7 @@ export default function ExampleCard({ theme }: { theme: ThemeType }) {
           { id: "demo", label: "Demo" },
           { id: "overview", label: "Overview" },
           { id: "usage", label: "Usage" },
-          { id: "tldr", label: "TL;DR" }
+          { id: "documentation", label: "Documentation" }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -100,9 +100,9 @@ export default function ExampleCard({ theme }: { theme: ThemeType }) {
           <ExampleCardUsage theme={theme} />
         </div>
       )}
-      {activeTab === "tldr" && (
+      {activeTab === "documentation" && (
         <div style={{ padding: '1rem' }}>
-          <ExampleCardTLDR theme={theme} />
+          <ExampleCardDocumentation theme={theme} />
         </div>
       )}
     </>

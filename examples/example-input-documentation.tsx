@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { PM7Card } from '../src/components/card/pm7-card';
 
-const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
+const ExampleInputDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [copied, setCopied] = useState(false);
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://pm7.tools/menu/docs.html');
+      await navigator.clipboard.writeText('https://pm7.tools/input/docs.html');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -31,7 +31,7 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
           color: theme === 'dark' ? '#ffffff' : '#1a1a1a',
           marginBottom: '1rem'
         }}>
-          PM7Menu Component Documentation
+          PM7Input Component Documentation
         </h2>
         <p style={{ 
           fontSize: '1.1rem', 
@@ -68,10 +68,10 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://pm7.tools/menu/docs.html
+              https://pm7.tools/input/docs.html
             </code>
             <button
-              onClick={() => window.open('https://pm7.tools/menu/docs.html', '_blank')}
+              onClick={() => window.open('https://pm7.tools/input/docs.html', '_blank')}
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -183,7 +183,7 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
         }}>
           Deze link bevat pure HTML documentatie die perfect leesbaar is door AI-assistants, 
           WebFetch tools, en andere automatische systemen. Geen JavaScript, geen menu's - 
-          alleen de essentiële PM7Menu implementatie guidance.
+          alleen de essentiële PM7Input implementatie guidance.
         </p>
         <div style={{ 
           fontSize: '0.9rem',
@@ -198,8 +198,8 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
       <div style={{ marginTop: '2rem' }}>
         <PM7Card theme={theme} style={{ padding: 0, overflow: 'hidden' }}>
           <iframe
-            src="https://pm7.tools/menu/docs.html"
-            title="PM7 Menu AI Documentation"
+            src="https://pm7.tools/input/docs.html"
+            title="PM7 Input AI Documentation"
             style={{
               width: '100%',
               height: '600px',
@@ -214,4 +214,4 @@ const ExampleMenuTLDR = ({ theme }: { theme: 'light' | 'dark' }) => {
   );
 };
 
-export default ExampleMenuTLDR;
+export default ExampleInputDocumentation;

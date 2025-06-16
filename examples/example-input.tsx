@@ -19,7 +19,7 @@ import ExampleInputOverview from './example-input-overview';
 import ExampleInputUsage from './example-input-usage';
 import ExampleInputAPI from './example-input-api';
 import ExampleInputExamples from './example-input-examples';
-import ExampleInputTLDR from './example-input-tldr';
+import ExampleInputDocumentation from './example-input-documentation';
 
 // Static README content for API tab
 const inputReadme = `# PM7Input Component
@@ -91,7 +91,7 @@ const usageContent = (
   </div>
 );
 
-type TabType = 'demo' | 'overview' | 'usage' | 'tldr';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation';
 type ThemeType = 'light' | 'dark';
 
 // Custom styled input component for examples
@@ -217,7 +217,7 @@ const InputExample = ({ theme }: { theme: ThemeType }) => {
           { id: 'demo', label: 'Demo' },
           { id: 'overview', label: 'Overview' },
           { id: 'usage', label: 'Usage' },
-          { id: 'tldr', label: 'TL;DR' }
+          { id: 'documentation', label: 'Documentation' }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -239,9 +239,9 @@ const InputExample = ({ theme }: { theme: ThemeType }) => {
           <ExampleInputUsage theme={theme} />
         </div>
       )}
-      {activeTab === 'tldr' && (
+      {activeTab === 'documentation' && (
         <div style={{ padding: '1rem' }}>
-          <ExampleInputTLDR theme={theme} />
+          <ExampleInputDocumentation theme={theme} />
         </div>
       )}
     </>

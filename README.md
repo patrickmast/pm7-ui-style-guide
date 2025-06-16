@@ -72,15 +72,15 @@ View the live examples of all components at our [Vercel deployment](https://pm7-
 
 The PM7 UI Style Guide now includes pre-rendered static HTML documentation that can be accessed by tools like WebFetch, AI agents, and crawlers without requiring JavaScript execution.
 
-### Quick Access - Dialog TL;DR
+### Quick Access - Dialog Documentation
 
 For immediate access to the Dialog component documentation:
 
 ```bash
-npm run build:dialog-tldr
+npm run build:dialog-doc
 ```
 
-This generates `static/dialog-tldr.html` - a clean, WebFetch-friendly version of the complete Dialog integration guide.
+This generates `static/dialog-doc.html` - a clean, WebFetch-friendly version of the complete Dialog integration guide.
 
 ### Full Static Documentation
 
@@ -90,10 +90,10 @@ To generate static HTML for all components and documentation pages:
 npm run build:static
 ```
 
-This creates static HTML files for all components (menu, button, input, dialog, tabselector, card, themetoggle) across all documentation tabs (demo, overview, usage, documentation, tldr) in both light and dark themes.
+This creates static HTML files for all components (menu, button, input, dialog, tabselector, card, themetoggle) across all documentation tabs (demo, overview, usage, documentation) in both light and dark themes.
 
 **Generated files include:**
-- `static/dialog-tldr.html` - Complete Dialog integration guide  
+- `static/dialog-doc.html` - Complete Dialog integration guide  
 - `static/{component}-{tab}.html` - Light theme versions
 - `static/{component}-{tab}-dark.html` - Dark theme versions
 - `static/index.html` - Index of all generated pages

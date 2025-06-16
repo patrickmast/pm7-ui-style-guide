@@ -6,10 +6,10 @@ import ExampleThemeToggleOverview from './example-theme-toggle-overview';
 import ExampleThemeToggleUsage from './example-theme-toggle-usage';
 import ExampleThemeToggleAPI from './example-theme-toggle-api';
 import ExampleThemeToggleExamples from './example-theme-toggle-examples';
-import ExampleThemeToggleTLDR from './example-theme-toggle-tldr';
+import ExampleThemeToggleDocumentation from './example-theme-toggle-documentation';
 
 // Type definitions for tabs and theme
-type TabType = 'demo' | 'overview' | 'usage' | 'tldr';
+type TabType = 'demo' | 'overview' | 'usage' | 'documentation';
 type ThemeType = 'light' | 'dark';
 
 const ExampleThemeToggle = ({ theme }: { theme: ThemeType }) => {
@@ -30,7 +30,7 @@ const ExampleThemeToggle = ({ theme }: { theme: ThemeType }) => {
           { id: 'demo', label: 'Demo' },
           { id: 'overview', label: 'Overview' },
           { id: 'usage', label: 'Usage' },
-          { id: 'tldr', label: 'TL;DR' }
+          { id: 'documentation', label: 'Documentation' }
         ]}
         activeTab={activeTab}
         onTabChange={handleTabChange}
@@ -53,9 +53,9 @@ const ExampleThemeToggle = ({ theme }: { theme: ThemeType }) => {
           <ExampleThemeToggleUsage theme={theme} />
         </div>
       )}
-      {activeTab === 'tldr' && (
+      {activeTab === 'documentation' && (
         <div style={{ padding: '1rem' }}>
-          <ExampleThemeToggleTLDR theme={theme} />
+          <ExampleThemeToggleDocumentation theme={theme} />
         </div>
       )}
     </>
