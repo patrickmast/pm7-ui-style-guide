@@ -79,8 +79,8 @@ return (
     {/* Tab row using PM7TabSelector */}
     <PM7TabSelector
       tabs={[
-        { id: 'demo', label: 'Demo' },
         { id: 'overview', label: 'Overview' },
+        { id: 'demo', label: 'Demo' },
         { id: 'usage', label: 'Usage' },
         { id: 'documentation', label: 'Documentation' }
       ]}

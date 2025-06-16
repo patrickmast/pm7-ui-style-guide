@@ -30,9 +30,20 @@ export const buttonRules = {
 // In a real app that already uses ShadCN/UI, they would apply buttonRules to their existing Button
 export interface PM7ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: 'light' | 'dark';
+  spacing?: 'none' | 'sm' | 'md' | 'lg';
 }
 
-export const PM7Button: React.FC<PM7ButtonProps> = ({ children, ...props }) => {
+export const PM7Button: React.FC<PM7ButtonProps> = ({ children, spacing = 'md', ...props }) => {
+  const getSpacing = () => {
+    switch (spacing) {
+      case 'none': return '0';
+      case 'sm': return '0.125rem';
+      case 'md': return '0.25rem';
+      case 'lg': return '0.5rem';
+      default: return '0.25rem';
+    }
+  };
+
   const getButtonStyles = () => {
     const className = props.className || '';
     const baseStyles = {
@@ -41,6 +52,7 @@ export const PM7Button: React.FC<PM7ButtonProps> = ({ children, ...props }) => {
       padding: '0.5rem 1rem',
       fontSize: '0.875rem',
       fontWeight: '500',
+      margin: getSpacing(),
     };
 
     // Handle different button variants

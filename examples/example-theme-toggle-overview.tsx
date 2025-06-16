@@ -1,89 +1,90 @@
 import React from 'react';
 
 const ExampleThemeToggleOverview = ({ theme }: { theme: 'light' | 'dark' }) => {
-  const containerStyle = {
-    padding: '1.5rem'
-  };
-
-  const headingStyle = {
-    fontSize: '1.875rem',
-    fontWeight: 'bold',
-    marginBottom: '1.5rem',
-    color: theme === 'dark' ? '#ffffff' : '#111827'
-  };
-
-  const subHeadingStyle = {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    marginBottom: '1rem',
-    color: theme === 'dark' ? '#ffffff' : '#111827'
-  };
-
-  const textStyle = {
-    marginBottom: '1rem',
-    color: theme === 'dark' ? '#d1d5db' : '#374151',
-    lineHeight: '1.6'
-  };
-
-  const listStyle = {
-    listStyle: 'disc',
-    marginLeft: '1.25rem',
-    marginBottom: '1.5rem',
-    color: theme === 'dark' ? '#d1d5db' : '#374151'
-  };
-
-  const listItemStyle = {
-    marginBottom: '0.5rem'
-  };
-
-  const strongStyle = {
-    fontWeight: 'bold',
-    color: theme === 'dark' ? '#ffffff' : '#111827'
-  };
-
   return (
-    <div style={containerStyle}>
-      <h1 style={headingStyle}>PM7ThemeToggle Component</h1>
-      <p style={textStyle}>A theme toggle component that allows users to switch between light and dark modes with automatic theme detection and persistence.</p>
-      
-      <h2 style={subHeadingStyle}>Features</h2>
-      <ul style={listStyle}>
-        <li style={listItemStyle}><strong style={strongStyle}>Automatic theme detection:</strong> Detects system preference on first load</li>
-        <li style={listItemStyle}><strong style={strongStyle}>LocalStorage persistence:</strong> Remembers user preference across sessions</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Keyboard accessible:</strong> Supports Enter and Space key navigation</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Multiple sizes:</strong> Small, medium (default), and large variants</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Controlled/Uncontrolled:</strong> Can be used with external state management or handle state internally</li>
-        <li style={listItemStyle}><strong style={strongStyle}>PM7 branded styling:</strong> Uses PM7 color scheme with yellow/gray theme indicators</li>
-      </ul>
+    <>
+      <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>PM7ThemeToggle Component</h3>
+        
+        <div style={{ marginBottom: '1.5rem' }}>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            PM7ThemeToggle is a theme switching component that allows users to toggle between light and dark modes. It provides automatic system preference detection, localStorage persistence, and smooth animated transitions with PM7 branding.
+          </p>
+        </div>
 
-      <h2 style={subHeadingStyle}>When to Use</h2>
-      <ul style={listStyle}>
-        <li style={listItemStyle}>When your application supports both light and dark themes</li>
-        <li style={listItemStyle}>In application headers or settings panels</li>
-        <li style={listItemStyle}>When you want to give users control over their viewing experience</li>
-        <li style={listItemStyle}>For accessibility compliance with user preference detection</li>
-      </ul>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>What It Provides</h4>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            The component can operate in controlled or uncontrolled mode, automatically managing theme state and DOM classes when uncontrolled, or integrating with your application's state management when controlled. It handles user preferences, system detection, and persistence automatically.
+          </p>
+        </div>
 
-      <h2 style={subHeadingStyle}>Behavior</h2>
-      <ul style={listStyle}>
-        <li style={listItemStyle}><strong style={strongStyle}>Uncontrolled mode:</strong> Automatically manages theme state and applies to document.documentElement and document.body</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Controlled mode:</strong> Calls onThemeChange callback without applying theme to DOM (parent component responsibility)</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Initial state:</strong> Checks localStorage → system preference → defaults to 'light'</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Persistence:</strong> Saves theme preference to localStorage as 'pm7-theme'</li>
-      </ul>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Common Use Cases</h4>
+          <div style={{ marginLeft: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+            <div style={{ marginBottom: '0.5rem' }}>• Application headers and navigation bars</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Settings panels and user preference screens</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Mobile app toolbars and menu systems</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Dashboard controls and admin interfaces</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Accessibility-focused applications</div>
+          </div>
+        </div>
 
-      <h2 style={subHeadingStyle}>Accessibility</h2>
-      <ul style={listStyle}>
-        <li style={listItemStyle}><strong style={strongStyle}>Keyboard navigation:</strong> Enter and Space keys toggle theme</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Focus indication:</strong> Clear focus outline following PM7 design system</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Screen reader support:</strong> Descriptive aria-label indicating current action</li>
-        <li style={listItemStyle}><strong style={strongStyle}>Semantic HTML:</strong> Uses proper button role and tabIndex</li>
-      </ul>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Operating Modes</h4>
+          <div style={{ marginLeft: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+            <div style={{ marginBottom: '0.5rem' }}>• <strong>Uncontrolled Mode:</strong> Manages its own state, applies theme to DOM automatically</div>
+            <div style={{ marginBottom: '0.5rem' }}>• <strong>Controlled Mode:</strong> Integrates with your state management system</div>
+            <div style={{ marginBottom: '0.5rem' }}>• <strong>Smart Initialization:</strong> localStorage → system preference → light fallback</div>
+            <div style={{ marginBottom: '0.5rem' }}>• <strong>Persistence:</strong> Automatically saves user choice across sessions</div>
+          </div>
+        </div>
 
-      <p style={textStyle}>
-        Check the <strong style={strongStyle}>Demo</strong> tab to see the theme toggle in action with different configurations, the <strong style={strongStyle}>Usage</strong> tab for implementation details, and the <strong style={strongStyle}>Documentation</strong> tab for complete API reference.
-      </p>
-    </div>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Key Features</h4>
+          <div style={{ marginLeft: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+            <div style={{ marginBottom: '0.5rem' }}>• Three size variants: small, medium, and large</div>
+            <div style={{ marginBottom: '0.5rem' }}>• System color scheme preference detection</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Sun and moon icons from Lucide React</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Smooth toggle animation with thumb movement</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Keyboard navigation (Enter and Space keys)</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Screen reader support with dynamic ARIA labels</div>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>How It Works</h4>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            When uncontrolled, the component initializes by checking localStorage for a saved preference, then falls back to system color scheme detection, and finally defaults to light mode. It automatically applies 'dark' classes to document elements and saves changes to localStorage.
+          </p>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            In controlled mode, you provide the current theme and handle the state changes yourself, giving you full control over how themes are applied and managed in your application.
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Integration</h4>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            PM7ThemeToggle requires the Lucide React package for icons and includes its own CSS file for styling. It works with React Context, Redux, Zustand, or any state management solution, and can be used standalone without any additional setup.
+          </p>
+        </div>
+
+        <div style={{ 
+          backgroundColor: theme === 'dark' ? '#374151' : '#f3f4f6', 
+          padding: '1rem', 
+          borderRadius: '0.5rem',
+          border: `1px solid ${theme === 'dark' ? '#525252' : '#e5e7eb'}`
+        }}>
+          <p style={{ 
+            margin: '0', 
+            color: theme === 'dark' ? '#d1d5db' : '#374151', 
+            fontSize: '0.875rem'
+          }}>
+            <strong>Note:</strong> The Demo tab shows the theme toggle in different sizes and configurations, the Usage tab provides implementation examples for both controlled and uncontrolled modes, and the API tab documents all available props.
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 

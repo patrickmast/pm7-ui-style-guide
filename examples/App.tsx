@@ -13,6 +13,7 @@ import DialogExample from './example-dialog';
 import TabSelectorExample from './example-tab-selector';
 import ExampleCard from './example-card';
 import ExampleThemeToggle from './example-theme-toggle';
+import ExampleComponentsTest from './example-components-test';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
@@ -123,6 +124,8 @@ const ComponentPage = () => {
         return <ExampleCard theme={theme} />;
       case 'themetoggle':
         return <ExampleThemeToggle theme={theme} />;
+      case 'all-components':
+        return <ExampleComponentsTest theme={theme} />;
       default:
         return <MenuExample />;
     }
@@ -193,6 +196,26 @@ const ComponentPage = () => {
     },
     {
       id: 'divider-1',
+      type: 'separator' as PM7MenuItemType
+    },
+    {
+      id: 'all-components',
+      label: 'All',
+      type: 'check' as PM7MenuItemType,
+      checked: activeComponent === 'all-components',
+      onClick: () => navigate('/all-components'),
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+          <path d="M9 12l2 2 4-4"/>
+          <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+          <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
+          <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"/>
+          <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"/>
+        </svg>
+      )
+    },
+    {
+      id: 'divider-2',
       type: 'separator' as PM7MenuItemType
     },
     {
@@ -313,6 +336,14 @@ const ComponentPage = () => {
                   className="sidebar-nav-link"
                 >
                   Theme Toggle
+                </Link>
+              </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'all-components' ? 'active' : ''}`} style={{ borderTop: '1px solid #e5e7eb', marginTop: '0.5rem', paddingTop: '0.5rem' }}>
+                <Link
+                  to="/all-components"
+                  className="sidebar-nav-link"
+                >
+                  All
                 </Link>
               </li>
             </ul>

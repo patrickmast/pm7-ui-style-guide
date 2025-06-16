@@ -1,137 +1,80 @@
 import React from 'react';
 
-interface Descriptions {
-  [key: string]: {
-    heading: string;
-    intro: string;
-    multiLanguage: string;
-    themeSwitching: string;
-    submenu: string;
-    icons: string;
-    separators: string;
-    checkboxes: string;
-    alignment: string;
-    customIconColor: string;
-    gettingStarted: string;
-    usage: string;
-    props: string;
-    mainComponent: string;
-  };
-}
-
-type LanguageType = 'en' | 'es' | 'fr' | 'de' | 'nl' | 'nl-be' | 'zh';
-
-const descriptions: Descriptions = {
-  en: {
-    heading: 'PM7Menu Component',
-    intro: 'The PM7Menu component provides a flexible and customizable menu system for your application. It supports various features including:',
-    multiLanguage: 'Multi-language support with automatic language detection',
-    themeSwitching: 'Theme switching (light/dark mode)',
-    submenu: 'Submenu support for nested navigation',
-    icons: 'Icon integration with Lucide React icons',
-    separators: 'Separators for visual organization',
-    checkboxes: 'Checkboxes and switches for toggleable options',
-    alignment: 'Flexible alignment options (start, center, end)',
-    customIconColor: 'Customizable icon colors',
-    gettingStarted: 'Getting Started',
-    usage: 'To use the PM7Menu component in your project:',
-    props: 'Props',
-    mainComponent: 'Main Component'
-  },
-  // Add other languages as needed...
-};
-
-const ExampleMenuOverview = ({ selectedLanguage, theme }: { selectedLanguage: LanguageType; theme: 'light' | 'dark' }) => {
-  const t = descriptions[selectedLanguage] || descriptions['en'];
-  
-  const containerStyle = {
-    padding: '1.5rem'
-  };
-
-  const headingStyle = {
-    fontSize: '1.875rem',
-    fontWeight: 'bold',
-    marginBottom: '1.5rem',
-    color: theme === 'dark' ? '#ffffff' : '#111827'
-  };
-
-  const subHeadingStyle = {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    marginBottom: '1rem',
-    color: theme === 'dark' ? '#ffffff' : '#111827'
-  };
-
-  const textStyle = {
-    marginBottom: '1rem',
-    color: theme === 'dark' ? '#d1d5db' : '#374151',
-    lineHeight: '1.6'
-  };
-
-  const listStyle = {
-    listStyle: 'disc',
-    marginLeft: '1.25rem',
-    marginBottom: '1.5rem',
-    color: theme === 'dark' ? '#d1d5db' : '#374151'
-  };
-
-  const listItemStyle = {
-    marginBottom: '0.5rem'
-  };
-
-  const codeContainerStyle = {
-    marginTop: '0.5rem',
-    borderRadius: '0.375rem',
-    overflow: 'hidden'
-  };
-
-  const codeBlockStyle = {
-    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
-    padding: '1rem',
-    overflowX: 'auto' as const,
-    fontSize: '0.875rem'
-  };
-
-  const codeStyle = {
-    color: theme === 'dark' ? '#e5e7eb' : '#1f2937',
-    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
-  };
-
+const ExampleMenuOverview = ({ theme }: { theme: 'light' | 'dark' }) => {
   return (
-    <div style={containerStyle}>
-      <h1 style={headingStyle}>{t.heading}</h1>
-      <h2 style={subHeadingStyle}>{t.props}</h2>
-      <p style={textStyle}>{t.intro}</p>
-      <ul style={listStyle}>
-        <li style={listItemStyle}>{t.multiLanguage}</li>
-        <li style={listItemStyle}>{t.themeSwitching}</li>
-        <li style={listItemStyle}>{t.submenu}</li>
-        <li style={listItemStyle}>{t.icons}</li>
-        <li style={listItemStyle}>{t.separators}</li>
-        <li style={listItemStyle}>{t.checkboxes}</li>
-        <li style={listItemStyle}>{t.alignment}</li>
-        <li style={listItemStyle}>{t.customIconColor}</li>
-      </ul>
-      <p style={textStyle}>
-        Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.
-      </p>
-      <h2 style={subHeadingStyle}>{t.mainComponent}</h2>
-      <p style={textStyle}>{t.usage}</p>
-      <div style={codeContainerStyle}>
-        <div style={codeBlockStyle}>
-          <code style={codeStyle}>
-            {`// For local development, use relative imports
-import { PM7Menu } from '../src/components/menu';
+    <>
+      <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>PM7Menu Component</h3>
+        
+        <div style={{ marginBottom: '1.5rem' }}>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            PM7Menu is a flexible dropdown menu component that provides a consistent way to create navigation menus, context menus, and action dropdowns in React applications. It comes with PM7 branding and handles common menu requirements out of the box.
+          </p>
+        </div>
 
-// Basic usage
-<PM7Menu
-  menuItems={menuItems}
-  theme="light"
-/>`}
-          </code>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>What It Provides</h4>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            The component handles accessibility, keyboard navigation, positioning, and theme compatibility automatically, so you can focus on defining your menu structure and functionality.
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Common Use Cases</h4>
+          <div style={{ marginLeft: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+            <div style={{ marginBottom: '0.5rem' }}>• User profile menus and account settings</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Context menus for table rows or content items</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Navigation dropdowns in headers and sidebars</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Settings panels with toggleable options</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Action menus for bulk operations</div>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Key Features</h4>
+          <div style={{ marginLeft: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+            <div style={{ marginBottom: '0.5rem' }}>• Multiple item types: regular items, checkboxes, radio buttons, and separators</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Icon support with customizable colors</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Automatic positioning to stay within viewport</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Built-in light and dark theme support</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Responsive design for mobile and desktop</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Full keyboard navigation and screen reader support</div>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>How It Works</h4>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            You provide an array of menu items with their labels, actions, and types. The component renders a trigger button (customizable icon and label) that opens a dropdown menu when clicked. Each menu item can have click handlers, be disabled, or include sub-items for nested menus.
+          </p>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            The menu automatically positions itself to stay visible on screen and provides smooth animations and hover states. All interaction patterns follow standard conventions that users expect from dropdown menus.
+          </p>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Integration</h4>
+          <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            PM7Menu integrates with existing React applications without additional dependencies beyond the PM7 UI Style Guide package. It works with any icon library and can be styled to match your application's design system while maintaining PM7's consistent look and feel.
+          </p>
+        </div>
+
+        <div style={{ 
+          backgroundColor: theme === 'dark' ? '#374151' : '#f3f4f6', 
+          padding: '1rem', 
+          borderRadius: '0.5rem',
+          border: `1px solid ${theme === 'dark' ? '#525252' : '#e5e7eb'}`
+        }}>
+          <p style={{ 
+            margin: '0', 
+            color: theme === 'dark' ? '#d1d5db' : '#374151', 
+            fontSize: '0.875rem'
+          }}>
+            <strong>Note:</strong> Check the Demo tab to see different menu configurations in action, the Usage tab for implementation details, and the API tab for complete prop documentation.
+          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

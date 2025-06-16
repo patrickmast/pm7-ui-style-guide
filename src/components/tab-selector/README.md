@@ -1,6 +1,6 @@
 # PM7TabSelector Component - Complete Integration Guide
 
-**PM7TabSelector** is a React tab navigation component that provides PM7-branded styling for creating tabbed interfaces. It offers horizontal tab navigation with active states, keyboard support, and PM7's signature styling.
+**PM7TabSelector** is a React tab navigation component that provides PM7-branded styling for creating tabbed interfaces. It offers horizontal tab navigation with active states, theme support, and accessibility features.
 
 **📖 Read Documentation**: [https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/tab-selector/README.md](https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/tab-selector/README.md)
 
@@ -11,23 +11,24 @@
 **CSS File**: pm7-tab-selector.css (required)  
 **Dependencies**: None
 
-## Installation & Usage
+## Installation
 
-### Basic Import
+```bash
+npm install pm7-ui-style-guide
+```
+
+## Import
 
 ```typescript
 import { PM7TabSelector } from 'pm7-ui-style-guide';
 // or
 import { TabSelector } from 'pm7-ui-style-guide';
-```
 
-### CSS Import (Required)
-
-```typescript
+// CSS import (required)
 import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';
 ```
 
-## Basic Examples
+## Basic Usage
 
 ### Simple Tab Selector
 
@@ -50,12 +51,13 @@ function MyComponent() {
       tabs={tabs}
       activeTab={activeTab}
       onTabChange={setActiveTab}
+      theme="light"
     />
   );
 }
 ```
 
-### Tabs with Icons
+### Tabs with Icons or Complex Content
 
 ```tsx
 import React, { useState } from 'react';
@@ -68,18 +70,30 @@ function TabsWithIcons() {
   const tabs = [
     { 
       id: 'home', 
-      label: 'Home', 
-      icon: <Home size={16} /> 
+      label: (
+        <span>
+          <Home size={16} style={{ marginRight: '8px' }} />
+          Home
+        </span>
+      )
     },
     { 
       id: 'profile', 
-      label: 'Profile', 
-      icon: <User size={16} /> 
+      label: (
+        <span>
+          <User size={16} style={{ marginRight: '8px' }} />
+          Profile
+        </span>
+      )
     },
     { 
       id: 'settings', 
-      label: 'Settings', 
-      icon: <Settings size={16} /> 
+      label: (
+        <span>
+          <Settings size={16} style={{ marginRight: '8px' }} />
+          Settings
+        </span>
+      )
     }
   ];
 
@@ -88,6 +102,7 @@ function TabsWithIcons() {
       tabs={tabs}
       activeTab={activeTab}
       onTabChange={setActiveTab}
+      theme="light"
     />
   );
 }
@@ -106,12 +121,22 @@ const tabs = [
   tabs={tabs}
   activeTab={activeTab}
   onTabChange={setActiveTab}
+  theme="light"
 />
 ```
 
-## Tab Content Integration
+### Dark Theme
 
-### Complete Tabbed Interface
+```tsx
+<PM7TabSelector
+  tabs={tabs}
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  theme="dark"
+/>
+```
+
+## Complete Tabbed Interface
 
 ```tsx
 import React, { useState } from 'react';
@@ -148,9 +173,10 @@ function TabbedInterface() {
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={setActiveTab}
+        theme="light"
       />
       
-      <div className="tab-content mt-4">
+      <div style={{ marginTop: '1rem' }}>
         {renderTabContent()}
       </div>
     </div>
@@ -160,146 +186,80 @@ function TabbedInterface() {
 
 ## API Reference
 
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `tabs` | Tab[] | Yes | Array of tab objects |
-| `activeTab` | string | Yes | ID of the currently active tab |
-| `onTabChange` | function | Yes | Callback when tab is changed: (tabId: string) => void |
-| `className` | string | No | Additional CSS classes for the container |
-| `variant` | `'default' \| 'pills'` | No | Visual style variant (default: 'default') |
-| `size` | `'sm' \| 'md' \| 'lg'` | No | Size of the tabs (default: 'md') |
+### PM7TabSelector Props
 
-### Tab Object Interface
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tabs` | `PM7TabItem[]` | - | Array of tab objects (required) |
+| `activeTab` | `string` | - | ID of the currently active tab (required) |
+| `onTabChange` | `(tabId: string) => void` | - | Callback when tab is changed (required) |
+| `className` | `string` | `''` | Additional CSS classes for the container |
+| `theme` | `'light' \| 'dark'` | `'light'` | Visual theme for proper styling |
+
+### PM7TabItem Interface
 
 ```typescript
-interface Tab {
-  id: string;           // Unique identifier for the tab
-  label: string;        // Display text for the tab
-  icon?: ReactNode;     // Optional icon to display
-  disabled?: boolean;   // Whether the tab is disabled
-  badge?: string;       // Optional badge/count to display
-}
+export type PM7TabItem = {
+  id: string;           // Unique identifier for the tab (required)
+  label: React.ReactNode; // Display text or content (required)
+  disabled?: boolean;   // Whether the tab is disabled (optional)
+};
 ```
 
-## Styling Variants
+## Theme Support
 
-### Default Variant
+The component supports both light and dark themes:
+
+```tsx
+// Light theme (default)
+<PM7TabSelector theme="light" />
+
+// Dark theme
+<PM7TabSelector theme="dark" />
+```
+
+## Styling & Customization
+
+### Custom CSS Classes
 
 ```tsx
 <PM7TabSelector
   tabs={tabs}
   activeTab={activeTab}
   onTabChange={setActiveTab}
-  variant="default"
+  className="my-custom-tabs"
+  theme="light"
 />
 ```
-
-### Pills Variant
-
-```tsx
-<PM7TabSelector
-  tabs={tabs}
-  activeTab={activeTab}
-  onTabChange={setActiveTab}
-  variant="pills"
-/>
-```
-
-### Different Sizes
-
-```tsx
-// Small tabs
-<PM7TabSelector size="sm" />
-
-// Medium tabs (default)
-<PM7TabSelector size="md" />
-
-// Large tabs
-<PM7TabSelector size="lg" />
-```
-
-## PM7 Styling & Theming
 
 ### PM7 Brand Colors
 
-- **Active Tab**: #1C86EF (PM7 primary blue)
+- **Active Tab**: PM7 primary blue (#1C86EF)
 - **Hover State**: Light blue background
-- **Border**: #D4D4D4 (light mode), #525252 (dark mode)
+- **Border**: Theme-aware border colors
 - **Text**: High contrast for accessibility
-
-### Custom Styling
-
-```tsx
-<PM7TabSelector
-  tabs={tabs}
-  activeTab={activeTab}
-  onTabChange={setActiveTab}
-  className="custom-tabs shadow-lg"
-/>
-```
-
-## Advanced Features
-
-### Tabs with Badges
-
-```tsx
-const tabs = [
-  { id: 'inbox', label: 'Inbox', badge: '12' },
-  { id: 'sent', label: 'Sent' },
-  { id: 'drafts', label: 'Drafts', badge: '3' }
-];
-
-<PM7TabSelector
-  tabs={tabs}
-  activeTab={activeTab}
-  onTabChange={setActiveTab}
-/>
-```
-
-### Responsive Tab Behavior
-
-```tsx
-// Tabs automatically stack on mobile
-<PM7TabSelector
-  tabs={tabs}
-  activeTab={activeTab}
-  onTabChange={setActiveTab}
-  className="responsive-tabs"
-/>
-```
 
 ## Accessibility Features
 
 **Built-in Accessibility:**
 
-- Full keyboard navigation (Tab, Arrow keys, Enter, Space)
-- ARIA attributes for screen readers
+- Full keyboard navigation (Tab, Enter, Space)
+- ARIA attributes for screen readers (`role="tab"`, `aria-selected`)
 - Focus management and visible focus indicators
 - Proper role and state announcements
-- High contrast support
 - Disabled state handling
-
-## Keyboard Navigation
-
-- **Tab**: Move focus to tab selector
-- **Arrow Keys**: Navigate between tabs
-- **Enter/Space**: Activate focused tab
-- **Home**: Go to first tab
-- **End**: Go to last tab
+- Component name attribute for debugging
 
 ## Best Practices
 
 **Recommended Usage:**
 
 - Keep tab labels concise and descriptive
-- Use icons consistently across all tabs or none
+- Use ReactNode for labels to include icons or complex content
 - Limit the number of tabs to 5-7 for optimal UX
-- Provide clear visual feedback for active states
-- Consider mobile responsiveness in your layout
-- Use badges sparingly for important notifications
+- Always provide an onTabChange handler
 - Test keyboard navigation thoroughly
-
-**Important**: The PM7TabSelector component requires the PM7 CSS file to be imported for proper styling. Make sure to include `import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';` in your application.
+- Use theme prop for consistent styling
 
 ## Common Patterns
 
@@ -312,7 +272,7 @@ function RoutedTabs() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'overview';
 
-  const handleTabChange = (tabId) => {
+  const handleTabChange = (tabId: string) => {
     setSearchParams({ tab: tabId });
   };
 
@@ -321,6 +281,7 @@ function RoutedTabs() {
       tabs={tabs}
       activeTab={activeTab}
       onTabChange={handleTabChange}
+      theme="light"
     />
   );
 }
@@ -345,25 +306,32 @@ function PersistentTabs() {
       tabs={tabs}
       activeTab={activeTab}
       onTabChange={setActiveTab}
+      theme="light"
     />
   );
 }
 ```
+
+## Important Notes
+
+- **CSS Import Required**: Must import pm7-tab-selector.css for proper styling
+- **Unique IDs**: Each tab must have a unique ID
+- **Theme Consistency**: Always specify theme prop for proper styling
+- **ReactNode Labels**: Labels can be strings or complex React elements
+- **Disabled Tabs**: Disabled tabs cannot be clicked and have visual indication
 
 ## Performance Considerations
 
 - Component is lightweight with minimal re-renders
 - Use React.memo for tab content components when needed
 - Consider lazy loading tab content for complex interfaces
-- Debounce rapid tab switching if content is expensive to render
 
 ## Browser Support
 
-PM7TabSelector supports all modern browsers including:
-
+PM7TabSelector supports all modern browsers:
 - Chrome 88+
 - Firefox 85+
 - Safari 14+
 - Edge 88+
 
-*For older browser support, ensure appropriate polyfills are included in your build process.*
+*Built with modern React and CSS for maximum compatibility.*

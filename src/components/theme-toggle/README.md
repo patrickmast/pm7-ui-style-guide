@@ -1,6 +1,6 @@
 # PM7ThemeToggle Component - Complete Integration Guide
 
-**PM7ThemeToggle** is a React component that provides a toggle button for switching between light and dark themes. It offers smooth animations, customizable icons, and PM7-branded styling while integrating seamlessly with theme providers.
+**PM7ThemeToggle** is a React component that provides a toggle switch for switching between light and dark themes. It offers automatic localStorage persistence, system preference detection, smooth animations, and PM7-branded styling with Lucide React icons.
 
 **📖 Read Documentation**: [https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/theme-toggle/README.md](https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/theme-toggle/README.md)
 
@@ -9,40 +9,58 @@
 **Package**: pm7-ui-style-guide  
 **Component**: PM7ThemeToggle (React theme toggle component)  
 **CSS File**: pm7-theme-toggle.css (required)  
-**Dependencies**: None
+**Dependencies**: lucide-react
 
-## Installation & Usage
+## Installation
 
-### Basic Import
-
-```typescript
-import { PM7ThemeToggle } from 'pm7-ui-style-guide';
-// or
-import { ThemeToggle } from 'pm7-ui-style-guide';
+```bash
+npm install pm7-ui-style-guide
+npm install lucide-react
 ```
 
-### CSS Import (Required)
+## Import
 
 ```typescript
+import { PM7ThemeToggle, ThemeType } from 'pm7-ui-style-guide';
+// or
+import { ThemeToggle } from 'pm7-ui-style-guide';
+
+// CSS import (required)
 import 'pm7-ui-style-guide/src/components/theme-toggle/pm7-theme-toggle.css';
 ```
 
-## Basic Examples
+## Basic Usage
 
-### Simple Theme Toggle
+### Uncontrolled Mode (Recommended)
 
 ```tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { PM7ThemeToggle } from 'pm7-ui-style-guide';
 import 'pm7-ui-style-guide/src/components/theme-toggle/pm7-theme-toggle.css';
 
 function MyComponent() {
-  const [theme, setTheme] = useState('light');
+  return (
+    <header>
+      {/* Component manages its own state with localStorage persistence */}
+      <PM7ThemeToggle />
+    </header>
+  );
+}
+```
 
-  const handleThemeChange = (newTheme) => {
+### Controlled Mode
+
+```tsx
+import React, { useState } from 'react';
+import { PM7ThemeToggle, ThemeType } from 'pm7-ui-style-guide';
+
+function MyComponent() {
+  const [theme, setTheme] = useState<ThemeType>('light');
+
+  const handleThemeChange = (newTheme: ThemeType) => {
     setTheme(newTheme);
-    // Apply theme to your app
-    document.documentElement.setAttribute('data-theme', newTheme);
+    // Apply theme to your app if needed
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
   };
 
   return (
@@ -54,66 +72,104 @@ function MyComponent() {
 }
 ```
 
-### With Custom Icons
-
-```tsx
-import { Sun, Moon } from 'lucide-react';
-
-<PM7ThemeToggle
-  theme={theme}
-  onThemeChange={handleThemeChange}
-  lightIcon={<Sun size={16} />}
-  darkIcon={<Moon size={16} />}
-/>
-```
-
 ### Different Sizes
 
 ```tsx
-// Small toggle
-<PM7ThemeToggle size="sm" />
+// Small size - compact for tight spaces
+<PM7ThemeToggle size="small" />
 
-// Medium toggle (default)
-<PM7ThemeToggle size="md" />
+// Medium size (default) - standard use case  
+<PM7ThemeToggle size="medium" />
 
-// Large toggle
-<PM7ThemeToggle size="lg" />
+// Large size - prominent placement
+<PM7ThemeToggle size="large" />
+```
+
+### Custom Styling
+
+```tsx
+<PM7ThemeToggle 
+  className="my-custom-toggle"
+  data-component-name="HeaderThemeToggle"
+/>
 ```
 
 ## API Reference
 
+### PM7ThemeToggle Props
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `theme` | `'light' \| 'dark'` | `'light'` | Current theme |
-| `onThemeChange` | function | - | Callback when theme changes: (theme: string) => void |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the toggle button |
-| `variant` | `'default' \| 'outline' \| 'ghost'` | `'default'` | Visual style variant |
-| `lightIcon` | ReactNode | Default sun icon | Custom icon for light theme |
-| `darkIcon` | ReactNode | Default moon icon | Custom icon for dark theme |
-| `showLabel` | boolean | false | Whether to show text label |
-| `className` | string | - | Additional CSS classes |
-| `disabled` | boolean | false | Whether the toggle is disabled |
+| `theme` | `ThemeType` | - | Controlled theme value (optional) |
+| `onThemeChange` | `(theme: ThemeType) => void` | - | Callback when theme changes (optional) |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the toggle switch |
+| `className` | `string` | `''` | Additional CSS classes |
+| `data-component-name` | `string` | - | Data attribute for component identification |
 
-## Theme Integration
+### ThemeType
 
-### With React Context
+```typescript
+export type ThemeType = 'light' | 'dark';
+```
+
+## Features
+
+### Automatic Behavior (Uncontrolled Mode)
+
+When no `theme` prop is provided, the component automatically:
+
+1. **System Preference Detection**: Detects system color scheme preference on first load
+2. **localStorage Persistence**: Saves user preference and restores it on subsequent visits
+3. **DOM Class Management**: Automatically adds/removes 'dark' class to `document.documentElement` and `document.body`
+4. **Smart Initialization**: Uses saved preference > system preference > 'light' as fallback
+
+### Manual Control (Controlled Mode)
+
+When `theme` and `onThemeChange` props are provided:
+
+- Component operates in controlled mode
+- You manage the theme state in your application
+- No automatic DOM manipulation (you handle theme application)
+
+### Visual Features
+
+- **Smooth Toggle Animation**: Animated switch with thumb that slides between positions
+- **Dynamic Icons**: Sun icon (☀️) for light theme, Moon icon (🌙) for dark theme from Lucide React
+- **Size Variants**: Three sizes with appropriately scaled icons (12px, 16px, 20px)
+- **PM7 Branding**: Consistent styling that matches PM7 design system
+
+### Accessibility Features
+
+- **Keyboard Navigation**: Full support for Tab, Enter, and Space key interactions
+- **ARIA Labels**: Dynamic aria-label that announces current action ("Switch to dark mode")
+- **Focus Indicators**: Clear visual focus states for keyboard users
+- **Screen Reader Support**: Proper button semantics and role attributes
+
+## Advanced Usage
+
+### Integration with React Context
 
 ```tsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const ThemeContext = createContext();
+const ThemeContext = createContext<{
+  theme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
+}>({
+  theme: 'light',
+  setTheme: () => {}
+});
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setTheme] = useState<ThemeType>('light');
   
-  const toggleTheme = (newTheme) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
+  useEffect(() => {
+    // Apply theme to document
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
   
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -123,20 +179,20 @@ export const useTheme = () => useContext(ThemeContext);
 
 // Usage in component
 function Header() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   
   return (
     <header>
       <PM7ThemeToggle
         theme={theme}
-        onThemeChange={toggleTheme}
+        onThemeChange={setTheme}
       />
     </header>
   );
 }
 ```
 
-### With Next.js and next-themes
+### Integration with Next.js and next-themes
 
 ```tsx
 import { useTheme } from 'next-themes';
@@ -146,178 +202,58 @@ function ThemeToggleButton() {
   
   return (
     <PM7ThemeToggle
-      theme={theme}
+      theme={theme as ThemeType}
       onThemeChange={setTheme}
     />
   );
 }
 ```
 
-### With localStorage Persistence
+### Integration with Redux
 
 ```tsx
-import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTheme } from './themeSlice';
 
-function ThemeToggleWithPersistence() {
-  const [theme, setTheme] = useState('light');
-  
-  useEffect(() => {
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
-  
-  const handleThemeChange = (newTheme) => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
+function ThemeToggleWrapper() {
+  const theme = useSelector((state: RootState) => state.theme.current);
+  const dispatch = useDispatch();
   
   return (
-    <PM7ThemeToggle
+    <PM7ThemeToggle 
       theme={theme}
-      onThemeChange={handleThemeChange}
+      onThemeChange={(newTheme) => dispatch(setTheme(newTheme))}
     />
   );
 }
 ```
 
-## Styling Variants
-
-### Default Variant
-
-```tsx
-<PM7ThemeToggle variant="default" />
-```
-
-### Outline Variant
-
-```tsx
-<PM7ThemeToggle variant="outline" />
-```
-
-### Ghost Variant
-
-```tsx
-<PM7ThemeToggle variant="ghost" />
-```
-
-### With Label
-
-```tsx
-<PM7ThemeToggle showLabel={true} />
-```
-
-## PM7 Styling & Theming
+## Styling & Customization
 
 ### PM7 Brand Colors
 
-- **Primary Blue**: #1C86EF (active state)
-- **Background**: Adapts to current theme
-- **Border**: #D4D4D4 (light mode), #525252 (dark mode)
-- **Icon Color**: High contrast for visibility
+The toggle uses PM7's design system colors and follows the brand guidelines for consistent appearance across all PM7 applications.
 
-### Custom Styling
+### Custom CSS Classes
 
 ```tsx
 <PM7ThemeToggle
-  className="custom-theme-toggle"
-  style={{ 
-    borderRadius: '50%',
-    padding: '12px'
-  }}
+  className="my-custom-toggle border-2 border-gray-300"
+  size="large"
 />
 ```
 
-## Advanced Features
+### CSS Variables and Customization
 
-### System Theme Detection
+The component uses CSS custom properties that can be overridden:
 
-```tsx
-import React, { useState, useEffect } from 'react';
-
-function SystemThemeToggle() {
-  const [theme, setTheme] = useState('light');
-  
-  useEffect(() => {
-    // Detect system preference
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const systemTheme = mediaQuery.matches ? 'dark' : 'light';
-    
-    // Use saved preference or system preference
-    const savedTheme = localStorage.getItem('theme') || systemTheme;
-    setTheme(savedTheme);
-    
-    // Listen for system changes
-    const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
-    };
-    
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-  
-  return (
-    <PM7ThemeToggle
-      theme={theme}
-      onThemeChange={setTheme}
-    />
-  );
+```css
+.pm7-theme-toggle {
+  /* Override PM7 defaults if needed */
+  --toggle-background: #your-color;
+  --toggle-thumb: #your-thumb-color;
 }
 ```
-
-### Animated Theme Transition
-
-```tsx
-/* Add to your CSS */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Usage */
-<PM7ThemeToggle
-  theme={theme}
-  onThemeChange={(newTheme) => {
-    // Add transition class
-    document.documentElement.classList.add('theme-transitioning');
-    
-    setTheme(newTheme);
-    
-    // Remove transition class after animation
-    setTimeout(() => {
-      document.documentElement.classList.remove('theme-transitioning');
-    }, 300);
-  }}
-/>
-```
-
-## Accessibility Features
-
-**Built-in Accessibility:**
-
-- Keyboard navigation (Tab, Enter, Space)
-- ARIA attributes for screen readers
-- Focus indicators
-- High contrast support
-- Proper button semantics
-- Theme change announcements
-
-## Best Practices
-
-**Recommended Usage:**
-
-- Place theme toggle in header or navigation area
-- Persist user preference in localStorage
-- Respect system theme preferences initially
-- Use consistent iconography (sun/moon)
-- Provide smooth transitions between themes
-- Test with both light and dark backgrounds
-- Ensure toggle is accessible via keyboard
-
-**Important**: The PM7ThemeToggle component requires the PM7 CSS file to be imported for proper styling. Make sure to include `import 'pm7-ui-style-guide/src/components/theme-toggle/pm7-theme-toggle.css';` in your application.
 
 ## Common Patterns
 
@@ -332,10 +268,7 @@ function SystemThemeToggle() {
   <nav className="flex items-center space-x-4">
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
-    <PM7ThemeToggle 
-      theme={theme} 
-      onThemeChange={setTheme} 
-    />
+    <PM7ThemeToggle size="medium" />
   </nav>
 </header>
 ```
@@ -346,32 +279,55 @@ function SystemThemeToggle() {
 <div className="settings-panel">
   <h3>Appearance</h3>
   
-  <div className="setting-item">
-    <label>Theme</label>
-    <PM7ThemeToggle
-      theme={theme}
-      onThemeChange={setTheme}
-      showLabel={true}
-      variant="outline"
-    />
+  <div className="setting-item flex justify-between items-center">
+    <label>Dark Mode</label>
+    <PM7ThemeToggle size="small" />
   </div>
 </div>
 ```
 
-## Performance Considerations
+### Mobile Navigation
 
-- Component is lightweight with minimal re-renders
-- Theme changes are efficiently handled through CSS variables
-- Icons are optimized for fast rendering
-- Animations use CSS transforms for smooth performance
+```tsx
+<div className="mobile-nav">
+  <button>Menu</button>
+  <PM7ThemeToggle size="small" />
+</div>
+```
+
+## Best Practices
+
+**Recommended Usage:**
+
+- Use uncontrolled mode for simple implementations (no props needed)
+- Use controlled mode when integrating with global state management
+- Place in header, navigation, or settings areas for discoverability
+- Choose appropriate size for the UI context
+- Test with both keyboard and mouse interactions
+- Ensure toggle remains accessible in both light and dark themes
+
+**Performance Tips:**
+
+- Component is lightweight and optimized for frequent theme changes
+- Uses CSS transforms for smooth animations
+- Minimal re-renders in both controlled and uncontrolled modes
 
 ## Browser Support
 
-PM7ThemeToggle supports all modern browsers including:
-
+PM7ThemeToggle supports all modern browsers:
 - Chrome 88+
 - Firefox 85+
 - Safari 14+
 - Edge 88+
 
-*For older browser support, ensure appropriate polyfills are included in your build process.*
+*Requires modern browser support for CSS custom properties and prefer-color-scheme media query.*
+
+## Important Notes
+
+- **CSS Import Required**: Must import pm7-theme-toggle.css for proper styling
+- **Lucide React Dependency**: Icons are provided by lucide-react package
+- **Automatic Persistence**: Uncontrolled mode automatically saves preference to localStorage
+- **System Preference**: Respects user's system color scheme preference initially
+- **DOM Management**: Uncontrolled mode automatically manages 'dark' class on document elements
+
+*Built with modern React patterns and PM7 design system for consistent, accessible theme switching.*

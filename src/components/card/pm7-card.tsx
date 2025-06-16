@@ -27,11 +27,31 @@ PM7Card.displayName = "PM7Card"
 
 export interface PM7CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   theme?: 'light' | 'dark';
+  variant?: 'default' | 'dark';
   className?: string;
 }
-const PM7CardHeader = ({ className = "", theme = 'light', ...props }: PM7CardHeaderProps) => (
-  <div className={`pm7-card-header flex flex-col space-y-1.5 text-center sm:text-left ${className} ${theme === 'dark' ? 'dark' : ''}`} {...props} />
-)
+const PM7CardHeader = ({ className = "", theme = 'light', variant = 'default', ...props }: PM7CardHeaderProps) => {
+  const getDarkHeaderStyles = () => {
+    if (variant === 'dark') {
+      return {
+        backgroundColor: theme === 'dark' ? '#374151' : '#f3f4f6',
+        color: theme === 'dark' ? '#ffffff' : '#111827',
+        margin: '-1.5rem -1.5rem 1rem -1.5rem',
+        padding: '1rem 1.5rem',
+        borderRadius: '0.5rem 0.5rem 0 0'
+      };
+    }
+    return {};
+  };
+
+  return (
+    <div 
+      className={`pm7-card-header flex flex-col space-y-1.5 text-center sm:text-left ${className} ${theme === 'dark' ? 'dark' : ''}`} 
+      style={{ ...getDarkHeaderStyles(), ...props.style }}
+      {...props} 
+    />
+  );
+}
 PM7CardHeader.displayName = "PM7CardHeader"
 
 export interface PM7CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {

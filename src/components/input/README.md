@@ -1,242 +1,214 @@
-# PM7Input Component - Complete Integration Guide
+# PM7Input Configuration - Complete Integration Guide
 
-**PM7Input** is a React input component that provides PM7-branded styling on top of standard HTML input elements. It offers consistent styling, proper focus states, and support for various input types while maintaining accessibility standards.
+**inputRules** is a configuration object that provides PM7-branded styling rules for input components. It defines focus border behavior and visual styling guidelines to ensure consistent input appearance across PM7 applications.
 
 **📖 Read Documentation**: [https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/input/README.md](https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/input/README.md)
 
 **✏️ Edit Documentation**: [https://github.com/patrickmast/pm7-ui-style-guide/edit/main/src/components/input/README.md](https://github.com/patrickmast/pm7-ui-style-guide/edit/main/src/components/input/README.md)
 
 **Package**: pm7-ui-style-guide  
-**Component**: PM7Input (React input component with PM7 styling)  
+**Component**: inputRules (Configuration object for PM7 input styling)  
 **CSS File**: No separate CSS file required - uses global PM7 styling rules  
 **Dependencies**: None
 
-## Installation & Usage
+## Installation
 
-### Basic Import
+```bash
+npm install pm7-ui-style-guide
+```
+
+## Import
 
 ```typescript
-import { PM7Input } from 'pm7-ui-style-guide';
-// or
-import { Input } from 'pm7-ui-style-guide';
+import { inputRules } from 'pm7-ui-style-guide';
 ```
 
-### CSS Import (Required)
+## Configuration Reference
 
-*Note: The PM7Input component does not require a separate CSS import as it uses the global PM7 styling rules.*
+The `inputRules` object provides the following configuration options:
 
-## Basic Examples
+### focusBorderColor
 
-### Text Input
+- **Type**: `string`
+- **Default**: `'primary'`
+- **Description**: Controls the border color when an input field receives focus
 
-```tsx
-<PM7Input
-  type="text"
-  placeholder="Enter your name"
-  value={value}
-  onChange={(e) => setValue(e.target.value)}
-/>
+**Options:**
+- `'primary'` - Uses PM7 primary brand color #1C86EF (default)
+- `'red'` - Red border for error states
+- `'green'` - Green border for success states
+- Custom hex color (e.g., `'#FF5722'`)
+
+### alwaysShowBorder
+
+- **Type**: `boolean`
+- **Default**: `true`
+- **Description**: Determines whether input fields should always display a border or only show border on focus
+
+**Options:**
+- `true` - Always show border (default, recommended for PM7 styling)
+- `false` - Only show border on focus (minimal styling)
+
+## Usage Examples
+
+### Default Configuration
+
+```typescript
+import { inputRules } from 'pm7-ui-style-guide';
+
+// Default configuration
+console.log(inputRules);
+// Output: { focusBorderColor: 'primary', alwaysShowBorder: true }
 ```
 
-### Email Input
+### Custom Border Color
 
-```tsx
-<PM7Input
-  type="email"
-  placeholder="Enter your email"
-  required
-/>
+```typescript
+import { inputRules } from 'pm7-ui-style-guide';
+
+// Set custom focus border color
+inputRules.focusBorderColor = '#FF5722'; // Custom orange color
+
+// For error states
+inputRules.focusBorderColor = 'red';
+
+// For success states
+inputRules.focusBorderColor = 'green';
 ```
 
-### Password Input
+### Border Display Configuration
 
-```tsx
-<PM7Input
-  type="password"
-  placeholder="Enter password"
-  minLength={8}
-/>
+```typescript
+import { inputRules } from 'pm7-ui-style-guide';
+
+// Always show borders (recommended)
+inputRules.alwaysShowBorder = true;
+
+// Show borders only on focus (minimal styling)
+inputRules.alwaysShowBorder = false;
 ```
 
-### Number Input
+### Runtime Configuration
 
-```tsx
-<PM7Input
-  type="number"
-  placeholder="Enter amount"
-  min={0}
-  max={1000}
-  step={0.01}
-/>
-```
+```typescript
+import { inputRules } from 'pm7-ui-style-guide';
 
-## Input Types
-
-**Supported Input Types:**
-
-- `text` - Standard text input
-- `email` - Email input with validation
-- `password` - Password input (masked)
-- `number` - Numeric input
-- `tel` - Telephone number input
-- `url` - URL input
-- `search` - Search input
-- `date` - Date picker input
-- `time` - Time picker input
-- `datetime-local` - Date and time input
-
-## Form Integration
-
-### With Form Labels
-
-```tsx
-<div>
-  <label htmlFor="username">Username</label>
-  <PM7Input
-    id="username"
-    type="text"
-    placeholder="Enter username"
-    required
-  />
-</div>
-```
-
-### With Error States
-
-```tsx
-<PM7Input
-  type="email"
-  placeholder="Enter email"
-  className={hasError ? 'border-red-500' : ''}
-  aria-invalid={hasError}
-  aria-describedby={hasError ? 'email-error' : undefined}
-/>
-{hasError && (
-  <p id="email-error" className="text-red-500 text-sm mt-1">
-    Please enter a valid email address
-  </p>
-)}
-```
-
-## API Reference
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `type` | string | "text" | HTML input type (text, email, password, etc.) |
-| `placeholder` | string | - | Placeholder text |
-| `value` | string | - | Input value (for controlled components) |
-| `defaultValue` | string | - | Default value (for uncontrolled components) |
-| `onChange` | function | - | Change event handler |
-| `onFocus` | function | - | Focus event handler |
-| `onBlur` | function | - | Blur event handler |
-| `disabled` | boolean | false | Whether the input is disabled |
-| `required` | boolean | false | Whether the input is required |
-| `readOnly` | boolean | false | Whether the input is read-only |
-| `autoComplete` | string | - | Autocomplete hint for the input |
-| `autoFocus` | boolean | false | Whether to auto-focus the input |
-| `maxLength` | number | - | Maximum number of characters |
-| `minLength` | number | - | Minimum number of characters |
-| `min` | number/string | - | Minimum value (for number/date inputs) |
-| `max` | number/string | - | Maximum value (for number/date inputs) |
-| `step` | number/string | - | Step value (for number inputs) |
-| `pattern` | string | - | Regex pattern for validation |
-| `className` | string | - | Additional CSS classes |
-| `style` | object | - | Inline styles |
-
-## Styling & Theming
-
-### PM7 Brand Colors
-
-- **Primary Blue**: #1C86EF (focus border)
-- **Border Color**: #D4D4D4 (light mode), #525252 (dark mode)
-- **Background**: White (light mode), Dark (dark mode)
-
-### Custom Styling
-
-```tsx
-<PM7Input
-  className="w-full bg-gray-50 border-2"
-  style={{ minHeight: '48px' }}
-/>
-```
-
-## Accessibility Features
-
-**Built-in Accessibility:**
-
-- Proper keyboard navigation
-- Screen reader support
-- ARIA attributes support
-- Focus management
-- High contrast support
-- Label association
-
-## Form Validation
-
-### HTML5 Validation
-
-```tsx
-<PM7Input
-  type="email"
-  required
-  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"
-  title="Please enter a valid email address"
-/>
-```
-
-### Custom Validation
-
-```tsx
-const [value, setValue] = useState('');
-const [error, setError] = useState('');
-
-const validateInput = (inputValue) => {
-  if (inputValue.length < 3) {
-    setError('Input must be at least 3 characters');
-    return false;
+// Dynamic configuration based on theme or state
+const configureInputs = (theme: 'light' | 'dark', hasErrors: boolean) => {
+  if (hasErrors) {
+    inputRules.focusBorderColor = 'red';
+  } else {
+    inputRules.focusBorderColor = 'primary';
   }
-  setError('');
-  return true;
+  
+  // Always show borders for better visibility
+  inputRules.alwaysShowBorder = true;
 };
-
-<PM7Input
-  value={value}
-  onChange={(e) => {
-    setValue(e.target.value);
-    validateInput(e.target.value);
-  }}
-  className={error ? 'border-red-500' : ''}
-/>
 ```
+
+## Integration with Form Libraries
+
+### React Hook Form
+
+```typescript
+import { inputRules } from 'pm7-ui-style-guide';
+import { useForm } from 'react-hook-form';
+
+const MyForm = () => {
+  const { register, formState: { errors } } = useForm();
+  
+  // Configure input styling based on validation state
+  React.useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      inputRules.focusBorderColor = 'red';
+    } else {
+      inputRules.focusBorderColor = 'primary';
+    }
+  }, [errors]);
+
+  return (
+    <form>
+      <input {...register('email', { required: true })} />
+    </form>
+  );
+};
+```
+
+### Formik
+
+```typescript
+import { inputRules } from 'pm7-ui-style-guide';
+import { Formik, Form, Field } from 'formik';
+
+const MyForm = () => {
+  return (
+    <Formik
+      initialValues={{ email: '' }}
+      validate={(values) => {
+        const errors = {};
+        // Configure styling based on validation
+        if (Object.keys(errors).length > 0) {
+          inputRules.focusBorderColor = 'red';
+        } else {
+          inputRules.focusBorderColor = 'primary';
+        }
+        return errors;
+      }}
+    >
+      <Form>
+        <Field name="email" type="email" />
+      </Form>
+    </Formik>
+  );
+};
+```
+
+## PM7 Brand Guidelines
+
+### Colors
+- **Primary**: #1C86EF (PM7 blue) - Default focus border color
+- **Error State**: Red border for form validation errors
+- **Success State**: Green border for successful validation
+- **Border**: Always visible for consistent UI appearance
+
+### Design Principles
+- Consistent input styling across all PM7 applications
+- Clear visual feedback for user interactions
+- Accessibility-friendly focus indicators
+- Professional appearance aligned with PM7 branding
 
 ## Best Practices
 
 **Recommended Usage:**
 
-- Always provide meaningful placeholder text
-- Use appropriate input types for better UX
-- Include proper labels for accessibility
-- Implement proper error handling and validation
-- Use autocomplete attributes when appropriate
-- Test with keyboard navigation
-- Ensure sufficient color contrast
+- Always use PM7 primary color for default focus states
+- Use red color for error/validation states
+- Use green color for success/validated states
+- Keep `alwaysShowBorder` as `true` for consistent appearance
+- Configure colors dynamically based on form state
+- Test focus states with keyboard navigation
 
-**Note**: The PM7Input component uses global PM7 styling rules and does not require a separate CSS import.
+## Implementation Notes
 
-## Performance Considerations
+- **Global Configuration**: The `inputRules` object affects all input styling
+- **Runtime Modification**: Configuration can be changed at any time
+- **No CSS Required**: Uses global PM7 styling rules
+- **Framework Agnostic**: Works with any React form library
+- **Accessibility**: Follows WCAG guidelines for focus indicators
 
-- Component is lightweight and optimized for performance
-- Use controlled components only when necessary
-- Debounce onChange handlers for expensive operations
-- Consider using React.memo for static inputs
+## API Reference
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `focusBorderColor` | `string` | `'primary'` | Border color on focus |
+| `alwaysShowBorder` | `boolean` | `true` | Always show border vs focus only |
 
 ## Browser Support
 
-PM7Input supports all modern browsers including:
-
+inputRules configuration supports all modern browsers:
 - Chrome 88+
 - Firefox 85+
 - Safari 14+
 - Edge 88+
 
-*For older browser support, ensure appropriate polyfills are included in your build process.*
+*The configuration object is a simple JavaScript object and has universal browser support.*

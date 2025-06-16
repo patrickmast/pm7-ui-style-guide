@@ -78,8 +78,10 @@ npm install                    # Install dependencies
 npm run dev                   # Start examples app (serves from /examples on port 5173)
 npm run build                 # Build the library for distribution to dist/
 npm run build:examples       # Build examples app for Vercel deployment
+npm run build:static         # Build static HTML documentation files
 npm run lint                  # Run ESLint with TypeScript checking
 npm run preview              # Preview built examples app
+npm run prerender            # Generate pre-rendered static documentation
 ```
 
 ### Testing Changes Locally
@@ -89,20 +91,50 @@ npm link                      # In this repository
 npm link pm7-ui-style-guide  # In the consuming project
 ```
 
+### Development Workflow Commands
+```bash
+# Check for TypeScript errors
+npx tsc --noEmit
+
+# Watch for file changes while developing
+npm run dev  # Auto-reloads on changes
+
+# Test library build before publishing
+npm run build && npm pack
+
+# Clean build artifacts
+rm -rf dist/ examples/dist/
+```
+
 ### Key Development Patterns
 
-1. **Dual Vite Configuration**: 
-   - `vite.config.js` - Library build (production) and examples dev server
-   - `vite.config.examples.js` - Examples app build for deployment
+1. **Dual Vite Configuration System**: 
+   - `vite.config.js` - Conditional config: library build (production) vs examples dev server (development)
+   - `vite.config.examples.js` - Dedicated config for examples app deployment to Vercel
+   - **Critical**: `npm run dev` serves examples app from `examples/` directory, NOT the root
 
-2. **Component Architecture**:
+2. **Component Architecture Pattern**:
    - Each component has its own directory with implementation, exports, and docs
    - Components export both PM7-prefixed versions and clean aliases
    - CSS files are co-located with components when needed
+   - **Pattern**: `pm7-[component].tsx` for implementation, `index.ts/tsx` for exports
 
-3. **Export Strategy**:
+3. **Export Strategy (Dual Export Pattern)**:
    - Main exports in `src/index.ts` provide both clean names and PM7-prefixed versions
    - Example: `export { PM7Menu as Menu }` allows both `import { Menu }` and `import { PM7Menu }`
+   - **Important**: This allows consuming applications flexibility in naming
+
+4. **CSS Architecture Pattern**:
+   - Component-specific CSS files (e.g., `pm7-menu.css`, `pm7-dialog.css`) 
+   - Global CSS variables in `src/css/variables.css`
+   - Main bundle CSS in `src/style.css`
+   - **Critical**: Consuming apps must import component CSS files separately
+
+5. **Radix UI Wrapper Pattern**:
+   - All components are wrappers around Radix UI primitives
+   - PM7 styling applied via CSS classes and inline styles
+   - Maintains accessibility while providing PM7 branding
+   - **Example**: `PM7Menu` wraps `@radix-ui/react-dropdown-menu`
 
 ## PM7 Brand Guidelines & Styling Rules
 
@@ -151,6 +183,38 @@ npm link pm7-ui-style-guide  # In the consuming project
 3. Test locally by linking: `npm link` in this repo, `npm link pm7-ui-style-guide` in test project
 4. Update version with `npm version patch|minor|major`
 5. Publish with `npm publish --access public`
+
+## CRITICAL DOCUMENTATION REQUIREMENT
+
+**MEMORY: Documentation Synchronization Rule**
+
+When modifying ANY component prop, interface, or functionality:
+
+1. **ALWAYS update THREE locations simultaneously:**
+   - Component implementation (`src/components/[name]/pm7-[name].tsx`)
+   - Component README (`src/components/[name]/README.md`)
+   - Usage page (`examples/example-[name]-usage.tsx`)
+
+2. **ALL props MUST be documented in Usage pages:**
+   - Every prop in the component interface MUST appear in the usage page
+   - Include type, default value, and clear description
+   - Provide examples showing how to use each prop
+   - Update the props table with ALL available props
+
+3. **Documentation must be complete and consistent:**
+   - Props table in usage page must match component interface exactly
+   - README examples must reflect current component API
+   - No prop should exist in code without documentation
+   - No documentation should exist for non-existent props
+
+4. **Verification checklist:**
+   - [ ] Component interface updated
+   - [ ] README.md updated with new props/examples
+   - [ ] Usage page props table updated
+   - [ ] Usage page examples show new functionality
+   - [ ] All three sources have consistent information
+
+**This rule applies to ALL components: Button, Card, Dialog, Input, Menu, TabSelector, ThemeToggle, and any future components.**
 
 ## Important Implementation Notes
 

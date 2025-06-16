@@ -1,6 +1,6 @@
 # PM7Card Component - Complete Integration Guide
 
-**PM7Card** is a React container component that provides PM7-branded styling for creating card layouts. It offers consistent styling, shadows, borders, and spacing while maintaining flexibility for various content types.
+**PM7Card** is a React card component that provides PM7-branded styling for creating structured content containers. It offers consistent styling, proper spacing, theme support, and specialized header variants while maintaining accessibility standards.
 
 **📖 Read Documentation**: [https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/card/README.md](https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/card/README.md)
 
@@ -11,279 +11,269 @@
 **CSS File**: pm7-card.css (required)  
 **Dependencies**: None
 
-## Installation & Usage
+## Installation
 
-### Basic Import
-
-```typescript
-import { PM7Card } from 'pm7-ui-style-guide';
-// or
-import { Card } from 'pm7-ui-style-guide';
+```bash
+npm install pm7-ui-style-guide
 ```
 
-### CSS Import (Required)
+## Import
 
 ```typescript
+// Component import
+import { PM7Card, PM7CardHeader, PM7CardTitle, PM7CardSubTitle, PM7CardFooter } from 'pm7-ui-style-guide';
+
+// CSS import (required)
 import 'pm7-ui-style-guide/src/components/card/pm7-card.css';
 ```
 
-## Basic Examples
+## Basic Usage
 
 ### Simple Card
 
 ```tsx
 import React from 'react';
-import { PM7Card } from 'pm7-ui-style-guide';
+import { PM7Card, PM7CardHeader, PM7CardTitle } from 'pm7-ui-style-guide';
 import 'pm7-ui-style-guide/src/components/card/pm7-card.css';
 
 function MyComponent() {
   return (
-    <PM7Card>
-      <h3>Card Title</h3>
-      <p>This is the card content.</p>
+    <PM7Card theme="light">
+      <PM7CardHeader theme="light">
+        <PM7CardTitle theme="light">Card Title</PM7CardTitle>
+      </PM7CardHeader>
+      <div style={{ padding: '1rem' }}>
+        This is the card content.
+      </div>
     </PM7Card>
   );
 }
 ```
 
-### Card with Header and Footer
+### Card with Dark Header
 
 ```tsx
-<PM7Card>
-  <PM7Card.Header>
-    <h3>Dashboard Overview</h3>
-    <p>Latest statistics and metrics</p>
-  </PM7Card.Header>
-  
-  <PM7Card.Content>
-    <div className="grid grid-cols-2 gap-4">
-      <div>Users: 1,234</div>
-      <div>Revenue: $12,345</div>
-    </div>
-  </PM7Card.Content>
-  
-  <PM7Card.Footer>
-    <button>View Details</button>
-  </PM7Card.Footer>
+<PM7Card theme="light">
+  <PM7CardHeader variant="dark" theme="light">
+    <PM7CardTitle theme="light">Props Reference</PM7CardTitle>
+  </PM7CardHeader>
+  <div style={{ padding: '1rem' }}>
+    Card content with dark header styling
+  </div>
 </PM7Card>
 ```
 
-### Clickable Card
+### Card with Subtitle
 
 ```tsx
-<PM7Card 
-  clickable 
-  onClick={() => console.log('Card clicked')}
->
-  <h3>Clickable Card</h3>
-  <p>This entire card is clickable</p>
+<PM7Card theme="light">
+  <PM7CardHeader theme="light">
+    <PM7CardTitle theme="light">User Profile</PM7CardTitle>
+    <PM7CardSubTitle theme="light">Manage your account settings</PM7CardSubTitle>
+  </PM7CardHeader>
+  <div style={{ padding: '1rem' }}>
+    Profile content here
+  </div>
 </PM7Card>
 ```
 
-## Card Variants
+## Header Variants
 
-### Default Variant
+### Default Header
 
 ```tsx
-<PM7Card variant="default">
-  Default card styling
-</PM7Card>
+<PM7CardHeader theme="light">
+  <PM7CardTitle theme="light">Default Header</PM7CardTitle>
+</PM7CardHeader>
 ```
 
-### Outlined Variant
+### Dark Header
 
 ```tsx
-<PM7Card variant="outlined">
-  Card with border, no shadow
-</PM7Card>
+<PM7CardHeader variant="dark" theme="light">
+  <PM7CardTitle theme="light">Dark Header</PM7CardTitle>
+</PM7CardHeader>
 ```
 
-### Elevated Variant
+The dark header variant provides:
+- Dark background in light theme (#f3f4f6)
+- Darker background in dark theme (#374151)
+- Full-width header with rounded top corners
+- Proper text contrast for accessibility
+
+## Theme Support
+
+All PM7Card components support both light and dark themes:
 
 ```tsx
-<PM7Card variant="elevated">
-  Card with enhanced shadow
+// Light theme
+<PM7Card theme="light">
+  <PM7CardHeader variant="dark" theme="light">
+    <PM7CardTitle theme="light">Light Theme</PM7CardTitle>
+  </PM7CardHeader>
+</PM7Card>
+
+// Dark theme
+<PM7Card theme="dark">
+  <PM7CardHeader variant="dark" theme="dark">
+    <PM7CardTitle theme="dark">Dark Theme</PM7CardTitle>
+  </PM7CardHeader>
 </PM7Card>
 ```
 
 ## API Reference
 
+### PM7Card Props
+
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | ReactNode | - | Card content |
-| `variant` | `'default' \| 'outlined' \| 'elevated'` | `'default'` | Visual style variant |
-| `clickable` | boolean | false | Makes the entire card clickable |
-| `onClick` | function | - | Click handler (only when clickable=true) |
-| `className` | string | - | Additional CSS classes |
-| `padding` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Internal padding size |
-| `rounded` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Border radius size |
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme for proper color rendering |
+| `className` | `string` | - | Additional CSS classes |
+| `...props` | `HTMLDivElement` | - | All standard div attributes |
 
-## Compound Components
+### PM7CardHeader Props
 
-### PM7Card.Header
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme for proper color rendering |
+| `variant` | `'default' \| 'dark'` | `'default'` | Header styling variant |
+| `className` | `string` | - | Additional CSS classes |
+| `...props` | `HTMLDivElement` | - | All standard div attributes |
+
+### PM7CardTitle Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme for proper color rendering |
+| `className` | `string` | - | Additional CSS classes |
+| `...props` | `HTMLHeadingElement` | - | All standard h3 attributes |
+
+### PM7CardSubTitle Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme for proper color rendering |
+| `className` | `string` | - | Additional CSS classes |
+| `...props` | `HTMLParagraphElement` | - | All standard p attributes |
+
+### PM7CardFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme for proper color rendering |
+| `className` | `string` | - | Additional CSS classes |
+| `...props` | `HTMLDivElement` | - | All standard div attributes |
+
+## Common Use Cases
+
+### Props Documentation Cards
 
 ```tsx
-<PM7Card.Header className="border-b">
-  <h2>Card Title</h2>
-  <p>Subtitle or description</p>
-</PM7Card.Header>
-```
-
-### PM7Card.Content
-
-```tsx
-<PM7Card.Content>
-  Main card content goes here
-</PM7Card.Content>
-```
-
-### PM7Card.Footer
-
-```tsx
-<PM7Card.Footer className="border-t">
-  <div className="flex justify-end gap-2">
-    <button>Cancel</button>
-    <button>Save</button>
+<PM7Card theme={theme}>
+  <PM7CardHeader variant="dark" theme={theme}>
+    <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+      propName <span style={{ fontSize: '0.875rem', fontWeight: 'normal' }}>(type, default)</span>
+    </PM7CardTitle>
+  </PM7CardHeader>
+  <div style={{ padding: '0 0.5rem' }}>
+    <p>Description of what this prop does.</p>
+    <div style={{ marginTop: '0.5rem' }}>
+      <strong>Options:</strong>
+      <div style={{ marginLeft: '1rem' }}>
+        <div><code>'option1'</code> - Description</div>
+        <div><code>'option2'</code> - Description</div>
+      </div>
+    </div>
   </div>
-</PM7Card.Footer>
-```
-
-## Common Patterns
-
-### Profile Card
-
-```tsx
-<PM7Card variant="elevated">
-  <PM7Card.Header className="text-center">
-    <img src="avatar.jpg" className="w-16 h-16 rounded-full mx-auto" />
-    <h3>John Doe</h3>
-    <p>Software Engineer</p>
-  </PM7Card.Header>
-  
-  <PM7Card.Content>
-    <div className="space-y-2">
-      <div>Email: john@example.com</div>
-      <div>Location: San Francisco</div>
-    </div>
-  </PM7Card.Content>
-  
-  <PM7Card.Footer>
-    <button className="w-full">View Profile</button>
-  </PM7Card.Footer>
 </PM7Card>
 ```
 
-### Statistics Card
+### Information Cards
 
 ```tsx
-<PM7Card>
-  <PM7Card.Header>
-    <h3>Total Sales</h3>
-  </PM7Card.Header>
-  
-  <PM7Card.Content>
-    <div className="text-3xl font-bold text-green-600">
-      $24,567
+<PM7Card theme="light">
+  <PM7CardHeader theme="light">
+    <PM7CardTitle theme="light">Statistics</PM7CardTitle>
+    <PM7CardSubTitle theme="light">Monthly overview</PM7CardSubTitle>
+  </PM7CardHeader>
+  <div style={{ padding: '1rem' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+      <div>Users: 1,234</div>
+      <div>Revenue: $12,345</div>
     </div>
-    <div className="text-sm text-gray-600">
-      ↑ 12% from last month
-    </div>
-  </PM7Card.Content>
+  </div>
+  <PM7CardFooter theme="light">
+    <button>View Details</button>
+  </PM7CardFooter>
 </PM7Card>
 ```
 
-### Action Card
+### Settings Cards
 
 ```tsx
-<PM7Card clickable onClick={handleAction}>
-  <PM7Card.Content className="flex items-center">
-    <div className="flex-1">
-      <h3>Create New Project</h3>
-      <p>Start a new project from scratch</p>
+<PM7Card theme="light">
+  <PM7CardHeader variant="dark" theme="light">
+    <PM7CardTitle theme="light">Account Settings</PM7CardTitle>
+  </PM7CardHeader>
+  <div style={{ padding: '1rem' }}>
+    <form>
+      <div style={{ marginBottom: '1rem' }}>
+        <label>Email:</label>
+        <input type="email" />
+      </div>
+      <div style={{ marginBottom: '1rem' }}>
+        <label>Password:</label>
+        <input type="password" />
+      </div>
+    </form>
+  </div>
+  <PM7CardFooter theme="light">
+    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+      <button>Cancel</button>
+      <button>Save</button>
     </div>
-    <div>
-      <Plus className="h-6 w-6" />
-    </div>
-  </PM7Card.Content>
+  </PM7CardFooter>
 </PM7Card>
 ```
 
-## PM7 Styling & Theming
+## PM7 Brand Guidelines
 
-### PM7 Brand Colors
+### Colors
+- **Card Background**: White (light mode), #262626 (dark mode)
+- **Border**: #e2e8f0 (light mode), #525252 (dark mode)
+- **Dark Header Background**: #f3f4f6 (light mode), #374151 (dark mode)
+- **Text**: Proper contrast ratios for accessibility
 
-- **Background**: White (light mode), Dark (dark mode)
-- **Border**: #D4D4D4 (light mode), #525252 (dark mode)
-- **Shadow**: Subtle gray shadows for elevation
-- **Hover State**: Slight shadow increase on clickable cards
-
-### Custom Styling
-
-```tsx
-<PM7Card className="max-w-md mx-auto bg-gradient-to-r from-blue-50 to-indigo-50">
-  Custom styled card
-</PM7Card>
-```
-
-## Responsive Design
-
-### Grid Layout
-
-```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <PM7Card>Card 1</PM7Card>
-  <PM7Card>Card 2</PM7Card>
-  <PM7Card>Card 3</PM7Card>
-</div>
-```
-
-### Responsive Padding
-
-```tsx
-<PM7Card className="p-4 md:p-6 lg:p-8">
-  Responsive padding card
-</PM7Card>
-```
+### Design Principles
+- Clean, minimal design with subtle shadows
+- Consistent spacing and typography
+- Accessible color contrasts
+- Responsive and mobile-friendly
+- PM7 brand color integration (#1C86EF)
 
 ## Accessibility Features
 
-**Built-in Accessibility:**
+- **Semantic HTML**: Proper heading hierarchy and structure
+- **Keyboard Navigation**: Full keyboard accessibility
+- **Screen Reader Support**: Proper labeling and descriptions
+- **High Contrast**: Meets WCAG contrast requirements
+- **Focus Management**: Clear focus indicators
+- **Responsive Design**: Works across all device sizes
 
-- Proper semantic structure
-- Keyboard navigation for clickable cards
-- Focus indicators
-- Screen reader support
-- High contrast compatibility
-- Proper ARIA attributes when interactive
+## Important Notes
 
-## Best Practices
-
-**Recommended Usage:**
-
-- Use cards to group related information
-- Keep card content focused and scannable
-- Use consistent card heights in grids
-- Provide clear visual hierarchy within cards
-- Use clickable cards sparingly for primary actions
-- Ensure adequate spacing between cards
-- Test with different content lengths
-
-**Important**: The PM7Card component requires the PM7 CSS file to be imported for proper styling. Make sure to include `import 'pm7-ui-style-guide/src/components/card/pm7-card.css';` in your application.
-
-## Performance Considerations
-
-- Component is lightweight with minimal overhead
-- Use CSS Grid or Flexbox for efficient card layouts
-- Consider virtualization for large lists of cards
-- Optimize images within cards for faster loading
+- **CSS Import Required**: Must import pm7-card.css for proper styling
+- **Theme Consistency**: Always pass theme prop to all card components
+- **Dark Headers**: Use `variant="dark"` for prominent headers
+- **Responsive**: Cards adapt to container width automatically
+- **Accessibility**: Built-in support for screen readers and keyboard navigation
 
 ## Browser Support
 
-PM7Card supports all modern browsers including:
-
+PM7Card supports all modern browsers:
 - Chrome 88+
 - Firefox 85+
 - Safari 14+
 - Edge 88+
 
-*For older browser support, ensure appropriate polyfills are included in your build process.*
+*Ensure your build process includes appropriate polyfills for older browser support.*

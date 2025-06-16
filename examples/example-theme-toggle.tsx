@@ -27,8 +27,8 @@ const ExampleThemeToggle = ({ theme }: { theme: ThemeType }) => {
     <>
       <PM7TabSelector
         tabs={[
-          { id: 'demo', label: 'Demo' },
           { id: 'overview', label: 'Overview' },
+          { id: 'demo', label: 'Demo' },
           { id: 'usage', label: 'Usage' },
           { id: 'documentation', label: 'Documentation' }
         ]}

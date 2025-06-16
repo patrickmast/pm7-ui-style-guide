@@ -15,8 +15,9 @@ const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
 
   return (
     <>
-      <h3 className="text-xl font-semibold mb-3">PM7Button Component Documentation</h3>
-      <p className="mb-4">Copieer deze link die kan gebruikt worden als documentatie voor dit component:</p>
+      <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>PM7Button Component</h3>
+        <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>Copieer deze link die kan gebruikt worden als documentatie voor dit component:</p>
 
       {/* Copy Link Section */}
       <div style={{ 
@@ -168,9 +169,8 @@ const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
         }}>
           Perfect voor ChatGPT, Claude, en andere AI code assistants
         </div>
+        </div>
       </div>
-
-
     </>
   );
 };

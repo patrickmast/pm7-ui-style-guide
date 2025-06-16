@@ -1,6 +1,6 @@
 # PM7Button Component - Complete Integration Guide
 
-**PM7Button** is a React button component that provides PM7-branded styling on top of standard HTML button elements. It offers consistent styling, proper focus states, and support for various button variants while maintaining accessibility standards.
+**PM7Button** is a React button component that provides PM7-branded styling on top of standard HTML button elements. It offers consistent styling, proper focus states, support for various button variants, and flexible spacing control while maintaining accessibility standards.
 
 **📖 Read Documentation**: [https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/button/README.md](https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/button/README.md)
 
@@ -52,12 +52,11 @@ import { PM7Button } from 'pm7-ui-style-guide';
 function MyComponent() {
   return (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <PM7Button variant="default">Default</PM7Button>
-      <PM7Button variant="destructive">Destructive</PM7Button>
-      <PM7Button variant="outline">Outline</PM7Button>
-      <PM7Button variant="secondary">Secondary</PM7Button>
-      <PM7Button variant="ghost">Ghost</PM7Button>
-      <PM7Button variant="link">Link</PM7Button>
+      <PM7Button>Default</PM7Button>
+      <PM7Button className="pm7-button-outline">Outline</PM7Button>
+      <PM7Button className="pm7-button-secondary">Secondary</PM7Button>
+      <PM7Button className="pm7-button-ghost">Ghost</PM7Button>
+      <PM7Button className="pm7-button-link">Link</PM7Button>
     </div>
   );
 }
@@ -72,11 +71,39 @@ import { PM7Button } from 'pm7-ui-style-guide';
 function MyComponent() {
   return (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <PM7Button size="sm">Small</PM7Button>
-      <PM7Button size="default">Default</PM7Button>
-      <PM7Button size="lg">Large</PM7Button>
-      <PM7Button size="icon">🎯</PM7Button>
+      <PM7Button className="pm7-button-small">Small</PM7Button>
+      <PM7Button>Default</PM7Button>
+      <PM7Button className="pm7-button-large">Large</PM7Button>
     </div>
+  );
+}
+```
+
+## Button Spacing
+
+Control the margin around buttons with the `spacing` prop:
+
+```tsx
+import React from 'react';
+import { PM7Button } from 'pm7-ui-style-guide';
+
+function MyComponent() {
+  return (
+    <>
+      {/* No spacing between buttons */}
+      <PM7Button spacing="none">First</PM7Button>
+      <PM7Button spacing="none">Second</PM7Button>
+      
+      {/* Small spacing (2px) */}
+      <PM7Button spacing="sm">Small</PM7Button>
+      
+      {/* Medium spacing (4px) - default */}
+      <PM7Button spacing="md">Medium</PM7Button>
+      <PM7Button>Default is medium</PM7Button>
+      
+      {/* Large spacing (8px) */}
+      <PM7Button spacing="lg">Large</PM7Button>
+    </>
   );
 }
 ```
@@ -113,11 +140,11 @@ function MyComponent() {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'default' \| 'destructive' \| 'outline' \| 'secondary' \| 'ghost' \| 'link'` | `'default'` | Button style variant |
-| `size` | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'default'` | Button size |
+| `className` | `string` | - | CSS classes for variants: `pm7-button-outline`, `pm7-button-secondary`, `pm7-button-ghost`, `pm7-button-link`, `pm7-button-small`, `pm7-button-large` |
+| `theme` | `'light' \| 'dark'` | - | Theme for proper color rendering (optional) |
+| `spacing` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Margin spacing around button: none (0), sm (2px), md (4px), lg (8px) |
 | `disabled` | `boolean` | `false` | Disable button interactions |
 | `onClick` | `(event: MouseEvent) => void` | - | Click handler function |
-| `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | Button content |
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type |
 
@@ -134,7 +161,7 @@ PM7Button supports all standard HTML button attributes including:
 ### Form Submit Button
 
 ```tsx
-<PM7Button type="submit" variant="default">
+<PM7Button type="submit">
   Submit Form
 </PM7Button>
 ```
@@ -142,24 +169,38 @@ PM7Button supports all standard HTML button attributes including:
 ### Cancel/Close Action
 
 ```tsx
-<PM7Button variant="ghost" onClick={onClose}>
+<PM7Button className="pm7-button-ghost" onClick={onClose}>
   Cancel
 </PM7Button>
 ```
 
-### Delete/Destructive Action
+### Button Groups
 
 ```tsx
-<PM7Button variant="destructive" onClick={onDelete}>
-  Delete Item
+{/* Tight button group with no spacing */}
+<PM7Button spacing="none">Save</PM7Button>
+<PM7Button spacing="none" className="pm7-button-outline">Save & Continue</PM7Button>
+<PM7Button spacing="none" className="pm7-button-ghost">Cancel</PM7Button>
+
+{/* Regular button group with default spacing */}
+<PM7Button>Primary</PM7Button>
+<PM7Button className="pm7-button-secondary">Secondary</PM7Button>
+<PM7Button className="pm7-button-ghost">Cancel</PM7Button>
+```
+
+### Secondary Action
+
+```tsx
+<PM7Button className="pm7-button-secondary" onClick={onSecondaryAction}>
+  Secondary Action
 </PM7Button>
 ```
 
-### Icon Button
+### Link Style Button
 
 ```tsx
-<PM7Button size="icon" variant="outline">
-  ⚙️
+<PM7Button className="pm7-button-link" onClick={onLinkAction}>
+  Link Action
 </PM7Button>
 ```
 
@@ -171,6 +212,8 @@ PM7Button supports all standard HTML button attributes including:
 - **Responsive**: Adapts to different screen sizes
 - **Dark Mode**: Automatically handles light/dark theme switching
 - **Self-contained**: No external dependencies or peer dependencies required
+- **Default Spacing**: Buttons have `md` (4px) margin by default for proper spacing
+- **Flexible Layout**: Use `spacing="none"` for tight button groups or custom layouts
 
 ## Accessibility Features
 
