@@ -2,17 +2,42 @@ import React from 'react';
 
 const ExampleInputOverview = ({ theme }: { theme: 'light' | 'dark' }) => (
   <>
-    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">PM7Input</h3>
-    <p className="mb-4 text-gray-700 dark:text-gray-300">
+    <h3 style={{ 
+      fontSize: '1.25rem', 
+      fontWeight: '600', 
+      marginBottom: '0.75rem', 
+      color: theme === 'dark' ? '#ffffff' : '#111827' 
+    }}>
+      PM7Input
+    </h3>
+    <p style={{ 
+      marginBottom: '1rem', 
+      color: theme === 'dark' ? '#d1d5db' : '#374151' 
+    }}>
       The PM7Input component provides a flexible, theme-aware input field with support for various states and styling options.
     </p>
-    <h4 className="text-lg font-medium mt-4 mb-2 text-gray-900 dark:text-white">Key Features</h4>
-    <ul className="list-disc ml-5 mt-1 mb-4 text-gray-700 dark:text-gray-300">
-      <li>Light and dark theme support</li>
-      <li>Support for disabled and read-only states</li>
-      <li>Configurable focus border color</li>
-      <li>Customizable via className and styling rules</li>
-      <li>Compatible with all standard HTML input types</li>
+    <h4 style={{ 
+      fontSize: '1.125rem', 
+      fontWeight: '500', 
+      marginTop: '1rem', 
+      marginBottom: '0.5rem', 
+      color: theme === 'dark' ? '#ffffff' : '#111827' 
+    }}>
+      Key Features
+    </h4>
+    <ul style={{ 
+      listStyle: 'disc', 
+      marginLeft: '1.25rem', 
+      marginTop: '0.25rem', 
+      marginBottom: '1rem', 
+      color: theme === 'dark' ? '#d1d5db' : '#374151',
+      lineHeight: '1.6'
+    }}>
+      <li style={{ marginBottom: '0.25rem' }}>Light and dark theme support</li>
+      <li style={{ marginBottom: '0.25rem' }}>Support for disabled and read-only states</li>
+      <li style={{ marginBottom: '0.25rem' }}>Configurable focus border color</li>
+      <li style={{ marginBottom: '0.25rem' }}>Customizable via className and styling rules</li>
+      <li style={{ marginBottom: '0.25rem' }}>Compatible with all standard HTML input types</li>
     </ul>
   </>
 );

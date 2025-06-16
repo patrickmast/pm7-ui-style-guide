@@ -1,4 +1,3 @@
-// Enhancement: Synced with README. Updated usage code to use theme="light" and confirmed all features match the latest documentation.
 import React from 'react';
 
 interface Descriptions {
@@ -42,29 +41,85 @@ const descriptions: Descriptions = {
   // Add other languages as needed...
 };
 
-const ExampleMenuOverview = ({ selectedLanguage }: { selectedLanguage: LanguageType }) => {
+const ExampleMenuOverview = ({ selectedLanguage, theme }: { selectedLanguage: LanguageType; theme: 'light' | 'dark' }) => {
   const t = descriptions[selectedLanguage] || descriptions['en'];
+  
+  const containerStyle = {
+    padding: '1.5rem'
+  };
+
+  const headingStyle = {
+    fontSize: '1.875rem',
+    fontWeight: 'bold',
+    marginBottom: '1.5rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const subHeadingStyle = {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const textStyle = {
+    marginBottom: '1rem',
+    color: theme === 'dark' ? '#d1d5db' : '#374151',
+    lineHeight: '1.6'
+  };
+
+  const listStyle = {
+    listStyle: 'disc',
+    marginLeft: '1.25rem',
+    marginBottom: '1.5rem',
+    color: theme === 'dark' ? '#d1d5db' : '#374151'
+  };
+
+  const listItemStyle = {
+    marginBottom: '0.5rem'
+  };
+
+  const codeContainerStyle = {
+    marginTop: '0.5rem',
+    borderRadius: '0.375rem',
+    overflow: 'hidden'
+  };
+
+  const codeBlockStyle = {
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
+    padding: '1rem',
+    overflowX: 'auto' as const,
+    fontSize: '0.875rem'
+  };
+
+  const codeStyle = {
+    color: theme === 'dark' ? '#e5e7eb' : '#1f2937',
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+  };
+
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">{t.heading}</h1>
-      <h2 className="text-2xl font-bold mb-4">{t.props}</h2>
-      <p className="mb-4">{t.intro}</p>
-      <ul className="list-disc ml-5 mb-6">
-        <li className="mb-2">{t.multiLanguage}</li>
-        <li className="mb-2">{t.themeSwitching}</li>
-        <li className="mb-2">{t.submenu}</li>
-        <li className="mb-2">{t.icons}</li>
-        <li className="mb-2">{t.separators}</li>
-        <li className="mb-2">{t.checkboxes}</li>
-        <li className="mb-2">{t.alignment}</li>
-        <li className="mb-2">{t.customIconColor}</li>
+    <div style={containerStyle}>
+      <h1 style={headingStyle}>{t.heading}</h1>
+      <h2 style={subHeadingStyle}>{t.props}</h2>
+      <p style={textStyle}>{t.intro}</p>
+      <ul style={listStyle}>
+        <li style={listItemStyle}>{t.multiLanguage}</li>
+        <li style={listItemStyle}>{t.themeSwitching}</li>
+        <li style={listItemStyle}>{t.submenu}</li>
+        <li style={listItemStyle}>{t.icons}</li>
+        <li style={listItemStyle}>{t.separators}</li>
+        <li style={listItemStyle}>{t.checkboxes}</li>
+        <li style={listItemStyle}>{t.alignment}</li>
+        <li style={listItemStyle}>{t.customIconColor}</li>
       </ul>
-      <p className="mb-4">Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.</p>
-      <h2 className="text-2xl font-bold mb-4">{t.mainComponent}</h2>
-      <p>{t.usage}</p>
-      <div className="mt-2 rounded-md overflow-hidden">
-        <pre className="bg-gray-100 dark:bg-gray-900 p-4 overflow-x-auto text-sm">
-          <code className="text-gray-800 dark:text-gray-200">
+      <p style={textStyle}>
+        Check the <strong>Demo</strong> tab to see the menu in action with different configurations, the <strong>Usage</strong> tab for implementation details, and the <strong>Documentation</strong> tab for complete API reference.
+      </p>
+      <h2 style={subHeadingStyle}>{t.mainComponent}</h2>
+      <p style={textStyle}>{t.usage}</p>
+      <div style={codeContainerStyle}>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>
             {`// For local development, use relative imports
 import { PM7Menu } from '../src/components/menu';
 
@@ -74,7 +129,7 @@ import { PM7Menu } from '../src/components/menu';
   theme="light"
 />`}
           </code>
-        </pre>
+        </div>
       </div>
     </div>
   );

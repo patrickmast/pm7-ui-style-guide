@@ -95,13 +95,19 @@ return (
 
     {/* Tab content */}
     {activeTab === 'overview' && (
+      <div style={{ padding: '1rem' }}>
         <ExampleMenuOverview selectedLanguage={'en'} theme={theme} />
+      </div>
     )}
     {activeTab === 'demo' && (
+      <div style={{ padding: '1rem' }}>
         <ExampleMenuDemo theme={theme} />
+      </div>
     )}
     {activeTab === 'usage' && (
+      <div style={{ padding: '1rem' }}>
         <ExampleMenuUsage selectedLanguage={'en'} />
+      </div>
     )}
     {activeTab === 'documentation' && (
       <div style={{ padding: '1rem' }}>

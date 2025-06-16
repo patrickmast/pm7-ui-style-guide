@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { PM7Card } from '../src/components/card/pm7-card';
 
 const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [copied, setCopied] = useState(false);
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://pm7.tools/button/docs.html');
+      await navigator.clipboard.writeText('https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/button/README.md');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -15,32 +14,9 @@ const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   };
 
   return (
-    <div style={{ 
-      maxWidth: '800px', 
-      margin: '0 auto', 
-      padding: '2rem',
-      backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff',
-      borderRadius: '12px',
-      border: `1px solid ${theme === 'dark' ? '#333' : '#e0e0e0'}`,
-      boxShadow: theme === 'dark' ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.1)'
-    }}>      
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ 
-          fontSize: '1.75rem', 
-          fontWeight: '600',
-          color: theme === 'dark' ? '#ffffff' : '#1a1a1a',
-          marginBottom: '1rem'
-        }}>
-          PM7Button Component Documentation
-        </h2>
-        <p style={{ 
-          fontSize: '1.1rem', 
-          color: theme === 'dark' ? '#a0a0a0' : '#666',
-          lineHeight: '1.6'
-        }}>
-          Copieer deze link die kan gebruikt worden als documentatie voor dit component:
-        </p>
-      </div>
+    <>
+      <h3 className="text-xl font-semibold mb-3">PM7Button Component Documentation</h3>
+      <p className="mb-4">Copieer deze link die kan gebruikt worden als documentatie voor dit component:</p>
 
       {/* Copy Link Section */}
       <div style={{ 
@@ -68,10 +44,10 @@ const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://pm7.tools/button/docs.html
+              https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/button/README.md
             </code>
             <button
-              onClick={() => window.open('https://pm7.tools/button/docs.html', '_blank')}
+              onClick={() => window.open('https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/button/README.md', '_blank')}
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -181,9 +157,9 @@ const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
           lineHeight: '1.6',
           marginBottom: '1rem'
         }}>
-          Deze link bevat pure HTML documentatie die perfect leesbaar is door AI-assistants, 
-          WebFetch tools, en andere automatische systemen. Geen JavaScript, geen menu's - 
-          alleen de essentiële PM7Button implementatie guidance.
+          Deze link bevat complete Markdown documentatie die perfect leesbaar is door AI-assistants, 
+          ontwikkelaars, en andere automatische systemen. Direct toegankelijk op GitHub - 
+          met alle essentiële PM7Button implementatie guidance.
         </p>
         <div style={{ 
           fontSize: '0.9rem',
@@ -194,23 +170,8 @@ const ExampleButtonDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
         </div>
       </div>
 
-      {/* AI Documentation iframe */}
-      <div style={{ marginTop: '2rem' }}>
-        <PM7Card theme={theme} style={{ padding: 0, overflow: 'hidden' }}>
-          <iframe
-            src="https://pm7.tools/button/docs.html"
-            title="PM7 Button AI Documentation"
-            style={{
-              width: '100%',
-              height: '600px',
-              border: 'none',
-              backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff'
-            }}
-          />
-        </PM7Card>
-      </div>
 
-    </div>
+    </>
   );
 };
 

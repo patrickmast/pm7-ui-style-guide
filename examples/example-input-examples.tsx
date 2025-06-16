@@ -24,29 +24,39 @@ const PM7Input = ({
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [key: string]: any;
 }) => {
-  const baseStyles = `
-    block w-full px-3 py-2 rounded-md
-    ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
-    ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-    ${readOnly ? 'cursor-default' : ''}
-    border border-gray-300 dark:border-gray-600
-    focus:outline-none
-    focus:ring-2
-    focus:ring-blue-500
-    focus:border-blue-500
-    transition-colors
-    ${className}
-  `;
+  const inputStyle = {
+    display: 'block',
+    width: '100%',
+    padding: '0.5rem 0.75rem',
+    borderRadius: '0.375rem',
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#ffffff',
+    color: theme === 'dark' ? '#ffffff' : '#111827',
+    border: `1px solid ${theme === 'dark' ? '#525252' : '#d1d5db'}`,
+    outline: 'none',
+    opacity: disabled ? 0.5 : 1,
+    cursor: disabled ? 'not-allowed' : readOnly ? 'default' : 'text',
+    transition: 'border-color 0.2s',
+    ...props.style
+  };
 
   return (
     <input
       type={type}
-      className={baseStyles}
+      className={className}
+      style={inputStyle}
       placeholder={placeholder}
       disabled={disabled}
       readOnly={readOnly}
       value={value}
       onChange={onChange}
+      onFocus={(e) => {
+        if (!disabled && !readOnly) {
+          e.target.style.borderColor = '#3b82f6';
+        }
+      }}
+      onBlur={(e) => {
+        e.target.style.borderColor = theme === 'dark' ? '#525252' : '#d1d5db';
+      }}
       {...props}
     />
   );
@@ -71,15 +81,65 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
     setDialogOpen(true);
   };
 
+  const sectionStyle = {
+    marginBottom: '1.5rem'
+  };
+
+  const titleStyle = {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    marginBottom: '1rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const subTitleStyle = {
+    fontSize: '1.125rem',
+    fontWeight: '500',
+    marginBottom: '0.75rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const containerStyle = {
+    padding: '1rem',
+    border: `1px solid ${theme === 'dark' ? '#525252' : '#e5e7eb'}`,
+    borderRadius: '0.375rem',
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#ffffff'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    marginBottom: '0.5rem',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: theme === 'dark' ? '#d1d5db' : '#374151'
+  };
+
+  const buttonStyle = {
+    fontSize: '0.875rem',
+    color: theme === 'dark' ? '#60a5fa' : '#2563eb',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    textDecoration: 'underline'
+  };
+
+  const gridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1rem',
+    marginBottom: '1rem'
+  };
+
   return (
     <>
-      <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Input Examples</h3>
+      <h3 style={titleStyle}>Input Examples</h3>
+      
       {/* Basic Input */}
-      <div className="mb-6">
-        <h4 className="text-lg font-medium mb-3 text-gray-900 dark:text-white">Basic Input</h4>
-        <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-md">
-          <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+      <div style={sectionStyle}>
+        <h4 style={subTitleStyle}>Basic Input</h4>
+        <div style={containerStyle}>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={labelStyle}>
               Default Input
             </label>
             <PM7Input
@@ -92,19 +152,20 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               'Basic Input',
               'A standard input field with default styling.'
             )}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            style={buttonStyle}
           >
             View Details
           </button>
         </div>
       </div>
+
       {/* Input States */}
-      <div className="mb-6">
-        <h4 className="text-lg font-medium mb-3 text-gray-900 dark:text-white">Input States</h4>
-        <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-md">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div style={sectionStyle}>
+        <h4 style={subTitleStyle}>Input States</h4>
+        <div style={containerStyle}>
+          <div style={gridStyle}>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label style={labelStyle}>
                 Disabled Input
               </label>
               <PM7Input
@@ -114,7 +175,7 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               />
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label style={labelStyle}>
                 Read-only Input
               </label>
               <PM7Input
@@ -129,19 +190,20 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               'Input States',
               'Inputs can be set to disabled or read-only states.'
             )}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            style={buttonStyle}
           >
             View Details
           </button>
         </div>
       </div>
+
       {/* Input Types */}
-      <div className="mb-6">
-        <h4 className="text-lg font-medium mb-3 text-gray-900 dark:text-white">Input Types</h4>
-        <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-md">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div style={sectionStyle}>
+        <h4 style={subTitleStyle}>Input Types</h4>
+        <div style={containerStyle}>
+          <div style={gridStyle}>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label style={labelStyle}>
                 Password Input
               </label>
               <PM7Input
@@ -151,7 +213,7 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               />
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label style={labelStyle}>
                 Number Input
               </label>
               <PM7Input
@@ -166,30 +228,54 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               'Input Types',
               'PM7Input supports all standard HTML input types including text, password, email, number, etc.'
             )}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            style={buttonStyle}
           >
             View Details
           </button>
         </div>
       </div>
+
       {/* Input with Icons */}
-      <div className="mb-6">
-        <h4 className="text-lg font-medium mb-3 text-gray-900 dark:text-white">Input with Icons</h4>
-        <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-md">
-          <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+      <div style={sectionStyle}>
+        <h4 style={subTitleStyle}>Input with Icons</h4>
+        <div style={containerStyle}>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={labelStyle}>
               Search Input
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            <div style={{ position: 'relative' }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: '0.75rem',
+                pointerEvents: 'none'
+              }}>
+                <svg 
+                  style={{ 
+                    width: '1rem', 
+                    height: '1rem', 
+                    color: theme === 'dark' ? '#9ca3af' : '#6b7280' 
+                  }} 
+                  fill="none" 
+                  viewBox="0 0 20 20"
+                >
+                  <path 
+                    stroke="currentColor" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth="2" 
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
                 </svg>
               </div>
               <PM7Input
                 theme={theme}
                 type="search"
-                className="pl-10"
+                style={{ paddingLeft: '2.5rem' }}
                 placeholder="Search..."
               />
             </div>
@@ -199,12 +285,13 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               'Input with Icons',
               'Inputs can be enhanced with icons by wrapping them in a relative container and positioning icons absolutely.'
             )}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            style={buttonStyle}
           >
             View Details
           </button>
         </div>
       </div>
+
       {/* Dialog for input information */}
       <PM7Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
         <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
@@ -214,12 +301,12 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogDescription>
             {activeInputInfo.description}
             {activeInputInfo.type && (
-              <div className="mt-2">
+              <div style={{ marginTop: '0.5rem' }}>
                 <p><strong>Type:</strong> {activeInputInfo.type}</p>
               </div>
             )}
             {activeInputInfo.state && (
-              <div className="mt-2">
+              <div style={{ marginTop: '0.5rem' }}>
                 <p><strong>State:</strong> {activeInputInfo.state}</p>
               </div>
             )}

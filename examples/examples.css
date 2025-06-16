@@ -643,8 +643,16 @@ code.font-mono.bg-gray-100 {
   background-color: var(--code-bg) !important;
 }
 
+/* Main content area styling */
+main {
+  padding: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0;
+}
+
 /* Add space between header and first PM7TabSelector in main */
 main > .mb-4:first-child {
-  margin-top: 1rem;
-  margin-left: 1rem;
+  margin-top: 0;
+  margin-left: 0;
 }

@@ -1,128 +1,226 @@
 import React from 'react';
 
-const ExampleInputUsage = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <div className="mb-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">PM7Input Components</h3>
-    <div className="mb-6">
-      <h4 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Basic Input</h4>
-      <p className="mb-3 text-gray-700 dark:text-gray-300">The core input component with theme support:</p>
-      <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-md mb-4 overflow-x-auto">
-        <code className="text-sm font-mono text-gray-800 dark:text-gray-300">{`import { inputRules } from 'pm7-ui-style-guide';
+const ExampleInputUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
+  const containerStyle = {
+    marginBottom: '1.5rem',
+    padding: '1.5rem',
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#ffffff',
+    borderRadius: '0.5rem',
+    boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    border: `1px solid ${theme === 'dark' ? '#525252' : '#e5e7eb'}`
+  };
+
+  const titleStyle = {
+    fontSize: '1.25rem',
+    fontWeight: '600',
+    marginBottom: '0.75rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const subTitleStyle = {
+    fontSize: '1.125rem',
+    fontWeight: '500',
+    marginBottom: '0.5rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const smallSubTitleStyle = {
+    fontSize: '1rem',
+    fontWeight: '500',
+    marginTop: '1rem',
+    marginBottom: '0.5rem',
+    color: theme === 'dark' ? '#e5e7eb' : '#1f2937'
+  };
+
+  const textStyle = {
+    marginBottom: '0.75rem',
+    color: theme === 'dark' ? '#d1d5db' : '#374151'
+  };
+
+  const codeBlockStyle = {
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
+    padding: '1rem',
+    borderRadius: '0.375rem',
+    marginBottom: '1rem',
+    overflowX: 'auto' as const
+  };
+
+  const codeStyle = {
+    fontSize: '0.875rem',
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+    color: theme === 'dark' ? '#d1d5db' : '#1f2937'
+  };
+
+  const inlineCodeStyle = {
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
+    paddingLeft: '0.25rem',
+    paddingRight: '0.25rem',
+    paddingTop: '0.125rem',
+    paddingBottom: '0.125rem',
+    borderRadius: '0.25rem',
+    fontSize: '0.875rem',
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+  };
+
+  const tableStyle = {
+    width: '100%',
+    fontSize: '0.875rem',
+    textAlign: 'left' as const,
+    color: theme === 'dark' ? '#d1d5db' : '#374151',
+    marginBottom: '1rem'
+  };
+
+  const thStyle = {
+    padding: '0.5rem 1rem',
+    fontSize: '0.75rem',
+    textTransform: 'uppercase' as const,
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
+    color: theme === 'dark' ? '#9ca3af' : '#6b7280'
+  };
+
+  const tdStyle = {
+    padding: '0.5rem 1rem',
+    borderBottom: `1px solid ${theme === 'dark' ? '#525252' : '#e5e7eb'}`
+  };
+
+  const tdBoldStyle = {
+    ...tdStyle,
+    fontWeight: '500'
+  };
+
+  return (
+    <div style={containerStyle}>
+      <h3 style={titleStyle}>PM7Input Components</h3>
+      
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h4 style={subTitleStyle}>Basic Input</h4>
+        <p style={textStyle}>The core input component with theme support:</p>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>{`import { inputRules } from 'pm7-ui-style-guide';
 
 // Basic usage
 <PM7Input
   theme="light"
   placeholder="Enter text..."
 />`}</code>
-      </pre>
-    </div>
-    <div className="mb-6">
-      <h4 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Input Properties</h4>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left text-gray-700 dark:text-gray-300 mb-4">
-          <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-800">
-            <tr>
-              <th className="px-4 py-2">Property</th>
-              <th className="px-4 py-2">Type</th>
-              <th className="px-4 py-2">Default</th>
-              <th className="px-4 py-2">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">theme</td>
-              <td className="px-4 py-2">'light' | 'dark'</td>
-              <td className="px-4 py-2">Required</td>
-              <td className="px-4 py-2">Controls the input's appearance based on theme</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">placeholder</td>
-              <td className="px-4 py-2">string</td>
-              <td className="px-4 py-2">''</td>
-              <td className="px-4 py-2">Placeholder text displayed when input is empty</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">disabled</td>
-              <td className="px-4 py-2">boolean</td>
-              <td className="px-4 py-2">false</td>
-              <td className="px-4 py-2">When true, disables the input and applies disabled styling</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">readOnly</td>
-              <td className="px-4 py-2">boolean</td>
-              <td className="px-4 py-2">false</td>
-              <td className="px-4 py-2">When true, makes the input read-only</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">type</td>
-              <td className="px-4 py-2">string</td>
-              <td className="px-4 py-2">'text'</td>
-              <td className="px-4 py-2">Input type (text, password, email, number, etc.)</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">className</td>
-              <td className="px-4 py-2">string</td>
-              <td className="px-4 py-2">''</td>
-              <td className="px-4 py-2">Additional CSS classes to apply</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">value</td>
-              <td className="px-4 py-2">string</td>
-              <td className="px-4 py-2">undefined</td>
-              <td className="px-4 py-2">Controlled input value</td>
-            </tr>
-            <tr className="border-b border-gray-200 dark:border-gray-700">
-              <td className="px-4 py-2 font-medium">onChange</td>
-              <td className="px-4 py-2">function</td>
-              <td className="px-4 py-2">undefined</td>
-              <td className="px-4 py-2">Handler function for input changes</td>
-            </tr>
-          </tbody>
-        </table>
+        </div>
       </div>
-    </div>
-    <div className="mb-6">
-      <h4 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Input Configuration</h4>
-      <p className="mb-3 text-gray-700 dark:text-gray-300">The PM7Input can be configured using the <code className="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">inputRules</code> object:</p>
-      <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-md mb-4 overflow-x-auto">
-        <code className="text-sm font-mono text-gray-800 dark:text-gray-300">{`// Available configuration options
+
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h4 style={subTitleStyle}>Input Properties</h4>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>Property</th>
+                <th style={thStyle}>Type</th>
+                <th style={thStyle}>Default</th>
+                <th style={thStyle}>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={tdBoldStyle}>theme</td>
+                <td style={tdStyle}>'light' | 'dark'</td>
+                <td style={tdStyle}>Required</td>
+                <td style={tdStyle}>Controls the input's appearance based on theme</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>placeholder</td>
+                <td style={tdStyle}>string</td>
+                <td style={tdStyle}>''</td>
+                <td style={tdStyle}>Placeholder text displayed when input is empty</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>disabled</td>
+                <td style={tdStyle}>boolean</td>
+                <td style={tdStyle}>false</td>
+                <td style={tdStyle}>When true, disables the input and applies disabled styling</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>readOnly</td>
+                <td style={tdStyle}>boolean</td>
+                <td style={tdStyle}>false</td>
+                <td style={tdStyle}>When true, makes the input read-only</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>type</td>
+                <td style={tdStyle}>string</td>
+                <td style={tdStyle}>'text'</td>
+                <td style={tdStyle}>Input type (text, password, email, number, etc.)</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>className</td>
+                <td style={tdStyle}>string</td>
+                <td style={tdStyle}>''</td>
+                <td style={tdStyle}>Additional CSS classes to apply</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>value</td>
+                <td style={tdStyle}>string</td>
+                <td style={tdStyle}>undefined</td>
+                <td style={tdStyle}>Controlled input value</td>
+              </tr>
+              <tr>
+                <td style={tdBoldStyle}>onChange</td>
+                <td style={tdStyle}>function</td>
+                <td style={tdStyle}>undefined</td>
+                <td style={tdStyle}>Handler function for input changes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h4 style={subTitleStyle}>Input Configuration</h4>
+        <p style={textStyle}>
+          The PM7Input can be configured using the <code style={inlineCodeStyle}>inputRules</code> object:
+        </p>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>{`// Available configuration options
 const inputRules = {
   focusBorderColor: 'primary', // Color for border on focus (use 'primary' or a specific color)
   alwaysShowBorder: true,      // Whether to always show border or only on focus
 };`}</code>
-      </pre>
-    </div>
-    <div className="mb-6">
-      <h4 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Input Variants</h4>
-      <h5 className="text-md font-medium mt-4 mb-2 text-gray-800 dark:text-gray-200">Disabled Input</h5>
-      <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-md mb-4 overflow-x-auto">
-        <code className="text-sm font-mono text-gray-800 dark:text-gray-300">{`<PM7Input
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h4 style={subTitleStyle}>Input Variants</h4>
+        
+        <h5 style={smallSubTitleStyle}>Disabled Input</h5>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>{`<PM7Input
   theme="light"
   disabled={true}
   placeholder="Disabled input"
 />`}</code>
-      </pre>
-      <h5 className="text-md font-medium mt-4 mb-2 text-gray-800 dark:text-gray-200">Read-only Input</h5>
-      <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-md mb-4 overflow-x-auto">
-        <code className="text-sm font-mono text-gray-800 dark:text-gray-300">{`<PM7Input
+        </div>
+
+        <h5 style={smallSubTitleStyle}>Read-only Input</h5>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>{`<PM7Input
   theme="light"
   readOnly={true}
   value="Read-only content"
 />`}</code>
-      </pre>
-      <h5 className="text-md font-medium mt-4 mb-2 text-gray-800 dark:text-gray-200">Input with Custom Type</h5>
-      <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-md mb-4 overflow-x-auto">
-        <code className="text-sm font-mono text-gray-800 dark:text-gray-300">{`<PM7Input
+        </div>
+
+        <h5 style={smallSubTitleStyle}>Input with Custom Type</h5>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>{`<PM7Input
   theme="light"
   type="password"
   placeholder="Enter password"
 />`}</code>
-      </pre>
-    </div>
-    <div className="mb-6">
-      <h4 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Controlled Input Example</h4>
-      <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-md mb-4 overflow-x-auto">
-        <code className="text-sm font-mono text-gray-800 dark:text-gray-300">{`import { useState } from 'react';
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h4 style={subTitleStyle}>Controlled Input Example</h4>
+        <div style={codeBlockStyle}>
+          <code style={codeStyle}>{`import { useState } from 'react';
 
 const MyForm = () => {
   const [inputValue, setInputValue] = useState('');
@@ -136,9 +234,10 @@ const MyForm = () => {
     />
   );
 };`}</code>
-      </pre>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default ExampleInputUsage;

@@ -30,90 +30,217 @@ const descriptions: Descriptions = {
   // Add other languages as needed...
 };
 
-const ExampleMenuUsage = ({ selectedLanguage }: { selectedLanguage: LanguageType }) => {
+const ExampleMenuUsage = ({ selectedLanguage, theme }: { selectedLanguage: LanguageType; theme: 'light' | 'dark' }) => {
   const t = descriptions[selectedLanguage] || descriptions['en'];
+  
+  const containerStyle = {
+    padding: '1.5rem'
+  };
+
+  const headingStyle = {
+    fontSize: '1.875rem',
+    fontWeight: 'bold',
+    marginBottom: '1.5rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const subHeadingStyle = {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+    color: theme === 'dark' ? '#ffffff' : '#111827'
+  };
+
+  const textStyle = {
+    marginBottom: '1rem',
+    color: theme === 'dark' ? '#d1d5db' : '#374151',
+    lineHeight: '1.6'
+  };
+
+  const listStyle = {
+    listStyle: 'disc',
+    marginLeft: '1.25rem',
+    marginBottom: '1.5rem',
+    color: theme === 'dark' ? '#d1d5db' : '#374151'
+  };
+
+  const listItemStyle = {
+    marginBottom: '0.5rem'
+  };
+
+  const codeInlineStyle = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
+    padding: '0.125rem 0.5rem',
+    borderRadius: '0.25rem',
+    color: theme === 'dark' ? '#e5e7eb' : '#1f2937'
+  };
+
+  const codeBlockStyle = {
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#f3f4f6',
+    padding: '1rem',
+    borderRadius: '0.375rem',
+    marginBottom: '1rem',
+    overflowX: 'auto' as const,
+    border: `1px solid ${theme === 'dark' ? '#525252' : '#d1d5db'}`
+  };
+
+  const codeStyle = {
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+    color: theme === 'dark' ? '#e5e7eb' : '#1f2937',
+    fontSize: '0.875rem'
+  };
+
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">{t.heading}</h1>
-      <h2 className="text-2xl font-bold mb-4">{t.mainComponent}</h2>
-      <p className="mb-4">The <code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7Menu</code> is the primary component that renders a complete dropdown menu with a hamburger icon trigger.</p>
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-4">{t.props}</h2>
-        <ul className="list-disc ml-5 mb-4">
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuItems</code> - Array of menu items to display (required)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">theme</code> - Theme: 'light' or 'dark' (default: 'light')</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuAlignment</code> - Alignment of the menu: 'start', 'center', or 'end' (default: 'start')</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuTriggerIconColorLight</code> - Icon color for light mode (default: #000000)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuTriggerIconColorDark</code> - Icon color for dark mode (default: #FAFAFA)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuTriggerLabelColorLight</code> - Label color for light mode (default: #000000)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuTriggerLabelColorDark</code> - Label color for dark mode (default: #FAFAFA)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">mobileBreakpoint</code> - Pixel width at which to switch to mobile styling (default: 768)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">showUncheckedIcon</code> - Show icon for unchecked items (default: false)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuTriggerBordered</code> - Show border around trigger (default: false)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">menuTriggerBorderedOnHover</code> - Show border on hover (default: false)</li>
+    <div style={containerStyle}>
+      <h1 style={headingStyle}>{t.heading}</h1>
+      <h2 style={subHeadingStyle}>{t.mainComponent}</h2>
+      <p style={textStyle}>The <code style={codeInlineStyle}>PM7Menu</code> is the primary component that renders a complete dropdown menu with a hamburger icon trigger.</p>
+      <div style={{marginBottom: '1.5rem'}}>
+        <h2 style={subHeadingStyle}>{t.props}</h2>
+        <ul style={listStyle}>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuItems</code> - Array of menu items to display (required)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>theme</code> - Theme: 'light' or 'dark' (default: 'light')</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuAlignment</code> - Alignment of the menu: 'start', 'center', or 'end' (default: 'start')</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuTriggerIconColorLight</code> - Icon color for light mode (default: #000000)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuTriggerIconColorDark</code> - Icon color for dark mode (default: #FAFAFA)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuTriggerLabelColorLight</code> - Label color for light mode (default: #000000)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuTriggerLabelColorDark</code> - Label color for dark mode (default: #FAFAFA)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>mobileBreakpoint</code> - Pixel width at which to switch to mobile styling (default: 768)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>showUncheckedIcon</code> - Show icon for unchecked items (default: false)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuTriggerBordered</code> - Show border around trigger (default: false)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>menuTriggerBorderedOnHover</code> - Show border on hover (default: false)</li>
         </ul>
       </div>
-      <h2 className="text-2xl font-bold mt-8 mb-4">{t.menuItemTypes}</h2>
-      <p className="mb-4">The <code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuItem</code> interface supports various item types:</p>
-      <div className="mb-6">
-        <ul className="list-disc ml-5 mb-4">
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">normal</code> - Standard clickable menu item (default)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">check</code> - Checkbox menu item with checkmark icon</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">radio</code> - Radio button menu item</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">submenu</code> - Item that opens a nested submenu</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">separator</code> - Horizontal line to separate menu sections</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">switch</code> - Toggle switch menu item</li>
+      <h2 style={subHeadingStyle}>{t.menuItemTypes}</h2>
+      <p style={textStyle}>The <code style={codeInlineStyle}>PM7MenuItem</code> interface supports various item types:</p>
+      <div style={{marginBottom: '1.5rem'}}>
+        <ul style={listStyle}>
+          <li style={listItemStyle}><code style={codeInlineStyle}>normal</code> - Standard clickable menu item (default)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>check</code> - Checkbox menu item with checkmark icon</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>radio</code> - Radio button menu item</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>submenu</code> - Item that opens a nested submenu</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>separator</code> - Horizontal line to separate menu sections</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>switch</code> - Toggle switch menu item</li>
         </ul>
       </div>
-      <h2 className="text-2xl font-bold mt-8 mb-4">{t.menuItemProps}</h2>
-      <p className="mb-4">Each menu item accepts the following properties:</p>
-      <div className="mb-6">
-        <ul className="list-disc ml-5 mb-4">
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">id</code> - Unique identifier for the menu item (required)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label</code> - Text or component to display (required)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">type</code> - Menu item type as described above (default: 'normal')</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">onClick</code> - Function to call when the item is clicked</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">icon</code> - Optional icon to display before the label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">rightIcon</code> - Optional icon to display after the label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">disabled</code> - Whether the item is disabled (default: false)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">checked</code> - For check/radio/switch items, whether it's checked (default: false)</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">onChange</code> - For check/radio/switch items, function to call when checked state changes</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">submenuItems</code> - Array of menu items for submenu (required for type: 'submenu')</li>
+      <h2 style={subHeadingStyle}>{t.menuItemProps}</h2>
+      <p style={textStyle}>Each menu item accepts the following properties:</p>
+      <div style={{marginBottom: '1.5rem'}}>
+        <ul style={listStyle}>
+          <li style={listItemStyle}><code style={codeInlineStyle}>id</code> - Unique identifier for the menu item (required)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label</code> - Text or component to display (required)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>type</code> - Menu item type as described above (default: 'normal')</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>onClick</code> - Function to call when the item is clicked</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>icon</code> - Optional icon to display before the label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>rightIcon</code> - Optional icon to display after the label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>disabled</code> - Whether the item is disabled (default: false)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>checked</code> - For check/radio/switch items, whether it's checked (default: false)</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>onChange</code> - For check/radio/switch items, function to call when checked state changes</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>submenuItems</code> - Array of menu items for submenu (required for type: 'submenu')</li>
         </ul>
       </div>
-      <h2 className="text-2xl font-bold mt-8 mb-4">{t.multiLanguageSupport}</h2>
-      <p className="mb-4">Menu items support multiple languages through language-specific label properties:</p>
-      <div className="mb-6">
-        <ul className="list-disc ml-5 mb-4">
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-en</code> - English label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-es</code> - Spanish label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-fr</code> - French label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-de</code> - German label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-nl</code> - Dutch label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-nl-be</code> - Belgian Dutch label</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">label-zh</code> - Chinese label</li>
+      <h2 style={subHeadingStyle}>{t.multiLanguageSupport}</h2>
+      <p style={textStyle}>Menu items support multiple languages through language-specific label properties:</p>
+      <div style={{marginBottom: '1.5rem'}}>
+        <ul style={listStyle}>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-en</code> - English label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-es</code> - Spanish label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-fr</code> - French label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-de</code> - German label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-nl</code> - Dutch label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-nl-be</code> - Belgian Dutch label</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>label-zh</code> - Chinese label</li>
         </ul>
       </div>
-      <h2 className="text-2xl font-bold mt-8 mb-4">{t.primitiveComponents}</h2>
-      <p className="mb-4">For custom menu implementations, you can use these individual primitive components:</p>
-      <div className="mb-6">
-        <ul className="list-disc ml-5 mb-4">
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuRoot</code> - Root component that manages menu state</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuTrigger</code> - Button that toggles the menu</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuContent</code> - Dropdown content container</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuItem</code> - Individual menu item</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuCheckboxItem</code> - Checkbox menu item</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuRadioItem</code> - Radio button menu item</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuSeparator</code> - Horizontal separator line</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuSub</code> - Submenu container</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuSubTrigger</code> - Submenu trigger item</li>
-          <li className="mb-2"><code className="font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PM7MenuSubContent</code> - Submenu content container</li>
+      <h2 style={subHeadingStyle}>{t.primitiveComponents}</h2>
+      <p style={textStyle}>For custom menu implementations, you can use these individual primitive components:</p>
+      <div style={{marginBottom: '1.5rem'}}>
+        <ul style={listStyle}>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuRoot</code> - Root component that manages menu state</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuTrigger</code> - Button that toggles the menu</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuContent</code> - Dropdown content container</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuItem</code> - Individual menu item</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuCheckboxItem</code> - Checkbox menu item</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuRadioItem</code> - Radio button menu item</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuSeparator</code> - Horizontal separator line</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuSub</code> - Submenu container</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuSubTrigger</code> - Submenu trigger item</li>
+          <li style={listItemStyle}><code style={codeInlineStyle}>PM7MenuSubContent</code> - Submenu content container</li>
         </ul>
       </div>
-      <h2 className="text-2xl font-bold mt-8 mb-4">{t.usageExample}</h2>
-      <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto mb-4">
-        <code>{`// For local development, use relative imports\nimport { PM7Menu } from '../src/components/menu';\nimport { HomeIcon, SettingsIcon, LanguagesIcon } from 'lucide-react';\n\n// Define menu items\nconst menuItems = [\n  {\n    id: 'home',\n    label: 'Home',\n    icon: <HomeIcon size={16} />,\n    onClick: () => console.log('Home clicked')\n  },\n  {\n    id: 'settings',\n    label: 'Settings',\n    icon: <SettingsIcon size={16} />,\n    onClick: () => console.log('Settings clicked')\n  },\n  {\n    id: 'separator',\n    type: 'separator'\n  },\n  {\n    id: 'language',\n    label: 'Language',\n    icon: <LanguagesIcon size={16} />,\n    type: 'submenu',\n    submenuItems: [\n      {\n        id: 'en',\n        label: 'English',\n        type: 'check',\n        checked: true,\n        onClick: () => console.log('English selected')\n      },\n      {\n        id: 'es',\n        label: 'Español',\n        type: 'check',\n        checked: false,\n        onClick: () => console.log('Spanish selected')\n      }\n    ]\n  }\n];\n\n// Render menu with different alignments\nfunction MenuExample() {\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <PM7Menu\n        menuItems={menuItems}\n        theme=\"light\"\n        menuAlignment=\"start\"\n      />\n      <PM7Menu\n        menuItems={menuItems}\n        theme=\"light\"\n        menuAlignment=\"center\"\n      />\n      <PM7Menu\n        menuItems={menuItems}\n        theme=\"light\"\n        menuAlignment=\"end\"\n        menuTriggerIconColorLight=\"#1C86EF\"\n      />\n    </div>\n  );\n}`}</code>
-      </pre>
+      <h2 style={subHeadingStyle}>{t.usageExample}</h2>
+      <div style={codeBlockStyle}>
+        <code style={codeStyle}>{`// For local development, use relative imports
+import { PM7Menu } from '../src/components/menu';
+import { HomeIcon, SettingsIcon, LanguagesIcon } from 'lucide-react';
+
+// Define menu items
+const menuItems = [
+  {
+    id: 'home',
+    label: 'Home',
+    icon: <HomeIcon size={16} />,
+    onClick: () => console.log('Home clicked')
+  },
+  {
+    id: 'settings',
+    label: 'Settings',
+    icon: <SettingsIcon size={16} />,
+    onClick: () => console.log('Settings clicked')
+  },
+  {
+    id: 'separator',
+    type: 'separator'
+  },
+  {
+    id: 'language',
+    label: 'Language',
+    icon: <LanguagesIcon size={16} />,
+    type: 'submenu',
+    submenuItems: [
+      {
+        id: 'en',
+        label: 'English',
+        type: 'check',
+        checked: true,
+        onClick: () => console.log('English selected')
+      },
+      {
+        id: 'es',
+        label: 'Español',
+        type: 'check',
+        checked: false,
+        onClick: () => console.log('Spanish selected')
+      }
+    ]
+  }
+];
+
+// Render menu with different alignments
+function MenuExample() {
+  return (
+    <div className="flex flex-col gap-4">
+      <PM7Menu
+        menuItems={menuItems}
+        theme="light"
+        menuAlignment="start"
+      />
+      <PM7Menu
+        menuItems={menuItems}
+        theme="light"
+        menuAlignment="center"
+      />
+      <PM7Menu
+        menuItems={menuItems}
+        theme="light"
+        menuAlignment="end"
+        menuTriggerIconColorLight="#1C86EF"
+      />
+    </div>
+  );
+}`}</code>
+      </div>
     </div>
   );
 };
