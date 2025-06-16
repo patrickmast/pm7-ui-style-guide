@@ -88,14 +88,14 @@
 import { TabSelector } from 'pm7-ui-style-guide';</code></pre>
 
     <h3>CSS Import (Required)</h3>
-    <pre><code>import 'pm7-ui-style-guide/pm7-tab-selector.css';</code></pre>
+    <pre><code>import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';</code></pre>
 
     <h2>Basic Examples</h2>
 
     <h3>Simple Tab Selector</h3>
     <pre><code>import React, { useState } from 'react';
 import { PM7TabSelector } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/pm7-tab-selector.css';
+import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';
 
 function MyComponent() {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -379,7 +379,7 @@ function TabbedInterface() {
     </div>
 
     <div class="warning">
-        <p><strong>Important:</strong> The PM7TabSelector component requires the PM7 CSS file to be imported for proper styling. Make sure to include <code>import 'pm7-ui-style-guide/pm7-tab-selector.css';</code> in your application.</p>
+        <p><strong>Important:</strong> The PM7TabSelector component requires the PM7 CSS file to be imported for proper styling. Make sure to include <code>import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css';</code> in your application.</p>
     </div>
 
     <h2>Common Patterns</h2>

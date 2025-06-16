@@ -182,6 +182,47 @@ The library requires these peer dependencies to be installed by consuming applic
   - `src/css/variables.css` and `src/globals.css` - Global styles
   - `index.d.ts`, `colors.d.ts`, `tokens.d.ts` - TypeScript definitions
 
+## Component Documentation
+
+### Documentation Structure
+The PM7 UI Style Guide uses a "single source of truth" approach for component documentation:
+
+1. **Source Documentation**: `/static/*-doc.html` files
+   - These are the editable HTML documentation files
+   - Example: `/static/dialog-doc.html` for the Dialog component
+   - All component docs follow the pattern: `/static/[component-name]-doc.html`
+
+2. **Build Output**: `/examples/dist/*/docs.html` (auto-generated, do not edit)
+   - Generated during build process
+   - Should not be edited directly
+
+3. **Online Documentation**: `https://pm7.tools/[component]/docs.html`
+   - Deployed from the build output
+   - Public-facing documentation
+
+### Editing Documentation
+To update component documentation:
+1. Edit the appropriate file in `/static/[component-name]-doc.html`
+2. Build and deploy to see changes online
+3. Never edit files in `/examples/dist/` - these are auto-generated
+
+### Available Documentation Files
+- `/static/button-doc.html` - Button component
+- `/static/card-doc.html` - Card component
+- `/static/dialog-doc.html` - Dialog component (includes CSS import requirements)
+- `/static/input-doc.html` - Input component
+- `/static/menu-doc.html` - Menu component (includes CSS import requirements)
+- `/static/tab-selector-doc.html` - Tab Selector component (includes CSS import requirements)
+- `/static/theme-toggle-doc.html` - Theme Toggle component (includes CSS import requirements)
+
+### Important CSS Import Requirements
+Components that require CSS imports for proper styling:
+- Dialog: `import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css'`
+- Menu: `import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css'`
+- Card: `import 'pm7-ui-style-guide/src/components/card/pm7-card.css'`
+- Tab Selector: `import 'pm7-ui-style-guide/src/components/tab-selector/pm7-tab-selector.css'`
+- Theme Toggle: `import 'pm7-ui-style-guide/src/components/theme-toggle/pm7-theme-toggle.css'`
+
 ## Component Usage Patterns
 
 ### Menu Component

@@ -103,7 +103,7 @@ import {
 } from 'pm7-ui-style-guide';
 
 // CRITICAL: Import CSS for proper styling
-import 'pm7-ui-style-guide/pm7-menu.css';</code></pre>
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';</code></pre>
   </section>
 
   <!-- Basic Usage -->
@@ -111,7 +111,7 @@ import 'pm7-ui-style-guide/pm7-menu.css';</code></pre>
     <h2>Basic Usage - All-in-One Component</h2>
     <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
 import { PM7Menu } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/pm7-menu.css';
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
 
 function MyComponent() {
   const menuItems = [
@@ -153,7 +153,7 @@ function MyComponent() {
     <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React from 'react';
 import { PM7Menu } from 'pm7-ui-style-guide';
 import { Menu, Plus, Save, Trash2 } from 'lucide-react';
-import 'pm7-ui-style-guide/pm7-menu.css';
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
 
 function MyComponent() {
   return (
@@ -440,7 +440,7 @@ function NavigationMenu() {
     <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import React, { useState } from 'react';
 import { PM7Menu } from 'pm7-ui-style-guide';
 import { MoreVertical, Edit, Copy, Trash2, Archive } from 'lucide-react';
-import 'pm7-ui-style-guide/pm7-menu.css';
+import 'pm7-ui-style-guide/src/components/menu/pm7-menu.css';
 
 const TableRowActions = ({ item, onEdit, onCopy, onArchive, onDelete }) =&gt; {
   const [isArchived, setIsArchived] = useState(item.archived);

@@ -100,7 +100,7 @@ npm install @radix-ui/react-dialog@^1.0.5 lucide-react@^0.501.0</code></pre>
 } from 'pm7-ui-style-guide';
 
 // CRITICAL: Import CSS for proper styling
-import 'pm7-ui-style-guide/pm7-dialog.css';</code></pre>
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';</code></pre>
   </section>
 
   <!-- Basic Usage -->
@@ -116,7 +116,7 @@ import {
   PM7DialogDescription,
   PM7DialogOverlay 
 } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/pm7-dialog.css';
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
 
 function MyComponent() {
   const [open, setOpen] = useState(false);
@@ -337,7 +337,7 @@ import {
   PM7DialogFooter,
   PM7DialogOverlay 
 } from 'pm7-ui-style-guide';
-import 'pm7-ui-style-guide/pm7-dialog.css';
+import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';
 
 const SaveConfigDialog = ({ open, onOpenChange, configurationData }) =&gt; {
   const [configName, setConfigName] = useState('');
