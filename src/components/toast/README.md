@@ -21,7 +21,13 @@ npm install @radix-ui/react-toast
 
 ## Setup
 
-### 1. Add PM7Toaster to your app root
+### 1. Import required CSS
+
+```tsx
+import 'pm7-ui-style-guide/src/components/toast/pm7-toast.css';
+```
+
+### 2. Add PM7Toaster to your app root
 
 ```tsx
 import { PM7Toaster } from 'pm7-ui-style-guide';
@@ -36,7 +42,7 @@ function App() {
 }
 ```
 
-### 2. Use the toast function
+### 3. Use the toast function
 
 ```tsx
 import { toast } from 'pm7-ui-style-guide';

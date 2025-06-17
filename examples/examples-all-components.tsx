@@ -5,6 +5,7 @@ import { PM7Menu } from '../src/components/menu';
 import { PM7Dialog, PM7DialogContent, PM7DialogHeader, PM7DialogTitle, PM7DialogDescription, PM7DialogFooter } from '../src/components/dialog';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import { PM7ThemeToggle } from '../src/components/theme-toggle';
+import { PM7Toaster, toast } from '../src/components/toast';
 import { HomeIcon, SettingsIcon, UserIcon } from 'lucide-react';
 import { inputRules } from '../src/components/input/pm7-input';
 
@@ -439,6 +440,91 @@ const ExampleComponentsTest = ({ theme, onThemeChange }: { theme: 'light' | 'dar
           </div>
         </div>
       </PM7Card>
+
+      <PM7Card theme={theme}>
+        <PM7CardHeader theme={theme}>
+          <PM7CardTitle theme={theme}>PM7Toast Component</PM7CardTitle>
+          <PM7CardSubTitle theme={theme}>Notification system with multiple variants</PM7CardSubTitle>
+        </PM7CardHeader>
+        <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <p style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666', marginBottom: '0.5rem' }}>
+            Click buttons below to show different toast variants:
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <PM7Button
+              onClick={() => toast({
+                title: "Default Toast",
+                description: "This is a default notification"
+              })}
+              variant="outline"
+              theme={theme}
+            >
+              Default
+            </PM7Button>
+            <PM7Button
+              onClick={() => toast({
+                title: "Success!",
+                description: "Your changes have been saved",
+                variant: "success"
+              })}
+              variant="outline"
+              theme={theme}
+            >
+              Success
+            </PM7Button>
+            <PM7Button
+              onClick={() => toast({
+                title: "Error",
+                description: "Something went wrong",
+                variant: "destructive"
+              })}
+              variant="outline"
+              theme={theme}
+            >
+              Error
+            </PM7Button>
+            <PM7Button
+              onClick={() => toast({
+                title: "Warning",
+                description: "Please review your input",
+                variant: "warning"
+              })}
+              variant="outline"
+              theme={theme}
+            >
+              Warning
+            </PM7Button>
+            <PM7Button
+              onClick={() => toast({
+                title: "Info",
+                description: "New updates available",
+                variant: "info"
+              })}
+              variant="outline"
+              theme={theme}
+            >
+              Info
+            </PM7Button>
+            <PM7Button
+              onClick={() => toast({
+                title: "With Action",
+                description: "Click undo to revert",
+                action: {
+                  label: "Undo",
+                  onClick: () => toast({ title: "Undone!", variant: "success" })
+                }
+              })}
+              variant="outline"
+              theme={theme}
+            >
+              With Action
+            </PM7Button>
+          </div>
+        </div>
+      </PM7Card>
+      
+      {/* PM7Toaster must be included at the root level */}
+      <PM7Toaster theme={theme} />
     </div>
   );
 };

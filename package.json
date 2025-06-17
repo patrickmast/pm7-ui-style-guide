@@ -27,6 +27,7 @@
     "src/components/card/pm7-card.css",
     "src/components/tab-selector/pm7-tab-selector.css",
     "src/components/theme-toggle/pm7-theme-toggle.css",
+    "src/components/toast/pm7-toast.css",
     "src/css/variables.css",
     "src/globals.css",
     "index.d.ts",

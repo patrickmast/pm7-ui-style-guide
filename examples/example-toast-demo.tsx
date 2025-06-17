@@ -2,6 +2,7 @@ import React from 'react';
 import { PM7Button } from '../src/components/button/pm7-button';
 import { PM7Toaster } from '../src/components/toast';
 import { toast } from '../src/components/toast';
+import '../src/components/toast/pm7-toast.css';
 
 const ExampleToastDemo = ({ theme }: { theme: 'light' | 'dark' }) => {
   const showDefaultToast = () => {

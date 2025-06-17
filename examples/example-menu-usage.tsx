@@ -333,6 +333,7 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
           <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Show Border and Background on Hover:</p>
             <code>{'<PM7Menu menuItems={items} menuTriggerOnHover={true} theme="light" />'}</code>
+            <p style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666', marginTop: '0.25rem' }}>Note: Hover state persists while menu is open for better UX.</p>
           </div>
           <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Theme-Aware Colors:</p>

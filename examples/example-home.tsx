@@ -210,7 +210,10 @@ const ExampleHome = ({ theme }: { theme: ThemeType }) => {
               key={component.name}
               theme={theme}
               className="component-card"
-              onClick={() => navigate(component.route)}
+              onClick={() => {
+                navigate(`${component.route}/overview`);
+                window.scrollTo(0, 0);
+              }}
               style={{ cursor: 'pointer', padding: '1.5rem' }}
             >
               <div className="component-icon" style={{ color: '#1C86EF', marginBottom: '1rem' }}>
