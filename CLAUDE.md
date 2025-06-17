@@ -8,6 +8,14 @@ This is the PM7 UI Style Guide - a React component library that provides PM7-bra
 
 **Purpose**: This library serves as the single source of truth for UI consistency across all PM7 applications, ensuring consistent branding without requiring individual applications to customize ShadCN/UI components themselves.
 
+**Key Features**:
+- Pre-styled React components with PM7 branding
+- Design tokens (colors, spacing, typography) for consistent theming
+- Dark mode support built-in
+- TypeScript support with full type definitions
+- Accessibility-first approach using Radix UI primitives
+- Tree-shakeable exports for optimal bundle size
+
 ## Key Architectural Decisions
 
 ### Why This Library Exists
@@ -92,6 +100,12 @@ npm run prerender            # Generate pre-rendered static documentation
 # To test the library in another project locally:
 npm link                      # In this repository
 npm link pm7-ui-style-guide  # In the consuming project
+
+# Or use npm pack for a more realistic test:
+npm run build                 # Build the library first
+npm pack                      # Creates pm7-ui-style-guide-X.X.X.tgz
+# Then in consuming project:
+npm install ../path/to/pm7-ui-style-guide-X.X.X.tgz
 ```
 
 ### Development Workflow Commands
@@ -393,3 +407,24 @@ When I say "Deploy npm", do these tasks:
 1. Bumped the version of our npm package in package.json
 2. Built the npm package with `npm run build`
 3. Published the package to npm with `npm publish`
+
+## Quick Reference
+
+### Component Status & CSS Requirements
+| Component | CSS Import Required | Dark Mode Support | Mobile Responsive |
+|-----------|-------------------|-------------------|-------------------|
+| Button | No | Yes | Yes |
+| Card | Yes (`pm7-card.css`) | Yes | Yes |
+| Dialog | Yes (`pm7-dialog.css`) | Yes | Yes |
+| Input | No | Yes | Yes |
+| Menu | Yes (`pm7-menu.css`) | Yes | Yes |
+| TabSelector | Yes (`pm7-tab-selector.css`) | Yes | Yes |
+| ThemeToggle | Yes (`pm7-theme-toggle.css`) | Yes | N/A |
+
+### Common Tasks
+- **Add new component**: Create in `src/components/[name]/`, export from `src/index.ts`, add examples
+- **Update documentation**: Edit `/static/[component]-doc.html`, never edit `/examples/dist/`
+- **Test locally**: `npm run dev` then navigate to `http://localhost:5173`
+- **Run type check**: `npx tsc --noEmit`
+- **Build library**: `npm run build` (outputs to `dist/`)
+- **Deploy examples**: Push to main branch (auto-deploys to Vercel)
