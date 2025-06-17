@@ -353,37 +353,76 @@ const ComponentPage = () => {
           {renderComponent()}
         </main>
       </div>
-      <footer className="pm7-footer">
-        <div className="footer-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <div className="footer-logo-section">
-            <div 
-              className="footer-logo"
+      <footer className="pm7-footer" style={{
+        borderTop: `1px solid ${theme === 'dark' ? '#333' : '#e5e7eb'}`,
+        backgroundColor: theme === 'dark' ? '#1a1a1a' : '#f9fafb',
+        padding: '16px 24px',
+        marginTop: '0px',
+        position: 'relative',
+        zIndex: 10
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          fontSize: '14px',
+          color: theme === 'dark' ? '#9ca3af' : '#6b7280'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <div
               style={{
-                width: '32px',
-                height: '32px',
-                maskImage: 'url(/dancing-patrick-logo.svg)',
-                WebkitMaskImage: 'url(/dancing-patrick-logo.svg)',
+                width: '16px',
+                height: '16px',
+                maskImage: 'url(/favicon.svg)',
+                WebkitMaskImage: 'url(/favicon.svg)',
                 maskSize: 'contain',
                 WebkitMaskSize: 'contain',
                 maskRepeat: 'no-repeat',
                 WebkitMaskRepeat: 'no-repeat',
-                backgroundColor: theme === 'dark' ? '#3b9eff' : '#1C86EF'
+                backgroundColor: theme === 'dark' ? '#9ca3af' : '#6b7280',
+                transform: 'translateY(-2px)'
               }}
               aria-label="PM7 Logo"
             />
-            <div className="footer-brand">
-              <h4 className="footer-title">PM7 UI Style Guide</h4>
-            </div>
+            <span style={{ fontWeight: '500', color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>PM7 UI Style Guide</span>
+            <span style={{ opacity: '0.7' }}>•</span>
+            <span style={{ opacity: '0.8' }}>Professional UI Components for Modern Applications</span>
           </div>
-          <div>
-            <p className="footer-subtitle" style={{ margin: '0', textAlign: 'right' }}>Professional UI Components for Modern Applications</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              © 2025
+              <div
+                style={{
+                  width: '16px',
+                  height: '16px',
+                  maskImage: 'url(/dancing-patrick-logo.svg)',
+                  WebkitMaskImage: 'url(/dancing-patrick-logo.svg)',
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                  backgroundColor: theme === 'dark' ? '#3b9eff' : '#1C86EF'
+                }}
+                aria-label="pm.ink Logo"
+              />
+              <a href="http://pm.ink" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>pm.ink</a>
+            </span>
+            <span style={{ opacity: '0.7' }}>•</span>
+            <span>Built with ❤️ for modern web development</span>
+            <span style={{
+              backgroundColor: theme === 'dark' ? '#047857' : '#10b981',
+              color: 'white',
+              padding: '3px 8px',
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: '600',
+              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+            }}>
+              v{packageJson.version}
+            </span>
           </div>
-        </div>
-        <div className="footer-bottom">
-          <p className="footer-copyright">
-            © 2025 <a href="http://pm.ink" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>pm.ink</a>. Built with ❤️ for modern web development.
-            <span className="footer-version">v{packageJson.version}</span>
-          </p>
         </div>
       </footer>
       {/* Version Info Dialog */}
