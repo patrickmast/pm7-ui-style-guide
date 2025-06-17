@@ -155,8 +155,10 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
         { id: 'es', label: 'Español', type: 'check', checked: selectedLanguage === 'es', onClick: () => handleLanguageChange('es') },
         { id: 'fr', label: 'Français', type: 'check', checked: selectedLanguage === 'fr', onClick: () => handleLanguageChange('fr') },
         { id: 'de', label: 'Deutsch', type: 'check', checked: selectedLanguage === 'de', onClick: () => handleLanguageChange('de') },
+        { id: 'separator-lang', type: 'separator' },
         { id: 'nl', label: 'Nederlands', type: 'check', checked: selectedLanguage === 'nl', onClick: () => handleLanguageChange('nl') },
         { id: 'nl-be', label: 'Nederlands (België)', type: 'check', checked: selectedLanguage === 'nl-be', onClick: () => handleLanguageChange('nl-be') },
+        { id: 'separator-lang2', type: 'separator' },
         { id: 'zh', label: '中文', type: 'check', checked: selectedLanguage === 'zh', onClick: () => handleLanguageChange('zh') }
       ]
     },
@@ -585,6 +587,34 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
           menuTriggerIconColorDark={'#FFDD00'} // Yellow
           menuTriggerLabelColor = {'#1C86EF'} // PM7 Blue
           menuTriggerLabelColorDark = {'#FFDD00'} // Yellow
+        />
+      </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+      {/* 4. Submenu with Separators Example */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Submenu with Separators</h2>
+        <p className="mb-2">This example demonstrates that separators can be used within submenus to group related items.</p>
+        <PM7Menu
+          menuItems={[
+            { id: 'edit', label: 'Edit', submenuItems: [
+              { id: 'undo', label: 'Undo', onClick: () => console.log('Undo') },
+              { id: 'redo', label: 'Redo', onClick: () => console.log('Redo') },
+              { id: 'edit-sep1', type: 'separator' },
+              { id: 'cut', label: 'Cut', onClick: () => console.log('Cut') },
+              { id: 'copy', label: 'Copy', onClick: () => console.log('Copy') },
+              { id: 'paste', label: 'Paste', onClick: () => console.log('Paste') },
+              { id: 'edit-sep2', type: 'separator' },
+              { id: 'selectall', label: 'Select All', onClick: () => console.log('Select All') }
+            ]},
+            { id: 'view', label: 'View', submenuItems: [
+              { id: 'zoomin', label: 'Zoom In', onClick: () => console.log('Zoom In') },
+              { id: 'zoomout', label: 'Zoom Out', onClick: () => console.log('Zoom Out') },
+              { id: 'view-sep', type: 'separator' },
+              { id: 'fullscreen', label: 'Full Screen', onClick: () => console.log('Full Screen') }
+            ]}
+          ]}
+          theme={theme}
+          menuLabel="Edit"
         />
       </div>
     </div>

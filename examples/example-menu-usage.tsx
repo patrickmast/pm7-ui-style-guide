@@ -233,6 +233,9 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                 <div style={{ marginLeft: '1rem', marginBottom: '1rem' }}>
                   <div><code>menuTriggerIconColor</code> - Base icon color (used in light mode)</div>
                   <div><code>menuTriggerIconColorDark</code> - Icon color in dark theme</div>
+                  <div style={{ fontSize: '0.75rem', color: theme === 'dark' ? '#9CA3AF' : '#6B7280', marginTop: '0.25rem', fontStyle: 'italic' }}>
+                    Note: These props now correctly apply to both the default hamburger icon and custom icons
+                  </div>
                 </div>
                 <div style={{ marginBottom: '0.5rem' }}>
                   <strong>Label Colors:</strong>
@@ -341,6 +344,53 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             <code>{'<PM7Menu menuItems={items} menuTriggerIconColor="#1C86EF" menuTriggerBackgroundColor="#F3F4F6" theme="light" />'}</code>
           </div>
         </div>
+
+        {/* Disabled States Section */}
+        <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '2rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Disabled States</h4>
+        <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+          All menu item types support the <code>disabled</code> property for conditional availability:
+        </p>
+        
+        <PM7Card theme={theme} style={{ marginBottom: '1.5rem' }}>
+          <PM7CardHeader variant="dark" theme={theme}>
+            <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+              Disabled State Behavior
+            </PM7CardTitle>
+          </PM7CardHeader>
+          <div style={{ padding: '0.5rem' }}>
+            <ul style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginLeft: '1.5rem' }}>
+              <li>Shows at 50% opacity for visual indication</li>
+              <li>Displays "not-allowed" cursor on hover</li>
+              <li>Prevents all click and interaction events</li>
+              <li>Removes hover effects (no blue background)</li>
+              <li>Works with all item types: normal, check, radio, switch, and submenu</li>
+            </ul>
+          </div>
+        </PM7Card>
+
+        <h4 style={{ fontSize: '1rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Common Use Cases</h4>
+        <div style={codeBlockStyle}>
+          <p style={{ marginBottom: '0.75rem' }}>{`const menuItems = [`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  // Disable save when no changes`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  { id: 'save', label: 'Save', onClick: handleSave, disabled: !hasChanges },`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}></p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  // Disable based on permissions`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  { id: 'delete', label: 'Delete', onClick: handleDelete, disabled: !canDelete },`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}></p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  // Disable switch when feature unavailable`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  { id: 'feature', label: 'Beta Feature', type: 'switch', `}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`    checked: betaEnabled, onChange: setBetaEnabled, `}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`    disabled: !isBetaUser },`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}></p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  // Disable during loading states`}</p>
+          <p style={{ marginLeft: '1rem', marginBottom: '0.5rem' }}>{`  { id: 'refresh', label: 'Refresh', onClick: handleRefresh, disabled: isLoading }`}</p>
+          <p>{`];`}</p>
+        </div>
+
+        <p style={{ marginTop: '1rem', marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', fontSize: '0.875rem' }}>
+          <strong>Note:</strong> The disabled state is particularly useful for context-sensitive menus where certain actions 
+          should only be available under specific conditions.
+        </p>
       </div>
     </>
   );

@@ -486,7 +486,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
             ref={menuButtonRef}
             aria-label="Open menu"
             className={cn(
-              'flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none',
+              'flex items-center justify-center rounded-md cursor-pointer focus:outline-none focus-visible:outline-none',
               // Apply border and background based on checkbox states
               // Background + Border (normal state)
               menuTriggerBorder && menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--bordered',
@@ -543,6 +543,8 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               ...(menuTriggerOnHover && menuTriggerBorder && {
                 '--menu-trigger-hover-border-color': getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark) || getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) || (theme === 'dark' ? '#525252' : '#D5D5D5'),
               }),
+              // Set text color based on icon color
+              color: getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || (theme === 'dark' ? '#FAFAFA' : '#000000'),
             }}
             onClick={() => setIsOpen(!isOpen)}
           >
@@ -690,7 +692,9 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                   >
                     {item.submenuItems.map((subItem: any) => (
                       <React.Fragment key={subItem.id}>
-                        {subItem.type === 'check' ? (
+                        {subItem.type === 'separator' ? (
+                          <PM7MenuSeparator />
+                        ) : subItem.type === 'check' ? (
                           <PM7MenuCheckboxItem
                             checked={subItem.checked}
                             onCheckedChange={checked => {
@@ -768,23 +772,27 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               ) : item.type === 'switch' ? (
                 <PM7MenuItem
                   onClick={() => {
-                    if (item.onChange) {
-                      item.onChange(!item.checked);
-                    } else if (item.onClick) {
-                      item.onClick();
+                    if (!item.disabled) {
+                      if (item.onChange) {
+                        item.onChange(!item.checked);
+                      } else if (item.onClick) {
+                        item.onClick();
+                      }
                     }
                   }}
                   disabled={item.disabled}
                   style={{
-                    backgroundColor: hoveredItem === item.id ? '#1C86EF' : 'transparent',
-                    color: hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
-                    boxShadow: hoveredItem === item.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
-                    zIndex: hoveredItem === item.id ? 10 : 'auto',
+                    backgroundColor: !item.disabled && hoveredItem === item.id ? '#1C86EF' : 'transparent',
+                    color: !item.disabled && hoveredItem === item.id ? 'white' : (theme === 'dark' ? '#FAFAFA' : 'black'),
+                    boxShadow: !item.disabled && hoveredItem === item.id ? 'rgba(0, 0, 0, 0.08) 0px 5px 15px 0px, rgba(25, 28, 33, 0.2) 0px 15px 35px -5px' : 'none',
+                    zIndex: !item.disabled && hoveredItem === item.id ? 10 : 'auto',
                     position: 'relative',
-                    transform: hoveredItem === item.id ? 'translateZ(0)' : 'none'
+                    transform: !item.disabled && hoveredItem === item.id ? 'translateZ(0)' : 'none',
+                    opacity: item.disabled ? 0.5 : 1,
+                    cursor: item.disabled ? 'not-allowed' : 'pointer'
                   }}
-                  onMouseEnter={() => setHoveredItem(item.id)}
-                  onMouseLeave={() => setHoveredItem(null)}
+                  onMouseEnter={() => !item.disabled && setHoveredItem(item.id)}
+                  onMouseLeave={() => !item.disabled && setHoveredItem(null)}
                 >
                   {item.icon && (
                     <span className="menu-item-icon">{item.icon}</span>

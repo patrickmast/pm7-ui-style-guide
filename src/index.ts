@@ -41,3 +41,7 @@ export { PM7TabSelector as TabSelector } from './components/tab-selector';
 // Theme toggle component
 export * from './components/theme-toggle';
 export { PM7ThemeToggle as ThemeToggle } from './components/theme-toggle';
+
+// Toast components
+export * from './components/toast';
+export { PM7Toaster as Toaster } from './components/toast';

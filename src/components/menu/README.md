@@ -142,9 +142,56 @@ const menuItems = [
   { id: 'radio1', label: 'Option A', type: 'radio', checked: false, onChange: (checked) => {} },
   
   // Switch item
-  { id: 'switch1', label: 'Dark mode', type: 'switch', checked: false, onChange: (checked) => {} }
+  { id: 'switch1', label: 'Dark mode', type: 'switch', checked: false, onChange: (checked) => {} },
+  
+  // Submenu with nested items (all item types work in submenus including separators)
+  { id: 'more', label: 'More Options', submenuItems: [
+    { id: 'sub1', label: 'Submenu Item 1', onClick: () => {} },
+    { id: 'sub-sep', type: 'separator' },
+    { id: 'sub2', label: 'Submenu Item 2', onClick: () => {} }
+  ]}
 ];
 ```
+
+## Disabled States
+
+All menu item types support the `disabled` property. Disabled items:
+- Show at 50% opacity
+- Display a "not-allowed" cursor
+- Don't respond to clicks or hover effects
+- Cannot be activated or toggled
+
+```tsx
+const menuItems = [
+  { 
+    id: 'save', 
+    label: 'Save', 
+    onClick: handleSave,
+    disabled: !hasChanges // Conditionally disable
+  },
+  { 
+    id: 'toggle-feature', 
+    label: 'Feature Toggle',
+    type: 'switch',
+    checked: featureEnabled,
+    onChange: setFeatureEnabled,
+    disabled: !hasPermission // Disable switch when no permission
+  },
+  {
+    id: 'view-mode',
+    label: 'View Mode',
+    type: 'radio',
+    value: 'grid',
+    disabled: isLoading // Disable during loading
+  }
+];
+```
+
+This is particularly useful for:
+- Preventing actions when conditions aren't met
+- Showing unavailable features based on permissions
+- Indicating loading or processing states
+- Context-sensitive menu options
 
 ## Theme Support
 
@@ -212,6 +259,8 @@ const menuItems = [
 ### Color Customization
 
 PM7Menu supports theme-aware color props with a base version (used for light mode) and optional Dark variants for dark mode.
+
+**Note:** The `menuTriggerIconColor` prop now correctly applies to the menu trigger icon in both light and dark modes. This includes the default hamburger icon and any custom icons.
 
 ```tsx
 // Theme-aware color customization
@@ -339,6 +388,32 @@ const settingsItems = [
 />
 ```
 
+### Submenu with Separators
+
+```tsx
+const fileMenuItems = [
+  { id: 'new', label: 'New File', onClick: handleNew },
+  { id: 'open', label: 'Open...', onClick: handleOpen },
+  { id: 'separator1', type: 'separator' },
+  { id: 'recent', label: 'Recent Files', submenuItems: [
+    { id: 'file1', label: 'Document1.txt', onClick: () => openRecent('Document1.txt') },
+    { id: 'file2', label: 'Report.pdf', onClick: () => openRecent('Report.pdf') },
+    { id: 'file3', label: 'Presentation.pptx', onClick: () => openRecent('Presentation.pptx') },
+    { id: 'separator-recent', type: 'separator' },
+    { id: 'clear-recent', label: 'Clear Recent Files', onClick: clearRecentFiles }
+  ]},
+  { id: 'separator2', type: 'separator' },
+  { id: 'exit', label: 'Exit', onClick: handleExit }
+];
+
+<PM7Menu 
+  menuItems={fileMenuItems}
+  menuLabel="File"
+  theme="light"
+/>
+```
+*Note: Separators can be used within submenus to group related items, just like in the main menu.*
+
 ### User Profile Menu
 
 ```tsx
@@ -381,6 +456,36 @@ const profileItems = [
 - **Focus Management**: Clear focus indicators
 - **High Contrast**: Meets WCAG contrast requirements
 - **Mobile Friendly**: Touch-optimized for mobile devices
+
+## API Reference
+
+### PM7MenuItem Properties
+
+All menu item types share these common properties:
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `id` | string | Yes | Unique identifier for the menu item |
+| `label` | string | Yes* | Display text (*not required for separators) |
+| `type` | 'normal' \| 'check' \| 'radio' \| 'switch' \| 'separator' \| 'submenu' | No | Item type (default: 'normal') |
+| `disabled` | boolean | No | Disable the menu item (default: false) |
+| `icon` | ReactNode | No | Icon to display before the label |
+| `onClick` | () => void | No* | Click handler (*required for normal items) |
+| `onChange` | (checked: boolean) => void | No* | Change handler (*required for check/radio/switch) |
+| `checked` | boolean | No | Checked state for check/radio/switch items |
+| `submenuItems` | PM7MenuItem[] | No* | Nested menu items (*required for submenu type) |
+
+### Component Props
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `menuItems` | PM7MenuItem[] | Yes | Array of menu items to display |
+| `theme` | 'light' \| 'dark' | Yes | Theme mode |
+| `menuIcon` | ReactNode | No | Custom trigger icon |
+| `menuLabel` | string | No | Trigger button text |
+| `menuAlignment` | 'start' \| 'center' \| 'end' | No | Menu alignment (default: 'end') |
+| `className` | string | No | Additional CSS classes |
+| Various color props | string | No | Color customization options |
 
 ## Important Notes
 

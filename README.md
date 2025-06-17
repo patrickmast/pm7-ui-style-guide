@@ -64,7 +64,14 @@
 
 ## Live Examples
 
-View the live examples of all components at our [Vercel deployment](https://pm7-ui-style-guide-mqrvlm8a9-pm7-projects.vercel.app/).
+View the live examples and documentation at [PM7.tools](https://pm7.tools/).
+
+The PM7.tools website features:
+- **Home Page**: Overview of all components and quick start guide
+- **Interactive Examples**: Live demos of each component with code samples  
+- **Theme Support**: Toggle between light and dark themes
+- **API Documentation**: Comprehensive documentation for each component
+- **Mobile Responsive**: Optimized for all device sizes
 
 ---
 

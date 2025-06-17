@@ -42,6 +42,16 @@
   cursor: pointer !important;
 }
 
+/* Disabled menu items styling */
+[data-radix-dropdown-menu-item][data-disabled],
+[data-radix-dropdown-menu-checkbox-item][data-disabled],
+[data-radix-dropdown-menu-radio-item][data-disabled],
+[data-radix-dropdown-menu-subtrigger][data-disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
 /* Separator styling - MAXIMUM SPECIFICITY to override Tailwind and other CSS frameworks */
 *[data-radix-dropdown-menu-separator],
 *[data-radix-dropdown-menu-separator=""],
@@ -290,11 +300,18 @@ button.dark .menu-trigger-icon--custom {
   color: var(--menu-trigger-icon-color-dark, #FFDD00) !important;
 }
 
+/* Override for light mode when custom color is set */
+.menu-trigger-icon--custom[style*="--menu-trigger-icon-color"],
+span.menu-trigger-icon--custom[style*="--menu-trigger-icon-color"],
+button .menu-trigger-icon--custom[style*="--menu-trigger-icon-color"] {
+  color: var(--menu-trigger-icon-color) !important;
+}
+
 /* SVG icon coloring for menu trigger - HIGH SPECIFICITY */
 .menu-trigger-icon,
 span.menu-trigger-icon,
 button .menu-trigger-icon {
-  color: #000000 !important;
+  color: currentColor !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -311,13 +328,6 @@ button .menu-trigger-icon svg {
   height: auto !important;
   max-width: 100% !important;
   max-height: 100% !important;
-}
-
-.dark .menu-trigger-icon,
-.dark span.menu-trigger-icon,
-.dark button .menu-trigger-icon,
-button.dark .menu-trigger-icon {
-  color: #FAFAFA !important;
 }
 
 /* Menu trigger base styles - HIGH SPECIFICITY */

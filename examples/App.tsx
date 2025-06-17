@@ -6,6 +6,7 @@ import { getActiveTab } from './utils/tab-persistence';
 import packageJson from '../package.json';
 
 // Import example components
+import ExampleHome from './example-home';
 import MenuExample from './example-menu';
 import ButtonExample from './example-button';
 import InputExample from './example-input';
@@ -13,6 +14,7 @@ import DialogExample from './example-dialog';
 import TabSelectorExample from './example-tab-selector';
 import ExampleCard from './example-card';
 import ExampleThemeToggle from './example-theme-toggle';
+import ToastExample from './example-toast';
 import ExampleComponentsTest from './examples-all-components';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
@@ -38,7 +40,7 @@ const ComponentPage = () => {
   const { component } = useParams<{ component: string }>();
   const navigate = useNavigate();
 
-  const activeComponent = component || 'menu';
+  const activeComponent = component || 'home';
 
   // Initialize sidebar visibility from localStorage or default to true
   // Also consider window width for initial state
@@ -116,6 +118,8 @@ const ComponentPage = () => {
 
   const renderComponent = () => {
     switch (activeComponent) {
+      case 'home':
+        return <ExampleHome theme={theme} />;
       case 'menu':
         return <MenuExample theme={theme} />;
       case 'button':
@@ -130,18 +134,36 @@ const ComponentPage = () => {
         return <ExampleCard theme={theme} />;
       case 'themetoggle':
         return <ExampleThemeToggle theme={theme} />;
+      case 'toast':
+        return <ToastExample theme={theme} />;
       case 'all-components':
         return <ExampleComponentsTest theme={theme} onThemeChange={setTheme} />;
       default:
-        return <MenuExample theme={theme} />;
+        return <ExampleHome theme={theme} />;
     }
   };
 
   // Define menu items
   const menuItems = [
     {
+      id: 'home',
+      label: 'Home',
+      type: 'item' as PM7MenuItemType,
+      onClick: () => navigate('/home'),
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="16" height="16" strokeWidth="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      )
+    },
+    {
+      id: 'divider-home',
+      type: 'separator' as PM7MenuItemType
+    },
+    {
       id: 'components-submenu',
-      label: 'Component',
+      label: 'Components',
       type: 'submenu' as PM7MenuItemType,
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
@@ -197,6 +219,24 @@ const ComponentPage = () => {
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'themetoggle',
           onClick: () => navigate('/themetoggle')
+        },
+        {
+          id: 'toast-component',
+          label: 'Toast',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'toast',
+          onClick: () => navigate('/toast')
+        },
+        {
+          id: 'divider-all',
+          type: 'separator' as PM7MenuItemType
+        },
+        {
+          id: 'all-components',
+          label: 'All',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'all-components',
+          onClick: () => navigate('/all-components')
         }
       ]
     },
@@ -205,30 +245,11 @@ const ComponentPage = () => {
       type: 'separator' as PM7MenuItemType
     },
     {
-      id: 'all-components',
-      label: 'All',
-      type: 'check' as PM7MenuItemType,
-      checked: activeComponent === 'all-components',
-      onClick: () => navigate('/all-components'),
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
-          <path d="M9 12l2 2 4-4"/>
-          <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
-          <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
-          <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"/>
-          <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"/>
-        </svg>
-      )
-    },
-    {
-      id: 'divider-2',
-      type: 'separator' as PM7MenuItemType
-    },
-    {
       id: 'sidebar-toggle',
       label: sidebarVisible ? 'Hide sidebar' : 'Show sidebar',
       type: 'switch' as PM7MenuItemType,
       checked: sidebarVisible,
+      disabled: activeComponent === 'home',
       onChange: (checked: boolean) => {
         setSidebarVisible(checked);
         localStorage.setItem('pm7-ui-style-guide-sidebar-visible', checked.toString());
@@ -266,6 +287,12 @@ const ComponentPage = () => {
                   menuAlignment="start"
                   menuTriggerIconColor="#FFFFFF"
                   menuTriggerIconColorDark="#FFFFFF"
+                  menuTriggerOnHover={true}
+                  menuTriggerBorder={true}
+                  menuTriggerBorderColor="#FFFFFF"
+                  menuTriggerBorderColorDark="#FFFFFF"
+                  menuTriggerHoverBorderColor="#FFFFFF"
+                  menuTriggerHoverBorderColorDark="#FFFFFF"
                   theme={theme as 'light' | 'dark'}
             />
           </div>
@@ -278,10 +305,23 @@ const ComponentPage = () => {
             />
           </div>
         </div>
-        <h1>PM7 UI Style Guide</h1>
+        <h1>
+          <Link 
+            to="/home" 
+            style={{ 
+              color: 'inherit', 
+              textDecoration: 'none',
+              transition: 'opacity 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+          >
+            PM7 UI Style Guide
+          </Link>
+        </h1>
       </header>
       <div className={`content-wrapper ${theme === 'dark' ? 'dark' : ''}`}>
-        {sidebarVisible && (
+        {sidebarVisible && activeComponent !== 'home' && (
           <aside
             className="sidebar"
             style={{ width: '165px' }}
@@ -344,6 +384,14 @@ const ComponentPage = () => {
                   Theme Toggle
                 </Link>
               </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'toast' ? 'active' : ''}`}>
+                <Link
+                  to={`/toast/${getActiveTab('overview')}`}
+                  className="sidebar-nav-link"
+                >
+                  Toast
+                </Link>
+              </li>
               <li className={`sidebar-nav-item ${activeComponent === 'all-components' ? 'active' : ''}`} style={{ borderTop: '1px solid #e5e7eb', marginTop: '0.5rem', paddingTop: '0.5rem' }}>
                 <Link
                   to="/all-components"
@@ -355,7 +403,13 @@ const ComponentPage = () => {
             </ul>
           </aside>
         )}
-        <main data-theme={theme} className={theme === 'dark' ? 'dark' : ''} style={{ marginLeft: sidebarVisible ? undefined : '0' }}>
+        <main 
+          data-theme={theme} 
+          className={theme === 'dark' ? 'dark' : ''} 
+          style={{ 
+            marginLeft: (sidebarVisible && activeComponent !== 'home') ? undefined : '0',
+            width: activeComponent === 'home' ? '100%' : undefined
+          }}>
           {renderComponent()}
         </main>
       </div>
@@ -519,7 +573,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/menu/overview" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/:component/*" element={<ComponentPage />} />
       </Routes>
     </BrowserRouter>

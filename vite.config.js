@@ -29,6 +29,7 @@ export default defineConfig(({ command }) => {
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-slot',
+            '@radix-ui/react-toast',
             'lucide-react'
           ],
           output: {
