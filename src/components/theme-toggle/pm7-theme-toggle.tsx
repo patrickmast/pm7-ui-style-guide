@@ -8,6 +8,7 @@ export interface PM7ThemeToggleProps {
   theme?: ThemeType;
   onThemeChange?: (theme: ThemeType) => void;
   size?: 'small' | 'medium' | 'large';
+  showHover?: boolean;
   className?: string;
   'data-component-name'?: string;
 }
@@ -16,6 +17,7 @@ export const PM7ThemeToggle: React.FC<PM7ThemeToggleProps> = ({
   theme: controlledTheme,
   onThemeChange,
   size = 'medium',
+  showHover = true,
   className = '',
   'data-component-name': dataComponentName,
 }) => {
@@ -80,7 +82,7 @@ export const PM7ThemeToggle: React.FC<PM7ThemeToggleProps> = ({
       <div
         role="button"
         tabIndex={0}
-        className={`pm7-theme-switch ${currentTheme === 'dark' ? 'dark' : ''}`}
+        className={`pm7-theme-switch ${currentTheme === 'dark' ? 'dark' : ''} ${!showHover ? 'no-hover' : ''}`}
         onClick={toggleTheme}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {

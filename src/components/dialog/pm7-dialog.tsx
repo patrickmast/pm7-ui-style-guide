@@ -67,7 +67,7 @@ const PM7DialogHeader = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={`flex flex-col space-y-1.5 text-center sm:text-left ${className || ''}`}
+    className={`flex flex-col space-y-1.5 text-center sm:text-left p-2 pb-0 ${className || ''}`}
     {...props}
   />
 )
@@ -90,7 +90,7 @@ const PM7DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={`text-lg font-semibold leading-none tracking-tight ${className || ''}`}
+    className={`text-2xl font-semibold leading-none tracking-tight ${className || ''}`}
     {...props}
   />
 ))
@@ -102,7 +102,7 @@ const PM7DialogSubTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={`text-sm text-muted-foreground ${className || ''}`}
+    className={`text-sm text-muted-foreground mt-1 ${className || ''}`}
     {...props}
   />
 ))

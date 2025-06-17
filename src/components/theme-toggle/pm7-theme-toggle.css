@@ -38,9 +38,26 @@
   transition: all 0.2s ease-in-out;
 }
 
+.pm7-theme-switch:hover:not(.no-hover) {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Light theme hover */
+.pm7-theme-switch:hover:not(.no-hover):not(.dark) {
+  background-color: #f5f5f5;
+}
+
+/* Dark theme hover */
+.pm7-theme-switch:hover:not(.no-hover).dark {
+  background-color: #e8e8e8;
+}
+
 .pm7-theme-switch:focus {
-  outline: 2px solid #1C86EF;
-  outline-offset: 2px;
+  outline: none;
+}
+
+.pm7-theme-switch:focus-visible {
+  outline: none;
 }
 
 .pm7-theme-switch.dark {

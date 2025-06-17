@@ -401,7 +401,21 @@ button.menu-trigger--background-only[style*="background"] {
 
 .menu-trigger--bordered-hover:hover,
 button.menu-trigger--bordered-hover:hover {
-  border-color: var(--menu-trigger-hover-border-color, #D5D5D5) !important;
+  border-color: var(--menu-trigger-hover-border-color) !important;
+  background: var(--menu-trigger-hover-bg, #e8e7e7) !important;
+}
+
+/* Border-only hover: border stays, subtle background appears */
+.menu-trigger--border-only-hover:hover,
+button.menu-trigger--border-only-hover:hover {
+  border-color: var(--menu-trigger-hover-border-color) !important;
+  background: rgba(0, 0, 0, 0.05) !important; /* Light hover background */
+}
+
+/* Background-only hover: background changes, no border */
+.menu-trigger--background-only-hover:hover,
+button.menu-trigger--background-only-hover:hover {
+  border-color: transparent !important;
   background: var(--menu-trigger-hover-bg, #e8e7e7) !important;
 }
 
@@ -445,7 +459,23 @@ button.dark.menu-trigger--border-only {
 .dark .menu-trigger--bordered-hover:hover,
 .dark button.menu-trigger--bordered-hover:hover,
 button.dark.menu-trigger--bordered-hover:hover {
-  border-color: var(--menu-trigger-hover-border-color, #525252) !important;
+  border-color: var(--menu-trigger-hover-border-color) !important;
+  background: var(--menu-trigger-hover-bg, #2f333d) !important;
+}
+
+/* Dark mode border-only hover */
+.dark .menu-trigger--border-only-hover:hover,
+.dark button.menu-trigger--border-only-hover:hover,
+button.dark.menu-trigger--border-only-hover:hover {
+  border-color: var(--menu-trigger-hover-border-color) !important;
+  background: rgba(255, 255, 255, 0.05) !important; /* Light hover background for dark mode */
+}
+
+/* Dark mode background-only hover */
+.dark .menu-trigger--background-only-hover:hover,
+.dark button.menu-trigger--background-only-hover:hover,
+button.dark.menu-trigger--background-only-hover:hover {
+  border-color: transparent !important;
   background: var(--menu-trigger-hover-bg, #2f333d) !important;
 }
 

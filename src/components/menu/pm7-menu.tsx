@@ -494,12 +494,12 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               menuTriggerBorder && !menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--border-only',
               // Background + Border (hover state)
               menuTriggerBorder && menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--bordered menu-trigger--bordered-hover',
-              // Border only (hover state)
-              menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--border-only menu-trigger--bordered-hover',
+              // Border only (hover state) - use special border-only-hover class
+              menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--border-only menu-trigger--border-only-hover',
               // Background only (normal state) - new case
               !menuTriggerBorder && menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--background-only',
-              // Background only (hover state) - new case
-              !menuTriggerBorder && menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--background-only menu-trigger--bordered-hover',
+              // Background only (hover state) - use special background-only-hover class
+              !menuTriggerBorder && menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--background-only menu-trigger--background-only-hover',
               // Hover only (no border or background normally, only on hover)
               !menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--bordered-hover'
             )}
@@ -528,16 +528,20 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
                 background: getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark),
                 '--menu-trigger-bg': getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark),
               }),
-              ...(getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) && {
-                borderColor: getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark),
-                '--menu-trigger-border-color': getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark),
+              // Set border color - either custom or default
+              ...(menuTriggerBorder && {
+                '--menu-trigger-border-color': getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) || (theme === 'dark' ? '#525252' : '#D5D5D5'),
+                ...(getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) && {
+                  borderColor: getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark),
+                }),
               }),
               // CSS custom properties for hover colors
               ...(getThemeColor(menuTriggerHoverBackgroundColor, menuTriggerHoverBackgroundColorDark) && {
                 '--menu-trigger-hover-bg': getThemeColor(menuTriggerHoverBackgroundColor, menuTriggerHoverBackgroundColorDark),
               }),
-              ...(getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark) && {
-                '--menu-trigger-hover-border-color': getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark),
+              // Set hover border color - either custom hover color or inherit current border color
+              ...(menuTriggerOnHover && menuTriggerBorder && {
+                '--menu-trigger-hover-border-color': getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark) || getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) || (theme === 'dark' ? '#525252' : '#D5D5D5'),
               }),
             }}
             onClick={() => setIsOpen(!isOpen)}

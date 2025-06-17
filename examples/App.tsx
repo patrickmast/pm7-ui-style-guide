@@ -125,7 +125,7 @@ const ComponentPage = () => {
       case 'themetoggle':
         return <ExampleThemeToggle theme={theme} />;
       case 'all-components':
-        return <ExampleComponentsTest theme={theme} />;
+        return <ExampleComponentsTest theme={theme} onThemeChange={setTheme} />;
       default:
         return <MenuExample theme={theme} />;
     }

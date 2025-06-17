@@ -6,6 +6,7 @@ import { PM7Dialog, PM7DialogContent, PM7DialogHeader, PM7DialogTitle, PM7Dialog
 import { PM7TabSelector } from '../src/components/tab-selector';
 import { PM7ThemeToggle } from '../src/components/theme-toggle';
 import { HomeIcon, SettingsIcon, UserIcon } from 'lucide-react';
+import { inputRules } from '../src/components/input/pm7-input';
 
 // CSS imports as required by component documentation
 import '../src/components/card/pm7-card.css';
@@ -14,12 +15,71 @@ import '../src/components/dialog/pm7-dialog.css';
 import '../src/components/tab-selector/pm7-tab-selector.css';
 import '../src/components/theme-toggle/pm7-theme-toggle.css';
 
-const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
+// Custom styled input component
+const PM7Input = ({
+  theme,
+  placeholder = '',
+  disabled = false,
+  readOnly = false,
+  type = 'text',
+  className = '',
+  value,
+  onChange,
+  ...props
+}: {
+  theme: 'light' | 'dark';
+  placeholder?: string;
+  disabled?: boolean;
+  readOnly?: boolean;
+  type?: string;
+  className?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  [key: string]: any;
+}) => {
+  const inputStyle = {
+    display: 'block',
+    width: '100%',
+    padding: '0.5rem 0.75rem',
+    borderRadius: '0.375rem',
+    backgroundColor: theme === 'dark' ? '#2A2A2A' : '#ffffff',
+    color: theme === 'dark' ? '#ffffff' : '#111827',
+    border: `1px solid ${theme === 'dark' ? '#525252' : '#d1d5db'}`,
+    outline: 'none',
+    opacity: disabled ? 0.5 : 1,
+    cursor: disabled ? 'not-allowed' : readOnly ? 'default' : 'text',
+    transition: 'border-color 0.2s',
+    ...props.style
+  };
+
+  return (
+    <input
+      type={type}
+      className={className}
+      style={inputStyle}
+      placeholder={placeholder}
+      disabled={disabled}
+      readOnly={readOnly}
+      value={value}
+      onChange={onChange}
+      onFocus={(e) => {
+        e.target.style.borderColor = inputRules.focusBorderColor === 'primary' ? '#1C86EF' : inputRules.focusBorderColor;
+      }}
+      onBlur={(e) => {
+        e.target.style.borderColor = theme === 'dark' ? '#525252' : '#d1d5db';
+      }}
+      {...props}
+    />
+  );
+};
+
+const ExampleComponentsTest = ({ theme, onThemeChange }: { theme: 'light' | 'dark', onThemeChange?: (theme: 'light' | 'dark') => void }) => {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('overview');
   const [showMenuBorder, setShowMenuBorder] = React.useState(true);
   const [showMenuBackground, setShowMenuBackground] = React.useState(true);
   const [showMenuOnHover, setShowMenuOnHover] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState('');
 
   // Sample menu items
   const menuItems = [
@@ -96,6 +156,64 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
 
       <PM7Card theme={theme}>
         <PM7CardHeader theme={theme}>
+          <PM7CardTitle theme={theme}>PM7Input Component</PM7CardTitle>
+          <PM7CardSubTitle theme={theme}>Form inputs with PM7 styling and focus states</PM7CardSubTitle>
+        </PM7CardHeader>
+        <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem', 
+              fontSize: '0.875rem', 
+              fontWeight: '500',
+              color: theme === 'dark' ? '#e0e0e0' : '#333'
+            }}>
+              Normal Input
+            </label>
+            <PM7Input
+              theme={theme}
+              placeholder="Enter text here..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          </div>
+          <div>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem', 
+              fontSize: '0.875rem', 
+              fontWeight: '500',
+              color: theme === 'dark' ? '#e0e0e0' : '#333'
+            }}>
+              Disabled Input
+            </label>
+            <PM7Input
+              theme={theme}
+              placeholder="This input is disabled"
+              disabled={true}
+            />
+          </div>
+          <div>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '0.5rem', 
+              fontSize: '0.875rem', 
+              fontWeight: '500',
+              color: theme === 'dark' ? '#e0e0e0' : '#333'
+            }}>
+              Read-only Input
+            </label>
+            <PM7Input
+              theme={theme}
+              value="This is read-only content"
+              readOnly={true}
+            />
+          </div>
+        </div>
+      </PM7Card>
+
+      <PM7Card theme={theme}>
+        <PM7CardHeader theme={theme}>
           <PM7CardTitle theme={theme}>PM7Menu Component</PM7CardTitle>
           <PM7CardSubTitle theme={theme}>Four trigger variants for different use cases</PM7CardSubTitle>
         </PM7CardHeader>
@@ -113,7 +231,7 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
                 cursor: 'pointer',
                 fontSize: '0.875rem',
                 color: theme === 'dark' ? '#e0e0e0' : '#333'
-              }}>
+              }} title="menuTriggerBorder">
                 <input 
                   type="checkbox" 
                   checked={showMenuBorder}
@@ -129,7 +247,7 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
                 cursor: 'pointer',
                 fontSize: '0.875rem',
                 color: theme === 'dark' ? '#e0e0e0' : '#333'
-              }}>
+              }} title="menuTriggerBackground">
                 <input 
                   type="checkbox" 
                   checked={showMenuBackground}
@@ -145,7 +263,7 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
                 cursor: 'pointer',
                 fontSize: '0.875rem',
                 color: theme === 'dark' ? '#e0e0e0' : '#333'
-              }}>
+              }} title="menuTriggerOnHover">
                 <input 
                   type="checkbox" 
                   checked={showMenuOnHover}
@@ -240,18 +358,23 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7CardTitle theme={theme}>PM7Dialog Component</PM7CardTitle>
           <PM7CardSubTitle theme={theme}>Modal dialog with proper styling</PM7CardSubTitle>
         </PM7CardHeader>
-        <PM7Button onClick={() => setDialogOpen(true)}>
-          Open Dialog
-        </PM7Button>
+        <div style={{ padding: '1rem' }}>
+          <PM7Button onClick={() => setDialogOpen(true)}>
+            Open Dialog
+          </PM7Button>
+        </div>
         
         <PM7Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <PM7DialogContent className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] bg-background shadow-lg sm:rounded-lg p-0 overflow-hidden">
-            <PM7DialogHeader className="p-6 pb-4">
-              <PM7DialogTitle className="text-lg font-semibold">Sample Dialog</PM7DialogTitle>
-              <PM7DialogDescription className="mt-2 text-sm text-muted-foreground">
+            <PM7DialogHeader>
+              <PM7DialogTitle>Sample Dialog</PM7DialogTitle>
+              <PM7DialogDescription>
                 This is a sample dialog to test the PM7Dialog component styling in {theme} mode.
               </PM7DialogDescription>
             </PM7DialogHeader>
+            <div className="p-2">
+              <p className="text-sm">Dialog content goes here.</p>
+            </div>
             
             <PM7DialogFooter className="flex flex-row justify-end space-x-2 bg-gray-50 px-6 py-4 border-t">
               <PM7Button 
@@ -275,11 +398,13 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7CardTitle theme={theme}>PM7TabSelector Component</PM7CardTitle>
           <PM7CardSubTitle theme={theme}>Tabbed navigation interface</PM7CardSubTitle>
         </PM7CardHeader>
-        <PM7TabSelector
-          tabs={tabs}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-        />
+        <div style={{ padding: '1rem' }}>
+          <PM7TabSelector
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+        </div>
       </PM7Card>
 
       <PM7Card theme={theme}>
@@ -287,21 +412,32 @@ const ExampleComponentsTest = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7CardTitle theme={theme}>PM7ThemeToggle Component</PM7CardTitle>
           <PM7CardSubTitle theme={theme}>Theme switching buttons in different sizes</PM7CardSubTitle>
         </PM7CardHeader>
-        <PM7ThemeToggle 
-          size="sm" 
-          theme={theme}
-          onThemeChange={(newTheme) => console.log('Theme changed to:', newTheme)}
-        />
-        <PM7ThemeToggle 
-          size="md" 
-          theme={theme}
-          onThemeChange={(newTheme) => console.log('Theme changed to:', newTheme)}
-        />
-        <PM7ThemeToggle 
-          size="lg" 
-          theme={theme}
-          onThemeChange={(newTheme) => console.log('Theme changed to:', newTheme)}
-        />
+        <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <PM7ThemeToggle 
+              size="small" 
+              theme={theme}
+              onThemeChange={onThemeChange}
+            />
+            <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>Small</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <PM7ThemeToggle 
+              size="medium" 
+              theme={theme}
+              onThemeChange={onThemeChange}
+            />
+            <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>Medium (default)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <PM7ThemeToggle 
+              size="large" 
+              theme={theme}
+              onThemeChange={onThemeChange}
+            />
+            <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>Large</span>
+          </div>
+        </div>
       </PM7Card>
     </div>
   );

@@ -250,15 +250,36 @@ For advanced implementations, the following utility components are also availabl
 - **Configurable Width**: Use maxWidth prop with Tailwind CSS classes
 - **Accessibility**: Full keyboard navigation and screen reader support
 - **Animation**: Smooth open/close animations included
+- **Optimized Spacing**: Compact, professional layout with minimal padding
+- **Large Dialog Titles**: Prominent title typography (24px) for better hierarchy
+
+## Default Styling
+
+### Built-in Layout
+PM7Dialog components come with optimized default styling:
+
+- **PM7DialogHeader**: Compact padding (8px) with no bottom padding for tight layout
+- **PM7DialogTitle**: Large, prominent text (24px) using `text-2xl font-semibold`
+- **PM7DialogDescription**: Subtle subtitle with minimal top margin (4px) for proper hierarchy
+- **Layout**: Designed for professional, space-efficient dialogs
+
+### Customizing Spacing
+While default spacing is optimized, you can override with additional classes:
+
+```tsx
+<PM7DialogHeader className="p-6">
+  <PM7DialogTitle>Custom Spaced Title</PM7DialogTitle>
+</PM7DialogHeader>
+```
 
 ## PM7 Brand Guidelines
 
 ### Design Principles
-- Clean, minimal dialog design
-- Consistent spacing and typography
+- Clean, minimal dialog design with compact spacing
+- Consistent typography hierarchy (large titles, subtle descriptions)
 - Accessible keyboard navigation
 - PM7 brand color integration
-- Professional appearance
+- Professional, space-efficient appearance
 
 ## Important Notes
 
