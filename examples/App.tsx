@@ -13,7 +13,7 @@ import DialogExample from './example-dialog';
 import TabSelectorExample from './example-tab-selector';
 import ExampleCard from './example-card';
 import ExampleThemeToggle from './example-theme-toggle';
-import ExampleComponentsTest from './example-components-test';
+import ExampleComponentsTest from './examples-all-components';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
@@ -354,7 +354,7 @@ const ComponentPage = () => {
         </main>
       </div>
       <footer className="pm7-footer">
-        <div className="footer-content">
+        <div className="footer-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className="footer-logo-section">
             <div 
               className="footer-logo"
@@ -373,32 +373,15 @@ const ComponentPage = () => {
             />
             <div className="footer-brand">
               <h4 className="footer-title">PM7 UI Style Guide</h4>
-              <p className="footer-subtitle">Professional UI Components for Modern Applications</p>
             </div>
           </div>
-          <div className="footer-links">
-            <div className="footer-section">
-              <h5 className="footer-section-title">Resources</h5>
-              <ul className="footer-link-list">
-                <li><a href="/menu/documentation" className="footer-link">Documentation</a></li>
-                <li><a href="/menu/usage" className="footer-link">Getting Started</a></li>
-                <li><a href="https://github.com/patrickmast/pm7-ui-style-guide" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a></li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h5 className="footer-section-title">Components</h5>
-              <ul className="footer-link-list">
-                <li><a href="/menu/overview" className="footer-link">Menu</a></li>
-                <li><a href="/button/overview" className="footer-link">Button</a></li>
-                <li><a href="/dialog/overview" className="footer-link">Dialog</a></li>
-                <li><a href="/card/overview" className="footer-link">Card</a></li>
-              </ul>
-            </div>
+          <div>
+            <p className="footer-subtitle" style={{ margin: '0', textAlign: 'right' }}>Professional UI Components for Modern Applications</p>
           </div>
         </div>
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © 2024 PM7. Built with ❤️ for modern web development.
+            © 2025 <a href="http://pm.ink" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>pm.ink</a>. Built with ❤️ for modern web development.
             <span className="footer-version">v{packageJson.version}</span>
           </p>
         </div>
