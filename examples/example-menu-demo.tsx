@@ -54,10 +54,10 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
     return 'en';
   });
 
-  // Add state for trigger border demo
+  // Add state for trigger border and background demo
   const [showTriggerBorder, setShowTriggerBorder] = React.useState(true);
-  // Add state for trigger hover border demo
-  const [showTriggerHoverBorder, setShowTriggerHoverBorder] = React.useState(true);
+  const [showTriggerBackground, setShowTriggerBackground] = React.useState(true);
+  const [showTriggerOnHover, setShowTriggerOnHover] = React.useState(false);
 
   const handleLanguageChange = (lang: LanguageType) => {
     setSelectedLanguage(lang);
@@ -341,7 +341,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
     return descriptions[selectedLanguage]?.[key] || descriptions['en'][key] || key;
   };
   return (
-    <div className="p-6">
+    <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
       {/* Checkbox for trigger border demo */}
       <div className="mb-4 flex flex-col gap-2">
         <div className="flex items-center">
@@ -353,19 +353,31 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
             onChange={e => setShowTriggerBorder(e.target.checked)}
           />
           <label htmlFor="show-trigger-border" className="select-none cursor-pointer">
-            Show trigger icon or label with border.
+            Show border on trigger
           </label>
         </div>
         <div className="flex items-center">
           <input
-            id="show-trigger-hover-border"
+            id="show-trigger-background"
             type="checkbox"
             className="mr-2"
-            checked={showTriggerHoverBorder}
-            onChange={e => setShowTriggerHoverBorder(e.target.checked)}
+            checked={showTriggerBackground}
+            onChange={e => setShowTriggerBackground(e.target.checked)}
           />
-          <label htmlFor="show-trigger-hover-border" className="select-none cursor-pointer">
-            Show trigger icon or label on hover border.
+          <label htmlFor="show-trigger-background" className="select-none cursor-pointer">
+            Show background on trigger
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="show-trigger-on-hover"
+            type="checkbox"
+            className="mr-2"
+            checked={showTriggerOnHover}
+            onChange={e => setShowTriggerOnHover(e.target.checked)}
+          />
+          <label htmlFor="show-trigger-on-hover" className="select-none cursor-pointer">
+            Show border/background on hover only
           </label>
         </div>
       </div>
@@ -382,8 +394,9 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
               }))
             }))}
             theme={theme}
-            menuTriggerBordered={showTriggerBorder}
-            menuTriggerBorderedOnHover={showTriggerHoverBorder}
+            menuTriggerBorder={showTriggerBorder}
+            menuTriggerBackground={showTriggerBackground}
+            menuTriggerOnHover={showTriggerOnHover}
           />
           <div className="ml-4">
             <p>{getDescription('title')}</p>
@@ -464,11 +477,11 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
               }))
             }))}
             theme={theme}
-            menuTriggerIconColorLight={'#1C86EF'} // PM7 Blue
+            menuTriggerIconColor={'#1C86EF'} // PM7 Blue
             menuTriggerIconColorDark={'#FFDD00'} // Yellow
           />
           <div className="ml-4">
-            <p>{getDescription('iconColorDesc')} <code>menuTriggerIconColorLight</code> / <code>menuTriggerIconColorDark</code> {getDescription('prop')}</p>
+            <p>{getDescription('iconColorDesc')} <code>menuTriggerIconColor</code> / <code>menuTriggerIconColorDark</code> {getDescription('prop')}</p>
             <p className="mt-2">{getDescription('exampleUses')} {theme === 'dark' ? getDescription('yellow') : getDescription('primaryBlue')} {getDescription('color')} <code>{theme === 'dark' ? '#FFDD00' : '#1C86EF'}</code></p>
           </div>
         </div>
@@ -492,10 +505,10 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
       </div>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
 
-      {/* DEMO: menuTriggerLabelColorLight / menuTriggerLabelColorDark props */}
+      {/* DEMO: theme-aware label color props */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Custom Trigger Label Color</h2>
-        <p className="mb-2">This example uses a label as the menu trigger with custom label colors for light and dark mode.</p>
+        <p className="mb-2">This example uses a label as the menu trigger with custom label colors for light and dark mode using the theme-aware color props.</p>
         <PM7Menu
           menuItems={[
             { id: 'about', label: 'About', onClick: () => console.log('About') },
@@ -503,7 +516,7 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
           ]}
           theme={theme}
           menuLabel="Help"
-          menuTriggerLabelColorLight="#1C86EF" // PM7 Blue
+          menuTriggerLabelColor="#1C86EF" // PM7 Blue
           menuTriggerLabelColorDark="#FFDD00" // Yellow
         />
       </div>
@@ -568,9 +581,9 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
               <path d="m9 11 3 3 3-3" />
             </svg>
           }
-          menuTriggerIconColorLight={'#1C86EF'} // PM7 Blue
+          menuTriggerIconColor={'#1C86EF'} // PM7 Blue
           menuTriggerIconColorDark={'#FFDD00'} // Yellow
-          menuTriggerLabelColorLight = {'#1C86EF'} // PM7 Blue
+          menuTriggerLabelColor = {'#1C86EF'} // PM7 Blue
           menuTriggerLabelColorDark = {'#FFDD00'} // Yellow
         />
       </div>

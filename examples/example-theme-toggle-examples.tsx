@@ -5,7 +5,7 @@ const ExampleThemeToggleExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [controlledTheme, setControlledTheme] = useState<ThemeType>('light');
 
   return (
-    <div>
+    <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
       <h2>Interactive Examples</h2>
       
       <div className="example-section">

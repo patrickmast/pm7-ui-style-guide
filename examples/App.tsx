@@ -111,7 +111,7 @@ const ComponentPage = () => {
   const renderComponent = () => {
     switch (activeComponent) {
       case 'menu':
-        return <MenuExample />;
+        return <MenuExample theme={theme} />;
       case 'button':
         return <ButtonExample theme={theme} />;
       case 'input':
@@ -127,7 +127,7 @@ const ComponentPage = () => {
       case 'all-components':
         return <ExampleComponentsTest theme={theme} />;
       default:
-        return <MenuExample />;
+        return <MenuExample theme={theme} />;
     }
   };
 
@@ -258,7 +258,7 @@ const ComponentPage = () => {
           <div className="menu-wrapper">
             <Menu menuItems={menuItems}
                   menuAlignment="start"
-                  menuTriggerIconColorLight="#FFFFFF"
+                  menuTriggerIconColor="#FFFFFF"
                   menuTriggerIconColorDark="#FFFFFF"
                   theme={theme as 'light' | 'dark'}
             />
@@ -284,7 +284,7 @@ const ComponentPage = () => {
             <ul className="sidebar-nav">
               <li className={`sidebar-nav-item ${activeComponent === 'menu' ? 'active' : ''}`}>
                 <Link
-                  to={`/menu/${getActiveTab('demo')}`}
+                  to={`/menu/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Menu
@@ -292,7 +292,7 @@ const ComponentPage = () => {
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'button' ? 'active' : ''}`}>
                 <Link
-                  to={`/button/${getActiveTab('demo')}`}
+                  to={`/button/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Button
@@ -300,7 +300,7 @@ const ComponentPage = () => {
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'input' ? 'active' : ''}`}>
                 <Link
-                  to={`/input/${getActiveTab('demo')}`}
+                  to={`/input/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Input
@@ -308,7 +308,7 @@ const ComponentPage = () => {
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'dialog' ? 'active' : ''}`}>
                 <Link
-                  to={`/dialog/${getActiveTab('demo')}`}
+                  to={`/dialog/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Dialog
@@ -316,7 +316,7 @@ const ComponentPage = () => {
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'tabselector' ? 'active' : ''}`}>
                 <Link
-                  to={`/tabselector/${getActiveTab('demo')}`}
+                  to={`/tabselector/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Tab Selector
@@ -324,7 +324,7 @@ const ComponentPage = () => {
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'card' ? 'active' : ''}`}>
                 <Link
-                  to={`/card/${getActiveTab('demo')}`}
+                  to={`/card/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Card
@@ -332,7 +332,7 @@ const ComponentPage = () => {
               </li>
               <li className={`sidebar-nav-item ${activeComponent === 'themetoggle' ? 'active' : ''}`}>
                 <Link
-                  to={`/themetoggle/${getActiveTab('demo')}`}
+                  to={`/themetoggle/${getActiveTab('overview')}`}
                   className="sidebar-nav-link"
                 >
                   Theme Toggle
@@ -353,8 +353,55 @@ const ComponentPage = () => {
           {renderComponent()}
         </main>
       </div>
-      <footer>
-        <p>PM7 UI Style Guide - A collection of reusable UI components</p>
+      <footer className="pm7-footer">
+        <div className="footer-content">
+          <div className="footer-logo-section">
+            <div 
+              className="footer-logo"
+              style={{
+                width: '32px',
+                height: '32px',
+                maskImage: 'url(/dancing-patrick-logo.svg)',
+                WebkitMaskImage: 'url(/dancing-patrick-logo.svg)',
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+                backgroundColor: theme === 'dark' ? '#3b9eff' : '#1C86EF'
+              }}
+              aria-label="PM7 Logo"
+            />
+            <div className="footer-brand">
+              <h4 className="footer-title">PM7 UI Style Guide</h4>
+              <p className="footer-subtitle">Professional UI Components for Modern Applications</p>
+            </div>
+          </div>
+          <div className="footer-links">
+            <div className="footer-section">
+              <h5 className="footer-section-title">Resources</h5>
+              <ul className="footer-link-list">
+                <li><a href="/menu/documentation" className="footer-link">Documentation</a></li>
+                <li><a href="/menu/usage" className="footer-link">Getting Started</a></li>
+                <li><a href="https://github.com/patrickmast/pm7-ui-style-guide" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a></li>
+              </ul>
+            </div>
+            <div className="footer-section">
+              <h5 className="footer-section-title">Components</h5>
+              <ul className="footer-link-list">
+                <li><a href="/menu/overview" className="footer-link">Menu</a></li>
+                <li><a href="/button/overview" className="footer-link">Button</a></li>
+                <li><a href="/dialog/overview" className="footer-link">Dialog</a></li>
+                <li><a href="/card/overview" className="footer-link">Card</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p className="footer-copyright">
+            © 2024 PM7. Built with ❤️ for modern web development.
+            <span className="footer-version">v{packageJson.version}</span>
+          </p>
+        </div>
       </footer>
       {/* Version Info Dialog */}
       <PM7Dialog open={showVersionDialog} onOpenChange={setShowVersionDialog}>
@@ -413,7 +460,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/menu" replace />} />
+        <Route path="/" element={<Navigate to="/menu/overview" replace />} />
         <Route path="/:component/*" element={<ComponentPage />} />
       </Routes>
     </BrowserRouter>

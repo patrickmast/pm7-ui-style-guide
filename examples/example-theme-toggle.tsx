@@ -15,7 +15,7 @@ type ThemeType = 'light' | 'dark';
 const ExampleThemeToggle = ({ theme }: { theme: ThemeType }) => {
   const navigate = useNavigate();
   const { '*': tabPath } = useParams();
-  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
+  const activeTab = (tabPath || getActiveTab('overview')) as TabType;
 
   // Function to handle tab changes
   const handleTabChange = (tabId: string) => {

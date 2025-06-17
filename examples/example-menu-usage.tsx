@@ -143,39 +143,62 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </div>
           </PM7Card>
 
-          {/* menuTriggerBordered prop */}
+          {/* menuTriggerBorder prop */}
           <PM7Card theme={theme}>
             <PM7CardHeader variant="dark" theme={theme}>
               <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
-                menuTriggerBordered <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(boolean, default is false)</span>
+                menuTriggerBorder <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(boolean, default is false)</span>
               </PM7CardTitle>
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Whether to always show a border/background around the menu trigger.
+                Whether to show a border around the menu trigger.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
                   <strong>Options:</strong>
                 </div>
                 <div style={{ marginLeft: '1rem' }}>
-                  <div><code>true</code> - Always show border/background</div>
-                  <div><code style={{ fontWeight: 'bold' }}>false</code> - No border/background (default)</div>
+                  <div><code>true</code> - Show border</div>
+                  <div><code style={{ fontWeight: 'bold' }}>false</code> - No border (default)</div>
                 </div>
               </div>
             </div>
           </PM7Card>
 
-          {/* menuTriggerBorderedOnHover prop */}
+          {/* menuTriggerBackground prop */}
           <PM7Card theme={theme}>
             <PM7CardHeader variant="dark" theme={theme}>
               <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
-                menuTriggerBorderedOnHover <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(boolean, default is false)</span>
+                menuTriggerBackground <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(boolean, default is false)</span>
               </PM7CardTitle>
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Whether to show border/background only on hover over the menu trigger.
+                Whether to show a background on the menu trigger.
+              </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Options:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div><code>true</code> - Show background</div>
+                  <div><code style={{ fontWeight: 'bold' }}>false</code> - No background (default)</div>
+                </div>
+              </div>
+            </div>
+          </PM7Card>
+
+          {/* menuTriggerOnHover prop */}
+          <PM7Card theme={theme}>
+            <PM7CardHeader variant="dark" theme={theme}>
+              <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+                menuTriggerOnHover <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(boolean, default is false)</span>
+              </PM7CardTitle>
+            </PM7CardHeader>
+            <div style={{ padding: '0 0.5rem' }}>
+              <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
+                Whether to show border and background only on hover over the menu trigger.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
@@ -193,24 +216,55 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7Card theme={theme}>
             <PM7CardHeader variant="dark" theme={theme}>
               <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
-                Color Customization <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(optional styling props)</span>
+                Color Customization <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(theme-aware styling props)</span>
               </PM7CardTitle>
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Optional props for customizing colors of menu trigger and background.
+                Theme-aware color props for menu trigger and dropdown. Each prop has base and Dark variants for consistent theming.
               </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666', marginBottom: '1rem', padding: '0.75rem', backgroundColor: theme === 'dark' ? '#1F2937' : '#F3F4F6', borderRadius: '0.375rem' }}>
+                <strong>Remark:</strong> All color customization props are of type <code>string</code> and accept CSS color values (hex, rgb, hsl, named colors, etc.).
+              </div>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
-                  <strong>Available Props:</strong>
+                  <strong>Icon Colors:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem', marginBottom: '1rem' }}>
+                  <div><code>menuTriggerIconColor</code> - Base icon color (used in light mode)</div>
+                  <div><code>menuTriggerIconColorDark</code> - Icon color in dark theme</div>
+                </div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Label Colors:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem', marginBottom: '1rem' }}>
+                  <div><code>menuTriggerLabelColor</code> - Base label color (used in light mode)</div>
+                  <div><code>menuTriggerLabelColorDark</code> - Label color in dark theme</div>
+                </div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Background Colors:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem', marginBottom: '1rem' }}>
+                  <div><code>menuTriggerBackgroundColor</code> - Trigger background color</div>
+                  <div><code>menuTriggerBackgroundColorDark</code> - Trigger background color in dark mode</div>
+                  <div><code>menuBackgroundColor</code> - Dropdown background color</div>
+                  <div><code>menuBackgroundColorDark</code> - Dropdown background color in dark mode</div>
+                </div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Border Colors:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem', marginBottom: '1rem' }}>
+                  <div><code>menuTriggerBorderColor</code> - Trigger border color</div>
+                  <div><code>menuTriggerBorderColorDark</code> - Trigger border color in dark mode</div>
+                </div>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Hover Colors:</strong>
                 </div>
                 <div style={{ marginLeft: '1rem' }}>
-                  <div><code>menuTriggerIconColorLight</code> - string - Icon color in light theme</div>
-                  <div><code>menuTriggerIconColorDark</code> - string - Icon color in dark theme</div>
-                  <div><code>menuTriggerLabelColorLight</code> - string - Label color in light theme</div>
-                  <div><code>menuTriggerLabelColorDark</code> - string - Label color in dark theme</div>
-                  <div><code>menuTriggerBackgroundColor</code> - string - Trigger background color</div>
-                  <div><code>menuBackgroundColor</code> - string - Dropdown background color</div>
+                  <div><code>menuTriggerHoverBackgroundColor</code> - Trigger hover background color</div>
+                  <div><code>menuTriggerHoverBackgroundColorDark</code> - Trigger hover background color in dark mode</div>
+                  <div><code>menuTriggerHoverBorderColor</code> - Trigger hover border color</div>
+                  <div><code>menuTriggerHoverBorderColorDark</code> - Trigger hover border color in dark mode</div>
                 </div>
               </div>
             </div>
@@ -235,23 +289,56 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
 
         </div>
 
-        <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Usage Examples</h4>
+        <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Menu Trigger Variants</h4>
         <div style={codeBlockStyle}>
           <div style={{ marginBottom: '1rem' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Basic Menu:</p>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>1. Icon Only (Default Hamburger):</p>
             <code>{'<PM7Menu menuItems={items} theme="light" />'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Menu with Text Label:</p>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>2. Icon Only (Custom Icon):</p>
+            <code>{'<PM7Menu menuItems={items} menuIcon={<CustomIcon />} theme="light" />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>3. Text Only:</p>
+            <code>{'<PM7Menu menuItems={items} menuLabel="File" theme="light" />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>4. Icon + Text:</p>
+            <code>{'<PM7Menu menuItems={items} menuIcon={<FileIcon />} menuLabel="File" theme="light" />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>5. Hamburger + Text:</p>
             <code>{'<PM7Menu menuItems={items} menuLabel="Menu" theme="light" />'}</code>
+            <p style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666', marginTop: '0.25rem' }}>Note: When menuLabel is provided without menuIcon, the default hamburger icon is used.</p>
+          </div>
+        </div>
+
+        <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Additional Examples</h4>
+        <div style={codeBlockStyle}>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Border and Background with Center Alignment:</p>
+            <code>{'<PM7Menu menuItems={items} menuTriggerBorder={true} menuTriggerBackground={true} menuAlignment="center" theme="light" />'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Bordered Menu with Center Alignment:</p>
-            <code>{'<PM7Menu menuItems={items} menuTriggerBordered={true} menuAlignment="center" theme="light" />'}</code>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Border Only (No Background):</p>
+            <code>{'<PM7Menu menuItems={items} menuTriggerBorder={true} theme="light" />'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Custom Icon and Colors:</p>
-            <code>{'<PM7Menu menuItems={items} menuIcon={<CustomIcon />} menuTriggerIconColorLight="#1C86EF" theme="light" />'}</code>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Show Border and Background on Hover:</p>
+            <code>{'<PM7Menu menuItems={items} menuTriggerOnHover={true} theme="light" />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Theme-Aware Colors:</p>
+            <code>{'<PM7Menu menuItems={items} menuTriggerIconColor="#1C86EF" menuTriggerIconColorDark="#3B9EFF" theme="light" />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Full Theme-Aware Customization:</p>
+            <code>{'<PM7Menu menuItems={items} menuTriggerBackgroundColor="#F3F4F6" menuTriggerBackgroundColorDark="#1F2937" menuTriggerBorderColor="#E5E7EB" menuTriggerBorderColorDark="#374151" theme="light" />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Base Props Only (same color in both themes):</p>
+            <code>{'<PM7Menu menuItems={items} menuTriggerIconColor="#1C86EF" menuTriggerBackgroundColor="#F3F4F6" theme="light" />'}</code>
           </div>
         </div>
       </div>

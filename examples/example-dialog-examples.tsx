@@ -30,7 +30,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
 
   return (
     <>
-      <h3 className="text-xl font-semibold mb-3">Dialog Examples</h3>
+      <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
+        <h3 className="text-xl font-semibold mb-3">Dialog Examples</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Column 1 */}
         <div>
@@ -39,7 +40,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
             <button
               onClick={() => setBasicDialogOpen(true)}
               className="w-full mb-2"
-              style={{ padding: '12px 0', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer', fontWeight: 500 }}
+              style={{ padding: '12px 0', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer', fontWeight: 500 }}
             >
               Open Basic Dialog
             </button>
@@ -124,7 +125,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setBasicDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer' }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer' }}
             >
               Close
             </button>
@@ -141,7 +142,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setConfirmDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer', marginRight: 8 }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer', marginRight: 8 }}
             >
               Cancel
             </button>
@@ -188,7 +189,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setFormDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer', marginRight: 8 }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer', marginRight: 8 }}
             >
               Cancel
             </button>
@@ -225,7 +226,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               <div>
                 <button
                   onClick={() => setCustomFooterDialogOpen(false)}
-                  style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer', marginRight: 8 }}
+                  style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer', marginRight: 8 }}
                 >
                   Save Draft
                 </button>
@@ -258,7 +259,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setScrollableDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer' }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer' }}
             >
               Close
             </button>
@@ -304,7 +305,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setImageDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer' }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer' }}
             >
               Close
             </button>
@@ -343,7 +344,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setLoadingDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer' }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer' }}
             >
               Close
             </button>
@@ -362,7 +363,7 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setNestedDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer', marginRight: 8 }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer', marginRight: 8 }}
             >
               Close
             </button>
@@ -387,13 +388,14 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           <PM7DialogFooter>
             <button
               onClick={() => setInnerNestedDialogOpen(false)}
-              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', cursor: 'pointer' }}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #ccc', background: '#f7f7f7', color: '#333', cursor: 'pointer' }}
             >
               Close
             </button>
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
+      </div>
     </>
   );
 };

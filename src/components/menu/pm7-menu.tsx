@@ -320,27 +320,63 @@ export interface PM7MenuProps {
   mobileBreakpoint?: number;
   menuAlignment?: 'start' | 'center' | 'end';
   menuIcon?: React.ReactNode; // New: custom icon
-  menuTriggerIconColorLight?: string;
-  menuTriggerIconColorDark?: string;
-  menuTriggerLabelColorLight?: string; // New: label color for light mode
-  menuTriggerLabelColorDark?: string;  // New: label color for dark mode
+  menuTriggerIconColor?: string; // Base icon color (used in light mode)
+  menuTriggerIconColorDark?: string; // Icon color for dark mode
+  menuTriggerLabelColor?: string; // Base label color (used in light mode)
+  menuTriggerLabelColorDark?: string; // Label color for dark mode
   menuLabel?: React.ReactNode; // New: custom label (string or ReactNode)
   /**
-   * If true, always show a border and subtle background on the menu trigger (icon or label). Default: false
+   * If true, show border on the menu trigger. Default: false
    */
-  menuTriggerBordered?: boolean;
+  menuTriggerBorder?: boolean;
   /**
-   * If true, show a border and subtle background only on hover of the menu trigger (icon or label). Default: false
+   * If true, show background on the menu trigger. Default: false
    */
-  menuTriggerBorderedOnHover?: boolean;
+  menuTriggerBackground?: boolean;
   /**
-   * Background color for the menu trigger button
+   * If true, show border and background only on hover of the menu trigger. Default: false
+   */
+  menuTriggerOnHover?: boolean;
+  /**
+   * Background color for the menu trigger button (overrides default)
    */
   menuTriggerBackgroundColor?: string;
+  /**
+   * Background color for the menu trigger button in dark mode (overrides default)
+   */
+  menuTriggerBackgroundColorDark?: string;
+  /**
+   * Border color for the menu trigger button (overrides default)
+   */
+  menuTriggerBorderColor?: string;
+  /**
+   * Border color for the menu trigger button in dark mode (overrides default)
+   */
+  menuTriggerBorderColorDark?: string;
+  /**
+   * Background color for the menu trigger button on hover (overrides default)
+   */
+  menuTriggerHoverBackgroundColor?: string;
+  /**
+   * Background color for the menu trigger button on hover in dark mode (overrides default)
+   */
+  menuTriggerHoverBackgroundColorDark?: string;
+  /**
+   * Border color for the menu trigger button on hover (overrides default)
+   */
+  menuTriggerHoverBorderColor?: string;
+  /**
+   * Border color for the menu trigger button on hover in dark mode (overrides default)
+   */
+  menuTriggerHoverBorderColorDark?: string;
   /**
    * Background color for the dropdown menu content
    */
   menuBackgroundColor?: string;
+  /**
+   * Background color for the dropdown menu content in dark mode
+   */
+  menuBackgroundColorDark?: string;
 }
 
 const PM7MenuComponent: React.FC<PM7MenuProps> = ({
@@ -348,16 +384,25 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
   theme = 'light',
   mobileBreakpoint = 768,
   menuAlignment = 'start',
-  menuTriggerIconColorLight,
+  menuTriggerIconColor,
   menuTriggerIconColorDark,
   menuIcon,
   menuLabel,
-  menuTriggerLabelColorLight,
+  menuTriggerLabelColor,
   menuTriggerLabelColorDark,
-  menuTriggerBordered = false,
-  menuTriggerBorderedOnHover = false,
+  menuTriggerBorder = false,
+  menuTriggerBackground = false,
+  menuTriggerOnHover = false,
   menuTriggerBackgroundColor,
+  menuTriggerBackgroundColorDark,
+  menuTriggerBorderColor,
+  menuTriggerBorderColorDark,
+  menuTriggerHoverBackgroundColor,
+  menuTriggerHoverBackgroundColorDark,
+  menuTriggerHoverBorderColor,
+  menuTriggerHoverBorderColorDark,
   menuBackgroundColor,
+  menuBackgroundColorDark,
 }) => {
   // State for menu open/close
   const [isOpen, setIsOpen] = React.useState(false);
@@ -397,6 +442,15 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
     }
   }, [isOpen]);
 
+  // Helper function for theme-aware color selection
+  const getThemeColor = (baseColor: string | undefined, darkColor: string | undefined): string | undefined => {
+    if (theme === 'dark') {
+      return darkColor || baseColor;
+    } else {
+      return baseColor;
+    }
+  };
+
   // Define theme colors
   const themeColors = {
     light: {
@@ -433,15 +487,46 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
             aria-label="Open menu"
             className={cn(
               'flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none',
-              menuTriggerBordered && 'menu-trigger--bordered',
-              menuTriggerBorderedOnHover && 'menu-trigger--bordered-hover'
+              // Apply border and background based on new prop structure
+              menuTriggerBorder && menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--bordered',
+              menuTriggerOnHover && 'menu-trigger--bordered-hover',
+              menuTriggerBorder && !menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--border-only'
             )}
             style={{
-              ...(menuTriggerBackgroundColor && {
-                backgroundColor: menuTriggerBackgroundColor,
-                background: menuTriggerBackgroundColor,
-                // Force CSS custom property for maximum specificity
-                '--menu-trigger-bg': menuTriggerBackgroundColor,
+              // Base styles for all buttons
+              border: '1px solid transparent',
+              height: '32px',
+              minWidth: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxSizing: 'border-box',
+              // Add padding for text-containing buttons
+              ...(menuLabel && {
+                padding: '0 10px',
+                minWidth: 'auto'
+              }),
+              // Icon-only buttons get square sizing
+              ...(!menuLabel && {
+                padding: '0',
+                width: '32px'
+              }),
+              // Theme-aware color customization
+              ...(getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark) && {
+                backgroundColor: getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark),
+                background: getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark),
+                '--menu-trigger-bg': getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark),
+              }),
+              ...(getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) && {
+                borderColor: getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark),
+                '--menu-trigger-border-color': getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark),
+              }),
+              // CSS custom properties for hover colors
+              ...(getThemeColor(menuTriggerHoverBackgroundColor, menuTriggerHoverBackgroundColorDark) && {
+                '--menu-trigger-hover-bg': getThemeColor(menuTriggerHoverBackgroundColor, menuTriggerHoverBackgroundColorDark),
+              }),
+              ...(getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark) && {
+                '--menu-trigger-hover-border-color': getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark),
               }),
             }}
             onClick={() => setIsOpen(!isOpen)}
@@ -451,19 +536,19 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               <span
                 className="menu-trigger-label flex items-center gap-2"
                 style={{
-                  color: theme === 'dark'
-                    ? (menuTriggerLabelColorDark || '#FAFAFA')
-                    : (menuTriggerLabelColorLight || '#000000'),
+                  color: getThemeColor(menuTriggerLabelColor, menuTriggerLabelColorDark) 
+                    || (theme === 'dark' ? '#FAFAFA' : '#000000'),
                 }}
               >
                 {menuIcon && (
                   <span
                     className="menu-trigger-icon menu-trigger-icon--custom"
                     style={{
-                      fontSize: 32,
-                      lineHeight: 1,
-                      '--menu-trigger-icon-color': menuTriggerIconColorLight || '#000000', // Black fallback
-                      '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      '--menu-trigger-icon-color': getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || '#000000', // Black fallback
+                      '--menu-trigger-icon-color-dark': getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || '#FAFAFA', // White fallback
                     } as React.CSSProperties}
                   >
                     {menuIcon}
@@ -475,10 +560,11 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               <span
                 className="menu-trigger-icon menu-trigger-icon--custom"
                 style={{
-                  fontSize: 32,
-                  lineHeight: 1,
-                  '--menu-trigger-icon-color': menuTriggerIconColorLight || '#000000', // Black fallback
-                  '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  '--menu-trigger-icon-color': getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || '#000000', // Black fallback
+                  '--menu-trigger-icon-color-dark': getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || '#FAFAFA', // White fallback
                 } as React.CSSProperties}
               >
                 {menuIcon}
@@ -487,13 +573,20 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               <span
                 className="menu-trigger-icon menu-trigger-icon--custom"
                 style={{
-                  fontSize: 32,
-                  lineHeight: 1,
-                  '--menu-trigger-icon-color': menuTriggerIconColorLight || '#000000', // Black fallback
-                  '--menu-trigger-icon-color-dark': menuTriggerIconColorDark || '#FAFAFA', // White fallback
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%',
+                  '--menu-trigger-icon-color': getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || '#000000', // Black fallback
+                  '--menu-trigger-icon-color-dark': getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || '#FAFAFA', // White fallback
                 } as React.CSSProperties}
               >
-                &#8801;
+                <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="18" height="2.5" rx="1.25" fill="currentColor"/>
+                  <rect y="6.25" width="18" height="2.5" rx="1.25" fill="currentColor"/>
+                  <rect y="12.5" width="18" height="2.5" rx="1.25" fill="currentColor"/>
+                </svg>
               </span>
             )}
           </button>
@@ -502,7 +595,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
         <PM7MenuContent
           align={menuAlignment}
           style={{
-            backgroundColor: menuBackgroundColor || currentTheme.bgColor,
+            backgroundColor: getThemeColor(menuBackgroundColor, menuBackgroundColorDark) || currentTheme.bgColor,
             borderColor: currentTheme.borderColor,
             color: currentTheme.textColor,
             boxShadow: MENU_STYLES.CONTAINER_SHADOW,
@@ -560,7 +653,7 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
 
                   <PM7MenuSubContent
                     style={{
-                      backgroundColor: menuBackgroundColor || currentTheme.bgColor,
+                      backgroundColor: getThemeColor(menuBackgroundColor, menuBackgroundColorDark) || currentTheme.bgColor,
                       borderColor: currentTheme.borderColor,
                       color: currentTheme.textColor,
                       boxShadow: MENU_STYLES.CONTAINER_SHADOW,

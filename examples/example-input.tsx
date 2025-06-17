@@ -203,7 +203,7 @@ const Separator = ({ theme }: { theme: 'light' | 'dark' }) => (
 const InputExample = ({ theme }: { theme: ThemeType }) => {
   const navigate = useNavigate();
   const { '*': tabPath } = useParams();
-  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
+  const activeTab = (tabPath || getActiveTab('overview')) as TabType;
 
   const handleTabChange = (tabId: string) => {
     saveActiveTab(tabId);

@@ -38,12 +38,15 @@ The project follows a layered architecture:
 2. **Component Layer**: Radix UI / ShadCN/UI - Unstyled, accessible components  
 3. **Branding Layer**: PM7 UI Style Guide - PM7-specific styling rules and overrides
 
-### Key Technologies
-- **React 18** with TypeScript
-- **Vite** for build tooling (dual config for library and examples)
-- **Tailwind CSS** for styling
-- **Radix UI** for accessible component primitives
-- **ESLint** for code quality
+### Key Technologies & Tools
+- **React 18** with TypeScript (hooks-based components)
+- **Vite 5** for build tooling (dual config system for library and examples)
+- **Tailwind CSS 3** for utility-first styling framework
+- **Radix UI** for accessible, unstyled component primitives
+- **Lucide React** for consistent icon system
+- **ESLint** with TypeScript checking for code quality
+- **Playwright/Puppeteer** for static documentation pre-rendering
+- **PostCSS & Autoprefixer** for CSS processing
 
 ### Directory Structure
 ```
@@ -164,25 +167,44 @@ rm -rf dist/ examples/dist/
 ## Development Workflow
 
 ### Component Development
-1. Create component directory in `src/components/`
-2. Implement component with PM7 styling rules
-3. Create exports in `index.ts` file
-4. Add component to main `src/index.ts` exports
-5. Create example in `examples/` directory
-6. Update examples app routing in `examples/App.tsx`
+1. Create component directory in `src/components/[component-name]/`
+2. Implement component in `pm7-[name].tsx` with PM7 styling rules
+3. Create exports in `index.ts` or `index.tsx` file
+4. Add component to main `src/index.ts` exports (both PM7-prefixed and clean alias)
+5. Create CSS file if needed: `pm7-[name].css`
+6. Update `package.json` `files` array if CSS file created
+7. Create example files in `examples/` directory following naming pattern
+8. Update examples app routing in `examples/App.tsx`
 
 ### Testing Components
-1. Use `npm run dev` to start examples app
-2. Navigate to component examples to test functionality
-3. Test both light and dark modes
-4. Verify responsive behavior
+1. Use `npm run dev` to start examples app (serves from `examples/` directory on port 5173)
+2. Navigate to component examples to test functionality  
+3. Test both light and dark modes using theme toggle
+4. Verify responsive behavior on different screen sizes
+5. Test with different props and configurations
 
 ### Building and Publishing
-1. Run `npm run lint` to ensure code quality
-2. Run `npm run build` to build library
+1. Run `npm run lint` to ensure code quality and TypeScript checking
+2. Run `npm run build` to build library (outputs to `dist/`)
 3. Test locally by linking: `npm link` in this repo, `npm link pm7-ui-style-guide` in test project
 4. Update version with `npm version patch|minor|major`
 5. Publish with `npm publish --access public`
+
+### Debugging Common Issues
+
+**Vite Config Issues:**
+- If examples app doesn't start: Check that `vite.config.js` serves examples in dev mode
+- If library doesn't build: Verify externals in `rollupOptions` are correct
+- If CSS not loading: Ensure CSS imports are in correct locations
+
+**Component Export Issues:**
+- If imports fail: Check both PM7-prefixed and clean aliases are exported from `src/index.ts`
+- If TypeScript errors: Verify component export patterns match the dual export strategy
+
+**CSS Styling Issues:**  
+- If styles not applying: Verify component CSS file is imported and listed in `package.json` files
+- If theming broken: Check CSS variables are defined in `src/css/variables.css`
+- If Radix components not styled: Ensure wrapper pattern is correctly applied
 
 ## CRITICAL DOCUMENTATION REQUIREMENT
 
@@ -305,7 +327,7 @@ const menuItems = [
 <Menu 
   menuItems={menuItems}
   menuAlignment="start"
-  menuTriggerIconColorLight="#1C86EF"
+  menuTriggerIconColor="#1C86EF"
   menuTriggerIconColorDark="#FFDD00"
 />
 ```

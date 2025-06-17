@@ -131,7 +131,7 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   };
 
   return (
-    <>
+    <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
       <h3 style={titleStyle}>Input Examples</h3>
       
       {/* Basic Input */}
@@ -316,7 +316,7 @@ const ExampleInputExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
-    </>
+    </div>
   );
 };
 

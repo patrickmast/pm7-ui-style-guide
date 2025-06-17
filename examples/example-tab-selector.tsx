@@ -84,7 +84,7 @@ The component automatically detects theme changes by listening to the \`pm7-them
 const TabSelectorExample = ({ theme }: { theme: ThemeType }) => {
   const navigate = useNavigate();
   const { '*': tabPath } = useParams();
-  const activeTab = (tabPath || getActiveTab('demo')) as TabType;
+  const activeTab = (tabPath || getActiveTab('overview')) as TabType;
 
   const handleTabChange = (tabId: string) => {
     saveActiveTab(tabId);

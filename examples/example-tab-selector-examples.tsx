@@ -35,7 +35,7 @@ const ExampleTabSelectorExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   };
 
   return (
-    <div>
+    <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
       <h3 style={titleStyle}>Examples</h3>
       
       <div style={sectionStyle}>

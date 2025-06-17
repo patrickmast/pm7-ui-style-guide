@@ -46,7 +46,7 @@ const ExampleButtonExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
 
   return (
     <>
-      <div className="p-4">
+      <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
         <h3 className="text-xl font-semibold mb-4">Button Variants</h3>
         <div className="flex flex-wrap gap-4 mb-6">
           <Button theme={theme} className={buttonRules.button} onClick={() => showButtonInfo('Default Style')}>

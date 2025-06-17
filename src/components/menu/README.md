@@ -56,8 +56,47 @@ function MyComponent() {
 }
 ```
 
-### Menu with Text Label
+### Menu Trigger Variants
 
+PM7Menu supports four different trigger button styles:
+
+#### 1. Icon Only (Default Hamburger)
+```tsx
+<PM7Menu 
+  menuItems={menuItems}
+  theme="light"
+/>
+```
+
+#### 2. Icon Only (Custom Icon)
+```tsx
+<PM7Menu 
+  menuItems={menuItems}
+  menuIcon={<SettingsIcon />}
+  theme="light"
+/>
+```
+
+#### 3. Text Only
+```tsx
+<PM7Menu 
+  menuItems={menuItems}
+  menuLabel="File"
+  theme="light"
+/>
+```
+
+#### 4. Icon + Text
+```tsx
+<PM7Menu 
+  menuItems={menuItems}
+  menuIcon={<FileIcon />}
+  menuLabel="File"
+  theme="light"
+/>
+```
+
+#### 5. Hamburger + Text
 ```tsx
 <PM7Menu 
   menuItems={menuItems}
@@ -65,13 +104,14 @@ function MyComponent() {
   theme="light"
 />
 ```
+*Note: When menuLabel is provided without menuIcon, the default hamburger icon is displayed alongside the text.*
 
 ### Bordered Menu with Custom Alignment
 
 ```tsx
 <PM7Menu 
   menuItems={menuItems}
-  menuTriggerBordered={true}
+  menuTriggerBorder={true}
   menuAlignment="center"
   theme="light"
 />
@@ -124,14 +164,14 @@ const menuItems = [
 // Always show border
 <PM7Menu 
   menuItems={items}
-  menuTriggerBordered={true}
+  menuTriggerBorder={true}
   theme="light"
 />
 
 // Show border on hover only
 <PM7Menu 
   menuItems={items}
-  menuTriggerBorderedOnHover={true}
+  menuTriggerOnHover={true}
   theme="light"
 />
 
@@ -143,17 +183,62 @@ const menuItems = [
 />
 ```
 
-### Color Customization
+### Border and Background Styling
 
 ```tsx
+// Show border and background
 <PM7Menu 
   menuItems={items}
-  menuTriggerIconColorLight="#1C86EF"
-  menuTriggerIconColorDark="#3B9EFF"
-  menuTriggerLabelColorLight="#111827"
-  menuTriggerLabelColorDark="#FFFFFF"
+  menuTriggerBorder={true}
+  menuTriggerBackground={true}
+  theme="light"
+/>
+
+// Show only border (no background)
+<PM7Menu 
+  menuItems={items}
+  menuTriggerBorder={true}
+  theme="light"
+/>
+
+// Show border and background only on hover
+<PM7Menu 
+  menuItems={items}
+  menuTriggerOnHover={true}
+  theme="light"
+/>
+```
+
+### Color Customization
+
+PM7Menu supports theme-aware color props with a base version (used for light mode) and optional Dark variants for dark mode.
+
+```tsx
+// Theme-aware color customization
+<PM7Menu 
+  menuItems={items}
+  menuTriggerIconColor="#1C86EF"                    // Base color (light mode)
+  menuTriggerIconColorDark="#3B9EFF"                // Dark mode override
+  menuTriggerLabelColor="#111827"                   // Base label color
+  menuTriggerLabelColorDark="#FFFFFF"               // Dark mode label color
+  menuTriggerBackgroundColor="#F3F4F6"             // Base background
+  menuTriggerBackgroundColorDark="#1F2937"         // Dark mode background
+  menuTriggerBorderColor="#E5E7EB"                 // Base border
+  menuTriggerBorderColorDark="#374151"             // Dark mode border
+  menuTriggerHoverBackgroundColor="#E5E7EB"        // Base hover background
+  menuTriggerHoverBackgroundColorDark="#374151"    // Dark mode hover background
+  menuTriggerHoverBorderColor="#D1D5DB"            // Base hover border
+  menuTriggerHoverBorderColorDark="#4B5563"        // Dark mode hover border
+  menuBackgroundColor="#FFFFFF"                    // Base dropdown background
+  menuBackgroundColorDark="#1F2937"               // Dark mode dropdown background
+  theme="light"
+/>
+
+// Using base props only (will use base color in both themes)
+<PM7Menu 
+  menuItems={items}
+  menuTriggerIconColor="#1C86EF"
   menuTriggerBackgroundColor="#F3F4F6"
-  menuBackgroundColor="#FFFFFF"
   theme="light"
 />
 ```
@@ -179,15 +264,24 @@ const menuItems = [
 | `menuAlignment` | `'start' \| 'center' \| 'end'` | `'start'` | Dropdown alignment relative to trigger |
 | `menuLabel` | `ReactNode` | - | Custom label next to trigger icon |
 | `menuIcon` | `ReactNode` | - | Custom trigger icon (default: hamburger) |
-| `menuTriggerBordered` | `boolean` | `false` | Always show border around trigger |
-| `menuTriggerBorderedOnHover` | `boolean` | `false` | Show border on hover only |
+| `menuTriggerBorder` | `boolean` | `false` | Show border on the menu trigger |
+| `menuTriggerBackground` | `boolean` | `false` | Show background on the menu trigger |
+| `menuTriggerOnHover` | `boolean` | `false` | Show border and background only on hover |
 | `mobileBreakpoint` | `number` | `768` | Screen width for mobile layout switch |
-| `menuTriggerIconColorLight` | `string` | - | Icon color in light theme |
+| `menuTriggerIconColor` | `string` | - | Base icon color (used in light mode) |
 | `menuTriggerIconColorDark` | `string` | - | Icon color in dark theme |
-| `menuTriggerLabelColorLight` | `string` | - | Label color in light theme |
+| `menuTriggerLabelColor` | `string` | - | Base label color (used in light mode) |
 | `menuTriggerLabelColorDark` | `string` | - | Label color in dark theme |
 | `menuTriggerBackgroundColor` | `string` | - | Trigger background color |
+| `menuTriggerBackgroundColorDark` | `string` | - | Trigger background color in dark mode |
+| `menuTriggerBorderColor` | `string` | - | Trigger border color |
+| `menuTriggerBorderColorDark` | `string` | - | Trigger border color in dark mode |
+| `menuTriggerHoverBackgroundColor` | `string` | - | Trigger hover background color |
+| `menuTriggerHoverBackgroundColorDark` | `string` | - | Trigger hover background color in dark mode |
+| `menuTriggerHoverBorderColor` | `string` | - | Trigger hover border color |
+| `menuTriggerHoverBorderColorDark` | `string` | - | Trigger hover border color in dark mode |
 | `menuBackgroundColor` | `string` | - | Dropdown background color |
+| `menuBackgroundColorDark` | `string` | - | Dropdown background color in dark mode |
 
 ### Menu Item Props (PM7MenuItem)
 
@@ -220,7 +314,7 @@ const navItems = [
 <PM7Menu 
   menuItems={navItems}
   menuLabel="Menu"
-  menuTriggerBordered={true}
+  menuTriggerBorder={true}
   theme="light"
 />
 ```
@@ -274,6 +368,7 @@ const profileItems = [
 
 ### Design Principles
 - Clean, minimal dropdown design
+- Four flexible trigger variants for different use cases
 - Consistent spacing and typography
 - Accessible keyboard navigation
 - Responsive mobile-friendly layout

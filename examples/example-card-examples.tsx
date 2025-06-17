@@ -2,7 +2,7 @@ import React from 'react';
 import { PM7Card, PM7CardHeader, PM7CardFooter, PM7CardTitle, PM7CardSubTitle } from '../src/components/card';
 
 const ExampleCardExamples = ({ theme }: { theme: 'light' | 'dark' }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+  <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
     {/* Basic Card Example */}
     <div>
       <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: 'bold' }}>Basic Card</h3>

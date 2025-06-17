@@ -33,8 +33,10 @@ const ExampleMenuOverview = ({ theme }: { theme: 'light' | 'dark' }) => {
         <div style={{ marginBottom: '1.5rem' }}>
           <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Key Features</h4>
           <div style={{ marginLeft: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+            <div style={{ marginBottom: '0.5rem' }}>• Four trigger variants: icon only, text only, icon + text, or hamburger + text</div>
             <div style={{ marginBottom: '0.5rem' }}>• Multiple item types: regular items, checkboxes, radio buttons, and separators</div>
-            <div style={{ marginBottom: '0.5rem' }}>• Icon support with customizable colors</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Flexible trigger styling: bordered, border-only, or clean appearance</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Full color customization for icons, labels, borders, and backgrounds</div>
             <div style={{ marginBottom: '0.5rem' }}>• Automatic positioning to stay within viewport</div>
             <div style={{ marginBottom: '0.5rem' }}>• Built-in light and dark theme support</div>
             <div style={{ marginBottom: '0.5rem' }}>• Responsive design for mobile and desktop</div>
@@ -45,10 +47,16 @@ const ExampleMenuOverview = ({ theme }: { theme: 'light' | 'dark' }) => {
         <div style={{ marginBottom: '1.5rem' }}>
           <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>How It Works</h4>
           <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
-            You provide an array of menu items with their labels, actions, and types. The component renders a trigger button (customizable icon and label) that opens a dropdown menu when clicked. Each menu item can have click handlers, be disabled, or include sub-items for nested menus.
+            You provide an array of menu items with their labels, actions, and types. The component renders a trigger button that opens a dropdown menu when clicked. The trigger can be customized in four ways:
           </p>
+          <ul style={{ marginBottom: '1rem', marginLeft: '1.5rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
+            <li style={{ marginBottom: '0.25rem' }}><strong>Icon only:</strong> Default hamburger menu or custom icon</li>
+            <li style={{ marginBottom: '0.25rem' }}><strong>Text only:</strong> Just a text label (like "File" or "Menu")</li>
+            <li style={{ marginBottom: '0.25rem' }}><strong>Icon + Text:</strong> Custom icon with a text label</li>
+            <li style={{ marginBottom: '0.25rem' }}><strong>Hamburger + Text:</strong> Default hamburger icon with a text label</li>
+          </ul>
           <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
-            The menu automatically positions itself to stay visible on screen and provides smooth animations and hover states. All interaction patterns follow standard conventions that users expect from dropdown menus.
+            Each menu item can have click handlers, be disabled, or include sub-items for nested menus. The menu automatically positions itself to stay visible on screen and provides smooth animations and hover states. All interaction patterns follow standard conventions that users expect from dropdown menus.
           </p>
         </div>
 
