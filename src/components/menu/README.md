@@ -256,6 +256,8 @@ This is particularly useful for:
 />
 ```
 
+**Note:** When `menuTriggerOnHover` is enabled, the hover state (border and/or background) will automatically persist while the menu is open, providing clear visual feedback about which menu is active.
+
 ### Color Customization
 
 PM7Menu supports theme-aware color props with a base version (used for light mode) and optional Dark variants for dark mode.

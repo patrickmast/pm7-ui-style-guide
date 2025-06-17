@@ -208,6 +208,9 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                   <div><code>true</code> - Show border/background on hover</div>
                   <div><code style={{ fontWeight: 'bold' }}>false</code> - No hover effect (default)</div>
                 </div>
+                <div style={{ marginTop: '0.75rem', padding: '0.5rem', backgroundColor: theme === 'dark' ? '#1F2937' : '#F3F4F6', borderRadius: '0.375rem' }}>
+                  <strong>Behavior:</strong> When enabled, the hover state automatically persists while the menu is open, providing visual feedback about the active menu.
+                </div>
               </div>
             </div>
           </PM7Card>

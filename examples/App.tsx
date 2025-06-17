@@ -289,8 +289,8 @@ const ComponentPage = () => {
                   menuTriggerIconColorDark="#FFFFFF"
                   menuTriggerOnHover={true}
                   menuTriggerBorder={true}
-                  menuTriggerBorderColor="#FFFFFF"
-                  menuTriggerBorderColorDark="#FFFFFF"
+                  menuTriggerBorderColor="transparent"
+                  menuTriggerBorderColorDark="transparent"
                   menuTriggerHoverBorderColor="#FFFFFF"
                   menuTriggerHoverBorderColorDark="#FFFFFF"
                   theme={theme as 'light' | 'dark'}

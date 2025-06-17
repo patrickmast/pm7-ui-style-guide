@@ -51,6 +51,16 @@ const PM7Toast = React.forwardRef<
     <ToastPrimitives.Root
       ref={ref}
       className={cn(toastVariants({ variant }), className)}
+      style={{
+        backgroundColor: variant === 'destructive' ? '#dc2626' : 'white',
+        color: variant === 'destructive' ? 'white' : 'black',
+        border: '1px solid ' + (variant === 'destructive' ? '#dc2626' : '#ccc'),
+        padding: '1.5rem',
+        borderRadius: '0.375rem',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        minWidth: '300px',
+        ...props.style
+      }}
       {...props}
     />
   )

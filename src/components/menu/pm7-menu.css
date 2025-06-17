@@ -429,6 +429,26 @@ button.menu-trigger--background-only-hover:hover {
   background: var(--menu-trigger-hover-bg, #e8e7e7) !important;
 }
 
+/* Active state styles - when menu is open */
+.menu-trigger--active.menu-trigger--bordered-hover,
+button.menu-trigger--active.menu-trigger--bordered-hover,
+.menu-trigger--active.menu-trigger--border-only-hover,
+button.menu-trigger--active.menu-trigger--border-only-hover {
+  border-color: var(--menu-trigger-hover-border-color) !important;
+}
+
+.menu-trigger--active.menu-trigger--bordered-hover,
+button.menu-trigger--active.menu-trigger--bordered-hover,
+.menu-trigger--active.menu-trigger--background-only-hover,
+button.menu-trigger--active.menu-trigger--background-only-hover {
+  background: var(--menu-trigger-hover-bg, #e8e7e7) !important;
+}
+
+.menu-trigger--active.menu-trigger--border-only-hover,
+button.menu-trigger--active.menu-trigger--border-only-hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
 /* Apply dark mode styles - HIGH SPECIFICITY */
 .dark .menu-trigger--bordered,
 .dark button.menu-trigger--bordered,
@@ -487,6 +507,31 @@ button.dark.menu-trigger--border-only-hover:hover {
 button.dark.menu-trigger--background-only-hover:hover {
   border-color: transparent !important;
   background: var(--menu-trigger-hover-bg, #2f333d) !important;
+}
+
+/* Dark mode active state styles - when menu is open */
+.dark .menu-trigger--active.menu-trigger--bordered-hover,
+.dark button.menu-trigger--active.menu-trigger--bordered-hover,
+button.dark.menu-trigger--active.menu-trigger--bordered-hover,
+.dark .menu-trigger--active.menu-trigger--border-only-hover,
+.dark button.menu-trigger--active.menu-trigger--border-only-hover,
+button.dark.menu-trigger--active.menu-trigger--border-only-hover {
+  border-color: var(--menu-trigger-hover-border-color) !important;
+}
+
+.dark .menu-trigger--active.menu-trigger--bordered-hover,
+.dark button.menu-trigger--active.menu-trigger--bordered-hover,
+button.dark.menu-trigger--active.menu-trigger--bordered-hover,
+.dark .menu-trigger--active.menu-trigger--background-only-hover,
+.dark button.menu-trigger--active.menu-trigger--background-only-hover,
+button.dark.menu-trigger--active.menu-trigger--background-only-hover {
+  background: var(--menu-trigger-hover-bg, #2f333d) !important;
+}
+
+.dark .menu-trigger--active.menu-trigger--border-only-hover,
+.dark button.menu-trigger--active.menu-trigger--border-only-hover,
+button.dark.menu-trigger--active.menu-trigger--border-only-hover {
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Allow inline styles to override dark mode bordered background */

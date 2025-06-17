@@ -501,7 +501,9 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               // Background only (hover state) - use special background-only-hover class
               !menuTriggerBorder && menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--background-only menu-trigger--background-only-hover',
               // Hover only (no border or background normally, only on hover)
-              !menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--bordered-hover'
+              !menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--bordered-hover',
+              // Add active state when menu is open
+              isOpen && 'menu-trigger--active'
             )}
             style={{
               // Base styles for all buttons
@@ -545,6 +547,13 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
               }),
               // Set text color based on icon color
               color: getThemeColor(menuTriggerIconColor, menuTriggerIconColorDark) || (theme === 'dark' ? '#FAFAFA' : '#000000'),
+              // Apply hover styles when menu is open
+              ...(isOpen && menuTriggerOnHover && menuTriggerBorder && {
+                borderColor: getThemeColor(menuTriggerHoverBorderColor, menuTriggerHoverBorderColorDark) || getThemeColor(menuTriggerBorderColor, menuTriggerBorderColorDark) || (theme === 'dark' ? '#525252' : '#D5D5D5'),
+              }),
+              ...(isOpen && menuTriggerOnHover && menuTriggerBackground && {
+                backgroundColor: getThemeColor(menuTriggerHoverBackgroundColor, menuTriggerHoverBackgroundColorDark) || getThemeColor(menuTriggerBackgroundColor, menuTriggerBackgroundColorDark),
+              }),
             }}
             onClick={() => setIsOpen(!isOpen)}
           >
