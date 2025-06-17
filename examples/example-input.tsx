@@ -17,8 +17,7 @@ import {
 } from '../src/components/dialog/pm7-dialog';
 import ExampleInputOverview from './example-input-overview';
 import ExampleInputUsage from './example-input-usage';
-import ExampleInputAPI from './example-input-api';
-import ExampleInputExamples from './example-input-examples';
+import ExampleInputExamples from './example-input-demo';
 import ExampleInputDocumentation from './example-input-documentation';
 
 // Static README content for API tab

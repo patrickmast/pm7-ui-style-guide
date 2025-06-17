@@ -19,8 +19,7 @@ import '../src/components/tab-selector/pm7-tab-selector.css';
 import '../src/components/card/pm7-card.css';
 import ExampleDialogOverview from './example-dialog-overview';
 import ExampleDialogUsage from './example-dialog-usage';
-import ExampleDialogAPI from './example-dialog-api';
-import ExampleDialogExamples from './example-dialog-examples';
+import ExampleDialogExamples from './example-dialog-demo';
 import ExampleDialogDocumentation from './example-dialog-documentation';
 
 // Static README content for API tab

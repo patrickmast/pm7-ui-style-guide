@@ -4,8 +4,7 @@ import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleButtonOverview from './example-button-overview';
 import ExampleButtonUsage from './example-button-usage';
-import ExampleButtonAPI from './example-button-api';
-import ExampleButtonExamples from './example-button-examples';
+import ExampleButtonExamples from './example-button-demo';
 import ExampleButtonDocumentation from './example-button-documentation';
 
 // Type definitions for tabs and theme

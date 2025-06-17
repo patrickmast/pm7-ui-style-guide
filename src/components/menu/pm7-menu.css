@@ -327,7 +327,9 @@ button.menu-trigger--bordered,
 .menu-trigger--bordered-hover,
 button.menu-trigger--bordered-hover,
 .menu-trigger--border-only,
-button.menu-trigger--border-only {
+button.menu-trigger--border-only,
+.menu-trigger--background-only,
+button.menu-trigger--background-only {
   border: 1px solid transparent !important;
   height: 32px !important;
   min-width: 32px !important;
@@ -349,7 +351,9 @@ button[data-radix-dropdown-menu-trigger]:has(.menu-trigger-label) {
 .menu-trigger--bordered:not(:has(.menu-trigger-label)),
 button.menu-trigger--bordered:not(:has(.menu-trigger-label)),
 .menu-trigger--bordered-hover:not(:has(.menu-trigger-label)),
-button.menu-trigger--bordered-hover:not(:has(.menu-trigger-label)) {
+button.menu-trigger--bordered-hover:not(:has(.menu-trigger-label)),
+.menu-trigger--background-only:not(:has(.menu-trigger-label)),
+button.menu-trigger--background-only:not(:has(.menu-trigger-label)) {
   padding: 0 !important;
   width: 32px !important; /* Square button for icon only */
 }
@@ -360,7 +364,9 @@ button.menu-trigger--bordered:has(.menu-trigger-label),
 .menu-trigger--bordered-hover:has(.menu-trigger-label),
 button.menu-trigger--bordered-hover:has(.menu-trigger-label),
 .menu-trigger--border-only:has(.menu-trigger-label),
-button.menu-trigger--border-only:has(.menu-trigger-label) {
+button.menu-trigger--border-only:has(.menu-trigger-label),
+.menu-trigger--background-only:has(.menu-trigger-label),
+button.menu-trigger--background-only:has(.menu-trigger-label) {
   padding: 0 10px !important; /* Slightly more padding for better visual balance */
   min-width: auto !important; /* Allow width to grow with content */
 }
@@ -368,6 +374,13 @@ button.menu-trigger--border-only:has(.menu-trigger-label) {
 .menu-trigger--bordered,
 button.menu-trigger--bordered {
   border-color: var(--menu-trigger-border-color, #D5D5D5) !important;
+  background: var(--menu-trigger-bg, #f1f1f1) !important;
+}
+
+/* Background only styling - background without border */
+.menu-trigger--background-only,
+button.menu-trigger--background-only {
+  border-color: transparent !important;
   background: var(--menu-trigger-bg, #f1f1f1) !important;
 }
 
@@ -380,7 +393,9 @@ button.menu-trigger--border-only {
 
 /* Allow inline styles to override bordered background - LOWER SPECIFICITY */
 .menu-trigger--bordered[style*="background"],
-button.menu-trigger--bordered[style*="background"] {
+button.menu-trigger--bordered[style*="background"],
+.menu-trigger--background-only[style*="background"],
+button.menu-trigger--background-only[style*="background"] {
   background: inherit !important;
 }
 
@@ -397,9 +412,12 @@ button.menu-trigger--bordered-hover:hover {
 .dark button.menu-trigger--bordered-hover,
 .dark .menu-trigger--border-only,
 .dark button.menu-trigger--border-only,
+.dark .menu-trigger--background-only,
+.dark button.menu-trigger--background-only,
 button.dark.menu-trigger--bordered,
 button.dark.menu-trigger--bordered-hover,
-button.dark.menu-trigger--border-only {
+button.dark.menu-trigger--border-only,
+button.dark.menu-trigger--background-only {
   border: 1px solid transparent !important;
 }
 
@@ -407,6 +425,13 @@ button.dark.menu-trigger--border-only {
 .dark button.menu-trigger--bordered,
 button.dark.menu-trigger--bordered {
   border-color: var(--menu-trigger-border-color, #525252) !important;
+  background: var(--menu-trigger-bg, #23272F) !important;
+}
+
+.dark .menu-trigger--background-only,
+.dark button.menu-trigger--background-only,
+button.dark.menu-trigger--background-only {
+  border-color: transparent !important;
   background: var(--menu-trigger-bg, #23272F) !important;
 }
 
@@ -427,16 +452,24 @@ button.dark.menu-trigger--bordered-hover:hover {
 /* Allow inline styles to override dark mode bordered background */
 .dark .menu-trigger--bordered[style*="background"],
 .dark button.menu-trigger--bordered[style*="background"],
-button.dark.menu-trigger--bordered[style*="background"] {
+button.dark.menu-trigger--bordered[style*="background"],
+.dark .menu-trigger--background-only[style*="background"],
+.dark button.menu-trigger--background-only[style*="background"],
+button.dark.menu-trigger--background-only[style*="background"] {
   background: inherit !important;
 }
 
 /* ULTIMATE OVERRIDE: Use CSS custom property for menuTriggerBackgroundColor */
 .menu-trigger--bordered[style*="--menu-trigger-bg"],
 button.menu-trigger--bordered[style*="--menu-trigger-bg"],
+.menu-trigger--background-only[style*="--menu-trigger-bg"],
+button.menu-trigger--background-only[style*="--menu-trigger-bg"],
 .dark .menu-trigger--bordered[style*="--menu-trigger-bg"],
 .dark button.menu-trigger--bordered[style*="--menu-trigger-bg"],
-button.dark.menu-trigger--bordered[style*="--menu-trigger-bg"] {
+.dark .menu-trigger--background-only[style*="--menu-trigger-bg"],
+.dark button.menu-trigger--background-only[style*="--menu-trigger-bg"],
+button.dark.menu-trigger--bordered[style*="--menu-trigger-bg"],
+button.dark.menu-trigger--background-only[style*="--menu-trigger-bg"] {
   background: var(--menu-trigger-bg) !important;
   background-color: var(--menu-trigger-bg) !important;
 }

@@ -4,8 +4,7 @@ import { getActiveTab, saveActiveTab } from './utils/tab-persistence';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleThemeToggleOverview from './example-theme-toggle-overview';
 import ExampleThemeToggleUsage from './example-theme-toggle-usage';
-import ExampleThemeToggleAPI from './example-theme-toggle-api';
-import ExampleThemeToggleExamples from './example-theme-toggle-examples';
+import ExampleThemeToggleExamples from './example-theme-toggle-demo';
 import ExampleThemeToggleDocumentation from './example-theme-toggle-documentation';
 
 // Type definitions for tabs and theme

@@ -487,10 +487,21 @@ const PM7MenuComponent: React.FC<PM7MenuProps> = ({
             aria-label="Open menu"
             className={cn(
               'flex items-center justify-center rounded-md cursor-pointer text-black focus:outline-none focus-visible:outline-none',
-              // Apply border and background based on new prop structure
+              // Apply border and background based on checkbox states
+              // Background + Border (normal state)
               menuTriggerBorder && menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--bordered',
-              menuTriggerOnHover && 'menu-trigger--bordered-hover',
-              menuTriggerBorder && !menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--border-only'
+              // Border only (normal state)  
+              menuTriggerBorder && !menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--border-only',
+              // Background + Border (hover state)
+              menuTriggerBorder && menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--bordered menu-trigger--bordered-hover',
+              // Border only (hover state)
+              menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--border-only menu-trigger--bordered-hover',
+              // Background only (normal state) - new case
+              !menuTriggerBorder && menuTriggerBackground && !menuTriggerOnHover && 'menu-trigger--background-only',
+              // Background only (hover state) - new case
+              !menuTriggerBorder && menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--background-only menu-trigger--bordered-hover',
+              // Hover only (no border or background normally, only on hover)
+              !menuTriggerBorder && !menuTriggerBackground && menuTriggerOnHover && 'menu-trigger--bordered-hover'
             )}
             style={{
               // Base styles for all buttons

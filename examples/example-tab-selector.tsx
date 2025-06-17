@@ -8,8 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import { PM7TabSelector } from '../src/components/tab-selector';
 import ExampleTabSelectorOverview from './example-tab-selector-overview';
 import ExampleTabSelectorUsage from './example-tab-selector-usage';
-import ExampleTabSelectorAPI from './example-tab-selector-api';
-import ExampleTabSelectorExamples from './example-tab-selector-examples';
+import ExampleTabSelectorExamples from './example-tab-selector-demo';
 import ExampleTabSelectorDocumentation from './example-tab-selector-documentation';
 
 type TabType = 'demo' | 'overview' | 'usage' | 'documentation';
