@@ -1,6 +1,7 @@
 // Enhancement: Synced with README. Updated to demonstrate all new props and best practices, including showUncheckedIcon and custom label color props. Added clear comments for each demo section.
 import React from 'react';
 import { PM7Menu, PM7MenuIcon } from '../src/components/menu';
+import { PM7Card } from '../src/components/card';
 import { HomeIcon, SettingsIcon, UserIcon, MoonIcon, SunIcon, LanguagesIcon } from 'lucide-react';
 
 interface Descriptions {
@@ -415,6 +416,38 @@ const ExampleMenuDemo = ({ theme }: { theme: ThemeType }) => {
         </div>
       </div>
       <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+      
+      {/* Menu coloring section */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Menu coloring</h2>
+        <p className="mb-4">Demonstration of a PM7Menu trigger with white background and black border.</p>
+        <PM7Card style={{ backgroundColor: theme === 'dark' ? '#4B5563' : '#E5E7EB', padding: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <PM7Menu
+              menuItems={menuItems.slice(0, 3).map((item: any) => ({
+                ...item,
+                label: getLabel(item),
+                submenuItems: item.submenuItems?.map((subItem: any) => ({
+                  ...subItem,
+                  label: getLabel(subItem)
+                }))
+              }))}
+              theme={theme}
+              menuTriggerBorder={true}
+              menuTriggerBackground={true}
+              menuTriggerOnHover={false}
+              menuTriggerBackgroundColor="#FFFFFF"
+              menuTriggerBackgroundColorDark="#FFFFFF"
+              menuTriggerBorderColor="#000000"
+              menuTriggerBorderColorDark="#000000"
+              menuTriggerIconColor="#000000"
+              menuTriggerIconColorDark="#000000"
+            />
+          </div>
+        </PM7Card>
+      </div>
+      <hr className="border-t border-gray-300 dark:border-gray-600 my-6" />
+      
       <div className="mb-8">
         <h2 className="text-2xl font-bold mb-4">{getDescription('menuAlignment')}</h2>
         <div className="flex flex-wrap gap-8">

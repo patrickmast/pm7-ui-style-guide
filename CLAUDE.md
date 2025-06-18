@@ -6,6 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **This project uses ENGLISH ONLY for all documentation, code comments, and user-facing text. Do not use Dutch or any other language in the codebase.**
 
+**CLARIFICATION**: While Claude Code conversations with the user are normally in Dutch (as per global settings), ALL content written to this project's files must be in English. This includes:
+- Code comments
+- Documentation files
+- UI text and labels
+- Example descriptions
+- Error messages
+- README content
+- Any other text that becomes part of the codebase
+
 ## Repository Overview
 
 This is the PM7 UI Style Guide - a React component library that provides PM7-branded components and design tokens for consistent styling across all PM7 applications. The library is built on top of Radix UI primitives with Tailwind CSS and provides PM7-specific styling rules and overrides for ShadCN/UI components.
