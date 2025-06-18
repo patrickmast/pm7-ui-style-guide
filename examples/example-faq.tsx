@@ -238,6 +238,50 @@ const FAQExample: React.FC<FAQExampleProps> = ({ theme }) => {
       )
     },
     {
+      id: 'white-menu-button',
+      question: 'How do I create a white PM7Menu trigger button?',
+      answer: (
+        <>
+          <p style={{ marginBottom: '0.75rem' }}>
+            To create a white trigger button for PM7Menu, you need to enable the background and set the appropriate color props:
+          </p>
+          <CodeBlock code={`<PM7Menu 
+  menuItems={items}
+  menuTriggerBackground={true}           // Enable background
+  menuTriggerBackgroundColor="#FFFFFF"   // White in light mode
+  menuTriggerBackgroundColorDark="#FFFFFF" // White in dark mode
+  menuTriggerBorder={true}               // Enable border
+  menuTriggerBorderColor="#E5E7EB"      // Light gray border
+  menuTriggerBorderColorDark="#E5E7EB"  // Same border in dark mode
+  menuTriggerIconColor="#000000"         // Black icon
+  menuTriggerIconColorDark="#000000"     // Black icon in dark mode
+  menuTriggerOnHover={false}             // No hover effects
+  theme={theme}
+/>`} />
+          <p style={{ marginBottom: '0.75rem', marginTop: '1rem' }}>
+            <strong>Important notes:</strong>
+          </p>
+          <ul style={{ marginLeft: '1.5rem', listStyleType: 'disc' }}>
+            <li style={{ marginBottom: '0.5rem' }}>
+              <code style={{ backgroundColor: theme === 'dark' ? '#1a1a1a' : '#f3f4f6', padding: '0.125rem 0.5rem', borderRadius: '0.25rem' }}>menuTriggerBackground</code> must be <code>true</code> to show background colors
+            </li>
+            <li style={{ marginBottom: '0.5rem' }}>
+              <code style={{ backgroundColor: theme === 'dark' ? '#1a1a1a' : '#f3f4f6', padding: '0.125rem 0.5rem', borderRadius: '0.25rem' }}>menuTriggerBorder</code> must be <code>true</code> to show borders
+            </li>
+            <li style={{ marginBottom: '0.5rem' }}>
+              Set both light and dark mode colors to ensure consistent appearance
+            </li>
+            <li style={{ marginBottom: '0.5rem' }}>
+              Use <code style={{ backgroundColor: theme === 'dark' ? '#1a1a1a' : '#f3f4f6', padding: '0.125rem 0.5rem', borderRadius: '0.25rem' }}>menuTriggerOnHover={false}</code> if you don't want hover effects
+            </li>
+          </ul>
+          <p style={{ marginTop: '1rem' }}>
+            For more trigger button styles, check the PM7Menu documentation for examples like transparent buttons, outlined buttons, and brand color buttons.
+          </p>
+        </>
+      )
+    },
+    {
       id: 'customize',
       question: 'How do I customize PM7 components (colors, styles, spacing)?',
       answer: (

@@ -258,6 +258,77 @@ This is particularly useful for:
 
 **Note:** When `menuTriggerOnHover` is enabled, the hover state (border and/or background) will automatically persist while the menu is open, providing clear visual feedback about which menu is active.
 
+### Common Trigger Button Styles
+
+#### White Trigger Button
+Perfect for dark backgrounds or when you need high contrast:
+
+```tsx
+<PM7Menu 
+  menuItems={items}
+  menuTriggerBackground={true}
+  menuTriggerBackgroundColor="#FFFFFF"
+  menuTriggerBackgroundColorDark="#FFFFFF"
+  menuTriggerBorder={true}
+  menuTriggerBorderColor="#E5E7EB"
+  menuTriggerBorderColorDark="#E5E7EB"
+  menuTriggerIconColor="#000000"
+  menuTriggerIconColorDark="#000000"
+  menuTriggerOnHover={false}
+  theme={theme}
+/>
+```
+
+#### Transparent Minimal Button
+Clean, icon-only style that shows interaction on hover:
+
+```tsx
+<PM7Menu 
+  menuItems={items}
+  menuTriggerBorder={false}
+  menuTriggerBackground={false}
+  menuTriggerOnHover={true}
+  theme={theme}
+/>
+```
+
+#### Primary Brand Color Button
+Uses PM7's primary blue as a solid background:
+
+```tsx
+<PM7Menu 
+  menuItems={items}
+  menuTriggerBackground={true}
+  menuTriggerBackgroundColor="#1C86EF"
+  menuTriggerBackgroundColorDark="#3B9EFF"
+  menuTriggerBorder={false}
+  menuTriggerIconColor="#FFFFFF"
+  menuTriggerIconColorDark="#FFFFFF"
+  theme={theme}
+/>
+```
+
+#### Outlined Button
+Border-only style without background fill:
+
+```tsx
+<PM7Menu 
+  menuItems={items}
+  menuTriggerBorder={true}
+  menuTriggerBorderColor="#1C86EF"
+  menuTriggerBorderColorDark="#3B9EFF"
+  menuTriggerBackground={false}
+  menuTriggerIconColor="#1C86EF"
+  menuTriggerIconColorDark="#3B9EFF"
+  theme={theme}
+/>
+```
+
+**Important:** 
+- `menuTriggerBackground` must be `true` to show background colors
+- `menuTriggerBorder` must be `true` to show borders
+- Use matching dark mode colors for consistent appearance across themes
+
 ### Color Customization
 
 PM7Menu supports theme-aware color props with a base version (used for light mode) and optional Dark variants for dark mode.

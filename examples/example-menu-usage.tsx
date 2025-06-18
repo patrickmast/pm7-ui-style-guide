@@ -295,6 +295,102 @@ const ExampleMenuUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
 
         </div>
 
+        {/* Common Styling Patterns Section */}
+        <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '2rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Common Styling Patterns</h4>
+        <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+          Ready-to-use examples for common trigger button designs:
+        </p>
+        
+        <div style={codeBlockStyle}>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>White Trigger Button (works in both light and dark mode):</p>
+            <code style={{ display: 'block', whiteSpace: 'pre-wrap' }}>{`<PM7Menu 
+  menuItems={items}
+  menuTriggerBackground={true}
+  menuTriggerBackgroundColor="#FFFFFF"
+  menuTriggerBackgroundColorDark="#FFFFFF"
+  menuTriggerBorder={true}
+  menuTriggerBorderColor="#E5E7EB"
+  menuTriggerBorderColorDark="#E5E7EB"
+  menuTriggerIconColor="#000000"
+  menuTriggerIconColorDark="#000000"
+  menuTriggerOnHover={false}
+  theme={theme}
+/>`}</code>
+          </div>
+          
+          <div style={{ marginBottom: '1.5rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Transparent Icon-Only Button (minimal style):</p>
+            <code style={{ display: 'block', whiteSpace: 'pre-wrap' }}>{`<PM7Menu 
+  menuItems={items}
+  menuTriggerBorder={false}
+  menuTriggerBackground={false}
+  menuTriggerOnHover={true}
+  theme={theme}
+/>`}</code>
+          </div>
+          
+          <div style={{ marginBottom: '1.5rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Primary Brand Color Button:</p>
+            <code style={{ display: 'block', whiteSpace: 'pre-wrap' }}>{`<PM7Menu 
+  menuItems={items}
+  menuTriggerBackground={true}
+  menuTriggerBackgroundColor="#1C86EF"
+  menuTriggerBackgroundColorDark="#3B9EFF"
+  menuTriggerBorder={false}
+  menuTriggerIconColor="#FFFFFF"
+  menuTriggerIconColorDark="#FFFFFF"
+  theme={theme}
+/>`}</code>
+          </div>
+          
+          <div style={{ marginBottom: '1.5rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Outlined Button (border only, no background):</p>
+            <code style={{ display: 'block', whiteSpace: 'pre-wrap' }}>{`<PM7Menu 
+  menuItems={items}
+  menuTriggerBorder={true}
+  menuTriggerBorderColor="#1C86EF"
+  menuTriggerBorderColorDark="#3B9EFF"
+  menuTriggerBackground={false}
+  menuTriggerIconColor="#1C86EF"
+  menuTriggerIconColorDark="#3B9EFF"
+  theme={theme}
+/>`}</code>
+          </div>
+          
+          <div style={{ marginBottom: '1.5rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Material Design Flat Button:</p>
+            <code style={{ display: 'block', whiteSpace: 'pre-wrap' }}>{`<PM7Menu 
+  menuItems={items}
+  menuLabel="OPTIONS"
+  menuTriggerBorder={false}
+  menuTriggerBackground={false}
+  menuTriggerOnHover={true}
+  menuTriggerLabelColor="#1C86EF"
+  menuTriggerLabelColorDark="#3B9EFF"
+  theme={theme}
+/>`}</code>
+          </div>
+        </div>
+        
+        <div style={{ 
+          marginTop: '1rem', 
+          padding: '1rem', 
+          backgroundColor: theme === 'dark' ? '#1F2937' : '#E0F2FE', 
+          borderRadius: '0.375rem',
+          border: `1px solid ${theme === 'dark' ? '#374151' : '#7DD3FC'}`
+        }}>
+          <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#0369A1', fontWeight: '500', marginBottom: '0.5rem' }}>
+            💡 Pro Tip: Understanding Trigger Styling Props
+          </p>
+          <ul style={{ color: theme === 'dark' ? '#e0e0e0' : '#0369A1', marginLeft: '1.5rem', fontSize: '0.875rem' }}>
+            <li><code>menuTriggerBackground</code> must be <code>true</code> to show background colors</li>
+            <li><code>menuTriggerBorder</code> must be <code>true</code> to show borders</li>
+            <li>Use matching dark mode colors for consistent appearance across themes</li>
+            <li>Set <code>menuTriggerOnHover={false}</code> for static designs</li>
+          </ul>
+        </div>
+
         <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Menu Trigger Variants</h4>
         <div style={codeBlockStyle}>
           <div style={{ marginBottom: '1rem' }}>
