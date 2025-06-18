@@ -30,7 +30,8 @@ import {
   PM7DialogFooter,
   PM7DialogTitle,
   PM7DialogDescription,
-  PM7DialogSeparator
+  PM7DialogSeparator,
+  PM7DialogIcon
 } from 'pm7-ui-style-guide';
 
 // CRITICAL: Import CSS for proper styling
@@ -101,6 +102,22 @@ function MyComponent() {
 </PM7Dialog>
 ```
 
+## Dialog with Close Button
+
+```tsx
+<PM7Dialog open={open} onOpenChange={setOpen}>
+  <PM7DialogContent showCloseButton={true}>
+    <PM7DialogHeader>
+      <PM7DialogTitle>Dialog with Close Button</PM7DialogTitle>
+      <PM7DialogDescription>
+        Click the X button in the top right to close this dialog.
+      </PM7DialogDescription>
+    </PM7DialogHeader>
+    <div>Dialog content here...</div>
+  </PM7DialogContent>
+</PM7Dialog>
+```
+
 ## Dialog with Separator
 
 ```tsx
@@ -126,6 +143,32 @@ function MyComponent() {
     <PM7DialogFooter>
       <button onClick={() => setOpen(false)}>Cancel</button>
       <button onClick={() => setOpen(false)}>Save</button>
+    </PM7DialogFooter>
+  </PM7DialogContent>
+</PM7Dialog>
+```
+
+## Dialog with Icon
+
+```tsx
+import { Info } from 'lucide-react';
+
+<PM7Dialog open={open} onOpenChange={setOpen}>
+  <PM7DialogContent>
+    <PM7DialogIcon>
+      <Info size={24} className="text-blue-500" />
+    </PM7DialogIcon>
+    <PM7DialogHeader>
+      <PM7DialogTitle>Information</PM7DialogTitle>
+      <PM7DialogDescription>
+        This dialog displays an icon in the top-right corner.
+      </PM7DialogDescription>
+    </PM7DialogHeader>
+    <div>
+      <p>The icon is positioned absolutely in the top-right corner of the dialog.</p>
+    </div>
+    <PM7DialogFooter>
+      <button onClick={() => setOpen(false)}>Got it</button>
     </PM7DialogFooter>
   </PM7DialogContent>
 </PM7Dialog>
@@ -197,12 +240,14 @@ const FormDialog = ({ open, onOpenChange, onSave }) => {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `maxWidth` | `string` | `'max-w-lg'` | Maximum width CSS class |
+| `showCloseButton` | `boolean` | `false` | Shows a close button in the top right corner of the dialog when set to true |
 | `className` | `string` | - | Additional CSS classes |
 
 ### PM7DialogHeader Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| `showHeaderBorder` | `boolean` | `true` | Shows a bottom border on the dialog header when set to true |
 | `className` | `string` | - | Additional CSS classes |
 
 ### PM7DialogTitle Props
@@ -211,13 +256,15 @@ const FormDialog = ({ open, onOpenChange, onSave }) => {
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
+*Note: Title uses 28px font size for prominent visual hierarchy*
+
 ### PM7DialogDescription Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `className` | `string` | - | Additional CSS classes |
 
-*Note: PM7DialogSubTitle is available as an alias for PM7DialogDescription*
+*Note: PM7DialogSubTitle is available as an alias for PM7DialogDescription. Both use 15px font size.*
 
 ### PM7DialogFooter Props
 
@@ -233,6 +280,15 @@ const FormDialog = ({ open, onOpenChange, onSave }) => {
 | `marginBottom` | `string` | `'0px'` | Bottom margin |
 | `className` | `string` | - | Additional CSS classes |
 
+### PM7DialogIcon Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `React.ReactNode` | - | Icon content to display |
+
+*Note: PM7DialogIcon is positioned absolutely in the top-right corner of the dialog content area (40x40px container). When present, the close button automatically adjusts its position.*
+
 ## Available Utility Components
 
 For advanced implementations, the following utility components are also available:
@@ -244,24 +300,31 @@ For advanced implementations, the following utility components are also availabl
 
 ## Features
 
-- **Automatic Close Button**: PM7DialogContent includes an X button in the top-right corner
+- **Optional Close Button**: Control close button visibility with showCloseButton prop (auto-adjusts position when icon is present)
 - **Built-in Overlay**: Backdrop is automatically included and managed
 - **Theme Awareness**: Adapts styling based on dark/light theme classes
 - **Configurable Width**: Use maxWidth prop with Tailwind CSS classes
 - **Accessibility**: Full keyboard navigation and screen reader support
 - **Animation**: Smooth open/close animations included
-- **Optimized Spacing**: Compact, professional layout with minimal padding
-- **Large Dialog Titles**: Prominent title typography (24px) for better hierarchy
+- **Optimized Spacing**: Professional layout with carefully designed spacing
+- **Large Dialog Titles**: Prominent title typography (28px) for better hierarchy
+- **Icon Support**: Display icons in the top-right corner with PM7DialogIcon
+- **Flexible Header**: Optional bottom border on header with showHeaderBorder prop
+- **Enhanced Close Button**: Hover background effect for better user feedback
 
 ## Default Styling
 
 ### Built-in Layout
 PM7Dialog components come with optimized default styling:
 
-- **PM7DialogHeader**: Compact padding (8px) with no bottom padding for tight layout
-- **PM7DialogTitle**: Large, prominent text (24px) using `text-2xl font-semibold`
-- **PM7DialogDescription**: Subtle subtitle with minimal top margin (4px) for proper hierarchy
-- **Layout**: Designed for professional, space-efficient dialogs
+- **PM7DialogContent**: Top padding of 26px for proper visual balance
+- **PM7DialogHeader**: No internal padding, optional bottom border (controlled by showHeaderBorder prop)
+- **PM7DialogTitle**: Large, prominent text (28px) with semibold font weight
+- **PM7DialogDescription/PM7DialogSubTitle**: Subtle subtitle text (15px) for supporting information
+- **PM7DialogFooter**: Top border for visual separation from content
+- **PM7DialogIcon**: 40x40px container positioned in top-right corner
+- **Close Button**: Auto-adjusts position when icon is present, includes hover background effect
+- **Layout**: Designed for professional, visually balanced dialogs
 
 ### Customizing Spacing
 While default spacing is optimized, you can override with additional classes:
@@ -275,19 +338,24 @@ While default spacing is optimized, you can override with additional classes:
 ## PM7 Brand Guidelines
 
 ### Design Principles
-- Clean, minimal dialog design with compact spacing
-- Consistent typography hierarchy (large titles, subtle descriptions)
+- Clean, minimal dialog design with balanced spacing
+- Consistent typography hierarchy (28px titles, 15px descriptions)
 - Accessible keyboard navigation
 - PM7 brand color integration
-- Professional, space-efficient appearance
+- Professional appearance with refined visual details
+- Hover effects on interactive elements (close button)
+- Optional visual separators (header border, footer border)
 
 ## Important Notes
 
 - **CSS Import Required**: Must import pm7-dialog.css for proper styling
 - **Peer Dependencies**: Requires @radix-ui/react-dialog
 - **Automatic Overlay**: PM7DialogContent includes overlay automatically
-- **Close Button**: Automatic X button included in PM7DialogContent
+- **Close Button**: Optional X button available via showCloseButton prop (auto-adjusts position when icon present)
 - **Theme Classes**: Add 'dark' class to className for dark mode styling
+- **Typography**: Title (28px) and Description (15px) have fixed font sizes for consistency
+- **Spacing**: Content has 26px top padding, no gap between grid items
+- **Borders**: Header border optional via showHeaderBorder, footer has top border
 
 ## Browser Support
 

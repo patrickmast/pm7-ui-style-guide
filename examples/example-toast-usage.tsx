@@ -28,12 +28,37 @@ const ExampleToastUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
         </div>
         
         <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Setup</h4>
+        
+        <div style={{ 
+          backgroundColor: theme === 'dark' ? '#4B5563' : '#FEF3C7',
+          borderLeft: '4px solid',
+          borderLeftColor: theme === 'dark' ? '#F59E0B' : '#F59E0B',
+          padding: '1rem',
+          marginBottom: '1rem',
+          borderRadius: '0.375rem'
+        }}>
+          <p style={{ fontWeight: '600', marginBottom: '0.5rem', color: theme === 'dark' ? '#FEF3C7' : '#92400E' }}>
+            ⚠️ Important: CSS Import Required
+          </p>
+          <p style={{ color: theme === 'dark' ? '#FEF3C7' : '#92400E', fontSize: '0.875rem' }}>
+            PM7Toast requires a CSS import for animations to work properly. Without this import, toasts will appear but won't have slide animations.
+          </p>
+        </div>
+        
         <p style={{ marginBottom: '0.75rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
-          First, add the PM7Toaster component to your app root:
+          1. Import the required CSS file:
+        </p>
+        <div style={codeBlockStyle}>
+          <p>{'import "pm7-ui-style-guide/src/components/toast/pm7-toast.css";'}</p>
+        </div>
+        
+        <p style={{ marginBottom: '0.75rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>
+          2. Add the PM7Toaster component to your app root:
         </p>
         <div style={codeBlockStyle}>
           <p>{'// In your App.tsx or main layout'}</p>
           <p>{'import { PM7Toaster } from "pm7-ui-style-guide";'}</p>
+          <p>{'import "pm7-ui-style-guide/src/components/toast/pm7-toast.css";'}</p>
           <p>{''}</p>
           <p>{'function App() {'}</p>
           <p>{'  return ('}</p>

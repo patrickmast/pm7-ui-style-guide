@@ -5,7 +5,7 @@ const ExampleMenuDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/menu/README.md');
+      await navigator.clipboard.writeText('https://raw.githubusercontent.com/patrickmast/pm7-ui-style-guide/main/src/components/menu/README.md');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -44,10 +44,10 @@ const ExampleMenuDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/menu/README.md
+              https://raw.githubusercontent.com/patrickmast/pm7-ui-style-guide/main/src/components/menu/README.md
             </code>
             <button
-              onClick={() => window.open('https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/menu/README.md', '_blank')}
+              onClick={() => window.open('https://raw.githubusercontent.com/patrickmast/pm7-ui-style-guide/main/src/components/menu/README.md', '_blank')}
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -134,6 +134,7 @@ const ExampleMenuDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
           </button>
         </div>
       </div>
+
 
       <div style={{ 
         backgroundColor: theme === 'dark' ? '#2a2a2a' : '#e7f3ff',

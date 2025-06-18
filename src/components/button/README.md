@@ -25,6 +25,9 @@ npm install pm7-ui-style-guide
 // Simple import - no CSS import needed
 import { PM7Button } from 'pm7-ui-style-guide';
 
+// Optional: Import button configuration rules
+import { PM7Button, buttonRules } from 'pm7-ui-style-guide';
+
 // All styling is built into the component
 ```
 
@@ -52,7 +55,10 @@ import { PM7Button } from 'pm7-ui-style-guide';
 function MyComponent() {
   return (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      {/* Default: Primary blue button with white text */}
       <PM7Button>Default</PM7Button>
+      
+      {/* Variants - override default styling */}
       <PM7Button className="pm7-button-outline">Outline</PM7Button>
       <PM7Button className="pm7-button-secondary">Secondary</PM7Button>
       <PM7Button className="pm7-button-ghost">Ghost</PM7Button>
@@ -146,7 +152,8 @@ function MyComponent() {
 | `disabled` | `boolean` | `false` | Disable button interactions |
 | `onClick` | `(event: MouseEvent) => void` | - | Click handler function |
 | `children` | `ReactNode` | - | Button content |
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type attribute (passed through to HTML button) |
+| `style` | `CSSProperties` | - | Custom inline styles (will override component styles) |
 
 ### HTML Attributes
 
@@ -204,6 +211,29 @@ PM7Button supports all standard HTML button attributes including:
 </PM7Button>
 ```
 
+## Configuration Export (buttonRules)
+
+PM7Button exports a `buttonRules` object containing all styling configuration:
+
+```tsx
+import { buttonRules } from 'pm7-ui-style-guide';
+
+// Available configuration:
+buttonRules.primary         // "pm7-button-primary"
+buttonRules.outline         // "pm7-button-outline"
+buttonRules.secondary       // "pm7-button-secondary"
+buttonRules.ghost           // "pm7-button-ghost"
+buttonRules.link            // "pm7-button-link"
+buttonRules.small           // "pm7-button-small"
+buttonRules.large           // "pm7-button-large"
+buttonRules.disabled        // "pm7-button-disabled"
+buttonRules.disabledOpacity // "0.5"
+buttonRules.spacingClasses  // { none: 0, sm: "0.125rem", md: "0.25rem", lg: "0.5rem" }
+buttonRules.focusBorderColor // "primary" (PM7 blue #1C86EF)
+```
+
+This is useful for programmatically generating class names or understanding the component's configuration.
+
 ## Important Notes
 
 - **No CSS Import Required**: All styles are built into the component
@@ -214,6 +244,7 @@ PM7Button supports all standard HTML button attributes including:
 - **Self-contained**: No external dependencies or peer dependencies required
 - **Default Spacing**: Buttons have `md` (4px) margin by default for proper spacing
 - **Flexible Layout**: Use `spacing="none"` for tight button groups or custom layouts
+- **Style Override**: Use the `style` prop to apply custom inline styles that will override component styles
 
 ## Accessibility Features
 

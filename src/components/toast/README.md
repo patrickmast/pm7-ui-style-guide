@@ -8,6 +8,7 @@
 
 **Package**: pm7-ui-style-guide  
 **Component**: PM7Toast (React notification system)  
+**CSS File**: pm7-toast.css (required for animations)  
 **Peer Dependencies**: @radix-ui/react-toast
 
 ## Installation
@@ -157,7 +158,7 @@ toast({ title: "Third notification", variant: "success" });
 
 ### toast(options)
 
-Shows a toast notification.
+Shows a toast notification and returns an object with methods to control the toast.
 
 #### Options
 
@@ -170,6 +171,40 @@ Shows a toast notification.
 | `action` | object | No | Action button configuration |
 | `action.label` | string | Yes* | Button text (*required if action is provided) |
 | `action.onClick` | function | Yes* | Click handler (*required if action is provided) |
+
+#### Return Value
+
+The `toast()` function returns an object with the following methods:
+
+| Method | Type | Description |
+|--------|------|-------------|
+| `id` | string | Unique identifier for the toast |
+| `dismiss()` | function | Immediately dismisses the toast |
+| `update(options)` | function | Updates the toast with new options |
+
+Example usage:
+
+```tsx
+// Store the returned object to control the toast
+const myToast = toast({
+  title: "Processing...",
+  description: "Please wait",
+  duration: Infinity // Won't auto-dismiss
+});
+
+// Later, update the toast
+myToast.update({
+  title: "Success!",
+  description: "Operation completed",
+  variant: "success"
+});
+
+// Or dismiss it manually
+myToast.dismiss();
+
+// Access the toast ID
+console.log(myToast.id); // "1", "2", etc.
+```
 
 ### PM7Toaster Component
 
@@ -283,7 +318,7 @@ function handleDelete(item) {
 
 ```tsx
 function handleLongOperation() {
-  const toastId = toast({
+  const loadingToast = toast({
     title: "Processing...",
     description: "Please wait while we process your request.",
     duration: Infinity // Won't auto-dismiss
@@ -291,7 +326,7 @@ function handleLongOperation() {
   
   performOperation()
     .then(() => {
-      dismiss(toastId);
+      loadingToast.dismiss();
       toast({
         title: "Complete!",
         description: "Operation completed successfully.",
@@ -299,7 +334,7 @@ function handleLongOperation() {
       });
     })
     .catch(() => {
-      dismiss(toastId);
+      loadingToast.dismiss();
       toast({
         title: "Failed",
         description: "Operation failed. Please try again.",

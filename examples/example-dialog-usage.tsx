@@ -27,7 +27,7 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
         
         <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Import</h4>
         <div style={codeBlockStyle}>
-          <p>import {'{ PM7Dialog, PM7DialogContent, PM7DialogHeader, PM7DialogTitle, PM7DialogDescription, PM7DialogFooter }'} from 'pm7-ui-style-guide';</p>
+          <p>import {'{ PM7Dialog, PM7DialogContent, PM7DialogHeader, PM7DialogTitle, PM7DialogDescription, PM7DialogFooter, PM7DialogIcon }'} from 'pm7-ui-style-guide';</p>
           <p>import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';</p>
         </div>
         
@@ -70,7 +70,7 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Main content container with auto-close button, overlay, and configurable maximum width.
+                Main content container with optional close button, overlay, and configurable maximum width. Top padding is 26px for visual balance.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
@@ -78,6 +78,7 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                 </div>
                 <div style={{ marginLeft: '1rem' }}>
                   <div><code style={{ fontWeight: 'bold' }}>maxWidth</code> - string (default: 'max-w-lg') - Maximum width CSS class</div>
+                  <div><code style={{ fontWeight: 'bold' }}>showCloseButton</code> - boolean (default: false) - Shows a close button in the top right corner of the dialog when set to true</div>
                   <div><code>className</code> - string - Additional CSS classes</div>
                   <div><code>...props</code> - All standard Radix Dialog Content props</div>
                 </div>
@@ -85,10 +86,13 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                   <strong>Features:</strong>
                 </div>
                 <div style={{ marginLeft: '1rem' }}>
-                  <div>• Automatic close (X) button in top-right corner</div>
+                  <div>• Optional close (X) button via showCloseButton prop</div>
+                  <div>• Close button auto-adjusts position when icon is present</div>
+                  <div>• Close button has hover background effect</div>
                   <div>• Built-in overlay/backdrop</div>
                   <div>• Theme-aware styling</div>
                   <div>• Configurable width with Tailwind classes</div>
+                  <div>• Top padding: 26px for proper visual spacing</div>
                 </div>
               </div>
             </div>
@@ -103,15 +107,24 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Header section container for dialog title and description with proper spacing.
+                Header section container for dialog title and description. Has no internal padding, with optional bottom border for visual separation.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
                   <strong>Props:</strong>
                 </div>
                 <div style={{ marginLeft: '1rem' }}>
+                  <div><code>showHeaderBorder</code> - boolean (default: true) - Shows a bottom border on the dialog header when set to true</div>
                   <div><code>className</code> - string - Additional CSS classes</div>
                   <div><code>...props</code> - All standard HTMLDivElement attributes</div>
+                </div>
+                <div style={{ marginTop: '0.75rem' }}>
+                  <strong>Styling:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div>• No internal padding (content determines spacing)</div>
+                  <div>• Optional bottom border (3px padding + 3px margin when enabled)</div>
+                  <div>• Border color adapts to theme</div>
                 </div>
               </div>
             </div>
@@ -126,7 +139,7 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Main title for the dialog with proper typography and accessibility attributes.
+                Main title for the dialog with prominent typography (28px font size) and accessibility attributes.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
@@ -135,6 +148,15 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                 <div style={{ marginLeft: '1rem' }}>
                   <div><code>className</code> - string - Additional CSS classes</div>
                   <div><code>...props</code> - All standard Radix Dialog Title props</div>
+                </div>
+                <div style={{ marginTop: '0.75rem' }}>
+                  <strong>Styling:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div>• Font size: 28px (fixed)</div>
+                  <div>• Font weight: Semibold</div>
+                  <div>• Leading: none</div>
+                  <div>• Tracking: tight</div>
                 </div>
               </div>
             </div>
@@ -149,7 +171,7 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Description or subtitle for the dialog with proper accessibility support.
+                Description or subtitle for the dialog with proper accessibility support and consistent font size (15px).
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
@@ -158,6 +180,14 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                 <div style={{ marginLeft: '1rem' }}>
                   <div><code>className</code> - string - Additional CSS classes</div>
                   <div><code>...props</code> - All standard Radix Dialog Description props</div>
+                </div>
+                <div style={{ marginTop: '0.75rem' }}>
+                  <strong>Styling:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div>• Font size: 15px (fixed)</div>
+                  <div>• Color: Muted foreground</div>
+                  <div>• Margin top: 4px (1 unit)</div>
                 </div>
                 <div style={{ marginTop: '0.75rem', fontSize: '0.8rem', fontStyle: 'italic' }}>
                   Note: PM7DialogSubTitle is also available as an alias
@@ -175,7 +205,7 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Footer section container for action buttons and controls with proper alignment.
+                Footer section container for action buttons and controls with proper alignment. Includes a top border for visual separation.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 <div style={{ marginBottom: '0.5rem' }}>
@@ -184,6 +214,15 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                 <div style={{ marginLeft: '1rem' }}>
                   <div><code>className</code> - string - Additional CSS classes</div>
                   <div><code>...props</code> - All standard HTMLDivElement attributes</div>
+                </div>
+                <div style={{ marginTop: '0.75rem' }}>
+                  <strong>Styling:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div>• Top border for visual separation from content</div>
+                  <div>• Flexbox layout (column-reverse on mobile, row on desktop)</div>
+                  <div>• Right-aligned buttons on desktop</div>
+                  <div>• Button spacing handled by Flexbox gap</div>
                 </div>
               </div>
             </div>
@@ -209,6 +248,40 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
                   <div><code>marginBottom</code> - string (default: '0px') - Bottom margin</div>
                   <div><code>className</code> - string - Additional CSS classes</div>
                   <div><code>...props</code> - All standard HTMLDivElement attributes</div>
+                </div>
+              </div>
+            </div>
+          </PM7Card>
+
+          {/* PM7DialogIcon props */}
+          <PM7Card theme={theme}>
+            <PM7CardHeader variant="dark" theme={theme}>
+              <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+                PM7DialogIcon <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(icon display)</span>
+              </PM7CardTitle>
+            </PM7CardHeader>
+            <div style={{ padding: '0 0.5rem' }}>
+              <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
+                Display an icon in the top-right corner of the dialog. The icon is positioned absolutely within the dialog content area.
+              </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Props:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div><code>className</code> - string - Additional CSS classes</div>
+                  <div><code>children</code> - React.ReactNode - Icon content to display</div>
+                  <div><code>...props</code> - All standard HTMLDivElement attributes</div>
+                </div>
+                <div style={{ marginTop: '0.75rem' }}>
+                  <strong>Usage:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div>• Place inside PM7DialogContent to show an icon</div>
+                  <div>• Positioned absolutely in the top-right corner</div>
+                  <div>• Typically used with icon libraries like Lucide</div>
+                  <div>• Size: 40x40px container for the icon</div>
+                  <div>• When present, close button auto-adjusts position</div>
                 </div>
               </div>
             </div>
@@ -252,12 +325,28 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             <code>{'<PM7DialogContent maxWidth="max-w-2xl"><PM7DialogTitle>Wide Dialog</PM7DialogTitle></PM7DialogContent>'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Dialog with Close Button:</p>
+            <code>{'<PM7DialogContent showCloseButton={true}><PM7DialogTitle>Dialog with Close Button</PM7DialogTitle></PM7DialogContent>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Complete Dialog Structure:</p>
             <code>{'<PM7DialogHeader><PM7DialogTitle>Title</PM7DialogTitle><PM7DialogDescription>Description</PM7DialogDescription></PM7DialogHeader>'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Dialog Header without Border:</p>
+            <code>{'<PM7DialogHeader showHeaderBorder={false}><PM7DialogTitle>Title</PM7DialogTitle></PM7DialogHeader>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Dialog with Footer Actions:</p>
             <code>{'<PM7DialogFooter><button>Cancel</button><button>Confirm</button></PM7DialogFooter>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Dialog with Icon:</p>
+            <code>{'<PM7DialogContent><PM7DialogIcon><Info size={24} /></PM7DialogIcon><PM7DialogTitle>Information</PM7DialogTitle></PM7DialogContent>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Dialog with Icon and Close Button:</p>
+            <code>{'<PM7DialogContent showCloseButton={true}><PM7DialogIcon><Info /></PM7DialogIcon><PM7DialogTitle>Title</PM7DialogTitle></PM7DialogContent>'}</code>
           </div>
         </div>
       </div>

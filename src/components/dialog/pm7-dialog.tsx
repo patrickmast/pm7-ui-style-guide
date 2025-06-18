@@ -26,48 +26,94 @@ const PM7DialogOverlay = React.forwardRef<
 ))
 PM7DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+const PM7DialogIcon = ({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={`absolute right-8 top-6 ${className || ''}`}
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '40px',
+      height: '40px'
+    }}
+    {...props}
+  >
+    {children}
+  </div>
+)
+PM7DialogIcon.displayName = "PM7DialogIcon"
+
 const PM7DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     maxWidth?: string;
+    showCloseButton?: boolean;
   }
->(({ className, children, maxWidth = 'max-w-lg', ...props }, ref) => (
-  <PM7DialogPortal>
-    <PM7DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={`fixed left-[50%] top-[50%] z-50 grid w-full ${maxWidth} translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg ${className || ''}`}
-      style={{
-        cursor: 'default',
-        backgroundColor: className?.includes('dark') ? '#262626' : 'white',
-        border: `1px solid ${className?.includes('dark') ? '#525252' : '#e2e8f0'}`
-      }}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close asChild>
-        <PM7Button
-          className="pm7-dialog-close absolute right-4 top-4 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
-          style={{ color: 'inherit', padding: '4px', minWidth: 'auto', background: 'transparent', border: 'none' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-          <span className="sr-only">Close</span>
-        </PM7Button>
-      </DialogPrimitive.Close>
+>(({ className, children, maxWidth = 'max-w-lg', showCloseButton = false, ...props }, ref) => {
+  // Check if PM7DialogIcon is present in children
+  const hasIcon = React.Children.toArray(children).some(
+    child => React.isValidElement(child) && child.type === PM7DialogIcon
+  );
+
+  return (
+    <PM7DialogPortal>
+      <PM7DialogOverlay />
+      <DialogPrimitive.Content
+        ref={ref}
+        className={`fixed left-[50%] top-[50%] z-50 grid w-full ${maxWidth} translate-x-[-50%] translate-y-[-50%] border bg-background pt-6 pb-8 px-8 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg ${className || ''}`}
+        style={{
+          cursor: 'default',
+          backgroundColor: className?.includes('dark') ? '#262626' : 'white',
+          border: `1px solid ${className?.includes('dark') ? '#525252' : '#e2e8f0'}`,
+          paddingTop: '26px'
+        }}
+        {...props}
+      >
+        {children}
+        {showCloseButton && (
+          <DialogPrimitive.Close asChild>
+            <PM7Button
+              className="pm7-dialog-close absolute opacity-70 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+              style={{ 
+                color: 'inherit', 
+                padding: '4px', 
+                minWidth: 'auto', 
+                background: 'transparent', 
+                border: 'none',
+                right: hasIcon ? '-2px' : '16px',
+                top: hasIcon ? '-2px' : '16px'
+              }}
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+            <span className="sr-only">Close</span>
+          </PM7Button>
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </PM7DialogPortal>
-))
+  )
+})
 PM7DialogContent.displayName = DialogPrimitive.Content.displayName
 
 const PM7DialogHeader = ({
   className,
+  showHeaderBorder = true,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+}: React.HTMLAttributes<HTMLDivElement> & {
+  showHeaderBorder?: boolean;
+}) => (
   <div
-    className={`flex flex-col space-y-1.5 text-center sm:text-left p-2 pb-0 ${className || ''}`}
+    className={`flex flex-col space-y-1.5 text-center sm:text-left ${showHeaderBorder ? 'pb-3 mb-3' : ''} ${className || ''}`}
+    style={{
+      borderBottom: showHeaderBorder ? `1px solid var(--header-border-color, #f1f5f9)` : 'none'
+    }}
     {...props}
   />
 )
@@ -90,7 +136,8 @@ const PM7DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={`text-2xl font-semibold leading-none tracking-tight ${className || ''}`}
+    className={`font-semibold leading-none tracking-tight ${className || ''}`}
+    style={{ fontSize: '28px' }}
     {...props}
   />
 ))
@@ -102,7 +149,8 @@ const PM7DialogSubTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={`text-sm text-muted-foreground mt-1 ${className || ''}`}
+    className={`text-muted-foreground mt-1 ${className || ''}`}
+    style={{ fontSize: '15px' }}
     {...props}
   />
 ))
@@ -147,4 +195,5 @@ export {
   PM7DialogSubTitle,
   PM7DialogDescription, // Keep for backward compatibility
   PM7DialogSeparator,
+  PM7DialogIcon,
 }

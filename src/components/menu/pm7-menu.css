@@ -1,6 +1,31 @@
 /* PM7Menu Component CSS - Self-contained styling for light and dark modes
    ENHANCEMENT: Added spacing to the switch icon in switch-type menu items to ensure it is not too close to the label. */
 
+/* DISABLE ALL ANIMATIONS FOR MENU COMPONENTS FIRST */
+[data-radix-dropdown-menu-trigger],
+[data-radix-dropdown-menu-trigger] *,
+[data-radix-dropdown-menu-content],
+[data-radix-dropdown-menu-content] *,
+[data-radix-dropdown-menu-subcontent],
+[data-radix-dropdown-menu-subcontent] *,
+[data-radix-dropdown-menu-item],
+[data-radix-dropdown-menu-checkbox-item],
+[data-radix-dropdown-menu-radio-item],
+[data-radix-dropdown-menu-subtrigger],
+[data-radix-dropdown-menu-separator],
+[data-radix-dropdown-menu-label] {
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  -o-animation: none !important;
+  -ms-animation: none !important;
+  animation: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
+
 /* Base menu styles */
 .menu-item-icon {
   display: inline-flex;
@@ -957,3 +982,73 @@ div[data-radix-dropdown-menu-subcontent][data-state="open"] {
   transform: translateZ(0) !important;
   backface-visibility: hidden !important;
 }
+
+/* FORCE NO ANIMATIONS ON MENU - NUCLEAR OPTION */
+/* Override all possible animation keyframes to do nothing */
+@keyframes slideDownAndFade { from { opacity: 1; } to { opacity: 1; } }
+@keyframes slideLeftAndFade { from { opacity: 1; } to { opacity: 1; } }
+@keyframes slideUpAndFade { from { opacity: 1; } to { opacity: 1; } }
+@keyframes slideRightAndFade { from { opacity: 1; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 1; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 1; } }
+@keyframes zoomIn { from { opacity: 1; } to { opacity: 1; } }
+@keyframes zoomOut { from { opacity: 1; } to { opacity: 1; } }
+@keyframes enterFromRight { from { opacity: 1; } to { opacity: 1; } }
+@keyframes enterFromLeft { from { opacity: 1; } to { opacity: 1; } }
+@keyframes exitToRight { from { opacity: 1; } to { opacity: 1; } }
+@keyframes exitToLeft { from { opacity: 1; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 1; } to { opacity: 1; } }
+
+[data-radix-dropdown-menu-content],
+[data-radix-dropdown-menu-subcontent],
+[data-radix-dropdown-menu-trigger],
+[data-radix-dropdown-menu-item],
+[data-radix-dropdown-menu-checkbox-item],
+[data-radix-dropdown-menu-radio-item],
+[data-radix-dropdown-menu-subtrigger],
+[data-radix-popper-content-wrapper] > div[data-radix-dropdown-menu-content],
+[data-radix-dropdown-menu-content] *,
+[data-radix-dropdown-menu-subcontent] *,
+[data-radix-dropdown-menu-trigger] * {
+  animation: none !important;
+  animation-name: none !important;
+  animation-duration: 0s !important;
+  animation-timing-function: step-end !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 0 !important;
+  animation-direction: normal !important;
+  animation-fill-mode: none !important;
+  animation-play-state: paused !important;
+  transition: none !important;
+  transition-property: none !important;
+  transition-duration: 0s !important;
+  transition-timing-function: step-end !important;
+  transition-delay: 0s !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Kill Tailwind animations ONLY on dropdown menu elements */
+[data-radix-dropdown-menu-content].animate-in,
+[data-radix-dropdown-menu-content].animate-out,
+[data-radix-dropdown-menu-content].fade-in-0,
+[data-radix-dropdown-menu-content].fade-out-0,
+[data-radix-dropdown-menu-content].zoom-in-95,
+[data-radix-dropdown-menu-content].zoom-out-95,
+[data-radix-dropdown-menu-content].slide-in-from-top-2,
+[data-radix-dropdown-menu-content].slide-in-from-bottom-2,
+[data-radix-dropdown-menu-content].slide-in-from-left-2,
+[data-radix-dropdown-menu-content].slide-in-from-right-2,
+[data-radix-dropdown-menu-subcontent].animate-in,
+[data-radix-dropdown-menu-subcontent].animate-out,
+[data-radix-dropdown-menu-subcontent].fade-in-0,
+[data-radix-dropdown-menu-subcontent].fade-out-0,
+[data-radix-dropdown-menu-subcontent].zoom-in-95,
+[data-radix-dropdown-menu-subcontent].zoom-out-95,
+[data-radix-dropdown-menu-subcontent].slide-in-from-top-2,
+[data-radix-dropdown-menu-subcontent].slide-in-from-bottom-2,
+[data-radix-dropdown-menu-subcontent].slide-in-from-left-2,
+[data-radix-dropdown-menu-subcontent].slide-in-from-right-2 {
+  animation: none !important;
+}
+

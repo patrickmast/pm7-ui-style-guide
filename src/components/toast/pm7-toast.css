@@ -12,31 +12,56 @@
   }
 }
 
-/* Slide out to left animation */
-@keyframes toast-slide-out-left {
+/* Slide out to right animation */
+@keyframes toast-slide-out-right {
   from {
     transform: translateX(0);
     opacity: 1;
   }
   to {
-    transform: translateX(calc(-100% - 2rem));
+    transform: translateX(calc(100% + 2rem));
     opacity: 0;
+    visibility: hidden; /* Hide at the end to prevent flicker */
   }
 }
 
-/* Apply animations to toast */
-[data-radix-toast-root][data-state="open"] {
-  animation: toast-slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* Apply animations ONLY to toast elements - multiple selectors for compatibility */
+[data-radix-toast-root][data-state="open"],
+[data-radix-toast][data-state="open"],
+[data-radix-toast-viewport] [data-state="open"],
+li[role="status"][data-state="open"] {
+  animation: toast-slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-[data-radix-toast-root][data-state="closed"] {
-  animation: toast-slide-out-left 0.4s cubic-bezier(0.7, 0, 0.84, 0);
+[data-radix-toast-root][data-state="closed"],
+[data-radix-toast][data-state="closed"],
+[data-radix-toast-viewport] [data-state="closed"],
+li[role="status"][data-state="closed"] {
+  animation: toast-slide-out-right 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards !important;
 }
 
-/* Ensure smooth transitions */
-[data-radix-toast-root] {
-  transition: all 0.3s ease;
+/* Additional selector for toast items inside viewport */
+[data-radix-toast-viewport] > * {
+  will-change: transform, opacity;
 }
+
+[data-radix-toast-viewport] > *[data-state="open"] {
+  animation: toast-slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+[data-radix-toast-viewport] > *[data-state="closed"] {
+  animation: toast-slide-out-right 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards !important;
+}
+
+/* Fallback with class-based approach */
+.toast-entering {
+  animation: toast-slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.toast-exiting {
+  animation: toast-slide-out-right 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards !important;
+}
+
 
 /* Toast viewport positioning */
 [data-radix-toast-viewport] {
@@ -58,4 +83,5 @@
 /* Individual toast styling */
 [data-radix-toast-root] {
   pointer-events: auto;
+  will-change: transform, opacity; /* Optimize animation performance */
 }

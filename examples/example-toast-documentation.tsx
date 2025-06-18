@@ -5,7 +5,7 @@ const ExampleToastDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
   
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText('https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/toast/README.md');
+      await navigator.clipboard.writeText('https://raw.githubusercontent.com/patrickmast/pm7-ui-style-guide/main/src/components/toast/README.md');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -44,10 +44,10 @@ const ExampleToastDocumentation = ({ theme }: { theme: 'light' | 'dark' }) => {
               display: 'block',
               wordBreak: 'break-all'
             }}>
-              https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/toast/README.md
+              https://raw.githubusercontent.com/patrickmast/pm7-ui-style-guide/main/src/components/toast/README.md
             </code>
             <button
-              onClick={() => window.open('https://github.com/patrickmast/pm7-ui-style-guide/blob/main/src/components/toast/README.md', '_blank')}
+              onClick={() => window.open('https://raw.githubusercontent.com/patrickmast/pm7-ui-style-guide/main/src/components/toast/README.md', '_blank')}
               title="Open link in new tab"
               style={{
                 position: 'absolute',

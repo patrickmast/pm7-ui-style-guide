@@ -3,6 +3,7 @@
 import { useToast } from "./use-pm7-toast"
 import {
   PM7Toast,
+  PM7ToastAction,
   PM7ToastClose,
   PM7ToastDescription,
   PM7ToastProvider,
@@ -24,7 +25,14 @@ export function PM7Toaster() {
                 <PM7ToastDescription>{description}</PM7ToastDescription>
               )}
             </div>
-            {action}
+            {action && (
+              <PM7ToastAction
+                altText={action.label}
+                onClick={action.onClick}
+              >
+                {action.label}
+              </PM7ToastAction>
+            )}
             <PM7ToastClose />
           </PM7Toast>
         )

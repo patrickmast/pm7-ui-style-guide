@@ -6,7 +6,8 @@ import {
   PM7DialogHeader,
   PM7DialogTitle,
   PM7DialogDescription,
-  PM7DialogFooter
+  PM7DialogFooter,
+  PM7DialogIcon
 } from '../src/components/dialog/pm7-dialog';
 
 const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
@@ -20,6 +21,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [loadingDialogOpen, setLoadingDialogOpen] = useState(false);
   const [nestedDialogOpen, setNestedDialogOpen] = useState(false);
   const [innerNestedDialogOpen, setInnerNestedDialogOpen] = useState(false);
+  const [noFooterDialogOpen, setNoFooterDialogOpen] = useState(false);
+  const [iconDialogOpen, setIconDialogOpen] = useState(false);
 
   // Form state
   const [formValue, setFormValue] = useState('');
@@ -28,10 +31,59 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
   // Loading state
   const [loading, setLoading] = useState(false);
 
+  // Close button state
+  const [showCloseButton, setShowCloseButton] = useState(false);
+
+  // Header border state
+  const [showHeaderBorder, setShowHeaderBorder] = useState(true);
+
   return (
     <>
       <div style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', paddingBottom: '0.5rem' }}>
         <h3 className="text-xl font-semibold mb-3">Dialog Examples</h3>
+        
+        {/* Dialog options */}
+        <div className="mb-4 space-y-2">
+          {/* Close button checkbox */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="showCloseButton"
+              checked={showCloseButton}
+              onChange={(e) => setShowCloseButton(e.target.checked)}
+              className="cursor-pointer"
+            />
+            <label htmlFor="showCloseButton" className="cursor-pointer flex items-center gap-1">
+              Show close button in dialogs
+              <span
+                className="inline-flex items-center justify-center w-4 h-4 text-xs rounded-full bg-gray-200 dark:bg-gray-700 cursor-help"
+                title="showCloseButton"
+              >
+                ?
+              </span>
+            </label>
+          </div>
+          
+          {/* Header border checkbox */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="showHeaderBorder"
+              checked={showHeaderBorder}
+              onChange={(e) => setShowHeaderBorder(e.target.checked)}
+              className="cursor-pointer"
+            />
+            <label htmlFor="showHeaderBorder" className="cursor-pointer flex items-center gap-1">
+              Show header border
+              <span
+                className="inline-flex items-center justify-center w-4 h-4 text-xs rounded-full bg-gray-200 dark:bg-gray-700 cursor-help"
+                title="showHeaderBorder"
+              >
+                ?
+              </span>
+            </label>
+          </div>
+        </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Column 1 */}
         <div>
@@ -50,6 +102,13 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
               style={{ padding: '12px 0', borderRadius: 6, border: '1px solid #e53e3e', background: '#e53e3e', color: 'white', cursor: 'pointer', fontWeight: 500 }}
             >
               Open Confirmation Dialog
+            </button>
+            <button
+              onClick={() => setNoFooterDialogOpen(true)}
+              className="w-full mb-2"
+              style={{ padding: '12px 0', borderRadius: 6, border: '1px solid #6366f1', background: '#6366f1', color: 'white', cursor: 'pointer', fontWeight: 500 }}
+            >
+              Open Dialog without Footer
             </button>
           </div>
           <h4 className="text-lg font-medium mb-2">Form & Custom Footer</h4>
@@ -88,6 +147,13 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
             >
               Open Dialog with Image
             </button>
+            <button
+              onClick={() => setIconDialogOpen(true)}
+              className="w-full mb-2"
+              style={{ padding: '12px 0', borderRadius: 6, border: '1px solid #10b981', background: '#10b981', color: 'white', cursor: 'pointer', fontWeight: 500 }}
+            >
+              Open Dialog with Icon
+            </button>
           </div>
           <h4 className="text-lg font-medium mb-2">Loading & Nested</h4>
           <div className="border border-gray-300 dark:border-gray-600 rounded p-4">
@@ -114,8 +180,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </div>
       {/* Basic Dialog */}
       <PM7Dialog open={basicDialogOpen} onOpenChange={setBasicDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Basic Dialog</PM7DialogTitle>
             <PM7DialogDescription>This is a basic dialog with a title, description, and footer.</PM7DialogDescription>
           </PM7DialogHeader>
@@ -134,8 +200,24 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </PM7Dialog>
       {/* Confirmation Dialog */}
       <PM7Dialog open={confirmDialogOpen} onOpenChange={setConfirmDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogIcon>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#e53e3e"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </PM7DialogIcon>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Confirm Action</PM7DialogTitle>
             <PM7DialogDescription>Are you sure you want to perform this action?</PM7DialogDescription>
           </PM7DialogHeader>
@@ -155,10 +237,46 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
+      {/* No Footer Dialog */}
+      <PM7Dialog open={noFooterDialogOpen} onOpenChange={setNoFooterDialogOpen}>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
+            <PM7DialogTitle>Information</PM7DialogTitle>
+            <PM7DialogDescription>This dialog has no footer section.</PM7DialogDescription>
+          </PM7DialogHeader>
+          <div style={{ margin: '1rem 0' }}>
+            <p>Sometimes you just need to display information without any action buttons. This dialog demonstrates that the footer is optional.</p>
+            <p style={{ marginTop: '1rem' }}>You can close this dialog by:</p>
+            <ul style={{ marginTop: '0.5rem', marginLeft: '1.5rem', listStyleType: 'disc' }}>
+              <li>Clicking outside the dialog</li>
+              <li>Pressing the Escape key</li>
+              {showCloseButton && <li>Clicking the close button (if enabled)</li>}
+            </ul>
+          </div>
+        </PM7DialogContent>
+      </PM7Dialog>
       {/* Form Dialog */}
       <PM7Dialog open={formDialogOpen} onOpenChange={setFormDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogIcon>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#228B22"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </PM7DialogIcon>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Form Dialog</PM7DialogTitle>
             <PM7DialogDescription>Fill out this form and submit it.</PM7DialogDescription>
           </PM7DialogHeader>
@@ -207,8 +325,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </PM7Dialog>
       {/* Custom Footer Dialog */}
       <PM7Dialog open={customFooterDialogOpen} onOpenChange={setCustomFooterDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Custom Footer Dialog</PM7DialogTitle>
             <PM7DialogDescription>This dialog has a custom footer with multiple buttons.</PM7DialogDescription>
           </PM7DialogHeader>
@@ -243,8 +361,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </PM7Dialog>
       {/* Scrollable Dialog */}
       <PM7Dialog open={scrollableDialogOpen} onOpenChange={setScrollableDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Scrollable Dialog</PM7DialogTitle>
             <PM7DialogDescription>This dialog has scrollable content.</PM7DialogDescription>
           </PM7DialogHeader>
@@ -268,8 +386,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </PM7Dialog>
       {/* Image Dialog */}
       <PM7Dialog open={imageDialogOpen} onOpenChange={setImageDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Dialog with Image</PM7DialogTitle>
             <PM7DialogDescription>This dialog contains an image.</PM7DialogDescription>
           </PM7DialogHeader>
@@ -312,10 +430,51 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
           </PM7DialogFooter>
         </PM7DialogContent>
       </PM7Dialog>
+      {/* Icon Dialog */}
+      <PM7Dialog open={iconDialogOpen} onOpenChange={setIconDialogOpen}>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogIcon>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#10b981"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </PM7DialogIcon>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
+            <PM7DialogTitle>Success!</PM7DialogTitle>
+            <PM7DialogDescription>Your operation has been completed successfully.</PM7DialogDescription>
+          </PM7DialogHeader>
+          <div style={{ margin: '1rem 0' }}>
+            <p>The PM7DialogIcon component allows you to display an icon in the top-right corner of the dialog. This is useful for:</p>
+            <ul style={{ marginTop: '0.5rem', marginLeft: '1.5rem', listStyleType: 'disc' }}>
+              <li>Success messages (checkmark icon)</li>
+              <li>Error messages (X or alert icon)</li>
+              <li>Information dialogs (info icon)</li>
+              <li>Warning dialogs (warning icon)</li>
+            </ul>
+          </div>
+          <PM7DialogFooter>
+            <button
+              onClick={() => setIconDialogOpen(false)}
+              style={{ padding: '8px 16px', borderRadius: 6, border: '1px solid #10b981', background: '#10b981', color: 'white', cursor: 'pointer' }}
+            >
+              Got it!
+            </button>
+          </PM7DialogFooter>
+        </PM7DialogContent>
+      </PM7Dialog>
       {/* Loading Dialog */}
       <PM7Dialog open={loadingDialogOpen} onOpenChange={setLoadingDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Loading Dialog</PM7DialogTitle>
           </PM7DialogHeader>
           <div style={{ margin: '1rem 0', textAlign: 'center' }}>
@@ -353,8 +512,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </PM7Dialog>
       {/* Nested Dialog */}
       <PM7Dialog open={nestedDialogOpen} onOpenChange={setNestedDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Parent Dialog</PM7DialogTitle>
           </PM7DialogHeader>
           <div style={{ margin: '1rem 0' }}>
@@ -378,8 +537,8 @@ const ExampleDialogExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
       </PM7Dialog>
       {/* Inner Nested Dialog */}
       <PM7Dialog open={innerNestedDialogOpen} onOpenChange={setInnerNestedDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
-          <PM7DialogHeader>
+        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} showCloseButton={showCloseButton}>
+          <PM7DialogHeader showHeaderBorder={showHeaderBorder}>
             <PM7DialogTitle>Inner Dialog</PM7DialogTitle>
           </PM7DialogHeader>
           <div style={{ margin: '1rem 0' }}>

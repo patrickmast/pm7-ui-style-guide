@@ -94,6 +94,16 @@ function MyComponent() {
 />
 ```
 
+### Disable Hover Effects
+
+```tsx
+// Remove hover effects for a cleaner look
+<PM7ThemeToggle 
+  showHover={false}
+  size="small"
+/>
+```
+
 ## API Reference
 
 ### PM7ThemeToggle Props
@@ -103,6 +113,7 @@ function MyComponent() {
 | `theme` | `ThemeType` | - | Controlled theme value (optional) |
 | `onThemeChange` | `(theme: ThemeType) => void` | - | Callback when theme changes (optional) |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the toggle switch |
+| `showHover` | `boolean` | `true` | Whether to show hover effects on the toggle |
 | `className` | `string` | `''` | Additional CSS classes |
 | `data-component-name` | `string` | - | Data attribute for component identification |
 
