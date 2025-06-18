@@ -16,6 +16,7 @@ import ExampleCard from './example-card';
 import ExampleThemeToggle from './example-theme-toggle';
 import ToastExample from './example-toast';
 import ExampleComponentsTest from './examples-all-components';
+import FAQExample from './example-faq';
 import { Menu, PM7MenuItemType } from '../src/components/menu';
 import { PM7Button } from '../src/components/button/pm7-button';
 import {
@@ -25,7 +26,8 @@ import {
   PM7DialogTitle,
   PM7DialogSubTitle,
   PM7DialogFooter,
-  PM7DialogSeparator
+  PM7DialogSeparator,
+  PM7DialogIcon
 } from '../src/components/dialog';
 import '../src/components/dialog/pm7-dialog.css';
 import { PM7ThemeToggle, ThemeType } from '../src/components/theme-toggle';
@@ -138,6 +140,8 @@ const ComponentPage = () => {
         return <ToastExample theme={theme} />;
       case 'all-components':
         return <ExampleComponentsTest theme={theme} onThemeChange={setTheme} />;
+      case 'faq':
+        return <FAQExample theme={theme} />;
       default:
         return <ExampleHome theme={theme} />;
     }
@@ -237,6 +241,13 @@ const ComponentPage = () => {
           type: 'check' as PM7MenuItemType,
           checked: activeComponent === 'all-components',
           onClick: () => navigate('/all-components')
+        },
+        {
+          id: 'faq',
+          label: 'FAQ',
+          type: 'check' as PM7MenuItemType,
+          checked: activeComponent === 'faq',
+          onClick: () => navigate('/faq')
         }
       ]
     },
@@ -400,6 +411,14 @@ const ComponentPage = () => {
                   All
                 </Link>
               </li>
+              <li className={`sidebar-nav-item ${activeComponent === 'faq' ? 'active' : ''}`}>
+                <Link
+                  to="/faq"
+                  className="sidebar-nav-link"
+                >
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </aside>
         )}
@@ -519,14 +538,19 @@ const ComponentPage = () => {
       {/* Version Info Dialog */}
       <PM7Dialog open={showVersionDialog} onOpenChange={setShowVersionDialog}>
         <PM7DialogContent className={theme === 'dark' ? 'dark' : ''}>
+          <PM7DialogIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="30" height="30" strokeWidth="2" style={{ color: '#1C86EF' }}>
+              <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0m9-3h.01"/>
+              <path d="M11 12h1v4h1"/>
+            </svg>
+          </PM7DialogIcon>
           <PM7DialogHeader>
             <PM7DialogTitle>PM7 UI Style Guide</PM7DialogTitle>
             <PM7DialogSubTitle>
               Version: {packageJson.version}
             </PM7DialogSubTitle>
           </PM7DialogHeader>
-          <PM7DialogSeparator className={theme === 'dark' ? 'dark' : ''} marginTop='16px' marginBottom='16px' />
-          <div>
+          <div style={{ marginTop: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
               <span style={{
                 fontWeight: '500',

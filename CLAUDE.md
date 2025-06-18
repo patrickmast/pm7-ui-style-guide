@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## IMPORTANT: Language Requirement
+
+**This project uses ENGLISH ONLY for all documentation, code comments, and user-facing text. Do not use Dutch or any other language in the codebase.**
+
 ## Repository Overview
 
 This is the PM7 UI Style Guide - a React component library that provides PM7-branded components and design tokens for consistent styling across all PM7 applications. The library is built on top of Radix UI primitives with Tailwind CSS and provides PM7-specific styling rules and overrides for ShadCN/UI components.
@@ -224,12 +228,13 @@ rm -rf dist/ examples/dist/
 
 **MEMORY: Documentation Synchronization Rule**
 
-When modifying ANY component prop, interface, or functionality:
+When modifying ANY component prop, interface, functionality, or documentation:
 
-1. **ALWAYS update THREE locations simultaneously:**
-   - Component implementation (`src/components/[name]/pm7-[name].tsx`)
-   - Component README (`src/components/[name]/README.md`)
-   - Usage page (`examples/example-[name]-usage.tsx`)
+1. **ALWAYS update FOUR locations simultaneously:**
+   - Component README (`src/components/[component]/README.md`)
+   - Overview page (`examples/example-[component]-overview.tsx`)
+   - Usage page (`examples/example-[component]-usage.tsx`)
+   - FAQ page (`examples/example-faq.tsx`) - if relevant to common questions
 
 2. **ALL props MUST be documented in Usage pages:**
    - Every prop in the component interface MUST appear in the usage page
@@ -240,17 +245,21 @@ When modifying ANY component prop, interface, or functionality:
 3. **Documentation must be complete and consistent:**
    - Props table in usage page must match component interface exactly
    - README examples must reflect current component API
+   - Overview page should show real-world usage examples
+   - FAQ should be updated if the change addresses common questions
    - No prop should exist in code without documentation
    - No documentation should exist for non-existent props
 
 4. **Verification checklist:**
    - [ ] Component interface updated
    - [ ] README.md updated with new props/examples
+   - [ ] Overview page updated with relevant examples
    - [ ] Usage page props table updated
    - [ ] Usage page examples show new functionality
-   - [ ] All three sources have consistent information
+   - [ ] FAQ page updated if relevant
+   - [ ] All sources have consistent information
 
-**This rule applies to ALL components: Button, Card, Dialog, Input, Menu, TabSelector, ThemeToggle, and any future components.**
+**This rule applies to ALL components: Button, Card, Dialog, Input, Menu, TabSelector, ThemeToggle, Toast, and any future components.**
 
 ## Important Implementation Notes
 
