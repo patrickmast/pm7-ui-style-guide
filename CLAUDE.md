@@ -268,7 +268,15 @@ When modifying ANY component prop, interface, functionality, or documentation:
    - [ ] FAQ page updated if relevant
    - [ ] All sources have consistent information
 
+5. **AUTOMATED ENFORCEMENT:**
+   - Run `npm run check-docs` to verify documentation sync
+   - Build process automatically runs documentation check
+   - Build FAILS if documentation is out of sync
+   - Use `npm run check-docs [component]` to check specific component
+
 **This rule applies to ALL components: Button, Card, Dialog, Input, Menu, TabSelector, ThemeToggle, Toast, and any future components.**
+
+**CRITICAL: The build process now ENFORCES this rule automatically. Documentation sync is no longer optional.**
 
 ## Important Implementation Notes
 

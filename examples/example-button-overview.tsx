@@ -56,7 +56,7 @@ const ExampleButtonOverview = ({ theme }: { theme: 'light' | 'dark' }) => {
         <div style={{ marginBottom: '1.5rem' }}>
           <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>How It Works</h4>
           <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
-            You specify the variant, size, and any additional props like onClick handlers or disabled state. The component automatically applies appropriate styling, hover effects, and accessibility attributes. It supports both text content and icons, with proper spacing and alignment.
+            You specify the variant, size, optional icon, and any additional props like onClick handlers or disabled state. The component automatically applies appropriate styling, hover effects, and accessibility attributes. Icons can be positioned left (default) or right of the text, with automatic sizing (1rem) and spacing (0.5rem gap).
           </p>
           <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333', lineHeight: '1.6' }}>
             The button adapts to the current theme and provides visual feedback for user interactions. It can be used as a standard button, link, or form submit button depending on your needs.
@@ -70,7 +70,7 @@ const ExampleButtonOverview = ({ theme }: { theme: 'light' | 'dark' }) => {
             <div style={{ marginBottom: '0.5rem' }}>• Consistent hover, focus, and active states across all variants</div>
             <div style={{ marginBottom: '0.5rem' }}>• Built-in loading state support with spinner integration</div>
             <div style={{ marginBottom: '0.5rem' }}>• Disabled state with proper visual indication and accessibility</div>
-            <div style={{ marginBottom: '0.5rem' }}>• Icon support with automatic spacing and alignment</div>
+            <div style={{ marginBottom: '0.5rem' }}>• Icon support with automatic spacing, sizing, and left/right positioning</div>
             <div style={{ marginBottom: '0.5rem' }}>• Keyboard navigation and screen reader compatibility</div>
           </div>
         </div>

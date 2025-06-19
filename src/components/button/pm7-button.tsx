@@ -1,6 +1,7 @@
 // Enhancement: Provides PM7-specific styling for ShadCN/UI Button component
 // Bug Fix: Enhanced PM7Button component to support multiple button variants
 import React from 'react';
+import './pm7-button.css';
 
 // Button rules for pm7-ui-style-guide - these are the only changes needed
 // for apps that already use ShadCN/UI
@@ -31,9 +32,28 @@ export const buttonRules = {
 export interface PM7ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: 'light' | 'dark';
   spacing?: 'none' | 'sm' | 'md' | 'lg';
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
+  effect?: '6stars' | 'none';
 }
 
-export const PM7Button: React.FC<PM7ButtonProps> = ({ children, spacing = 'md', ...props }) => {
+// Star component for 6stars effect
+const Star = ({ index }: { index: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" version="1.1" style={{shapeRendering: 'geometricPrecision', textRendering: 'geometricPrecision', imageRendering: 'auto', fillRule: 'evenodd', clipRule: 'evenodd'}} viewBox="0 0 784.11 815.53" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <defs>
+      <linearGradient id={`starGradient${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style={{ stopColor: '#1C86EF' }} />
+        <stop offset="100%" style={{ stopColor: '#1C86EF' }} />
+      </linearGradient>
+    </defs>
+    <g id="Layer_x0020_1">
+      <metadata id="CorelCorpID_0Corel-Layer" />
+      <path fill={`url(#starGradient${index})`} d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z" />
+    </g>
+  </svg>
+);
+
+export const PM7Button: React.FC<PM7ButtonProps> = ({ children, spacing = 'md', icon, iconPosition = 'left', effect = 'none', ...props }) => {
   const getSpacing = () => {
     switch (spacing) {
       case 'none': return '0';
@@ -122,9 +142,56 @@ export const PM7Button: React.FC<PM7ButtonProps> = ({ children, spacing = 'md', 
     boxShadow: 'none'
   };
 
+  // Render icon with proper styling
+  const renderIcon = () => {
+    if (!icon) return null;
+    
+    return React.cloneElement(icon as React.ReactElement, {
+      style: {
+        width: '1rem',
+        height: '1rem',
+        ...((icon as React.ReactElement).props?.style || {})
+      }
+    });
+  };
+
+  // Render button content with icon positioning
+  const renderContent = () => {
+    if (!icon) return children;
+    
+    const iconElement = renderIcon();
+    const hasChildren = children && React.Children.count(children) > 0;
+    
+    if (!hasChildren) {
+      // Icon only button
+      return iconElement;
+    }
+    
+    if (iconPosition === 'right') {
+      return (
+        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {children}
+          {iconElement}
+        </span>
+      );
+    } else {
+      // Default: left position
+      return (
+        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {iconElement}
+          {children}
+        </span>
+      );
+    }
+  };
+
+  const buttonClass = effect === '6stars' ? 'pm7-button-6stars' : '';
+  const showStars = effect === '6stars' && !props.disabled;
+
   return (
     <button
       {...props}
+      className={`${buttonClass} ${props.className || ''}`}
       disabled={props.className?.includes(buttonRules.disabled) || props.disabled}
       style={{
         ...getButtonStyles(),
@@ -141,7 +208,15 @@ export const PM7Button: React.FC<PM7ButtonProps> = ({ children, spacing = 'md', 
         e.currentTarget.style.boxShadow = 'none';
       }}
     >
-      {children}
+      {renderContent()}
+      {showStars && [...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className={`pm7-star pm7-star-${i}`}
+        >
+          <Star index={i} />
+        </div>
+      ))}
     </button>
   );
 };

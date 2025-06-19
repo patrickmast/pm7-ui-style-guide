@@ -1,18 +1,19 @@
 {
   "name": "pm7-ui-style-guide",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "The official source of truth for UI, styling, and branding across all PM7 applications.",
   "main": "dist/pm7-ui-style-guide.umd.js",
   "module": "dist/pm7-ui-style-guide.es.js",
   "types": "index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run check-docs && vite build",
     "build:examples": "vite build --config vite.config.examples.js",
     "build:static": "npm run build:examples && node scripts/prerender.js",
     "prerender": "node scripts/prerender.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check-docs": "node scripts/check-docs-sync.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   "license": "ISC",
   "files": [
     "dist",
+    "src/components/button/pm7-button.css",
     "src/components/menu/pm7-menu.css",
     "src/components/dialog/pm7-dialog.css",
     "src/components/card/pm7-card.css",

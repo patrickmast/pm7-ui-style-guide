@@ -208,16 +208,89 @@ const ExampleButtonUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </div>
           </PM7Card>
 
-          {/* children prop */}
+          {/* icon prop */}
           <PM7Card theme={theme}>
             <PM7CardHeader variant="dark" theme={theme}>
               <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
-                children <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(ReactNode, required)</span>
+                icon <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(ReactNode, optional)</span>
               </PM7CardTitle>
             </PM7CardHeader>
             <div style={{ padding: '0 0.5rem' }}>
               <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
-                Content displayed inside the button.
+                Icon element to display in the button. Automatically sized to 1rem (16px) with proper spacing.
+              </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Usage:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div>Typically from lucide-react or similar icon libraries</div>
+                  <div>Automatically sized and spaced with 0.5rem gap from text</div>
+                  <div>Can be used alone (icon-only button) or with text</div>
+                </div>
+              </div>
+            </div>
+          </PM7Card>
+
+          {/* iconPosition prop */}
+          <PM7Card theme={theme}>
+            <PM7CardHeader variant="dark" theme={theme}>
+              <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+                iconPosition <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(string, default is 'left')</span>
+              </PM7CardTitle>
+            </PM7CardHeader>
+            <div style={{ padding: '0 0.5rem' }}>
+              <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
+                Position of the icon relative to the button text. Only used when icon prop is provided.
+              </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Options:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div><code style={{ fontWeight: 'bold' }}>'left'</code> - Icon before text (default)</div>
+                  <div><code>'right'</code> - Icon after text</div>
+                </div>
+              </div>
+            </div>
+          </PM7Card>
+
+          {/* effect prop */}
+          <PM7Card theme={theme}>
+            <PM7CardHeader variant="dark" theme={theme}>
+              <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+                effect <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(string, default is 'none')</span>
+              </PM7CardTitle>
+            </PM7CardHeader>
+            <div style={{ padding: '0 0.5rem' }}>
+              <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
+                Visual effect on hover. Requires importing pm7-button.css when used.
+              </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Options:</strong>
+                </div>
+                <div style={{ marginLeft: '1rem' }}>
+                  <div><code style={{ fontWeight: 'bold' }}>'none'</code> - No effect (default)</div>
+                  <div><code>'6stars'</code> - Animated stars that expand on hover with blue glow</div>
+                </div>
+                <div style={{ marginTop: '0.5rem', fontStyle: 'italic' }}>
+                  Note: When using effect="6stars", import 'pm7-ui-style-guide/src/components/button/pm7-button.css'
+                </div>
+              </div>
+            </div>
+          </PM7Card>
+
+          {/* children prop */}
+          <PM7Card theme={theme}>
+            <PM7CardHeader variant="dark" theme={theme}>
+              <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+                children <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(ReactNode, optional when icon provided)</span>
+              </PM7CardTitle>
+            </PM7CardHeader>
+            <div style={{ padding: '0 0.5rem' }}>
+              <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
+                Content displayed inside the button. Optional when using icon-only buttons.
               </p>
               <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
                 Any React content: text, icons, elements
@@ -251,8 +324,20 @@ const ExampleButtonUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             <code>{'<PM7Button onClick={() => alert("Clicked!")}>Click Me</PM7Button>'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Outline Button with Dark Theme:</p>
-            <code>{'<PM7Button className="pm7-button-outline" theme="dark">Outline</PM7Button>'}</code>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Button with Left Icon (default):</p>
+            <code>{'<PM7Button icon={<Download />}>Download File</PM7Button>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Button with Right Icon:</p>
+            <code>{'<PM7Button icon={<ArrowRight />} iconPosition="right">Continue</PM7Button>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Icon-only Button:</p>
+            <code>{'<PM7Button icon={<Settings />} />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Outline Button with Icon and Dark Theme:</p>
+            <code>{'<PM7Button className="pm7-button-outline" theme="dark" icon={<Upload />}>Upload</PM7Button>'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Large Secondary Button with No Spacing:</p>
@@ -261,6 +346,10 @@ const ExampleButtonUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
           <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Form Submit Button:</p>
             <code>{'<PM7Button type="submit" disabled={isLoading}>Submit Form</PM7Button>'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Button with 6stars Effect:</p>
+            <code>{'<PM7Button effect="6stars" icon={<Download />}>Export CSV</PM7Button>'}</code>
           </div>
         </div>
       </div>

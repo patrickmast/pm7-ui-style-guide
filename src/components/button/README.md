@@ -8,7 +8,7 @@
 
 **Package**: pm7-ui-style-guide  
 **Component**: PM7Button (React button component with PM7 styling)  
-**CSS File**: No separate CSS file required - styles are built-in  
+**CSS File**: `pm7-button.css` (optional - only needed for effect prop)  
 **Dependencies**: None - fully self-contained component
 
 ## Installation
@@ -22,13 +22,14 @@ npm install pm7-ui-style-guide
 ## Import
 
 ```typescript
-// Simple import - no CSS import needed
+// Simple import - no CSS import needed for basic functionality
 import { PM7Button } from 'pm7-ui-style-guide';
 
 // Optional: Import button configuration rules
 import { PM7Button, buttonRules } from 'pm7-ui-style-guide';
 
-// All styling is built into the component
+// Only needed if using effect prop
+import 'pm7-ui-style-guide/src/components/button/pm7-button.css';
 ```
 
 ## Basic Usage
@@ -85,6 +86,43 @@ function MyComponent() {
 }
 ```
 
+## Icons
+
+Add icons to buttons with the `icon` prop:
+
+```tsx
+import React from 'react';
+import { PM7Button } from 'pm7-ui-style-guide';
+import { Download, Upload, Settings, ArrowRight } from 'lucide-react';
+
+function MyComponent() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      {/* Icon on the left (default) */}
+      <PM7Button icon={<Download />}>
+        Download File
+      </PM7Button>
+      
+      {/* Icon on the right */}
+      <PM7Button icon={<ArrowRight />} iconPosition="right">
+        Continue
+      </PM7Button>
+      
+      {/* Icon only button */}
+      <PM7Button icon={<Settings />} />
+      
+      {/* Icon with outline variant */}
+      <PM7Button 
+        icon={<Upload />} 
+        className="pm7-button-outline"
+      >
+        Upload
+      </PM7Button>
+    </div>
+  );
+}
+```
+
 ## Button Spacing
 
 Control the margin around buttons with the `spacing` prop:
@@ -113,6 +151,49 @@ function MyComponent() {
   );
 }
 ```
+
+## Visual Effects
+
+Add hover effects to buttons with the `effect` prop:
+
+```tsx
+import React from 'react';
+import { PM7Button } from 'pm7-ui-style-guide';
+import { Download } from 'lucide-react';
+// Required when using effect prop
+import 'pm7-ui-style-guide/src/components/button/pm7-button.css';
+
+function MyComponent() {
+  return (
+    <div style={{ display: 'flex', gap: '2rem', padding: '2rem' }}>
+      {/* 6stars effect - animated stars on hover */}
+      <PM7Button effect="6stars" onClick={() => alert('Export!')}>
+        Export Data
+      </PM7Button>
+      
+      {/* 6stars effect with icon */}
+      <PM7Button 
+        effect="6stars" 
+        icon={<Download />}
+        onClick={() => alert('Download!')}
+      >
+        Download CSV
+      </PM7Button>
+      
+      {/* Effect is disabled when button is disabled */}
+      <PM7Button effect="6stars" disabled>
+        Disabled (no effect)
+      </PM7Button>
+    </div>
+  );
+}
+```
+
+The `6stars` effect adds six animated stars that expand outward on hover, creating a dynamic and engaging interaction. The effect includes:
+- Blue glow shadow on hover
+- Transparent background on hover
+- Six stars that animate to different positions
+- Smooth transitions for all animations
 
 ## Loading State
 
@@ -149,6 +230,9 @@ function MyComponent() {
 | `className` | `string` | - | CSS classes for variants: `pm7-button-outline`, `pm7-button-secondary`, `pm7-button-ghost`, `pm7-button-link`, `pm7-button-small`, `pm7-button-large` |
 | `theme` | `'light' \| 'dark'` | - | Theme for proper color rendering (optional) |
 | `spacing` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Margin spacing around button: none (0), sm (2px), md (4px), lg (8px) |
+| `icon` | `ReactNode` | - | Icon element to display in the button (typically from lucide-react or similar) |
+| `iconPosition` | `'left' \| 'right'` | `'left'` | Position of the icon relative to the button text |
+| `effect` | `'6stars' \| 'none'` | `'none'` | Visual effect on hover. '6stars' adds animated stars that expand on hover |
 | `disabled` | `boolean` | `false` | Disable button interactions |
 | `onClick` | `(event: MouseEvent) => void` | - | Click handler function |
 | `children` | `ReactNode` | - | Button content |
@@ -211,6 +295,25 @@ PM7Button supports all standard HTML button attributes including:
 </PM7Button>
 ```
 
+### Icon Buttons
+
+```tsx
+import { Download, Upload, Settings, Save } from 'lucide-react';
+
+{/* Action buttons with icons */}
+<PM7Button icon={<Download />}>Download</PM7Button>
+<PM7Button icon={<Upload />} className="pm7-button-outline">Upload</PM7Button>
+
+{/* Icon-only buttons for toolbars */}
+<PM7Button icon={<Settings />} className="pm7-button-ghost" />
+<PM7Button icon={<Save />} />
+
+{/* Right-aligned icon for navigation */}
+<PM7Button icon={<ArrowRight />} iconPosition="right">
+  Continue
+</PM7Button>
+```
+
 ## Configuration Export (buttonRules)
 
 PM7Button exports a `buttonRules` object containing all styling configuration:
@@ -236,7 +339,7 @@ This is useful for programmatically generating class names or understanding the 
 
 ## Important Notes
 
-- **No CSS Import Required**: All styles are built into the component
+- **CSS Import**: Only required when using the `effect` prop. Basic button functionality works without CSS import
 - **PM7 Branding**: Uses PM7 color scheme (#1C86EF primary blue)
 - **Accessibility**: Fully keyboard accessible with proper focus states
 - **Responsive**: Adapts to different screen sizes

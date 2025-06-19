@@ -121,6 +121,23 @@ const ExampleThemeToggleUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             </div>
           </PM7Card>
 
+          {/* showHover prop */}
+          <PM7Card theme={theme}>
+            <PM7CardHeader variant="dark" theme={theme}>
+              <PM7CardTitle theme={theme} style={{ margin: '0', fontSize: '1rem' }}>
+                showHover <span style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280', fontWeight: 'normal' }}>(boolean, default is true)</span>
+              </PM7CardTitle>
+            </PM7CardHeader>
+            <div style={{ padding: '0 0.5rem' }}>
+              <p style={{ color: theme === 'dark' ? '#e0e0e0' : '#333', marginBottom: '0.75rem' }}>
+                Controls whether hover effects are enabled on the theme toggle button.
+              </p>
+              <div style={{ fontSize: '0.875rem', color: theme === 'dark' ? '#a0a0a0' : '#666' }}>
+                Set to false to disable hover styling and animations
+              </div>
+            </div>
+          </PM7Card>
+
           {/* data-component-name prop */}
           <PM7Card theme={theme}>
             <PM7CardHeader variant="dark" theme={theme}>
@@ -155,6 +172,10 @@ const ExampleThemeToggleUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
             <code>{'<PM7ThemeToggle size="small" /> <PM7ThemeToggle size="large" />'}</code>
           </div>
           <div style={{ marginBottom: '1rem' }}>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Disable Hover Effects:</p>
+            <code>{'<PM7ThemeToggle showHover={false} />'}</code>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>With Custom Styling:</p>
             <code>{'<PM7ThemeToggle className="my-custom-toggle" data-component-name="HeaderThemeToggle" />'}</code>
           </div>
@@ -185,7 +206,7 @@ const ExampleThemeToggleUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
           </div>
           <div style={{ marginBottom: '1rem' }}>
             <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Component Props Interface:</p>
-            <code>{'interface PM7ThemeToggleProps { theme?: ThemeType; onThemeChange?: (theme: ThemeType) =&gt; void; size?: "small" | "medium" | "large"; className?: string; }'}</code>
+            <code>{'interface PM7ThemeToggleProps { theme?: ThemeType; onThemeChange?: (theme: ThemeType) =&gt; void; size?: "small" | "medium" | "large"; showHover?: boolean; className?: string; "data-component-name"?: string; }'}</code>
           </div>
         </div>
       </div>

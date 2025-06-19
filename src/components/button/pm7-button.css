@@ -1,0 +1,111 @@
+/* PM7 Button Effects CSS */
+
+/* 6stars effect styling */
+.pm7-button-6stars {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Only add transparent border to non-outline buttons */
+.pm7-button-6stars:not(.pm7-button-outline) {
+  border: 1px solid transparent !important;
+}
+
+.pm7-button-6stars:hover {
+  background-color: rgba(27, 134, 239, 0.1) !important;
+  box-shadow: 0 0 25px rgba(27, 134, 239, 0.55);
+  border: 1px solid #1C86EF !important;
+  color: #1C86EF !important;
+}
+
+/* Ensure text and icons stay visible */
+.pm7-button-6stars:hover span {
+  color: #1C86EF !important;
+}
+
+.pm7-button-6stars:hover svg {
+  stroke: #1C86EF !important;
+}
+
+/* Star container styling */
+.pm7-star {
+  position: absolute;
+  width: 25px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Star hover states */
+.pm7-button-6stars:hover .pm7-star {
+  z-index: 2;
+  filter: drop-shadow(0 0 10px #fffdef);
+}
+
+/* Individual star positions and animations */
+.pm7-star-0 {
+  top: 20%;
+  left: 20%;
+  width: 25px;
+}
+
+.pm7-button-6stars:hover .pm7-star-0 {
+  top: -80%;
+  left: -30%;
+}
+
+.pm7-star-1 {
+  top: 45%;
+  left: 45%;
+  width: 15px;
+}
+
+.pm7-button-6stars:hover .pm7-star-1 {
+  top: -25%;
+  left: 10%;
+}
+
+.pm7-star-2 {
+  top: 40%;
+  left: 40%;
+  width: 5px;
+}
+
+.pm7-button-6stars:hover .pm7-star-2 {
+  top: 55%;
+  left: 25%;
+}
+
+.pm7-star-3 {
+  top: 20%;
+  left: 40%;
+  width: 8px;
+}
+
+.pm7-button-6stars:hover .pm7-star-3 {
+  top: 30%;
+  left: 80%;
+}
+
+.pm7-star-4 {
+  top: 25%;
+  left: 45%;
+  width: 15px;
+}
+
+.pm7-button-6stars:hover .pm7-star-4 {
+  top: 25%;
+  left: 115%;
+}
+
+.pm7-star-5 {
+  top: 5%;
+  left: 50%;
+  width: 5px;
+}
+
+.pm7-button-6stars:hover .pm7-star-5 {
+  top: 5%;
+  left: 60%;
+}
