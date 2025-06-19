@@ -224,6 +224,34 @@ const FormDialog = ({ open, onOpenChange, onSave }) => {
 };
 ```
 
+## Important Notes About Styling
+
+### ⚠️ Custom Styles Warning
+When adding custom styles to `PM7DialogContent` via the `style` prop, be aware that these can override the default background color styling. If you use custom styles, you may need to explicitly set the background color:
+
+```tsx
+// ❌ Problem: Custom styles can make dialog transparent
+<PM7DialogContent style={{ maxWidth: '600px' }}>
+
+// ✅ Solution 1: Include backgroundColor in custom styles
+<PM7DialogContent 
+  style={{ 
+    maxWidth: '600px',
+    backgroundColor: theme === 'dark' ? '#262626' : '#ffffff'
+  }}
+>
+
+// ✅ Solution 2: Use className for dark mode (recommended)
+<PM7DialogContent 
+  className={theme === 'dark' ? 'dark' : ''}
+  maxWidth="sm"  // Use built-in maxWidth prop when available
+>
+```
+
+The default background colors are:
+- Light mode: `#ffffff` (white)
+- Dark mode: `#262626` (dark gray)
+
 ## API Reference
 
 ### PM7Dialog Props

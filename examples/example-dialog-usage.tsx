@@ -31,6 +31,32 @@ const ExampleDialogUsage = ({ theme }: { theme: 'light' | 'dark' }) => {
           <p>import 'pm7-ui-style-guide/src/components/dialog/pm7-dialog.css';</p>
         </div>
         
+        <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>⚠️ Important: Custom Styles Warning</h4>
+        <div style={{ backgroundColor: theme === 'dark' ? '#374151' : '#fef3c7', padding: '1rem', borderRadius: '0.375rem', marginBottom: '1.5rem', border: `1px solid ${theme === 'dark' ? '#d97706' : '#f59e0b'}` }}>
+          <p style={{ marginBottom: '0.75rem', color: theme === 'dark' ? '#fbbf24' : '#92400e', fontWeight: '600' }}>
+            When adding custom styles to PM7DialogContent, they can override default background colors!
+          </p>
+          <div style={codeBlockStyle}>
+            <p style={{ color: '#ef4444' }}>{'// ❌ Problem: Dialog becomes transparent'}</p>
+            <p>{'<PM7DialogContent style={{ maxWidth: "600px" }}>'}</p>
+            <p style={{ marginTop: '0.75rem', color: '#10b981' }}>{'// ✅ Solution 1: Include backgroundColor'}</p>
+            <p>{'<PM7DialogContent'}</p>
+            <p>{'  style={{'}</p>
+            <p>{'    maxWidth: "600px",'}</p>
+            <p>{'    backgroundColor: theme === "dark" ? "#262626" : "#ffffff"'}</p>
+            <p>{'  }}'}</p>
+            <p>{'>'}</p>
+            <p style={{ marginTop: '0.75rem', color: '#10b981' }}>{'// ✅ Solution 2: Use built-in props (recommended)'}</p>
+            <p>{'<PM7DialogContent'}</p>
+            <p>{'  className={theme === "dark" ? "dark" : ""}'}</p>
+            <p>{'  maxWidth="sm"'}</p>
+            <p>{'>'}</p>
+          </div>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.875rem', color: theme === 'dark' ? '#d1d5db' : '#6b7280' }}>
+            Default background colors: Light mode: #ffffff | Dark mode: #262626
+          </p>
+        </div>
+        
         <h4 style={{ fontSize: '1.125rem', fontWeight: '500', marginTop: '1.5rem', marginBottom: '0.75rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Props Reference</h4>
         <p style={{ marginBottom: '1rem', color: theme === 'dark' ? '#e0e0e0' : '#333' }}>Complete overview of all PM7Dialog component props and their configuration options:</p>
         

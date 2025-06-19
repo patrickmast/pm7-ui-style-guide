@@ -282,6 +282,52 @@ const FAQExample: React.FC<FAQExampleProps> = ({ theme }) => {
       )
     },
     {
+      id: 'dialog-transparent',
+      question: 'Why does my PM7Dialog become transparent when I add custom styles?',
+      answer: (
+        <>
+          <p style={{ marginBottom: '1rem' }}>
+            When you add custom styles to PM7DialogContent using the style prop, they can override the default background color styling. This happens because inline styles have higher specificity than CSS classes.
+          </p>
+          
+          <p style={{ marginBottom: '0.5rem' }}><strong>Problem:</strong></p>
+          <CodeBlock code={`// This makes the dialog transparent!
+<PM7DialogContent style={{ maxWidth: '600px' }}>
+  Dialog content...
+</PM7DialogContent>`} />
+          
+          <p style={{ marginBottom: '0.5rem', marginTop: '1rem' }}><strong>Solution 1 - Include backgroundColor in custom styles:</strong></p>
+          <CodeBlock code={`<PM7DialogContent 
+  style={{ 
+    maxWidth: '600px',
+    backgroundColor: theme === 'dark' ? '#262626' : '#ffffff'
+  }}
+>
+  Dialog content...
+</PM7DialogContent>`} />
+          
+          <p style={{ marginBottom: '0.5rem', marginTop: '1rem' }}><strong>Solution 2 - Use built-in props (recommended):</strong></p>
+          <CodeBlock code={`<PM7DialogContent 
+  className={theme === 'dark' ? 'dark' : ''}
+  maxWidth="sm"  // or "md", "lg", "xl"
+>
+  Dialog content...
+</PM7DialogContent>`} />
+          
+          <p style={{ marginTop: '1rem' }}>
+            <strong>Default background colors:</strong>
+          </p>
+          <ul style={{ marginLeft: '1.5rem', listStyleType: 'disc' }}>
+            <li>Light mode: #ffffff (white)</li>
+            <li>Dark mode: #262626 (dark gray)</li>
+          </ul>
+          <p style={{ marginTop: '0.75rem' }}>
+            Always test your dialogs in both light and dark modes to ensure proper visibility!
+          </p>
+        </>
+      )
+    },
+    {
       id: 'customize',
       question: 'How do I customize PM7 components (colors, styles, spacing)?',
       answer: (

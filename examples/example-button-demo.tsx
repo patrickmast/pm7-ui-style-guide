@@ -69,8 +69,26 @@ const ExampleButtonExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
     
     // Add props in a readable format
     const props = [];
-    if (className && className !== buttonRules.button) {
-      props.push(`  className="${className}"`);
+    if (className) {
+      // Only show className if it's not just the default button class
+      if (className === buttonRules.button) {
+        // Don't show className for default button
+      } else if (className.includes('outline')) {
+        props.push(`  className="pm7-button-outline"`);
+      } else if (className.includes('secondary')) {
+        props.push(`  className="pm7-button-secondary"`);
+      } else if (className.includes('ghost')) {
+        props.push(`  className="pm7-button-ghost"`);
+      } else if (className.includes('link')) {
+        props.push(`  className="pm7-button-link"`);
+      } else if (className.includes('small')) {
+        props.push(`  className="pm7-button-small"`);
+      } else if (className.includes('large')) {
+        props.push(`  className="pm7-button-large"`);
+      } else {
+        // For any other combination, show the full className
+        props.push(`  className="${className}"`);
+      }
     }
     if (effect) {
       props.push(`  effect="${effect}"`);
@@ -189,16 +207,16 @@ const ExampleButtonExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
         <Separator theme={theme} />
         <h3 className="text-xl font-semibold mb-4 mt-6">Icon Buttons</h3>
         <div className="flex flex-wrap gap-4 mb-6">
-          <Button theme={theme} className={buttonRules.button} icon={<Download />} onClick={() => showButtonInfo('Download File', '', false, true)}>
+          <Button theme={theme} className={buttonRules.button} icon={<Download />} onClick={() => showButtonInfo('Download File', buttonRules.button, false, true, undefined, undefined, 'Download', 'Download File')}>
             Download File
           </Button>
-          <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.outline} icon={<Upload />} onClick={() => showButtonInfo('Upload', 'outline', false, true)}>
+          <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.outline} icon={<Upload />} onClick={() => showButtonInfo('Upload', buttonRules.button + ' ' + buttonRules.outline, false, true, undefined, undefined, 'Upload', 'Upload')}>
             Upload
           </Button>
-          <Button theme={theme} className={buttonRules.button} icon={<ArrowRight />} iconPosition="right" onClick={() => showButtonInfo('Continue', '', false, true, 'right')}>
+          <Button theme={theme} className={buttonRules.button} icon={<ArrowRight />} iconPosition="right" onClick={() => showButtonInfo('Continue', buttonRules.button, false, true, 'right', undefined, 'ArrowRight', 'Continue')}>
             Continue
           </Button>
-          <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.secondary} icon={<Save />} onClick={() => showButtonInfo('Save Changes', 'secondary', false, true)}>
+          <Button theme={theme} className={buttonRules.button + ' ' + buttonRules.secondary} icon={<Save />} onClick={() => showButtonInfo('Save Changes', buttonRules.button + ' ' + buttonRules.secondary, false, true, undefined, undefined, 'Save', 'Save Changes')}>
             Save Changes
           </Button>
         </div>
@@ -270,28 +288,38 @@ const ExampleButtonExamples = ({ theme }: { theme: 'light' | 'dark' }) => {
         </div>
       </div>
       <PM7Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <PM7DialogContent className={theme === 'dark' ? 'dark' : ''} maxWidth="sm">
+        <PM7DialogContent 
+          className={theme === 'dark' ? 'dark' : ''} 
+          style={{ 
+            maxWidth: '600px', 
+            width: '90vw',
+            backgroundColor: theme === 'dark' ? '#1f2937' : '#ffffff',
+            border: `1px solid ${theme === 'dark' ? '#525252' : '#e2e8f0'}`,
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+          }}>
           <PM7DialogHeader>
             <PM7DialogTitle>{activeButtonInfo.title}</PM7DialogTitle>
             <PM7DialogDescription>
               {activeButtonInfo.description}
             </PM7DialogDescription>
           </PM7DialogHeader>
-          <div style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
+          <div style={{ padding: '0 1.5rem 1.5rem 1.5rem', overflow: 'hidden' }}>
             {activeButtonInfo.code && (
-              <div>
+              <div style={{ width: '100%', overflow: 'hidden' }}>
                 <h4 style={{ fontWeight: '600', marginBottom: '0.5rem', color: theme === 'dark' ? '#ffffff' : '#000000' }}>Code to create this button:</h4>
                 <pre style={{
                   backgroundColor: theme === 'dark' ? '#1f2937' : '#f3f4f6',
                   padding: '1rem',
                   borderRadius: '0.375rem',
-                  overflow: 'auto',
-                  fontSize: '0.875rem',
-                  lineHeight: '1.5',
+                  fontSize: '0.8rem',
+                  lineHeight: '1.4',
                   color: theme === 'dark' ? '#e5e7eb' : '#111827',
                   border: `1px solid ${theme === 'dark' ? '#374151' : '#e5e7eb'}`,
                   whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-word'
+                  wordBreak: 'break-all',
+                  maxWidth: '100%',
+                  overflowX: 'auto',
+                  overflowY: 'hidden'
                 }}>
                   <code>{activeButtonInfo.code}</code>
                 </pre>
