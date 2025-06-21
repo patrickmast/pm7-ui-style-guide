@@ -99,7 +99,7 @@ examples/             # Example/demo app
 ### Library Development
 ```bash
 npm install                    # Install dependencies
-npm run dev                   # Start examples app (serves from /examples on port 5173)
+npm run dev                   # Start examples app (serves from /examples on port 5174)
 npm run build                 # Build the library for distribution to dist/
 npm run build:examples       # Build examples app for Vercel deployment
 npm run build:static         # Build static HTML documentation files
@@ -204,7 +204,7 @@ rm -rf dist/ examples/dist/
 8. Update examples app routing in `examples/App.tsx`
 
 ### Testing Components
-1. Use `npm run dev` to start examples app (serves from `examples/` directory on port 5173)
+1. Use `npm run dev` to start examples app (serves from `examples/` directory on port 5174)
 2. Navigate to component examples to test functionality  
 3. Test both light and dark modes using theme toggle
 4. Verify responsive behavior on different screen sizes
@@ -450,7 +450,7 @@ When I say "Deploy npm", do these tasks:
 ### Common Tasks
 - **Add new component**: Create in `src/components/[name]/`, export from `src/index.ts`, add examples
 - **Update documentation**: Edit `/static/[component]-doc.html`, never edit `/examples/dist/`
-- **Test locally**: `npm run dev` then navigate to `http://localhost:5173`
+- **Test locally**: `npm run dev` then navigate to `http://localhost:5174`
 - **Run type check**: `npx tsc --noEmit`
 - **Build library**: `npm run build` (outputs to `dist/`)
 - **Deploy examples**: Push to main branch (auto-deploys to Vercel)

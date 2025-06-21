@@ -866,7 +866,7 @@ To run the examples app locally:
 
 3. Open your browser and navigate to:
    ```
-   http://localhost:5173/
+   http://localhost:5174/
    ```
 
 > **Note:** Always run the dev server from the project root, not from the `/examples` directory. The Vite configuration is set up to serve the examples app in development mode and build the library in production mode.
