@@ -1,0 +1,48 @@
+name: Deploy Patrick Brand to Vercel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "patrick-brand/**"
+      - ".github/workflows/deploy-patrick-brand.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Vercel token
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::VERCEL_TOKEN GitHub Actions secret is not configured."
+            exit 1
+          fi
+
+      - name: Create or link Vercel project
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npx --yes vercel@57.0.0 project add patrick-brand --scope=pm7 --token="$VERCEL_TOKEN" || true
+          cd patrick-brand
+          npx --yes vercel@57.0.0 link --yes --project=patrick-brand --scope=pm7 --token="$VERCEL_TOKEN"
+
+      - name: Deploy production
+        id: deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          cd patrick-brand
+          URL=$(npx --yes vercel@57.0.0 deploy --prod --yes --scope=pm7 --token="$VERCEL_TOKEN")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Production URL: $URL"
+
+      - name: Summary
+        run: |
+          echo "## Patrick Brand" >> "$GITHUB_STEP_SUMMARY"
+          echo "Production: ${{ steps.deploy.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"
